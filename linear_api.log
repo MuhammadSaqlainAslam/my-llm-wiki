@@ -1,0 +1,24 @@
+2026-04-26 17:10:27.304 - INFO     - Log file opened, level: INFO
+2026-04-26 17:10:27.304 - INFO     - Starting Linear MCP server
+2026-04-26 17:10:27.307 - INFO     - Getting team ID for K0Yang
+2026-04-26 17:10:27.307 - INFO     - Executing GraphQL query with variables: {"name": "K0Yang"}
+2026-04-26 17:10:27.987 - INFO     - Response status: 200
+2026-04-26 17:10:27.987 - INFO     - Successful response with data keys: ['teams']
+2026-04-26 17:10:39.113 - INFO     - Log file opened, level: INFO
+2026-04-26 17:10:39.114 - INFO     - Starting Linear MCP server
+2026-04-26 17:10:39.116 - INFO     - Getting team ID for K0Yang
+2026-04-26 17:10:39.116 - INFO     - Executing GraphQL query with variables: {"name": "K0Yang"}
+2026-04-26 17:10:39.653 - INFO     - Response status: 200
+2026-04-26 17:10:39.653 - INFO     - Successful response with data keys: ['teams']
+2026-04-26 17:11:25.477 - INFO     - Log file opened, level: INFO
+2026-04-26 17:11:25.477 - INFO     - Starting Linear MCP server
+2026-04-26 17:11:25.480 - INFO     - Getting team ID for K0Yang
+2026-04-26 17:11:25.480 - INFO     - Executing GraphQL query with variables: {"name": "K0Yang"}
+2026-04-26 17:11:25.864 - INFO     - Response status: 200
+2026-04-26 17:11:25.864 - INFO     - Successful response with data keys: ['teams']
+2026-04-27 17:11:33.264 - INFO     - Log file opened, level: INFO
+2026-04-27 17:11:33.265 - INFO     - Starting Linear MCP server
+2026-04-27 17:11:33.275 - INFO     - Getting team ID for K0Yang
+2026-04-27 17:11:33.275 - INFO     - Executing GraphQL query with variables: {"name": "K0Yang"}
+2026-04-27 17:11:34.992 - INFO     - Response status: 200
+2026-04-27 17:11:34.992 - INFO     - Successful response with data keys: ['teams']
