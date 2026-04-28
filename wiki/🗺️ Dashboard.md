@@ -7,6 +7,27 @@ tags: [meta, dashboard]
 
 Live Dataview queries over the `wiki/` vault. Requires the **Dataview** community plugin (enable JavaScript queries in settings).
 
+> **GitHub:** [MuhammadSaqlainAslam/my-llm-wiki](https://github.com/MuhammadSaqlainAslam/my-llm-wiki)
+
+---
+
+## 🆕 Latest Addition
+
+```dataview
+TABLE
+  title AS "Title",
+  year AS "Year",
+  join(tags, " · ") AS "Tags",
+  tldr AS "TL;DR"
+FROM "wiki"
+WHERE title != null
+  AND file.name != "Dashboard"
+  AND file.name != "Home"
+  AND file.name != "000 Karpathy Index"
+SORT file.mtime DESC
+LIMIT 1
+```
+
 ---
 
 ## 📚 All Notes
@@ -47,7 +68,7 @@ SORT year ASC
 ---
 
 ### ⚡ Efficiency
-*Replacing O(n²) attention with cheaper alternatives — SSMs, kernel fusion, cache compression.*
+*Replacing or compressing O(n²) attention — SSMs, kernel fusion, compressed sparse attention, KV cache reduction.*
 
 ```dataview
 TABLE
