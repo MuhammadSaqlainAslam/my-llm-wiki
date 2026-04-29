@@ -71,6 +71,17 @@ Every `[[wikilink]]` that appears anywhere in this wiki, with a one-line definit
 | [[Nemotron-3]] | Hybrid Mamba-Transformer-LatentMoE; synthesizes Themes I–III into a production system | NVIDIA 2025 |
 | [[DeepSeek_V4]] | MoE LLM with CSA+HCA compressed attention, mHC residual connections, Muon optimizer; 1M-token context at 27% of V3's FLOPs | DeepSeek-AI 2026 |
 
+**DeepSeek-V4 concept pages** — new mechanisms introduced in [[DeepSeek_V4]]:
+
+| Concept | What it is | First introduced |
+|---|---|---|
+| [[Compressed Sparse Attention]] | Compress $m$ tokens → 1 KV entry via learned weighted sum, then sparse top-k selection via Lightning Indexer; reduces KV cache to $n/m \cdot k$ entries | DeepSeek-AI 2026 |
+| [[Heavily Compressed Attention]] | Compress $m' \gg m$ tokens → 1 entry, then full dense attention over the tiny sequence; coarser than CSA but cheaper | DeepSeek-AI 2026 |
+| [[Manifold-Constrained Hyper-Connections]] | Expand residual stream to $n_\text{hc} \times d$; constrain mixing matrix to Birkhoff polytope (doubly stochastic) via Sinkhorn-Knopp so spectral norm ≤ 1 | DeepSeek-AI 2026 |
+| [[Muon Optimizer]] | Orthogonalize gradient matrix via Newton-Schulz iterations before applying; isotropic update, faster convergence than AdamW on matrix weights | Jordan et al. 2024; used at scale in DeepSeek-V4 |
+| [[On-Policy Distillation]] | Student generates own rollouts and minimizes reverse KL vs. ensemble of specialist teachers; no distribution shift, mode-seeking | Lu & Lab 2025; DeepSeek-AI 2026 |
+| [[GRPO]] | PPO variant without a value function; normalizes advantages within a group of $G$ rollouts per prompt; cheaper and more stable than PPO for LLMs | DeepSeek-AI 2024–2026 |
+
 **Stub pages** — key sub-concepts with their own notes:
 
 | Term | Brief definition | Appears in |

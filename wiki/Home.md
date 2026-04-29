@@ -50,6 +50,14 @@ Mamba + MoE + few attention layers
 Standard attention + DeepSeekMoE + CSA/HCA + mHC + Muon
 = DeepSeek-V4 (2026)
 = 1M-token context at 27% of V3 FLOPs, SOTA open model
+
+DeepSeek-V4 sub-concepts:
+  [[Compressed Sparse Attention]]          compress + sparse select KV
+  [[Heavily Compressed Attention]]         compress hard, dense attention
+  [[Manifold-Constrained Hyper-Connections]]  stable residual highway
+  [[Muon Optimizer]]                       orthogonal gradient updates
+  [[On-Policy Distillation]]               unify specialists post-RL
+  [[GRPO]]                                 group-relative RL, no critic
 ```
 
 ---

@@ -29,9 +29,9 @@ Both trained on 32–33T tokens and natively support 1M-token contexts.
 
 DeepSeek-V4 keeps the [[Transformer]] backbone and [[Mixture-of-Experts]] FFN layers from DeepSeek-V3, but makes three targeted upgrades:
 
-1. **Hybrid CSA + HCA** — replaces standard attention with two compressed variants
-2. **Manifold-Constrained Hyper-Connections (mHC)** — upgrades residual connections
-3. **Muon optimizer** — replaces AdamW for most parameters
+1. **Hybrid [[Compressed Sparse Attention|CSA]] + [[Heavily Compressed Attention|HCA]]** — replaces standard attention with two compressed variants
+2. **[[Manifold-Constrained Hyper-Connections]] (mHC)** — upgrades residual connections
+3. **[[Muon Optimizer|Muon]] optimizer** — replaces AdamW for most parameters
 
 Everything else (MTP modules, DeepSeekMoE, rotary embeddings) is inherited unchanged.
 
@@ -146,11 +146,11 @@ The post-training pipeline is a two-stage paradigm:
 
 **Stage 1 — Grow specialists.** For each domain (math, coding, agents, instruction following), train a *separate* expert model:
 1. SFT on high-quality domain data to build the foundation
-2. RL via **GRPO** (Group Relative Policy Optimization, from [[RLVR]]) with domain-specific reward models
+2. RL via **[[GRPO]]** (Group Relative Policy Optimization, from [[RLVR]]) with domain-specific reward models
 
 This avoids the classic multi-task RL conflict where improving one skill hurts another.
 
-**Stage 2 — Distill into one model.** A single unified model is trained via **on-policy distillation** (OPD): the student generates rollouts, then optimizes the reverse KL against the ensemble of teacher specialists. The student learns to balance all the specialists' behaviors in one set of weights.
+**Stage 2 — Distill into one model.** A single unified model is trained via **[[On-Policy Distillation]]** (OPD): the student generates rollouts, then optimizes the reverse KL against the ensemble of teacher specialists. The student learns to balance all the specialists' behaviors in one set of weights.
 
 This is cheaper than keeping multiple deployed models and avoids the quality degradation of simple merging (model soups).
 
