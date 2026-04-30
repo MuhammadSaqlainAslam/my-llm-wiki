@@ -10,20 +10,35 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1117;
-      --surface:   #161b22;
-      --surface2:  #1c2128;
-      --border:    #30363d;
-      --text:      #e6edf3;
-      --muted:     #8b949e;
-      --accent:    #7c3aed;
-      --accent-lt: #a78bfa;
+      --bg:         #0d1117;
+      --surface:    #161b22;
+      --surface2:   #1c2128;
+      --border:     #30363d;
+      --text:       #e6edf3;
+      --muted:      #8b949e;
+      --accent:     #7c3aed;
+      --accent-lt:  #a78bfa;
+      --bg-glass:   rgba(13,17,23,.88);
+      --bg-overlay: rgba(22,27,34,.9);
+    }
+
+    body.light {
+      --bg:         #ffffff;
+      --surface:    #f6f8fa;
+      --surface2:   #eaeef2;
+      --border:     #d0d7de;
+      --text:       #1c2128;
+      --muted:      #57606a;
+      --accent-lt:  #6d28d9;
+      --bg-glass:   rgba(255,255,255,.92);
+      --bg-overlay: rgba(246,248,250,.92);
     }
 
     html, body {
       height: 100%; overflow: hidden;
       background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      transition: background .2s ease, color .2s ease;
     }
 
     /* ── HEADER ──────────────────────────────────────────────────────── */
@@ -32,7 +47,7 @@
       height: 56px;
       display: flex; align-items: center; gap: 16px;
       padding: 0 24px;
-      background: rgba(13,17,23,.88);
+      background: var(--bg-glass);
       backdrop-filter: blur(12px) saturate(1.3);
       border-bottom: 1px solid var(--border);
     }
@@ -100,7 +115,7 @@
     /* ── LINKS ───────────────────────────────────────────────────────── */
     .link {
       fill: none;
-      stroke: #30363d;
+      stroke: var(--border);
       stroke-opacity: .38;
       stroke-width: 1;
       transition: stroke-opacity .12s, stroke .12s;
@@ -212,7 +227,7 @@
     /* ── LEGEND ──────────────────────────────────────────────────────── */
     #legend {
       position: absolute; bottom: 20px; left: 20px; z-index: 50;
-      background: rgba(22,27,34,.9);
+      background: var(--bg-overlay);
       border: 1px solid var(--border);
       border-radius: 8px; padding: 12px 14px;
       backdrop-filter: blur(8px);
@@ -238,11 +253,26 @@
     #status {
       position: absolute; bottom: 20px; right: 20px; z-index: 50;
       font-size: .72rem; color: var(--muted);
-      background: rgba(22,27,34,.9);
+      background: var(--bg-overlay);
       border: 1px solid var(--border);
       border-radius: 6px; padding: 6px 12px;
       backdrop-filter: blur(8px);
     }
+
+    /* ── THEME TOGGLE ────────────────────────────────────────────────── */
+    .theme-btn {
+      flex-shrink: 0;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; line-height: 1;
+      cursor: pointer;
+      transition: border-color .12s, color .12s;
+    }
+    .theme-btn:hover { border-color: var(--muted); color: var(--text); }
 
     /* ── RESET BUTTON ────────────────────────────────────────────────── */
     #reset-btn {
@@ -275,6 +305,7 @@
     <span class="hint-key"><kbd>click</kbd> open card</span>
     <span class="hint-key"><kbd>hover</kbd> highlight links</span>
   </div>
+  <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
 </header>
 
 <!-- ── GRAPH ─────────────────────────────────────────────────────────────── -->
@@ -296,6 +327,14 @@
 
 <script>
 "use strict";
+
+// ── theme ─────────────────────────────────────────────────────────────────
+(function () {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.body.classList.add('light');
+})();
+
+const getCSSVar = v => getComputedStyle(document.body).getPropertyValue(v).trim();
 
 // ── Category + color map ─────────────────────────────────────────────────
 const CAT_COLORS = {
@@ -413,8 +452,8 @@ async function main() {
         .attr('d', 'M0,-4L8,0L0,4')
         .attr('fill', color).attr('fill-opacity', .75);
   });
-  // Default dimmed arrow
-  defs.append('marker')
+  // Default dimmed arrow — save reference so theme toggle can recolor it
+  const dimArrowPath = defs.append('marker')
     .attr('id', 'arr-dim')
     .attr('viewBox', '0 -4 8 8')
     .attr('refX', 8).attr('refY', 0)
@@ -422,7 +461,7 @@ async function main() {
     .attr('orient', 'auto')
     .append('path')
       .attr('d', 'M0,-4L8,0L0,4')
-      .attr('fill', '#30363d');
+      .attr('fill', getCSSVar('--border'));
 
   // Zoom behaviour — transform a root <g>
   const zoom = d3.zoom()
@@ -514,7 +553,7 @@ async function main() {
       .attr('stroke', l => {
         const s = l.source.id;
         if (s === id || l.target.id === id) return CAT_COLORS[nodes.find(n=>n.id===s).cat].color;
-        return '#30363d';
+        return getCSSVar('--border');
       })
       .attr('marker-end', l => {
         const s = l.source.id;
@@ -540,7 +579,7 @@ async function main() {
     hovered = null;
     linkSel
       .attr('class', 'link')
-      .attr('stroke', '#30363d')
+      .attr('stroke', getCSSVar('--border'))
       .attr('marker-end', 'url(#arr-dim)');
     nodeSel.select('.node-circle').attr('class', 'node-circle');
     nodeSel.select('.node-ring').attr('class', 'node-ring');
@@ -661,9 +700,30 @@ async function main() {
     svg.attr('width', w).attr('height', h);
     sim.force('center', d3.forceCenter(w / 2, h / 2).strength(0.08));
   });
+
+  // Expose D3 repaint for theme toggle
+  return { dimArrowPath, linkSel };
 }
 
-main();
+async function init() {
+  const { dimArrowPath, linkSel } = await main();
+
+  const btn = document.getElementById('theme-btn');
+  btn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
+
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    btn.textContent = isLight ? '☀' : '☾';
+
+    // Repaint D3 elements that use hardcoded border color
+    const border = getCSSVar('--border');
+    dimArrowPath.attr('fill', border);
+    linkSel.filter('.link:not(.lit):not(.dimmed)').attr('stroke', border);
+  });
+}
+
+init();
 </script>
 </body>
 </html>

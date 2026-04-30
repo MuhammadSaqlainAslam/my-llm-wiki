@@ -22,6 +22,25 @@
       --accent-ring: rgba(124,58,237,.45);
       --tag-bg:      rgba(124,58,237,.18);
       --panel-w:     540px;
+      --bg-glass:    rgba(13,17,23,.90);
+      --code-color:  #e3b341;
+      --bq-color:    #b8a0e8;
+    }
+
+    body.light {
+      --bg:          #ffffff;
+      --surface:     #f6f8fa;
+      --surface2:    #eaeef2;
+      --border:      #d0d7de;
+      --text:        #1c2128;
+      --muted:       #57606a;
+      --accent-lt:   #6d28d9;
+      --accent-dim:  rgba(124,58,237,.08);
+      --accent-ring: rgba(124,58,237,.25);
+      --tag-bg:      rgba(124,58,237,.08);
+      --bg-glass:    rgba(255,255,255,.92);
+      --code-color:  #b45309;
+      --bq-color:    #6d28d9;
     }
 
     html, body { height: 100%; }
@@ -31,6 +50,7 @@
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       line-height: 1.6;
+      transition: background .2s ease, color .2s ease;
     }
 
     /* ── SITE NAV ───────────────────────────────────────────────────── */
@@ -61,7 +81,7 @@
     /* ── HEADER ─────────────────────────────────────────────────────── */
     header {
       position: sticky; top: 0; z-index: 200;
-      background: rgba(13,17,23,.90);
+      background: var(--bg-glass);
       backdrop-filter: blur(14px) saturate(1.4);
       border-bottom: 1px solid var(--border);
       padding: 0 28px;
@@ -129,6 +149,21 @@
       margin-left: auto; font-size: .75rem; color: var(--muted);
       white-space: nowrap; flex-shrink: 0;
     }
+
+    /* ── THEME TOGGLE ────────────────────────────────────────────────── */
+    .theme-btn {
+      flex-shrink: 0;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; line-height: 1;
+      cursor: pointer;
+      transition: border-color .12s, color .12s;
+    }
+    .theme-btn:hover { border-color: var(--muted); color: var(--text); }
 
     /* ── LAYOUT ─────────────────────────────────────────────────────── */
     #app {
@@ -318,13 +353,13 @@
     }
 
     #panel-body blockquote p {
-      color: #b8a0e8; margin: 0;
+      color: var(--bq-color); margin: 0;
       font-size: .83rem; font-style: italic; line-height: 1.6;
     }
 
     #panel-body code {
       font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace;
-      font-size: .8rem; color: #e3b341;
+      font-size: .8rem; color: var(--code-color);
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 4px; padding: 1px 5px;
@@ -435,6 +470,7 @@
   </div>
 
   <div class="header-count" id="header-count"></div>
+  <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
 </header>
 
 <!-- ── APP ───────────────────────────────────────────────────────────────── -->
@@ -482,6 +518,22 @@
 
 <script>
 "use strict";
+
+// ── theme ─────────────────────────────────────────────────────────────────
+(function () {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.body.classList.add('light');
+})();
+
+function setupTheme() {
+  const btn = document.getElementById('theme-btn');
+  btn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    btn.textContent = isLight ? '☀' : '☾';
+  });
+}
 
 // ── state ────────────────────────────────────────────────────────────────
 let notes   = [];
@@ -674,6 +726,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
+setupTheme();
 init();
 </script>
 </body>
