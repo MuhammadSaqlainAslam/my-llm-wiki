@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Wiki — Knowledge Graph</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --surface2:  #1c2128;
+      --border:    #30363d;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --accent:    #7c3aed;
+      --accent-lt: #a78bfa;
+    }
+
+    html, body {
+      height: 100%; overflow: hidden;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────────────────── */
+    header {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px;
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 24px;
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(12px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── SITE NAV ────────────────────────────────────────────────────── */
+    .site-nav {
+      display: flex; align-items: stretch; gap: 2px;
+      height: 100%; flex-shrink: 0;
+    }
+
+    .site-nav a {
+      display: flex; align-items: center;
+      text-decoration: none;
+      color: var(--muted); font-size: .82rem; font-weight: 500;
+      padding: 0 13px; position: relative;
+      transition: color .12s;
+    }
+
+    .site-nav a:hover { color: var(--text); }
+
+    .site-nav a.active { color: var(--text); }
+
+    .site-nav a.active::after {
+      content: '';
+      position: absolute; bottom: 0; left: 13px; right: 13px;
+      height: 2px; background: var(--accent);
+      border-radius: 1px 1px 0 0;
+    }
+
+    .brand-title {
+      font-size: 1rem; font-weight: 700; letter-spacing: -.02em;
+    }
+    .brand-title .dot { color: var(--accent-lt); }
+
+    .brand-sub { font-size: .72rem; color: var(--muted); }
+
+    .header-hint {
+      margin-left: auto;
+      font-size: .72rem; color: var(--muted);
+      display: flex; gap: 14px;
+    }
+
+    .hint-key {
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    kbd {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px;
+      font-size: .65rem; font-family: inherit;
+      color: var(--muted);
+    }
+
+    /* ── GRAPH WRAP ──────────────────────────────────────────────────── */
+    #graph-wrap {
+      position: absolute; inset: 56px 0 0 0;
+    }
+
+    svg {
+      width: 100%; height: 100%;
+      cursor: grab;
+    }
+    svg:active { cursor: grabbing; }
+
+    /* ── LINKS ───────────────────────────────────────────────────────── */
+    .link {
+      fill: none;
+      stroke: #30363d;
+      stroke-opacity: .38;
+      stroke-width: 1;
+      transition: stroke-opacity .12s, stroke .12s;
+    }
+    .link.dimmed { stroke-opacity: .04; }
+    .link.lit    { stroke-opacity: .82; stroke-width: 1.5; }
+
+    /* ── NODES ───────────────────────────────────────────────────────── */
+    .node { cursor: pointer; }
+
+    .node-circle {
+      transition: opacity .12s;
+    }
+    .node-circle.dimmed  { opacity: .12; }
+    .node-circle.hovered { filter: drop-shadow(0 0 7px currentColor); }
+
+    .node-ring {
+      fill: none; stroke-width: 2; opacity: 0;
+      transition: opacity .15s;
+    }
+    .node-ring.hovered { opacity: .85; }
+
+    .node-label {
+      font-size: 12px;
+      fill: var(--text);
+      pointer-events: none;
+      transition: opacity .12s;
+    }
+    .node-label.dimmed { opacity: .08; }
+
+    /* ── POPUP ───────────────────────────────────────────────────────── */
+    #popup {
+      display: none;
+      position: fixed;
+      width: 280px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      z-index: 300;
+      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      pointer-events: all;
+    }
+
+    .p-topbar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .p-cat {
+      font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+    }
+
+    .p-year {
+      font-size: .7rem; color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 7px;
+    }
+
+    .p-title {
+      font-size: .92rem; font-weight: 700;
+      color: var(--text); line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .p-tldr {
+      font-size: .78rem; color: var(--muted);
+      line-height: 1.6; margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .p-tags {
+      display: flex; flex-wrap: wrap; gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .ptag {
+      font-size: .65rem; color: var(--accent-lt);
+      background: rgba(124,58,237,.16);
+      border: 1px solid rgba(124,58,237,.35);
+      border-radius: 4px; padding: 1px 6px;
+    }
+
+    .p-link {
+      display: inline-block;
+      font-size: .75rem; color: var(--accent-lt);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(167,139,250,.35);
+      transition: color .12s, border-color .12s;
+    }
+    .p-link:hover { color: #c4b5fd; border-bottom-color: #c4b5fd; }
+
+    .p-close {
+      position: absolute; top: 10px; right: 10px;
+      background: none; border: none;
+      color: var(--muted); font-size: .85rem;
+      cursor: pointer; line-height: 1;
+      padding: 2px 5px; border-radius: 4px;
+      transition: color .12s;
+    }
+    .p-close:hover { color: var(--text); }
+
+    /* ── LEGEND ──────────────────────────────────────────────────────── */
+    #legend {
+      position: absolute; bottom: 20px; left: 20px; z-index: 50;
+      background: rgba(22,27,34,.9);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .legend-title {
+      font-size: .65rem; font-weight: 600;
+      color: var(--muted); letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    .legend-item {
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 5px; font-size: .73rem; color: var(--muted);
+    }
+    .legend-item:last-child { margin-bottom: 0; }
+
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── NODE COUNT BADGE ────────────────────────────────────────────── */
+    #status {
+      position: absolute; bottom: 20px; right: 20px; z-index: 50;
+      font-size: .72rem; color: var(--muted);
+      background: rgba(22,27,34,.9);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 6px 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ── RESET BUTTON ────────────────────────────────────────────────── */
+    #reset-btn {
+      position: absolute; top: 70px; right: 16px; z-index: 50;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px;
+      padding: 6px 12px; font-size: .75rem; cursor: pointer;
+      transition: color .12s, border-color .12s;
+    }
+    #reset-btn:hover { color: var(--text); border-color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ────────────────────────────────────────────────────────────── -->
+<header>
+  <div>
+    <div class="brand-title">Knowledge Graph<span class="dot">.</span></div>
+    <div class="brand-sub">LLM Wiki — force-directed concept map</div>
+  </div>
+
+  <nav class="site-nav">
+    <a href="index.html">Browse notes</a>
+    <a href="graph.html" class="active">Knowledge graph</a>
+  </nav>
+
+  <div class="header-hint">
+    <span class="hint-key"><kbd>scroll</kbd> zoom</span>
+    <span class="hint-key"><kbd>drag</kbd> pan / move nodes</span>
+    <span class="hint-key"><kbd>click</kbd> open card</span>
+    <span class="hint-key"><kbd>hover</kbd> highlight links</span>
+  </div>
+</header>
+
+<!-- ── GRAPH ─────────────────────────────────────────────────────────────── -->
+<div id="graph-wrap">
+  <svg id="graph"></svg>
+  <div id="popup"></div>
+</div>
+
+<!-- ── LEGEND ────────────────────────────────────────────────────────────── -->
+<div id="legend">
+  <div class="legend-title">Category</div>
+</div>
+
+<!-- ── STATUS ────────────────────────────────────────────────────────────── -->
+<div id="status"></div>
+
+<!-- ── RESET ─────────────────────────────────────────────────────────────── -->
+<button id="reset-btn" title="Reset zoom">⊡ Reset view</button>
+
+<script>
+"use strict";
+
+// ── Category + color map ─────────────────────────────────────────────────
+const CAT_COLORS = {
+  index:        { color: '#f59e0b', label: 'Index / Meta'       },
+  foundational: { color: '#7c3aed', label: 'Foundational'       },
+  moe:          { color: '#ea580c', label: 'Mixture-of-Experts'  },
+  ssm:          { color: '#0d9488', label: 'State Space Models'  },
+  attention:    { color: '#2563eb', label: 'Attention / KV'      },
+  posttraining: { color: '#e11d48', label: 'Post-training / RL'  },
+  efficiency:   { color: '#16a34a', label: 'Efficiency / HW'     },
+  other:        { color: '#64748b', label: 'Other'               },
+};
+
+function categorize(note) {
+  const t = new Set(note.tags);
+  if (t.has('index') || t.has('meta') || t.has('dashboard'))           return 'index';
+  if (t.has('foundational') || t.has('architecture'))                  return 'foundational';
+  if (t.has('moe') || t.has('routing'))                                return 'moe';
+  if (t.has('ssm') || t.has('linear-time') || t.has('recurrence') ||
+      t.has('mamba'))                                                   return 'ssm';
+  if (t.has('post-training') || t.has('rl') || t.has('reward') ||
+      t.has('distillation'))                                            return 'posttraining';
+  if (t.has('attention') || t.has('kv-cache') || t.has('long-context')||
+      t.has('compression') || t.has('sparse-attention'))               return 'attention';
+  if (t.has('inference') || t.has('efficiency') || t.has('quantization')||
+      t.has('hardware') || t.has('throughput') || t.has('kernel-fusion'))return 'efficiency';
+  return 'other';
+}
+
+function nodeLabel(d) {
+  // Strip leading digits/emoji/dashes, replace separators with spaces, truncate
+  let s = d.id
+    .replace(/^[0-9🗺️\-]+/, '')
+    .replace(/[-_]/g, ' ')
+    .trim();
+  if (!s) s = d.id;
+  return s.length > 24 ? s.slice(0, 22) + '…' : s;
+}
+
+function esc(s) {
+  return String(s || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Main ─────────────────────────────────────────────────────────────────
+async function main() {
+  const raw = await fetch('notes.json').then(r => r.json());
+
+  const idSet = new Set(raw.map(n => n.id));
+
+  // Incoming link counts
+  const inCount = {};
+  raw.forEach(n => { inCount[n.id] = 0; });
+  raw.forEach(n => {
+    n.links.forEach(l => { if (idSet.has(l)) inCount[l] = (inCount[l] || 0) + 1; });
+  });
+
+  // Nodes
+  const nodes = raw.map(n => ({
+    id:       n.id,
+    title:    n.title,
+    tags:     n.tags,
+    tldr:     n.tldr,
+    year:     n.year,
+    cat:      categorize(n),
+    inCount:  inCount[n.id] || 0,
+    r:        7 + Math.sqrt(inCount[n.id] || 0) * 3.8,
+  }));
+
+  // Edges — deduplicated, only between known nodes
+  const edgeSeen = new Set();
+  const edges = [];
+  raw.forEach(n => {
+    n.links.forEach(l => {
+      if (!idSet.has(l)) return;
+      const key = `${n.id}→${l}`;
+      if (!edgeSeen.has(key)) {
+        edgeSeen.add(key);
+        edges.push({ source: n.id, target: l });
+      }
+    });
+  });
+
+  // Adjacency for hover (bidirectional lookup)
+  const adj = new Map(); // id → Set<id>
+  edges.forEach(e => {
+    if (!adj.has(e.source)) adj.set(e.source, new Set());
+    if (!adj.has(e.target)) adj.set(e.target, new Set());
+    adj.get(e.source).add(e.target);
+    adj.get(e.target).add(e.source);
+  });
+
+  function isAdj(a, b) { return adj.has(a) && adj.get(a).has(b); }
+
+  // ── SVG setup ────────────────────────────────────────────────────────
+  const wrap   = document.getElementById('graph-wrap');
+  const width  = wrap.clientWidth;
+  const height = wrap.clientHeight;
+
+  const svg = d3.select('#graph')
+    .attr('width', width)
+    .attr('height', height);
+
+  // Arrowhead markers — one per category color
+  const defs = svg.append('defs');
+  Object.entries(CAT_COLORS).forEach(([cat, { color }]) => {
+    defs.append('marker')
+      .attr('id', `arr-${cat}`)
+      .attr('viewBox', '0 -4 8 8')
+      .attr('refX', 8).attr('refY', 0)
+      .attr('markerWidth', 5).attr('markerHeight', 5)
+      .attr('orient', 'auto')
+      .append('path')
+        .attr('d', 'M0,-4L8,0L0,4')
+        .attr('fill', color).attr('fill-opacity', .75);
+  });
+  // Default dimmed arrow
+  defs.append('marker')
+    .attr('id', 'arr-dim')
+    .attr('viewBox', '0 -4 8 8')
+    .attr('refX', 8).attr('refY', 0)
+    .attr('markerWidth', 5).attr('markerHeight', 5)
+    .attr('orient', 'auto')
+    .append('path')
+      .attr('d', 'M0,-4L8,0L0,4')
+      .attr('fill', '#30363d');
+
+  // Zoom behaviour — transform a root <g>
+  const zoom = d3.zoom()
+    .scaleExtent([0.2, 4])
+    .on('zoom', e => root.attr('transform', e.transform));
+
+  svg.call(zoom);
+
+  // Dismiss popup on background click
+  svg.on('click', hidePopup);
+
+  const root = svg.append('g');
+
+  // ── Force simulation ─────────────────────────────────────────────────
+  const sim = d3.forceSimulation(nodes)
+    .force('link',    d3.forceLink(edges).id(d => d.id)
+                        .distance(120).strength(0.45))
+    .force('charge',  d3.forceManyBody()
+                        .strength(d => -220 - d.r * 8)
+                        .distanceMax(500))
+    .force('center',  d3.forceCenter(width / 2, height / 2).strength(0.08))
+    .force('collide', d3.forceCollide().radius(d => d.r + 20).strength(0.8));
+
+  // ── Draw links ───────────────────────────────────────────────────────
+  const linkSel = root.append('g').attr('class', 'links')
+    .selectAll('line')
+    .data(edges)
+    .join('line')
+      .attr('class', 'link')
+      .attr('marker-end', 'url(#arr-dim)');
+
+  // ── Draw node groups ─────────────────────────────────────────────────
+  const nodeSel = root.append('g').attr('class', 'nodes')
+    .selectAll('g')
+    .data(nodes)
+    .join('g')
+      .attr('class', 'node')
+      .call(
+        d3.drag()
+          .on('start', (e, d) => {
+            if (!e.active) sim.alphaTarget(0.3).restart();
+            d.fx = d.x; d.fy = d.y;
+          })
+          .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+          .on('end',   (e, d) => {
+            if (!e.active) sim.alphaTarget(0);
+            d.fx = null; d.fy = null;
+          })
+      );
+
+  // Glow ring (shown on hover)
+  nodeSel.append('circle')
+    .attr('class', 'node-ring')
+    .attr('r', d => d.r + 5)
+    .attr('stroke', d => CAT_COLORS[d.cat].color);
+
+  // Main circle
+  nodeSel.append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', d => d.r)
+    .attr('fill',         d => CAT_COLORS[d.cat].color)
+    .attr('fill-opacity', .78)
+    .attr('stroke',       d => CAT_COLORS[d.cat].color)
+    .attr('stroke-width', 1.5)
+    .attr('stroke-opacity', .55);
+
+  // Labels — below the node
+  nodeSel.append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'hanging')
+    .attr('dy', d => d.r + 5)
+    .attr('font-size', '12px')
+    .text(nodeLabel);
+
+  // ── Hover ────────────────────────────────────────────────────────────
+  let hovered = null;
+
+  function applyHover(id) {
+    hovered = id;
+
+    // Links
+    linkSel
+      .attr('class', l => {
+        const s = l.source.id, t = l.target.id;
+        if (s === id || t === id) return 'link lit';
+        return 'link dimmed';
+      })
+      .attr('stroke', l => {
+        const s = l.source.id;
+        if (s === id || l.target.id === id) return CAT_COLORS[nodes.find(n=>n.id===s).cat].color;
+        return '#30363d';
+      })
+      .attr('marker-end', l => {
+        const s = l.source.id;
+        if (s === id || l.target.id === id)
+          return `url(#arr-${nodes.find(n => n.id === s).cat})`;
+        return 'url(#arr-dim)';
+      });
+
+    // Circles
+    nodeSel.select('.node-circle')
+      .attr('class', d => 'node-circle' + (d.id === id || isAdj(id, d.id) ? ' hovered' : ' dimmed'));
+
+    // Rings
+    nodeSel.select('.node-ring')
+      .attr('class', d => 'node-ring' + (d.id === id ? ' hovered' : ''));
+
+    // Labels
+    nodeSel.select('.node-label')
+      .attr('class', d => 'node-label' + (d.id === id || isAdj(id, d.id) ? '' : ' dimmed'));
+  }
+
+  function clearHover() {
+    hovered = null;
+    linkSel
+      .attr('class', 'link')
+      .attr('stroke', '#30363d')
+      .attr('marker-end', 'url(#arr-dim)');
+    nodeSel.select('.node-circle').attr('class', 'node-circle');
+    nodeSel.select('.node-ring').attr('class', 'node-ring');
+    nodeSel.select('.node-label').attr('class', 'node-label');
+  }
+
+  nodeSel
+    .on('mouseenter', (_, d) => applyHover(d.id))
+    .on('mouseleave', () => clearHover())
+    .on('click', (event, d) => {
+      event.stopPropagation();
+      showPopup(d, event.clientX, event.clientY);
+    });
+
+  // ── Tick ─────────────────────────────────────────────────────────────
+  sim.on('tick', () => {
+    linkSel
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => {
+        const dx = d.target.x - d.source.x;
+        const dy = d.target.y - d.source.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        return d.target.x - (dx / dist) * d.target.r;
+      })
+      .attr('y2', d => {
+        const dx = d.target.x - d.source.x;
+        const dy = d.target.y - d.source.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        return d.target.y - (dy / dist) * d.target.r;
+      });
+
+    nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // ── Popup ─────────────────────────────────────────────────────────────
+  const popup = document.getElementById('popup');
+
+  function showPopup(d, cx, cy) {
+    const { color } = CAT_COLORS[d.cat];
+    const tagsHtml = d.tags.slice(0, 6).map(t =>
+      `<span class="ptag">${esc(t)}</span>`
+    ).join('');
+
+    popup.style.borderColor = color;
+    popup.innerHTML = `
+      <button class="p-close" onclick="document.getElementById('popup').style.display='none'">✕</button>
+      <div class="p-topbar">
+        <span class="p-cat" style="color:${color}">${CAT_COLORS[d.cat].label}</span>
+        ${d.year ? `<span class="p-year">${esc(d.year)}</span>` : ''}
+      </div>
+      <div class="p-title">${esc(d.title)}</div>
+      ${d.tldr ? `<div class="p-tldr">${esc(d.tldr)}</div>` : ''}
+      <div class="p-tags">${tagsHtml}</div>
+      <a class="p-link" href="index.html#${esc(d.id)}" target="_blank">
+        Open in Wiki →
+      </a>
+    `;
+
+    // Position: prefer right of cursor, clamp to viewport
+    const pw = 280, ph = 240;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    let left = cx + 14;
+    let top  = cy - 20;
+    if (left + pw > vw - 8) left = cx - pw - 14;
+    if (top  + ph > vh - 8) top  = vh - ph - 8;
+    if (top  < 60)          top  = 60;
+
+    popup.style.left    = left + 'px';
+    popup.style.top     = top  + 'px';
+    popup.style.display = 'block';
+  }
+
+  function hidePopup() { popup.style.display = 'none'; }
+
+  // ── Legend ───────────────────────────────────────────────────────────
+  const legend = document.getElementById('legend');
+  const usedCats = [...new Set(nodes.map(n => n.cat))];
+  usedCats.forEach(cat => {
+    const { color, label } = CAT_COLORS[cat];
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <span class="legend-dot" style="background:${color}"></span>
+      <span>${label}</span>
+    `;
+    // Click legend to filter by category
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      const target = nodes.find(n => n.cat === cat);
+      if (target && hovered !== target.id) applyHover(target.id);
+      else clearHover();
+    });
+    legend.appendChild(item);
+  });
+
+  // ── Status ───────────────────────────────────────────────────────────
+  document.getElementById('status').textContent =
+    `${nodes.length} nodes · ${edges.length} edges`;
+
+  // ── Reset zoom ────────────────────────────────────────────────────────
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    svg.transition().duration(500)
+      .call(zoom.transform, d3.zoomIdentity
+        .translate(width / 2, height / 2)
+        .scale(0.9)
+        .translate(-width / 2, -height / 2));
+  });
+
+  // ── Keyboard ──────────────────────────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { hidePopup(); clearHover(); }
+  });
+
+  // Resize handler
+  window.addEventListener('resize', () => {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    svg.attr('width', w).attr('height', h);
+    sim.force('center', d3.forceCenter(w / 2, h / 2).strength(0.08));
+  });
+}
+
+main();
+</script>
+</body>
+</html>

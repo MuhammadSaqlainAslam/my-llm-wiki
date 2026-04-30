@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Wiki</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --surface2:    #1c2128;
+      --border:      #30363d;
+      --text:        #e6edf3;
+      --muted:       #8b949e;
+      --accent:      #7c3aed;
+      --accent-lt:   #a78bfa;
+      --accent-dim:  rgba(124,58,237,.14);
+      --accent-ring: rgba(124,58,237,.45);
+      --tag-bg:      rgba(124,58,237,.18);
+      --panel-w:     540px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── SITE NAV ───────────────────────────────────────────────────── */
+    .site-nav {
+      display: flex; align-items: stretch; gap: 2px;
+      height: 100%; flex-shrink: 0;
+    }
+
+    .site-nav a {
+      display: flex; align-items: center;
+      text-decoration: none;
+      color: var(--muted); font-size: .82rem; font-weight: 500;
+      padding: 0 13px; position: relative;
+      transition: color .12s;
+    }
+
+    .site-nav a:hover { color: var(--text); }
+
+    .site-nav a.active { color: var(--text); }
+
+    .site-nav a.active::after {
+      content: '';
+      position: absolute; bottom: 0; left: 13px; right: 13px;
+      height: 2px; background: var(--accent);
+      border-radius: 1px 1px 0 0;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(13,17,23,.90);
+      backdrop-filter: blur(14px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex; align-items: center; gap: 18px;
+    }
+
+    .brand { flex-shrink: 0; }
+
+    .brand-title {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -.03em;
+      color: var(--text);
+    }
+
+    .brand-title .dot { color: var(--accent-lt); }
+
+    .brand-sub {
+      font-size: .72rem; color: var(--muted); margin-top: 1px;
+      letter-spacing: .01em;
+    }
+
+    .search-wrap {
+      flex: 1; max-width: 440px; position: relative;
+    }
+
+    .search-icon {
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px 8px 34px;
+      color: var(--text); font-size: .875rem;
+      outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    #search::placeholder { color: var(--muted); }
+
+    .kbd {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      font-size: .65rem; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px; pointer-events: none;
+    }
+
+    /* active tag chip */
+    #tag-chip {
+      display: none; align-items: center; gap: 5px;
+      background: var(--accent-dim); border: 1px solid var(--accent-ring);
+      border-radius: 20px; padding: 4px 10px;
+      font-size: .75rem; color: var(--accent-lt); cursor: pointer;
+      transition: background .12s;
+    }
+    #tag-chip.on { display: flex; }
+    #tag-chip:hover { background: rgba(124,58,237,.26); }
+
+    .header-count {
+      margin-left: auto; font-size: .75rem; color: var(--muted);
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────────────────────── */
+    #app {
+      display: flex;
+      height: calc(100vh - 64px);
+    }
+
+    /* ── GRID PANE ───────────────────────────────────────────────────── */
+    #grid-pane {
+      flex: 1; min-width: 0;
+      overflow-y: auto; padding: 24px;
+    }
+
+    #result-bar {
+      font-size: .75rem; color: var(--muted); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 13px;
+    }
+
+    /* ── CARD ────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 17px 18px;
+      cursor: pointer; display: flex; flex-direction: column; gap: 10px;
+      transition: border-color .15s, box-shadow .15s, transform .1s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 6px 24px rgba(124,58,237,.1);
+      transform: translateY(-2px);
+    }
+
+    .card.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .card-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 8px;
+    }
+
+    .card-title {
+      font-size: .93rem; font-weight: 600; line-height: 1.4; color: var(--text);
+    }
+
+    .year-badge {
+      flex-shrink: 0;
+      font-size: .68rem; font-weight: 700;
+      color: var(--accent-lt);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-ring);
+      border-radius: 4px; padding: 2px 7px;
+    }
+
+    .card-tldr {
+      font-size: .81rem; color: var(--muted); line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tldr em { font-style: italic; opacity: .6; }
+
+    /* ── TAGS ────────────────────────────────────────────────────────── */
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .tag {
+      font-size: .68rem; color: var(--accent-lt);
+      background: var(--tag-bg);
+      border: 1px solid var(--accent-ring);
+      border-radius: 4px; padding: 2px 7px;
+      cursor: pointer; user-select: none;
+      transition: background .12s;
+    }
+    .tag:hover { background: rgba(124,58,237,.32); }
+    .tag.active-tag { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ── EMPTY STATE ─────────────────────────────────────────────────── */
+    #empty {
+      display: none; grid-column: 1/-1;
+      text-align: center; padding: 80px 20px; color: var(--muted);
+    }
+    #empty.show { display: block; }
+    #empty svg { opacity: .25; margin-bottom: 14px; }
+    #empty p { font-size: .9rem; }
+
+    /* ── DETAIL PANEL ────────────────────────────────────────────────── */
+    #panel {
+      flex-shrink: 0;
+      width: 0; overflow: hidden;
+      border-left: 1px solid transparent;
+      background: var(--surface);
+      display: flex; flex-direction: column;
+      transition: width .22s cubic-bezier(.4,0,.2,1),
+                  border-color .22s;
+    }
+
+    #panel.open {
+      width: var(--panel-w);
+      border-left-color: var(--border);
+    }
+
+    #panel-inner {
+      width: var(--panel-w); height: 100%;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    /* panel header */
+    #panel-hd {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    #panel-topbar {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 10px;
+    }
+
+    #panel-year {
+      font-size: .72rem; font-weight: 700; color: var(--accent-lt);
+      letter-spacing: .04em;
+    }
+
+    #close-btn {
+      display: flex; align-items: center; gap: 5px;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px;
+      padding: 4px 11px; font-size: .75rem; cursor: pointer;
+      transition: border-color .12s, color .12s;
+    }
+    #close-btn:hover { border-color: var(--muted); color: var(--text); }
+
+    #panel-title {
+      font-size: 1.05rem; font-weight: 700; line-height: 1.4;
+      color: var(--text); margin-bottom: 10px;
+    }
+
+    /* panel body */
+    #panel-body {
+      flex: 1; overflow-y: auto; padding: 24px 22px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+
+    /* prose */
+    #panel-body h1 { display: none; }
+
+    #panel-body h2 {
+      font-size: .97rem; font-weight: 700; color: var(--text);
+      margin: 26px 0 10px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #panel-body h3 {
+      font-size: .88rem; font-weight: 600; color: var(--text);
+      margin: 18px 0 7px;
+    }
+
+    #panel-body p {
+      font-size: .855rem; color: var(--muted);
+      margin-bottom: 13px; line-height: 1.75;
+    }
+
+    #panel-body ul, #panel-body ol {
+      padding-left: 18px; margin-bottom: 13px;
+    }
+
+    #panel-body li {
+      font-size: .855rem; color: var(--muted);
+      margin-bottom: 5px; line-height: 1.7;
+    }
+
+    #panel-body blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-dim);
+      border-radius: 0 6px 6px 0;
+      padding: 9px 15px; margin: 14px 0;
+    }
+
+    #panel-body blockquote p {
+      color: #b8a0e8; margin: 0;
+      font-size: .83rem; font-style: italic; line-height: 1.6;
+    }
+
+    #panel-body code {
+      font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace;
+      font-size: .8rem; color: #e3b341;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px;
+    }
+
+    #panel-body pre {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; overflow-x: auto; margin: 12px 0;
+    }
+
+    #panel-body pre code {
+      background: none; border: none; padding: 0; color: var(--text);
+    }
+
+    #panel-body table {
+      width: 100%; border-collapse: collapse;
+      font-size: .8rem; margin: 14px 0;
+    }
+
+    #panel-body th {
+      background: var(--surface2); color: var(--text);
+      font-weight: 600; padding: 7px 10px;
+      border: 1px solid var(--border); text-align: left;
+    }
+
+    #panel-body td {
+      padding: 7px 10px; border: 1px solid var(--border);
+      color: var(--muted); vertical-align: top;
+    }
+
+    #panel-body tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+    /* wikilinks inside panel */
+    .wikilink {
+      color: var(--accent-lt); text-decoration: none;
+      border-bottom: 1px solid rgba(167,139,250,.35);
+      transition: color .12s, border-color .12s;
+    }
+    .wikilink:hover { color: #c4b5fd; border-bottom-color: #c4b5fd; }
+    .wikilink.missing { color: var(--muted); border-bottom-style: dashed; }
+
+    /* ── SCROLLBARS ──────────────────────────────────────────────────── */
+    #grid-pane::-webkit-scrollbar,
+    #panel-body::-webkit-scrollbar { width: 5px; }
+    #grid-pane::-webkit-scrollbar-track,
+    #panel-body::-webkit-scrollbar-track { background: transparent; }
+    #grid-pane::-webkit-scrollbar-thumb,
+    #panel-body::-webkit-scrollbar-thumb {
+      background: var(--border); border-radius: 3px;
+    }
+
+    /* ── MOBILE ──────────────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      header { padding: 0 16px; flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 10px; }
+      .kbd { display: none; }
+      .header-count { display: none; }
+      .search-wrap { order: 3; max-width: 100%; flex-basis: 100%; }
+
+      #app { flex-direction: column; height: auto; min-height: calc(100vh - 80px); }
+      #grid-pane { overflow: visible; }
+      #panel {
+        width: 100% !important;
+        border-left: none !important;
+        border-top: 1px solid transparent;
+        max-height: 0;
+        transition: max-height .3s ease, border-color .3s;
+      }
+      #panel.open { max-height: 80vh; border-top-color: var(--border); }
+      #panel-inner { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="brand">
+    <div class="brand-title">LLM Wiki<span class="dot">.</span></div>
+    <div class="brand-sub">Andrej Karpathy — research notes</div>
+  </div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="active">Browse notes</a>
+    <a href="graph.html">Knowledge graph</a>
+  </nav>
+
+  <div class="search-wrap">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2.2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text"
+           placeholder="Search titles, summaries, tags…"
+           autocomplete="off" spellcheck="false">
+    <span class="kbd">⌘K</span>
+  </div>
+
+  <div id="tag-chip">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.5">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+    </svg>
+    <span id="chip-label"></span>
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.5">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </svg>
+  </div>
+
+  <div class="header-count" id="header-count"></div>
+</header>
+
+<!-- ── APP ───────────────────────────────────────────────────────────────── -->
+<div id="app">
+
+  <!-- grid -->
+  <div id="grid-pane">
+    <div id="result-bar"></div>
+    <div id="grid">
+      <div id="empty">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.3">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <p>No notes match your search.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- detail panel -->
+  <div id="panel">
+    <div id="panel-inner">
+
+      <div id="panel-hd">
+        <div id="panel-topbar">
+          <span id="panel-year"></span>
+          <button id="close-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+              <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+            close
+          </button>
+        </div>
+        <div id="panel-title"></div>
+        <div id="panel-tags" class="tags"></div>
+      </div>
+
+      <div id="panel-body"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+// ── state ────────────────────────────────────────────────────────────────
+let notes   = [];
+let byId    = {};
+let query   = '';
+let activeTag = null;
+let openId  = null;
+
+// ── refs ─────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const searchEl    = $('search');
+const grid        = $('grid');
+const emptyEl     = $('empty');
+const resultBar   = $('result-bar');
+const headerCount = $('header-count');
+const tagChip     = $('tag-chip');
+const chipLabel   = $('chip-label');
+const panel       = $('panel');
+const panelYear   = $('panel-year');
+const panelTitle  = $('panel-title');
+const panelTags   = $('panel-tags');
+const panelBody   = $('panel-body');
+const closeBtn    = $('close-btn');
+
+// ── load ─────────────────────────────────────────────────────────────────
+async function init() {
+  const res = await fetch('notes.json');
+  notes = await res.json();
+  notes.forEach(n => { byId[n.id] = n; });
+  headerCount.textContent = `${notes.length} notes`;
+  render();
+}
+
+// ── wikilink resolver ────────────────────────────────────────────────────
+// The HTML from build.py still contains [[NoteTitle]] as literal text.
+// We convert them to clickable <a> elements.
+function resolveWikilinks(html) {
+  return html.replace(
+    /\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]/g,
+    (_, ref) => {
+      const label = ref.trim();
+      // Try exact id match first, then with spaces→dashes
+      const id = label.replace(/\s+/g, '-');
+      const exists = byId[id] || byId[label];
+      const cls = exists ? 'wikilink' : 'wikilink missing';
+      const resolvedId = exists ? (byId[id] ? id : label) : id;
+      return `<a href="#" class="${cls}" data-noteid="${resolvedId}">${label}</a>`;
+    }
+  );
+}
+
+// ── filtering ────────────────────────────────────────────────────────────
+function visibleNotes() {
+  const q = query.toLowerCase();
+  return notes.filter(n => {
+    if (activeTag && !n.tags.includes(activeTag)) return false;
+    if (!q) return true;
+    return (
+      n.title.toLowerCase().includes(q) ||
+      (n.tldr && n.tldr.toLowerCase().includes(q)) ||
+      n.tags.some(t => t.toLowerCase().includes(q))
+    );
+  });
+}
+
+// ── render grid ──────────────────────────────────────────────────────────
+function render() {
+  const visible = visibleNotes();
+  resultBar.textContent = `${visible.length} of ${notes.length} notes`;
+  emptyEl.classList.toggle('show', visible.length === 0);
+
+  // remove existing cards (keep #empty in place)
+  grid.querySelectorAll('.card').forEach(c => c.remove());
+
+  visible.forEach(n => {
+    const card = document.createElement('div');
+    card.className = 'card' + (n.id === openId ? ' active' : '');
+    card.dataset.id = n.id;
+
+    // tldr may contain inline markdown — use marked.parseInline if available
+    const tldrRaw = n.tldr || '';
+    const tldrHtml = tldrRaw
+      ? (typeof marked !== 'undefined'
+          ? marked.parseInline(tldrRaw)
+          : escHtml(tldrRaw))
+      : '<em>No summary yet.</em>';
+
+    const yearHtml = n.year
+      ? `<span class="year-badge">${escHtml(n.year)}</span>`
+      : '';
+
+    // Show up to 6 tags on the card
+    const tagsHtml = n.tags.slice(0, 6).map(t =>
+      `<span class="tag${t === activeTag ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="card-title">${escHtml(n.title)}</span>
+        ${yearHtml}
+      </div>
+      <p class="card-tldr">${tldrHtml}</p>
+      <div class="tags">${tagsHtml}</div>
+    `;
+
+    // tag clicks — stop propagation so card doesn't also open
+    card.querySelectorAll('.tag').forEach(el =>
+      el.addEventListener('click', e => {
+        e.stopPropagation();
+        setTag(el.dataset.tag);
+      })
+    );
+
+    card.addEventListener('click', () => openNote(n.id));
+    grid.insertBefore(card, emptyEl);
+  });
+
+  // tag chip
+  tagChip.classList.toggle('on', !!activeTag);
+  if (activeTag) chipLabel.textContent = activeTag;
+}
+
+// ── open panel ───────────────────────────────────────────────────────────
+function openNote(id) {
+  const n = byId[id];
+  if (!n) return;
+
+  openId = id;
+  panelYear.textContent  = n.year  || '';
+  panelTitle.textContent = n.title;
+
+  // tags in panel
+  panelTags.innerHTML = n.tags.map(t =>
+    `<span class="tag" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
+  ).join('');
+  panelTags.querySelectorAll('.tag').forEach(el =>
+    el.addEventListener('click', () => setTag(el.dataset.tag))
+  );
+
+  // wire wikilinks in pre-rendered HTML
+  panelBody.innerHTML = resolveWikilinks(n.html);
+  panelBody.querySelectorAll('a.wikilink:not(.missing)').forEach(a =>
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      openNote(a.dataset.noteid);
+    })
+  );
+
+  panel.classList.add('open');
+  panelBody.scrollTop = 0;
+  render(); // refresh active card highlight
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  openId = null;
+  render();
+}
+
+// ── tag toggle ───────────────────────────────────────────────────────────
+function setTag(tag) {
+  activeTag = (tag === activeTag) ? null : tag;
+  render();
+}
+
+// ── utils ─────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
+
+// ── events ────────────────────────────────────────────────────────────────
+searchEl.addEventListener('input', () => {
+  query = searchEl.value.trim();
+  render();
+});
+
+closeBtn.addEventListener('click', closePanel);
+
+tagChip.addEventListener('click', () => { activeTag = null; render(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePanel();
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    searchEl.focus();
+    searchEl.select();
+  }
+});
+
+init();
+</script>
+</body>
+</html>
