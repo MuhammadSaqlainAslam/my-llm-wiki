@@ -23,7 +23,7 @@ FROM "wiki"
 WHERE title != null
   AND file.name != "Dashboard"
   AND file.name != "Home"
-  AND file.name != "000 Karpathy Index"
+  AND file.name != "000 Index"
 SORT file.mtime DESC
 LIMIT 1
 ```
@@ -44,7 +44,7 @@ FROM "wiki"
 WHERE title != null
   AND file.name != "Dashboard"
   AND file.name != "Home"
-  AND file.name != "000 Karpathy Index"
+  AND file.name != "000 Index"
 SORT year ASC, title ASC
 ```
 

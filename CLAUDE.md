@@ -19,7 +19,7 @@ This activates the `saqlain_vllm` Conda environment and sets `CLAUDE_CODE_USE_FO
 ## Content Structure
 
 - `wiki/Home.md` — top-level index with concept map and recommended reading order
-- `wiki/000 Karpathy Index.md` — full article list
+- `wiki/000 Index.md` — full article list
 - `wiki/*.md` — individual concept articles
 - `raw/*.pdf` — source papers (Attention Is All You Need, Mamba, Mixtral, Switch Transformers, Nemotron-3)
 

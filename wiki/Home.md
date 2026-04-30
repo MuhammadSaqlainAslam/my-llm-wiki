@@ -1,6 +1,6 @@
 # LLM Wiki
 
-Architecture notes in the style of Andrej Karpathy — intuition first, math second, no fluff.
+AI research knowledge base — papers, concepts & intuitions. Curated by Saqlain.
 
 ---
 

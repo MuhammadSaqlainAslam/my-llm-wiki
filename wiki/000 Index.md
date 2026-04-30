@@ -1,10 +1,10 @@
 ---
-title: "Karpathy Index — LLM Wiki Master Hub"
+title: "LLM Wiki Index"
 tags: [index, meta]
 tldr: "All papers, grouped by theme, with a concept glossary and a paragraph on how everything connects."
 ---
 
-# Karpathy Index
+# LLM Wiki Index
 
 > Every note in one place. Start here if you want the big picture.
 
