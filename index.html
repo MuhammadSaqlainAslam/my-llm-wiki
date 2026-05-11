@@ -134,16 +134,45 @@
       border-radius: 4px; padding: 1px 5px; pointer-events: none;
     }
 
-    /* active tag chip */
-    #tag-chip {
-      display: none; align-items: center; gap: 5px;
-      background: var(--accent-dim); border: 1px solid var(--accent-ring);
+    /* active filter bar */
+    #active-filters {
+      display: none; flex-wrap: wrap; align-items: center; gap: 6px;
+      margin-bottom: 14px;
+    }
+    #active-filters.on { display: flex; }
+
+    .active-filter-label {
+      font-size: .72rem; color: var(--muted); margin-right: 2px;
+    }
+
+    .filter-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #fff;
+      border: 1px solid var(--accent);
       border-radius: 20px; padding: 4px 10px;
-      font-size: .75rem; color: var(--accent-lt); cursor: pointer;
+      font-size: .72rem; font-weight: 600;
+      cursor: pointer;
       transition: background .12s;
     }
-    #tag-chip.on { display: flex; }
-    #tag-chip:hover { background: rgba(124,58,237,.26); }
+    .filter-pill:hover { background: #6d28d9; border-color: #6d28d9; }
+
+    .filter-pill .x {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      font-size: .65rem; line-height: 1;
+    }
+
+    .clear-all-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 20px; padding: 3px 11px;
+      font-size: .7rem; cursor: pointer;
+      transition: color .12s, border-color .12s;
+    }
+    .clear-all-btn:hover { color: var(--text); border-color: var(--muted); }
 
     .header-count {
       margin-left: auto; font-size: .75rem; color: var(--muted);
@@ -241,14 +270,18 @@
 
     .tag {
       font-size: .68rem; color: var(--accent-lt);
-      background: var(--tag-bg);
+      background: transparent;
       border: 1px solid var(--accent-ring);
-      border-radius: 4px; padding: 2px 7px;
+      border-radius: 12px; padding: 2px 9px;
       cursor: pointer; user-select: none;
-      transition: background .12s;
+      transition: background .12s, color .12s, border-color .12s;
     }
-    .tag:hover { background: rgba(124,58,237,.32); }
-    .tag.active-tag { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tag:hover { background: var(--accent-dim); }
+    .tag.active-tag {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent);
+    }
+    .tag.active-tag:hover { background: #6d28d9; border-color: #6d28d9; }
 
     /* ── EMPTY STATE ─────────────────────────────────────────────────── */
     #empty {
@@ -392,6 +425,18 @@
 
     #panel-body tr:nth-child(even) td { background: rgba(255,255,255,.02); }
 
+    /* obsidian-only blocks (dataview / mermaid / embeds) */
+    .obsidian-note {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--muted);
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+
     /* wikilinks inside panel */
     .wikilink {
       color: var(--accent-lt); text-decoration: none;
@@ -457,18 +502,6 @@
     <span class="kbd">⌘K</span>
   </div>
 
-  <div id="tag-chip">
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="2.5">
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-    </svg>
-    <span id="chip-label"></span>
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="2.5">
-      <path d="M18 6 6 18M6 6l12 12"/>
-    </svg>
-  </div>
-
   <div class="header-count" id="header-count"></div>
   <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
 </header>
@@ -479,6 +512,7 @@
   <!-- grid -->
   <div id="grid-pane">
     <div id="result-bar"></div>
+    <div id="active-filters"></div>
     <div id="grid">
       <div id="empty">
         <svg width="42" height="42" viewBox="0 0 24 24" fill="none"
@@ -539,19 +573,18 @@ function setupTheme() {
 let notes   = [];
 let byId    = {};
 let query   = '';
-let activeTag = null;
+let activeTags = new Set();
 let openId  = null;
 
 // ── refs ─────────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const searchEl    = $('search');
-const grid        = $('grid');
-const emptyEl     = $('empty');
-const resultBar   = $('result-bar');
-const headerCount = $('header-count');
-const tagChip     = $('tag-chip');
-const chipLabel   = $('chip-label');
-const panel       = $('panel');
+const searchEl     = $('search');
+const grid         = $('grid');
+const emptyEl      = $('empty');
+const resultBar    = $('result-bar');
+const headerCount  = $('header-count');
+const filterBar    = $('active-filters');
+const panel        = $('panel');
 const panelYear   = $('panel-year');
 const panelTitle  = $('panel-title');
 const panelTags   = $('panel-tags');
@@ -586,10 +619,13 @@ function resolveWikilinks(html) {
 }
 
 // ── filtering ────────────────────────────────────────────────────────────
+// AND logic — a note must contain every active tag to be shown.
 function visibleNotes() {
   const q = query.toLowerCase();
   return notes.filter(n => {
-    if (activeTag && !n.tags.includes(activeTag)) return false;
+    for (const t of activeTags) {
+      if (!n.tags.includes(t)) return false;
+    }
     if (!q) return true;
     return (
       n.title.toLowerCase().includes(q) ||
@@ -597,6 +633,29 @@ function visibleNotes() {
       n.tags.some(t => t.toLowerCase().includes(q))
     );
   });
+}
+
+// ── render filter bar ────────────────────────────────────────────────────
+function renderFilters() {
+  if (activeTags.size === 0) {
+    filterBar.classList.remove('on');
+    filterBar.innerHTML = '';
+    return;
+  }
+  filterBar.classList.add('on');
+
+  const label = `<span class="active-filter-label">Active filters:</span>`;
+  const pills = [...activeTags].map(t =>
+    `<span class="filter-pill" data-tag="${escAttr(t)}">${escHtml(t)}<span class="x">×</span></span>`
+  ).join('');
+  const clearBtn = `<button class="clear-all-btn" id="clear-all">Clear all filters</button>`;
+
+  filterBar.innerHTML = label + pills + clearBtn;
+
+  filterBar.querySelectorAll('.filter-pill').forEach(el =>
+    el.addEventListener('click', () => removeTag(el.dataset.tag))
+  );
+  filterBar.querySelector('#clear-all').addEventListener('click', clearTags);
 }
 
 // ── render grid ──────────────────────────────────────────────────────────
@@ -627,7 +686,7 @@ function render() {
 
     // Show up to 6 tags on the card
     const tagsHtml = n.tags.slice(0, 6).map(t =>
-      `<span class="tag${t === activeTag ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
+      `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
     ).join('');
 
     card.innerHTML = `
@@ -643,7 +702,7 @@ function render() {
     card.querySelectorAll('.tag').forEach(el =>
       el.addEventListener('click', e => {
         e.stopPropagation();
-        setTag(el.dataset.tag);
+        toggleTag(el.dataset.tag);
       })
     );
 
@@ -651,9 +710,7 @@ function render() {
     grid.insertBefore(card, emptyEl);
   });
 
-  // tag chip
-  tagChip.classList.toggle('on', !!activeTag);
-  if (activeTag) chipLabel.textContent = activeTag;
+  renderFilters();
 }
 
 // ── open panel ───────────────────────────────────────────────────────────
@@ -665,12 +722,12 @@ function openNote(id) {
   panelYear.textContent  = n.year  || '';
   panelTitle.textContent = n.title;
 
-  // tags in panel
+  // tags in panel — clicking adds them to the active filter set
   panelTags.innerHTML = n.tags.map(t =>
-    `<span class="tag" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
+    `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
   ).join('');
   panelTags.querySelectorAll('.tag').forEach(el =>
-    el.addEventListener('click', () => setTag(el.dataset.tag))
+    el.addEventListener('click', () => toggleTag(el.dataset.tag))
   );
 
   // wire wikilinks in pre-rendered HTML
@@ -694,8 +751,20 @@ function closePanel() {
 }
 
 // ── tag toggle ───────────────────────────────────────────────────────────
-function setTag(tag) {
-  activeTag = (tag === activeTag) ? null : tag;
+function toggleTag(tag) {
+  if (!tag) return;
+  if (activeTags.has(tag)) activeTags.delete(tag);
+  else                     activeTags.add(tag);
+  render();
+}
+
+function removeTag(tag) {
+  activeTags.delete(tag);
+  render();
+}
+
+function clearTags() {
+  activeTags.clear();
   render();
 }
 
@@ -714,8 +783,6 @@ searchEl.addEventListener('input', () => {
 });
 
 closeBtn.addEventListener('click', closePanel);
-
-tagChip.addEventListener('click', () => { activeTag = null; render(); });
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePanel();

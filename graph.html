@@ -146,83 +146,188 @@
     }
     .node-label.dimmed { opacity: .08; }
 
-    /* ── POPUP ───────────────────────────────────────────────────────── */
-    #popup {
-      display: none;
+    /* ── SIDE PANEL ──────────────────────────────────────────────────── */
+    #panel {
       position: fixed;
-      width: 280px;
+      top: 56px; right: 0; bottom: 0;
+      width: 540px; max-width: 92vw;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      z-index: 300;
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
-      pointer-events: all;
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform .22s cubic-bezier(.4,0,.2,1);
+      z-index: 250;
+      display: flex; flex-direction: column;
+      box-shadow: -8px 0 32px rgba(0,0,0,.4);
+    }
+    #panel.open { transform: translateX(0); }
+
+    #panel-hd {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
-    .p-topbar {
+    #panel-topbar {
       display: flex; align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
+      justify-content: space-between; margin-bottom: 10px;
     }
 
-    .p-cat {
+    #panel-cat {
       font-size: .68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .08em;
     }
 
-    .p-year {
+    #panel-year {
       font-size: .7rem; color: var(--muted);
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 4px; padding: 1px 7px;
     }
 
-    .p-title {
-      font-size: .92rem; font-weight: 700;
-      color: var(--text); line-height: 1.4;
-      margin-bottom: 8px;
+    #panel-close {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px;
+      padding: 4px 10px; font-size: .75rem; cursor: pointer;
+      transition: border-color .12s, color .12s;
+    }
+    #panel-close:hover { border-color: var(--muted); color: var(--text); }
+
+    #panel-title {
+      font-size: 1.05rem; font-weight: 700; line-height: 1.4;
+      color: var(--text); margin-bottom: 10px;
     }
 
-    .p-tldr {
-      font-size: .78rem; color: var(--muted);
-      line-height: 1.6; margin-bottom: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    #panel-tags {
+      display: flex; flex-wrap: wrap; gap: 5px;
     }
 
-    .p-tags {
-      display: flex; flex-wrap: wrap; gap: 4px;
-      margin-bottom: 12px;
+    #panel-tags .ptag {
+      font-size: .68rem; color: var(--accent-lt);
+      background: transparent;
+      border: 1px solid rgba(124,58,237,.45);
+      border-radius: 12px; padding: 2px 9px;
+      cursor: pointer; user-select: none;
+      transition: background .12s, color .12s, border-color .12s;
+    }
+    #panel-tags .ptag:hover { background: rgba(124,58,237,.18); }
+    #panel-tags .ptag.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
     }
 
-    .ptag {
-      font-size: .65rem; color: var(--accent-lt);
-      background: rgba(124,58,237,.16);
-      border: 1px solid rgba(124,58,237,.35);
-      border-radius: 4px; padding: 1px 6px;
+    #panel-body {
+      flex: 1; overflow-y: auto; padding: 22px 22px 32px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
     }
 
-    .p-link {
-      display: inline-block;
-      font-size: .75rem; color: var(--accent-lt);
-      text-decoration: none;
+    #panel-body::-webkit-scrollbar { width: 5px; }
+    #panel-body::-webkit-scrollbar-track { background: transparent; }
+    #panel-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    #panel-body h1 { display: none; }
+    #panel-body h2 {
+      font-size: .97rem; font-weight: 700; color: var(--text);
+      margin: 24px 0 10px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    #panel-body h3 {
+      font-size: .88rem; font-weight: 600; color: var(--text);
+      margin: 18px 0 7px;
+    }
+    #panel-body p {
+      font-size: .855rem; color: var(--muted);
+      margin-bottom: 13px; line-height: 1.75;
+    }
+    #panel-body ul, #panel-body ol {
+      padding-left: 18px; margin-bottom: 13px;
+    }
+    #panel-body li {
+      font-size: .855rem; color: var(--muted);
+      margin-bottom: 5px; line-height: 1.7;
+    }
+    #panel-body blockquote {
+      border-left: 3px solid var(--accent);
+      background: rgba(124,58,237,.10);
+      border-radius: 0 6px 6px 0;
+      padding: 9px 15px; margin: 14px 0;
+    }
+    #panel-body blockquote p {
+      color: var(--accent-lt); margin: 0;
+      font-size: .83rem; font-style: italic; line-height: 1.6;
+    }
+    #panel-body code {
+      font-family: 'JetBrains Mono','Fira Code','Cascadia Code',monospace;
+      font-size: .8rem; color: #e3b341;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px;
+    }
+    body.light #panel-body code { color: #b45309; }
+    #panel-body pre {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; overflow-x: auto; margin: 12px 0;
+    }
+    #panel-body pre code { background: none; border: none; padding: 0; color: var(--text); }
+    #panel-body table {
+      width: 100%; border-collapse: collapse;
+      font-size: .8rem; margin: 14px 0;
+    }
+    #panel-body th {
+      background: var(--surface2); color: var(--text); font-weight: 600;
+      padding: 7px 10px; border: 1px solid var(--border); text-align: left;
+    }
+    #panel-body td {
+      padding: 7px 10px; border: 1px solid var(--border);
+      color: var(--muted); vertical-align: top;
+    }
+    #panel-body a {
+      color: var(--accent-lt); text-decoration: none;
       border-bottom: 1px solid rgba(167,139,250,.35);
-      transition: color .12s, border-color .12s;
     }
-    .p-link:hover { color: #c4b5fd; border-bottom-color: #c4b5fd; }
+    #panel-body a:hover { color: #c4b5fd; }
 
-    .p-close {
-      position: absolute; top: 10px; right: 10px;
-      background: none; border: none;
-      color: var(--muted); font-size: .85rem;
-      cursor: pointer; line-height: 1;
-      padding: 2px 5px; border-radius: 4px;
-      transition: color .12s;
+    /* obsidian-only blocks */
+    .obsidian-note {
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--muted);
+      border-radius: 4px;
+      margin: 8px 0;
     }
-    .p-close:hover { color: var(--text); }
+
+    /* tag-filter bar at the bottom of the graph when filters active */
+    #tag-filter-bar {
+      display: none; flex-wrap: wrap; align-items: center; gap: 6px;
+      position: absolute; top: 70px; left: 16px; z-index: 60;
+      max-width: calc(100% - 250px);
+      padding: 6px 10px;
+      background: var(--bg-overlay);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+    }
+    #tag-filter-bar.on { display: flex; }
+    .tf-label { font-size: .68rem; color: var(--muted); margin-right: 2px; }
+    .tf-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .68rem; font-weight: 600;
+      background: var(--accent); color: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 12px; padding: 2px 9px;
+      cursor: pointer;
+    }
+    .tf-pill .x {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 13px; height: 13px; border-radius: 50%;
+      background: rgba(255,255,255,.22); font-size: .6rem; line-height: 1;
+    }
+    .tf-clear {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 12px;
+      padding: 2px 9px; font-size: .65rem; cursor: pointer;
+    }
+    .tf-clear:hover { color: var(--text); border-color: var(--muted); }
 
     /* ── LEGEND ──────────────────────────────────────────────────────── */
     #legend {
@@ -302,7 +407,7 @@
   <div class="header-hint">
     <span class="hint-key"><kbd>scroll</kbd> zoom</span>
     <span class="hint-key"><kbd>drag</kbd> pan / move nodes</span>
-    <span class="hint-key"><kbd>click</kbd> open card</span>
+    <span class="hint-key"><kbd>click</kbd> open note</span>
     <span class="hint-key"><kbd>hover</kbd> highlight links</span>
   </div>
   <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
@@ -311,7 +416,23 @@
 <!-- ── GRAPH ─────────────────────────────────────────────────────────────── -->
 <div id="graph-wrap">
   <svg id="graph"></svg>
-  <div id="popup"></div>
+</div>
+
+<!-- ── TAG FILTER BAR ────────────────────────────────────────────────────── -->
+<div id="tag-filter-bar"></div>
+
+<!-- ── SIDE PANEL ────────────────────────────────────────────────────────── -->
+<div id="panel">
+  <div id="panel-hd">
+    <div id="panel-topbar">
+      <span id="panel-cat"></span>
+      <span id="panel-year"></span>
+      <button id="panel-close">close</button>
+    </div>
+    <div id="panel-title"></div>
+    <div id="panel-tags"></div>
+  </div>
+  <div id="panel-body"></div>
 </div>
 
 <!-- ── LEGEND ────────────────────────────────────────────────────────────── -->
@@ -380,9 +501,14 @@ function esc(s) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// ── Tag-filter state ─────────────────────────────────────────────────────
+const activeTags = new Set();
+let byId = {};
+
 // ── Main ─────────────────────────────────────────────────────────────────
 async function main() {
   const raw = await fetch('notes.json').then(r => r.json());
+  raw.forEach(n => { byId[n.id] = n; });
 
   const idSet = new Set(raw.map(n => n.id));
 
@@ -470,8 +596,8 @@ async function main() {
 
   svg.call(zoom);
 
-  // Dismiss popup on background click
-  svg.on('click', hidePopup);
+  // Background click on the SVG closes the panel
+  svg.on('click', closePanel);
 
   const root = svg.append('g');
 
@@ -584,6 +710,8 @@ async function main() {
     nodeSel.select('.node-circle').attr('class', 'node-circle');
     nodeSel.select('.node-ring').attr('class', 'node-ring');
     nodeSel.select('.node-label').attr('class', 'node-label');
+    // Re-apply tag filter dimming if any filters are active.
+    if (activeTags.size > 0) applyTagFilter();
   }
 
   nodeSel
@@ -591,7 +719,7 @@ async function main() {
     .on('mouseleave', () => clearHover())
     .on('click', (event, d) => {
       event.stopPropagation();
-      showPopup(d, event.clientX, event.clientY);
+      openPanel(d.id);
     });
 
   // ── Tick ─────────────────────────────────────────────────────────────
@@ -615,45 +743,131 @@ async function main() {
     nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
   });
 
-  // ── Popup ─────────────────────────────────────────────────────────────
-  const popup = document.getElementById('popup');
+  // ── Side Panel ────────────────────────────────────────────────────────
+  const panel       = document.getElementById('panel');
+  const panelCat    = document.getElementById('panel-cat');
+  const panelYear   = document.getElementById('panel-year');
+  const panelTitle  = document.getElementById('panel-title');
+  const panelTags   = document.getElementById('panel-tags');
+  const panelBody   = document.getElementById('panel-body');
+  const panelClose  = document.getElementById('panel-close');
 
-  function showPopup(d, cx, cy) {
-    const { color } = CAT_COLORS[d.cat];
-    const tagsHtml = d.tags.slice(0, 6).map(t =>
-      `<span class="ptag">${esc(t)}</span>`
-    ).join('');
+  panelClose.addEventListener('click', closePanel);
+  panel.addEventListener('click', e => e.stopPropagation());
 
-    popup.style.borderColor = color;
-    popup.innerHTML = `
-      <button class="p-close" onclick="document.getElementById('popup').style.display='none'">✕</button>
-      <div class="p-topbar">
-        <span class="p-cat" style="color:${color}">${CAT_COLORS[d.cat].label}</span>
-        ${d.year ? `<span class="p-year">${esc(d.year)}</span>` : ''}
-      </div>
-      <div class="p-title">${esc(d.title)}</div>
-      ${d.tldr ? `<div class="p-tldr">${esc(d.tldr)}</div>` : ''}
-      <div class="p-tags">${tagsHtml}</div>
-      <a class="p-link" href="index.html#${esc(d.id)}" target="_blank">
-        Open in Wiki →
-      </a>
-    `;
-
-    // Position: prefer right of cursor, clamp to viewport
-    const pw = 280, ph = 240;
-    const vw = window.innerWidth, vh = window.innerHeight;
-    let left = cx + 14;
-    let top  = cy - 20;
-    if (left + pw > vw - 8) left = cx - pw - 14;
-    if (top  + ph > vh - 8) top  = vh - ph - 8;
-    if (top  < 60)          top  = 60;
-
-    popup.style.left    = left + 'px';
-    popup.style.top     = top  + 'px';
-    popup.style.display = 'block';
+  // Convert [[WikiLink]] in raw HTML to <a> links that open another node
+  function resolveWikilinks(html) {
+    return html.replace(
+      /\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]/g,
+      (_, ref) => {
+        const label = ref.trim();
+        const id = label.replace(/\s+/g, '-');
+        const exists = byId[id] || byId[label];
+        const resolvedId = exists ? (byId[id] ? id : label) : id;
+        return `<a href="#" data-noteid="${esc(resolvedId)}" class="wl">${esc(label)}</a>`;
+      }
+    );
   }
 
-  function hidePopup() { popup.style.display = 'none'; }
+  function openPanel(id) {
+    const d = byId[id];
+    if (!d) return;
+
+    const { color, label } = CAT_COLORS[categorize(d)] || CAT_COLORS.other;
+    panelCat.textContent  = label;
+    panelCat.style.color  = color;
+    panelYear.textContent = d.year || '';
+    panelYear.style.display = d.year ? 'inline-block' : 'none';
+    panelTitle.textContent = d.title;
+
+    panelTags.innerHTML = d.tags.map(t =>
+      `<span class="ptag${activeTags.has(t) ? ' active' : ''}" data-tag="${esc(t)}">${esc(t)}</span>`
+    ).join('');
+    panelTags.querySelectorAll('.ptag').forEach(el =>
+      el.addEventListener('click', e => {
+        e.stopPropagation();
+        toggleTagFilter(el.dataset.tag);
+        // Refresh panel pill highlight without rebuilding the whole panel
+        el.classList.toggle('active', activeTags.has(el.dataset.tag));
+      })
+    );
+
+    panelBody.innerHTML = resolveWikilinks(d.html || '');
+    panelBody.querySelectorAll('a.wl').forEach(a =>
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = a.dataset.noteid;
+        if (byId[targetId]) openPanel(targetId);
+      })
+    );
+    panelBody.scrollTop = 0;
+
+    panel.classList.add('open');
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+  }
+
+  // ── Tag filter (applied to the graph) ─────────────────────────────────
+  const tagBar = document.getElementById('tag-filter-bar');
+
+  function nodeMatchesActiveTags(n) {
+    for (const t of activeTags) if (!n.tags.includes(t)) return false;
+    return true;
+  }
+
+  function applyTagFilter() {
+    const hasFilter = activeTags.size > 0;
+
+    nodeSel.select('.node-circle')
+      .classed('dimmed', d => hasFilter && !nodeMatchesActiveTags(d));
+    nodeSel.select('.node-label')
+      .classed('dimmed', d => hasFilter && !nodeMatchesActiveTags(d));
+
+    linkSel.classed('dimmed', l => {
+      if (!hasFilter) return false;
+      const sId = typeof l.source === 'object' ? l.source.id : l.source;
+      const tId = typeof l.target === 'object' ? l.target.id : l.target;
+      return !(nodeMatchesActiveTags(byId[sId]) && nodeMatchesActiveTags(byId[tId]));
+    });
+
+    // Render the visible filter bar
+    if (!hasFilter) {
+      tagBar.classList.remove('on');
+      tagBar.innerHTML = '';
+      return;
+    }
+    tagBar.classList.add('on');
+    tagBar.innerHTML =
+      `<span class="tf-label">Filtering:</span>` +
+      [...activeTags].map(t =>
+        `<span class="tf-pill" data-tag="${esc(t)}">${esc(t)}<span class="x">×</span></span>`
+      ).join('') +
+      `<button class="tf-clear" id="tf-clear">Clear</button>`;
+    tagBar.querySelectorAll('.tf-pill').forEach(el =>
+      el.addEventListener('click', () => {
+        activeTags.delete(el.dataset.tag);
+        applyTagFilter();
+        // Refresh panel pill highlight if open
+        panel.querySelectorAll('#panel-tags .ptag').forEach(p => {
+          p.classList.toggle('active', activeTags.has(p.dataset.tag));
+        });
+      })
+    );
+    tagBar.querySelector('#tf-clear').addEventListener('click', () => {
+      activeTags.clear();
+      applyTagFilter();
+      panel.querySelectorAll('#panel-tags .ptag').forEach(p => p.classList.remove('active'));
+    });
+  }
+
+  function toggleTagFilter(tag) {
+    if (!tag) return;
+    if (activeTags.has(tag)) activeTags.delete(tag);
+    else                     activeTags.add(tag);
+    applyTagFilter();
+  }
 
   // ── Legend ───────────────────────────────────────────────────────────
   const legend = document.getElementById('legend');
@@ -691,7 +905,7 @@ async function main() {
 
   // ── Keyboard ──────────────────────────────────────────────────────────
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { hidePopup(); clearHover(); }
+    if (e.key === 'Escape') { closePanel(); clearHover(); }
   });
 
   // Resize handler
