@@ -6,6 +6,9 @@
   <title>LLM Wiki</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -739,9 +742,26 @@ function openNote(id) {
     })
   );
 
+  // render KaTeX math expressions inside the panel body
+  renderMath(panelBody);
+
   panel.classList.add('open');
   panelBody.scrollTop = 0;
   render(); // refresh active card highlight
+}
+
+// ── KaTeX renderer ───────────────────────────────────────────────────────
+function renderMath(el) {
+  if (typeof renderMathInElement !== 'function') return;
+  renderMathInElement(el, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true  },
+      { left: '$',  right: '$',  display: false },
+      { left: '\\(', right: '\\)', display: false },
+      { left: '\\[', right: '\\]', display: true  }
+    ],
+    throwOnError: false
+  });
 }
 
 function closePanel() {

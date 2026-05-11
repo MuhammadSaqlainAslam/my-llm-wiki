@@ -6,6 +6,9 @@
   <title>LLM Wiki — Knowledge Graph</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -800,8 +803,21 @@ async function main() {
         if (byId[targetId]) openPanel(targetId);
       })
     );
-    panelBody.scrollTop = 0;
 
+    // render KaTeX math inside panel body
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(panelBody, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true  },
+          { left: '$',  right: '$',  display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true  }
+        ],
+        throwOnError: false
+      });
+    }
+
+    panelBody.scrollTop = 0;
     panel.classList.add('open');
   }
 
