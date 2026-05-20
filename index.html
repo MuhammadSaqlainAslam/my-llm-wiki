@@ -71,7 +71,6 @@
     }
 
     .site-nav a:hover { color: var(--text); }
-
     .site-nav a.active { color: var(--text); }
 
     .site-nav a.active::after {
@@ -98,7 +97,6 @@
       font-size: 1.15rem; font-weight: 700; letter-spacing: -.03em;
       color: var(--text);
     }
-
     .brand-title .dot { color: var(--accent-lt); }
 
     .brand-sub {
@@ -209,10 +207,51 @@
       overflow-y: auto; padding: 24px;
     }
 
+    /* ── TAB BAR ─────────────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      background: none; border: none;
+      color: var(--muted); font-size: .83rem; font-weight: 500;
+      padding: 8px 16px; cursor: pointer;
+      position: relative;
+      transition: color .12s;
+    }
+    .tab-btn:hover { color: var(--text); }
+
+    .tab-btn.active { color: var(--text); }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+      border-radius: 1px 1px 0 0;
+    }
+
+    /* ── RESULT BAR ──────────────────────────────────────────────────── */
     #result-bar {
       font-size: .75rem; color: var(--muted); margin-bottom: 18px;
       display: flex; align-items: center; gap: 10px;
     }
+
+    /* ── SORT SELECT ─────────────────────────────────────────────────── */
+    .sort-select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: .73rem;
+      cursor: pointer;
+      margin-left: auto;
+      outline: none;
+      transition: border-color .12s;
+    }
+    .sort-select:hover { border-color: var(--muted); color: var(--text); }
 
     #grid {
       display: grid;
@@ -249,6 +288,13 @@
       font-size: .93rem; font-weight: 600; line-height: 1.4; color: var(--text);
     }
 
+    /* ── CARD META (year + citation stacked) ─────────────────────────── */
+    .card-meta {
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: 4px;
+      flex-shrink: 0;
+    }
+
     .year-badge {
       flex-shrink: 0;
       font-size: .68rem; font-weight: 700;
@@ -256,6 +302,17 @@
       background: var(--accent-dim);
       border: 1px solid var(--accent-ring);
       border-radius: 4px; padding: 2px 7px;
+    }
+
+    /* ── CITATION BADGE (card) ───────────────────────────────────────── */
+    .citation-badge {
+      display: inline-block;
+      font-size: .63rem; font-weight: 600;
+      color: var(--accent-lt);
+      background: var(--tag-bg);
+      border: 1px solid var(--accent-ring);
+      border-radius: 10px; padding: 1px 7px;
+      white-space: nowrap;
     }
 
     .card-tldr {
@@ -295,6 +352,76 @@
     #empty svg { opacity: .25; margin-bottom: 14px; }
     #empty p { font-size: .9rem; }
 
+    /* ── RANKED LIST (Top Cited tab) ─────────────────────────────────── */
+    .ranked-list {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: column; gap: 8px;
+      max-width: 740px;
+    }
+
+    .ranked-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 13px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color .15s, box-shadow .15s, transform .1s;
+    }
+    .ranked-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 4px 16px rgba(124,58,237,.1);
+      transform: translateY(-1px);
+    }
+
+    .ranked-num {
+      font-size: 1rem; font-weight: 700;
+      color: var(--muted); min-width: 28px;
+      text-align: right; flex-shrink: 0;
+    }
+    .ranked-num.gold   { color: #f59e0b; }
+    .ranked-num.silver { color: #94a3b8; }
+    .ranked-num.bronze { color: #a16207; }
+
+    .ranked-info { flex: 1; min-width: 0; }
+
+    .ranked-title {
+      font-size: .92rem; font-weight: 600; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .ranked-meta {
+      font-size: .73rem; color: var(--muted); margin-top: 2px;
+    }
+
+    .ranked-count {
+      font-size: .83rem; font-weight: 700;
+      color: var(--accent-lt); white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── BY THEME (By Theme tab) ─────────────────────────────────────── */
+    .theme-section {
+      grid-column: 1 / -1;
+      margin-bottom: 28px;
+    }
+
+    .theme-heading {
+      font-size: .78rem; font-weight: 700; color: var(--muted);
+      letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 12px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .theme-heading .theme-count {
+      font-weight: 400; font-size: .72rem; margin-left: 6px;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 13px;
+    }
+
     /* ── DETAIL PANEL ────────────────────────────────────────────────── */
     #panel {
       flex-shrink: 0;
@@ -328,9 +455,23 @@
       justify-content: space-between; margin-bottom: 10px;
     }
 
+    .panel-meta {
+      display: flex; align-items: center; gap: 8px;
+    }
+
     #panel-year {
       font-size: .72rem; font-weight: 700; color: var(--accent-lt);
       letter-spacing: .04em;
+    }
+
+    /* ── PANEL CITATION ──────────────────────────────────────────────── */
+    #panel-citations {
+      display: none;
+      font-size: .7rem; font-weight: 600;
+      color: var(--accent-lt);
+      background: var(--tag-bg);
+      border: 1px solid var(--accent-ring);
+      border-radius: 4px; padding: 1px 8px;
     }
 
     #close-btn {
@@ -514,6 +655,14 @@
 
   <!-- grid -->
   <div id="grid-pane">
+
+    <!-- tab bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="all">All</button>
+      <button class="tab-btn" data-tab="top-cited">Top Cited</button>
+      <button class="tab-btn" data-tab="by-theme">By Theme</button>
+    </div>
+
     <div id="result-bar"></div>
     <div id="active-filters"></div>
     <div id="grid">
@@ -533,7 +682,10 @@
 
       <div id="panel-hd">
         <div id="panel-topbar">
-          <span id="panel-year"></span>
+          <div class="panel-meta">
+            <span id="panel-year"></span>
+            <span id="panel-citations"></span>
+          </div>
           <button id="close-btn">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2.5">
@@ -573,26 +725,29 @@ function setupTheme() {
 }
 
 // ── state ────────────────────────────────────────────────────────────────
-let notes   = [];
-let byId    = {};
-let query   = '';
+let notes      = [];
+let byId       = {};
+let query      = '';
 let activeTags = new Set();
-let openId  = null;
+let openId     = null;
+let sortBy     = 'title';      // 'title' | 'year' | 'citations'
+let activeTab  = 'all';        // 'all' | 'top-cited' | 'by-theme'
 
 // ── refs ─────────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const searchEl     = $('search');
-const grid         = $('grid');
-const emptyEl      = $('empty');
-const resultBar    = $('result-bar');
-const headerCount  = $('header-count');
-const filterBar    = $('active-filters');
-const panel        = $('panel');
-const panelYear   = $('panel-year');
-const panelTitle  = $('panel-title');
-const panelTags   = $('panel-tags');
-const panelBody   = $('panel-body');
-const closeBtn    = $('close-btn');
+const searchEl       = $('search');
+const grid           = $('grid');
+const emptyEl        = $('empty');
+const resultBar      = $('result-bar');
+const headerCount    = $('header-count');
+const filterBar      = $('active-filters');
+const panel          = $('panel');
+const panelYear      = $('panel-year');
+const panelCitations = $('panel-citations');
+const panelTitle     = $('panel-title');
+const panelTags      = $('panel-tags');
+const panelBody      = $('panel-body');
+const closeBtn       = $('close-btn');
 
 // ── load ─────────────────────────────────────────────────────────────────
 async function init() {
@@ -600,18 +755,32 @@ async function init() {
   notes = await res.json();
   notes.forEach(n => { byId[n.id] = n; });
   headerCount.textContent = `${notes.length} notes`;
+
+  // Wire up tab buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
+  });
+
   render();
 }
 
+// ── format citation count ─────────────────────────────────────────────────
+function fmtCit(n) {
+  if (!n) return '';
+  return n.toLocaleString();
+}
+
 // ── wikilink resolver ────────────────────────────────────────────────────
-// The HTML from build.py still contains [[NoteTitle]] as literal text.
-// We convert them to clickable <a> elements.
 function resolveWikilinks(html) {
   return html.replace(
     /\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]/g,
     (_, ref) => {
       const label = ref.trim();
-      // Try exact id match first, then with spaces→dashes
       const id = label.replace(/\s+/g, '-');
       const exists = byId[id] || byId[label];
       const cls = exists ? 'wikilink' : 'wikilink missing';
@@ -621,9 +790,8 @@ function resolveWikilinks(html) {
   );
 }
 
-// ── filtering ────────────────────────────────────────────────────────────
-// AND logic — a note must contain every active tag to be shown.
-function visibleNotes() {
+// ── filtering + sorting ──────────────────────────────────────────────────
+function filteredNotes() {
   const q = query.toLowerCase();
   return notes.filter(n => {
     for (const t of activeTags) {
@@ -636,6 +804,87 @@ function visibleNotes() {
       n.tags.some(t => t.toLowerCase().includes(q))
     );
   });
+}
+
+function sortedNotes(arr) {
+  const copy = [...arr];
+  if (sortBy === 'citations') {
+    copy.sort((a, b) => (b.citation_count || 0) - (a.citation_count || 0));
+  } else if (sortBy === 'year') {
+    copy.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
+  } else {
+    copy.sort((a, b) => a.title.localeCompare(b.title));
+  }
+  return copy;
+}
+
+// ── categorize for By Theme ──────────────────────────────────────────────
+const THEME_ORDER = [
+  { key: 'Foundations',            match: n => n.tags.some(t => ['foundational','architecture'].includes(t)) },
+  { key: 'State Space Models',     match: n => n.tags.some(t => ['ssm','linear-time','recurrence','mamba','lstm','rnn','linear-attention'].includes(t)) },
+  { key: 'Mixture-of-Experts',     match: n => n.tags.some(t => ['moe','routing','sparse'].includes(t)) },
+  { key: 'Inference Optimization', match: n => n.tags.some(t => ['inference','speculative-decoding','throughput','draft-model','kv-cache'].includes(t)) },
+  { key: 'Hardware & Systems',     match: n => n.tags.some(t => ['hardware','io-awareness','kernel-fusion','gpu','tpu','asic','fpga'].includes(t)) },
+  { key: 'Attention & KV',         match: n => n.tags.some(t => ['attention','long-context','compression'].includes(t)) },
+  { key: 'Training & RL',          match: n => n.tags.some(t => ['rlhf','rl','post-training','training','reward'].includes(t)) },
+  { key: 'Benchmarks',             match: n => n.tags.some(t => ['benchmarks','evaluation'].includes(t)) },
+  { key: 'Concepts & Glossary',    match: n => n.tags.includes('glossary') },
+  { key: 'Meta',                   match: n => n.tags.some(t => ['index','meta','dashboard'].includes(t)) },
+];
+
+function themeOf(n) {
+  for (const th of THEME_ORDER) {
+    if (th.match(n)) return th.key;
+  }
+  return 'Other';
+}
+
+// ── build a card element ─────────────────────────────────────────────────
+function makeCard(n) {
+  const card = document.createElement('div');
+  card.className = 'card' + (n.id === openId ? ' active' : '');
+  card.dataset.id = n.id;
+
+  const tldrRaw = n.tldr || '';
+  const tldrHtml = tldrRaw
+    ? (typeof marked !== 'undefined'
+        ? marked.parseInline(tldrRaw)
+        : escHtml(tldrRaw))
+    : '<em>No summary yet.</em>';
+
+  const yearHtml = n.year
+    ? `<span class="year-badge">${escHtml(n.year)}</span>`
+    : '';
+
+  const citHtml = n.citation_count
+    ? `<span class="citation-badge">🔖 ${fmtCit(n.citation_count)} citations</span>`
+    : '';
+
+  const tagsHtml = n.tags.slice(0, 6).map(t =>
+    `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
+  ).join('');
+
+  card.innerHTML = `
+    <div class="card-top">
+      <span class="card-title">${escHtml(n.title)}</span>
+      <div class="card-meta">
+        ${yearHtml}
+        ${citHtml}
+      </div>
+    </div>
+    <p class="card-tldr">${tldrHtml}</p>
+    <div class="tags">${tagsHtml}</div>
+  `;
+
+  card.querySelectorAll('.tag').forEach(el =>
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleTag(el.dataset.tag);
+    })
+  );
+
+  card.addEventListener('click', () => openNote(n.id));
+  return card;
 }
 
 // ── render filter bar ────────────────────────────────────────────────────
@@ -661,59 +910,145 @@ function renderFilters() {
   filterBar.querySelector('#clear-all').addEventListener('click', clearTags);
 }
 
-// ── render grid ──────────────────────────────────────────────────────────
-function render() {
-  const visible = visibleNotes();
-  resultBar.textContent = `${visible.length} of ${notes.length} notes`;
+// ── clear grid (keep #empty) ──────────────────────────────────────────────
+function clearGrid() {
+  [...grid.children].forEach(c => { if (c !== emptyEl) c.remove(); });
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────────────────
+function renderAll() {
+  const visible = sortedNotes(filteredNotes());
   emptyEl.classList.toggle('show', visible.length === 0);
 
-  // remove existing cards (keep #empty in place)
-  grid.querySelectorAll('.card').forEach(c => c.remove());
-
-  visible.forEach(n => {
-    const card = document.createElement('div');
-    card.className = 'card' + (n.id === openId ? ' active' : '');
-    card.dataset.id = n.id;
-
-    // tldr may contain inline markdown — use marked.parseInline if available
-    const tldrRaw = n.tldr || '';
-    const tldrHtml = tldrRaw
-      ? (typeof marked !== 'undefined'
-          ? marked.parseInline(tldrRaw)
-          : escHtml(tldrRaw))
-      : '<em>No summary yet.</em>';
-
-    const yearHtml = n.year
-      ? `<span class="year-badge">${escHtml(n.year)}</span>`
-      : '';
-
-    // Show up to 6 tags on the card
-    const tagsHtml = n.tags.slice(0, 6).map(t =>
-      `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
-    ).join('');
-
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="card-title">${escHtml(n.title)}</span>
-        ${yearHtml}
-      </div>
-      <p class="card-tldr">${tldrHtml}</p>
-      <div class="tags">${tagsHtml}</div>
-    `;
-
-    // tag clicks — stop propagation so card doesn't also open
-    card.querySelectorAll('.tag').forEach(el =>
-      el.addEventListener('click', e => {
-        e.stopPropagation();
-        toggleTag(el.dataset.tag);
-      })
-    );
-
-    card.addEventListener('click', () => openNote(n.id));
-    grid.insertBefore(card, emptyEl);
+  // Result bar with sort select
+  resultBar.innerHTML = `
+    <span>${visible.length} of ${notes.length} notes</span>
+    <select class="sort-select" id="sort-select">
+      <option value="title"${sortBy === 'title' ? ' selected' : ''}>Sort: Title A–Z</option>
+      <option value="year"${sortBy === 'year' ? ' selected' : ''}>Sort: Year (newest)</option>
+      <option value="citations"${sortBy === 'citations' ? ' selected' : ''}>Sort: Citations ↓</option>
+    </select>
+  `;
+  document.getElementById('sort-select').addEventListener('change', e => {
+    sortBy = e.target.value;
+    render();
   });
 
+  clearGrid();
+  visible.forEach(n => grid.insertBefore(makeCard(n), emptyEl));
   renderFilters();
+}
+
+// ── RENDER TOP CITED ──────────────────────────────────────────────────────
+function renderTopCited() {
+  const q = query.toLowerCase();
+  let cited = notes.filter(n => n.citation_count > 0);
+  if (q) {
+    cited = cited.filter(n =>
+      n.title.toLowerCase().includes(q) ||
+      (n.tldr && n.tldr.toLowerCase().includes(q)) ||
+      n.tags.some(t => t.toLowerCase().includes(q))
+    );
+  }
+  cited.sort((a, b) => (b.citation_count || 0) - (a.citation_count || 0));
+
+  resultBar.innerHTML = `<span>${cited.length} papers with citation data</span>`;
+  emptyEl.classList.toggle('show', cited.length === 0);
+
+  clearGrid();
+
+  const list = document.createElement('div');
+  list.className = 'ranked-list';
+
+  cited.forEach((n, i) => {
+    const rank = i + 1;
+    const numClass = rank === 1 ? ' gold' : rank === 2 ? ' silver' : rank === 3 ? ' bronze' : '';
+    const item = document.createElement('div');
+    item.className = 'ranked-item';
+    item.innerHTML = `
+      <span class="ranked-num${numClass}">#${rank}</span>
+      <div class="ranked-info">
+        <div class="ranked-title">${escHtml(n.title)}</div>
+        <div class="ranked-meta">${n.year ? escHtml(n.year) : '—'}</div>
+      </div>
+      <span class="ranked-count">${fmtCit(n.citation_count)} citations</span>
+    `;
+    item.addEventListener('click', () => openNote(n.id));
+    list.appendChild(item);
+  });
+
+  grid.insertBefore(list, emptyEl);
+}
+
+// ── RENDER BY THEME ───────────────────────────────────────────────────────
+function renderByTheme() {
+  const visible = filteredNotes();
+
+  resultBar.innerHTML = `<span>${visible.length} of ${notes.length} notes</span>`;
+  emptyEl.classList.toggle('show', visible.length === 0);
+
+  clearGrid();
+
+  // Group by theme
+  const groups = {};
+  visible.forEach(n => {
+    const theme = themeOf(n);
+    if (!groups[theme]) groups[theme] = [];
+    groups[theme].push(n);
+  });
+
+  // Render in fixed theme order
+  const renderedThemes = new Set();
+  THEME_ORDER.forEach(th => {
+    if (!groups[th.key] || groups[th.key].length === 0) return;
+    renderedThemes.add(th.key);
+
+    const section = document.createElement('div');
+    section.className = 'theme-section';
+
+    const heading = document.createElement('div');
+    heading.className = 'theme-heading';
+    heading.innerHTML = `${escHtml(th.key)}<span class="theme-count">(${groups[th.key].length})</span>`;
+    section.appendChild(heading);
+
+    const themeGrid = document.createElement('div');
+    themeGrid.className = 'theme-grid';
+    groups[th.key].forEach(n => themeGrid.appendChild(makeCard(n)));
+    section.appendChild(themeGrid);
+
+    grid.insertBefore(section, emptyEl);
+  });
+
+  // Catch-all for 'Other'
+  if (groups['Other'] && groups['Other'].length > 0) {
+    const section = document.createElement('div');
+    section.className = 'theme-section';
+
+    const heading = document.createElement('div');
+    heading.className = 'theme-heading';
+    heading.innerHTML = `Other<span class="theme-count">(${groups['Other'].length})</span>`;
+    section.appendChild(heading);
+
+    const themeGrid = document.createElement('div');
+    themeGrid.className = 'theme-grid';
+    groups['Other'].forEach(n => themeGrid.appendChild(makeCard(n)));
+    section.appendChild(themeGrid);
+
+    grid.insertBefore(section, emptyEl);
+  }
+
+  renderFilters();
+}
+
+// ── MAIN RENDER DISPATCH ──────────────────────────────────────────────────
+function render() {
+  if (activeTab === 'top-cited') {
+    renderTopCited();
+  } else if (activeTab === 'by-theme') {
+    renderByTheme();
+  } else {
+    renderAll();
+  }
 }
 
 // ── open panel ───────────────────────────────────────────────────────────
@@ -722,10 +1057,18 @@ function openNote(id) {
   if (!n) return;
 
   openId = id;
-  panelYear.textContent  = n.year  || '';
+  panelYear.textContent = n.year || '';
+
+  // Citation display in panel
+  if (n.citation_count) {
+    panelCitations.textContent = `📚 ${fmtCit(n.citation_count)} citations`;
+    panelCitations.style.display = 'inline-block';
+  } else {
+    panelCitations.style.display = 'none';
+  }
+
   panelTitle.textContent = n.title;
 
-  // tags in panel — clicking adds them to the active filter set
   panelTags.innerHTML = n.tags.map(t =>
     `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
   ).join('');
@@ -733,7 +1076,6 @@ function openNote(id) {
     el.addEventListener('click', () => toggleTag(el.dataset.tag))
   );
 
-  // wire wikilinks in pre-rendered HTML
   panelBody.innerHTML = resolveWikilinks(n.html);
   panelBody.querySelectorAll('a.wikilink:not(.missing)').forEach(a =>
     a.addEventListener('click', e => {
@@ -742,12 +1084,11 @@ function openNote(id) {
     })
   );
 
-  // render KaTeX math expressions inside the panel body
   renderMath(panelBody);
 
   panel.classList.add('open');
   panelBody.scrollTop = 0;
-  render(); // refresh active card highlight
+  render();
 }
 
 // ── KaTeX renderer ───────────────────────────────────────────────────────

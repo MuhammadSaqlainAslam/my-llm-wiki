@@ -70,7 +70,6 @@
     }
 
     .site-nav a:hover { color: var(--text); }
-
     .site-nav a.active { color: var(--text); }
 
     .site-nav a.active::after {
@@ -149,6 +148,42 @@
     }
     .node-label.dimmed { opacity: .08; }
 
+    /* ── HOVER TOOLTIP ───────────────────────────────────────────────── */
+    #tooltip {
+      display: none;
+      position: fixed; z-index: 300;
+      background: var(--bg-overlay);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      pointer-events: none;
+      max-width: 280px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+
+    .tt-title {
+      font-size: .87rem; font-weight: 600; color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .tt-meta {
+      font-size: .71rem; color: var(--muted); margin-bottom: 5px;
+    }
+
+    .tt-citations {
+      font-size: .71rem; font-weight: 600;
+      color: var(--accent-lt); margin-bottom: 5px;
+    }
+
+    .tt-tldr {
+      font-size: .77rem; color: var(--muted); line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     /* ── SIDE PANEL ──────────────────────────────────────────────────── */
     #panel {
       position: fixed;
@@ -175,6 +210,10 @@
       justify-content: space-between; margin-bottom: 10px;
     }
 
+    .panel-meta {
+      display: flex; align-items: center; gap: 8px;
+    }
+
     #panel-cat {
       font-size: .68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .08em;
@@ -185,6 +224,15 @@
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 4px; padding: 1px 7px;
+    }
+
+    #panel-citations {
+      display: none;
+      font-size: .7rem; font-weight: 600;
+      color: var(--accent-lt);
+      background: rgba(124,58,237,.12);
+      border: 1px solid rgba(124,58,237,.4);
+      border-radius: 4px; padding: 1px 8px;
     }
 
     #panel-close {
@@ -299,7 +347,7 @@
       margin: 8px 0;
     }
 
-    /* tag-filter bar at the bottom of the graph when filters active */
+    /* tag-filter bar */
     #tag-filter-bar {
       display: none; flex-wrap: wrap; align-items: center; gap: 6px;
       position: absolute; top: 70px; left: 16px; z-index: 60;
@@ -339,6 +387,7 @@
       border: 1px solid var(--border);
       border-radius: 8px; padding: 12px 14px;
       backdrop-filter: blur(8px);
+      min-width: 200px;
     }
 
     .legend-title {
@@ -355,6 +404,13 @@
 
     .legend-dot {
       width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    .legend-note {
+      font-size: .63rem; color: var(--muted);
+      margin-top: 10px; padding-top: 8px;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
     }
 
     /* ── NODE COUNT BADGE ────────────────────────────────────────────── */
@@ -421,6 +477,9 @@
   <svg id="graph"></svg>
 </div>
 
+<!-- ── TOOLTIP ───────────────────────────────────────────────────────────── -->
+<div id="tooltip"></div>
+
 <!-- ── TAG FILTER BAR ────────────────────────────────────────────────────── -->
 <div id="tag-filter-bar"></div>
 
@@ -428,8 +487,11 @@
 <div id="panel">
   <div id="panel-hd">
     <div id="panel-topbar">
-      <span id="panel-cat"></span>
-      <span id="panel-year"></span>
+      <div class="panel-meta">
+        <span id="panel-cat"></span>
+        <span id="panel-year"></span>
+        <span id="panel-citations"></span>
+      </div>
       <button id="panel-close">close</button>
     </div>
     <div id="panel-title"></div>
@@ -440,7 +502,7 @@
 
 <!-- ── LEGEND ────────────────────────────────────────────────────────────── -->
 <div id="legend">
-  <div class="legend-title">Category</div>
+  <div class="legend-title">Color = theme</div>
 </div>
 
 <!-- ── STATUS ────────────────────────────────────────────────────────────── -->
@@ -489,7 +551,6 @@ function categorize(note) {
 }
 
 function nodeLabel(d) {
-  // Strip leading digits/emoji/dashes, replace separators with spaces, truncate
   let s = d.id
     .replace(/^[0-9🗺️\-]+/, '')
     .replace(/[-_]/g, ' ')
@@ -504,9 +565,58 @@ function esc(s) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function fmtCit(n) {
+  if (!n) return '';
+  return n.toLocaleString();
+}
+
+// ── Node radius based on citation_count or inCount ──────────────────────
+function nodeRadius(n, inCnt) {
+  if (n.citation_count) {
+    // log10 scale: 1K → 13, 10K → 19, 100K → 25
+    const r = 7 + (Math.log10(n.citation_count) - 2) * 6;
+    return Math.max(r, 11);
+  }
+  // Fallback: incoming link count
+  return 6 + Math.sqrt(inCnt || 0) * 2.2;
+}
+
 // ── Tag-filter state ─────────────────────────────────────────────────────
 const activeTags = new Set();
 let byId = {};
+
+// ── Tooltip ───────────────────────────────────────────────────────────────
+const tooltip = document.getElementById('tooltip');
+
+function showTooltip(event, d) {
+  const yearPart = d.year ? `${esc(d.year)}` : '';
+  const citPart  = d.citation_count
+    ? `📚 ${fmtCit(d.citation_count)} citations`
+    : `${d.inCount} incoming link${d.inCount !== 1 ? 's' : ''}`;
+
+  tooltip.innerHTML = `
+    <div class="tt-title">${esc(d.title)}</div>
+    ${yearPart ? `<div class="tt-meta">${yearPart}</div>` : ''}
+    <div class="tt-citations">${citPart}</div>
+    ${d.tldr ? `<div class="tt-tldr">${esc(d.tldr)}</div>` : ''}
+  `;
+  tooltip.style.display = 'block';
+  positionTooltip(event);
+}
+
+function positionTooltip(event) {
+  const pad = 14;
+  const w   = 280;
+  let   x   = event.clientX + pad;
+  const y   = event.clientY - 10;
+  if (x + w > window.innerWidth) x = event.clientX - w - pad;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top  = y + 'px';
+}
+
+function hideTooltip() {
+  tooltip.style.display = 'none';
+}
 
 // ── Main ─────────────────────────────────────────────────────────────────
 async function main() {
@@ -522,16 +632,17 @@ async function main() {
     n.links.forEach(l => { if (idSet.has(l)) inCount[l] = (inCount[l] || 0) + 1; });
   });
 
-  // Nodes
+  // Nodes — size by citation_count if available, else inCount
   const nodes = raw.map(n => ({
-    id:       n.id,
-    title:    n.title,
-    tags:     n.tags,
-    tldr:     n.tldr,
-    year:     n.year,
-    cat:      categorize(n),
-    inCount:  inCount[n.id] || 0,
-    r:        7 + Math.sqrt(inCount[n.id] || 0) * 3.8,
+    id:             n.id,
+    title:          n.title,
+    tags:           n.tags,
+    tldr:           n.tldr,
+    year:           n.year,
+    citation_count: n.citation_count || 0,
+    cat:            categorize(n),
+    inCount:        inCount[n.id] || 0,
+    r:              nodeRadius(n, inCount[n.id] || 0),
   }));
 
   // Edges — deduplicated, only between known nodes
@@ -549,7 +660,7 @@ async function main() {
   });
 
   // Adjacency for hover (bidirectional lookup)
-  const adj = new Map(); // id → Set<id>
+  const adj = new Map();
   edges.forEach(e => {
     if (!adj.has(e.source)) adj.set(e.source, new Set());
     if (!adj.has(e.target)) adj.set(e.target, new Set());
@@ -568,7 +679,7 @@ async function main() {
     .attr('width', width)
     .attr('height', height);
 
-  // Arrowhead markers — one per category color
+  // Arrowhead markers
   const defs = svg.append('defs');
   Object.entries(CAT_COLORS).forEach(([cat, { color }]) => {
     defs.append('marker')
@@ -581,7 +692,6 @@ async function main() {
         .attr('d', 'M0,-4L8,0L0,4')
         .attr('fill', color).attr('fill-opacity', .75);
   });
-  // Default dimmed arrow — save reference so theme toggle can recolor it
   const dimArrowPath = defs.append('marker')
     .attr('id', 'arr-dim')
     .attr('viewBox', '0 -4 8 8')
@@ -592,14 +702,11 @@ async function main() {
       .attr('d', 'M0,-4L8,0L0,4')
       .attr('fill', getCSSVar('--border'));
 
-  // Zoom behaviour — transform a root <g>
   const zoom = d3.zoom()
     .scaleExtent([0.2, 4])
     .on('zoom', e => root.attr('transform', e.transform));
 
   svg.call(zoom);
-
-  // Background click on the SVG closes the panel
   svg.on('click', closePanel);
 
   const root = svg.append('g');
@@ -672,7 +779,6 @@ async function main() {
   function applyHover(id) {
     hovered = id;
 
-    // Links
     linkSel
       .attr('class', l => {
         const s = l.source.id, t = l.target.id;
@@ -691,15 +797,12 @@ async function main() {
         return 'url(#arr-dim)';
       });
 
-    // Circles
     nodeSel.select('.node-circle')
       .attr('class', d => 'node-circle' + (d.id === id || isAdj(id, d.id) ? ' hovered' : ' dimmed'));
 
-    // Rings
     nodeSel.select('.node-ring')
       .attr('class', d => 'node-ring' + (d.id === id ? ' hovered' : ''));
 
-    // Labels
     nodeSel.select('.node-label')
       .attr('class', d => 'node-label' + (d.id === id || isAdj(id, d.id) ? '' : ' dimmed'));
   }
@@ -713,15 +816,24 @@ async function main() {
     nodeSel.select('.node-circle').attr('class', 'node-circle');
     nodeSel.select('.node-ring').attr('class', 'node-ring');
     nodeSel.select('.node-label').attr('class', 'node-label');
-    // Re-apply tag filter dimming if any filters are active.
     if (activeTags.size > 0) applyTagFilter();
   }
 
   nodeSel
-    .on('mouseenter', (_, d) => applyHover(d.id))
-    .on('mouseleave', () => clearHover())
+    .on('mouseenter', (event, d) => {
+      applyHover(d.id);
+      showTooltip(event, d);
+    })
+    .on('mousemove', (event) => {
+      positionTooltip(event);
+    })
+    .on('mouseleave', () => {
+      clearHover();
+      hideTooltip();
+    })
     .on('click', (event, d) => {
       event.stopPropagation();
+      hideTooltip();
       openPanel(d.id);
     });
 
@@ -747,18 +859,18 @@ async function main() {
   });
 
   // ── Side Panel ────────────────────────────────────────────────────────
-  const panel       = document.getElementById('panel');
-  const panelCat    = document.getElementById('panel-cat');
-  const panelYear   = document.getElementById('panel-year');
-  const panelTitle  = document.getElementById('panel-title');
-  const panelTags   = document.getElementById('panel-tags');
-  const panelBody   = document.getElementById('panel-body');
-  const panelClose  = document.getElementById('panel-close');
+  const panel          = document.getElementById('panel');
+  const panelCat       = document.getElementById('panel-cat');
+  const panelYear      = document.getElementById('panel-year');
+  const panelCitations = document.getElementById('panel-citations');
+  const panelTitle     = document.getElementById('panel-title');
+  const panelTags      = document.getElementById('panel-tags');
+  const panelBody      = document.getElementById('panel-body');
+  const panelClose     = document.getElementById('panel-close');
 
   panelClose.addEventListener('click', closePanel);
   panel.addEventListener('click', e => e.stopPropagation());
 
-  // Convert [[WikiLink]] in raw HTML to <a> links that open another node
   function resolveWikilinks(html) {
     return html.replace(
       /\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]/g,
@@ -779,8 +891,17 @@ async function main() {
     const { color, label } = CAT_COLORS[categorize(d)] || CAT_COLORS.other;
     panelCat.textContent  = label;
     panelCat.style.color  = color;
+
     panelYear.textContent = d.year || '';
     panelYear.style.display = d.year ? 'inline-block' : 'none';
+
+    if (d.citation_count) {
+      panelCitations.textContent = `📚 ${fmtCit(d.citation_count)} citations`;
+      panelCitations.style.display = 'inline-block';
+    } else {
+      panelCitations.style.display = 'none';
+    }
+
     panelTitle.textContent = d.title;
 
     panelTags.innerHTML = d.tags.map(t =>
@@ -790,7 +911,6 @@ async function main() {
       el.addEventListener('click', e => {
         e.stopPropagation();
         toggleTagFilter(el.dataset.tag);
-        // Refresh panel pill highlight without rebuilding the whole panel
         el.classList.toggle('active', activeTags.has(el.dataset.tag));
       })
     );
@@ -804,7 +924,6 @@ async function main() {
       })
     );
 
-    // render KaTeX math inside panel body
     if (typeof renderMathInElement === 'function') {
       renderMathInElement(panelBody, {
         delimiters: [
@@ -848,7 +967,6 @@ async function main() {
       return !(nodeMatchesActiveTags(byId[sId]) && nodeMatchesActiveTags(byId[tId]));
     });
 
-    // Render the visible filter bar
     if (!hasFilter) {
       tagBar.classList.remove('on');
       tagBar.innerHTML = '';
@@ -865,7 +983,6 @@ async function main() {
       el.addEventListener('click', () => {
         activeTags.delete(el.dataset.tag);
         applyTagFilter();
-        // Refresh panel pill highlight if open
         panel.querySelectorAll('#panel-tags .ptag').forEach(p => {
           p.classList.toggle('active', activeTags.has(p.dataset.tag));
         });
@@ -896,7 +1013,6 @@ async function main() {
       <span class="legend-dot" style="background:${color}"></span>
       <span>${label}</span>
     `;
-    // Click legend to filter by category
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => {
       const target = nodes.find(n => n.cat === cat);
@@ -906,9 +1022,16 @@ async function main() {
     legend.appendChild(item);
   });
 
+  // Size legend note
+  const sizeNote = document.createElement('div');
+  sizeNote.className = 'legend-note';
+  sizeNote.innerHTML = 'Node size = citation count<br>where available, else link count';
+  legend.appendChild(sizeNote);
+
   // ── Status ───────────────────────────────────────────────────────────
+  const citedCount = nodes.filter(n => n.citation_count > 0).length;
   document.getElementById('status').textContent =
-    `${nodes.length} nodes · ${edges.length} edges`;
+    `${nodes.length} nodes · ${edges.length} edges · ${citedCount} with citations`;
 
   // ── Reset zoom ────────────────────────────────────────────────────────
   document.getElementById('reset-btn').addEventListener('click', () => {
@@ -921,17 +1044,15 @@ async function main() {
 
   // ── Keyboard ──────────────────────────────────────────────────────────
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closePanel(); clearHover(); }
+    if (e.key === 'Escape') { closePanel(); clearHover(); hideTooltip(); }
   });
 
-  // Resize handler
   window.addEventListener('resize', () => {
     const w = wrap.clientWidth, h = wrap.clientHeight;
     svg.attr('width', w).attr('height', h);
     sim.force('center', d3.forceCenter(w / 2, h / 2).strength(0.08));
   });
 
-  // Expose D3 repaint for theme toggle
   return { dimArrowPath, linkSel };
 }
 
@@ -946,7 +1067,6 @@ async function init() {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     btn.textContent = isLight ? '☀' : '☾';
 
-    // Repaint D3 elements that use hardcoded border color
     const border = getCSSVar('--border');
     dimArrowPath.attr('fill', border);
     linkSel.filter('.link:not(.lit):not(.dimmed)').attr('stroke', border);
