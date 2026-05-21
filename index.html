@@ -250,15 +250,53 @@
     /* ── PROGRESS SECTION ────────────────────────────────────────────── */
     #progress-section {
       display: none;
-      padding: 7px 20px;
+      padding: 8px 16px 9px;
       border-bottom: 1px solid var(--border);
       background: var(--surface);
       flex-shrink: 0;
     }
     #progress-section.show { display: block; }
 
-    .progress-row {
-      display: flex; align-items: center; gap: 12px;
+    .progress-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 13px;
+      margin-bottom: 7px;
+    }
+
+    .progress-card-top {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .progress-label {
+      font-size: .71rem; font-weight: 600; color: var(--muted);
+    }
+
+    #progress-stat {
+      font-size: .71rem; color: var(--muted); white-space: nowrap;
+    }
+
+    .progress-track {
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px; overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%; background: var(--accent);
+      border-radius: 3px; transition: width 0.4s ease;
+    }
+
+    .progress-filter-row {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+
+    .progress-legend {
+      font-size: .69rem; color: var(--muted);
+      white-space: nowrap; flex-shrink: 0;
     }
 
     .progress-filter-group {
@@ -275,26 +313,6 @@
     .progress-filter-btn:hover { color: var(--text); border-color: var(--muted); }
     .progress-filter-btn.active {
       background: var(--accent); color: #fff; border-color: var(--accent);
-    }
-
-    .progress-right {
-      flex: 1; display: flex; align-items: center; gap: 10px;
-    }
-
-    #progress-stat {
-      font-size: .71rem; color: var(--muted); white-space: nowrap;
-    }
-
-    .progress-track {
-      flex: 1; height: 4px;
-      background: var(--surface2);
-      border-radius: 2px; overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%; background: var(--accent);
-      border-radius: 2px; transition: width .3s ease;
-      min-width: 0;
     }
 
     /* ── RESULT BAR ──────────────────────────────────────────────────── */
@@ -382,18 +400,18 @@
 
     /* ── STATUS BADGE (reading progress) ────────────────────────────── */
     .status-badge {
-      display: inline-flex; align-items: center;
-      font-size: .62rem; font-weight: 600;
-      padding: 2px 7px; border-radius: 8px;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; line-height: 1;
       cursor: pointer; user-select: none;
-      border: 1px solid;
-      transition: background .12s, color .12s;
-      white-space: nowrap; flex-shrink: 0;
+      border: 2px solid;
+      transition: background .12s, opacity .12s;
+      flex-shrink: 0;
     }
-    .status-badge.unread  { background: transparent; color: var(--muted); border-color: var(--border); }
-    .status-badge.reading { background: rgba(245,158,11,.14); color: #fbbf24; border-color: rgba(245,158,11,.4); }
-    .status-badge.done    { background: rgba(16,185,129,.14); color: #34d399; border-color: rgba(16,185,129,.4); }
-    .status-badge:hover { opacity: .8; }
+    .status-badge.unread  { background: transparent; color: #888780; border-color: #888780; }
+    .status-badge.reading { background: #FAEEDA; color: #BA7517; border-color: #BA7517; }
+    .status-badge.done    { background: #E1F5EE; color: #0F6E56; border-color: #0F6E56; }
+    .status-badge:hover { opacity: .75; }
 
     .card-tldr {
       font-size: .81rem; color: var(--muted); line-height: 1.6;
@@ -1128,18 +1146,22 @@
 
     <!-- reading progress section -->
     <div id="progress-section">
-      <div class="progress-row">
+      <div class="progress-card">
+        <div class="progress-card-top">
+          <span class="progress-label">Reading progress</span>
+          <span id="progress-stat"></span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="progress-filter-row">
+        <span class="progress-legend">○ Unread &nbsp;◑ Reading &nbsp;✓ Done</span>
         <div class="progress-filter-group">
           <button class="progress-filter-btn active" data-pf="all">All</button>
           <button class="progress-filter-btn" data-pf="unread">Unread</button>
           <button class="progress-filter-btn" data-pf="reading">Reading</button>
           <button class="progress-filter-btn" data-pf="done">Done</button>
-        </div>
-        <div class="progress-right">
-          <span id="progress-stat"></span>
-          <div class="progress-track">
-            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -1255,14 +1277,14 @@ let progressFilter = 'all';
 
 // ── reading progress ──────────────────────────────────────────────────────
 let readProgress = {};
-try { readProgress = JSON.parse(localStorage.getItem('readProgress') || '{}'); } catch(e) {}
+try { readProgress = JSON.parse(localStorage.getItem('llm-wiki-reading-progress') || '{}'); } catch(e) {}
 
 function getReadStatus(id) { return readProgress[id] || 'unread'; }
 
 function statusLabel(s) {
-  if (s === 'reading') return '◐ reading';
-  if (s === 'done')    return '● done';
-  return '○ unread';
+  if (s === 'reading') return '◑';
+  if (s === 'done')    return '✓';
+  return '○';
 }
 
 function cycleStatus(id, e) {
@@ -1271,20 +1293,29 @@ function cycleStatus(id, e) {
   const next = cur === 'unread' ? 'reading' : cur === 'reading' ? 'done' : 'unread';
   if (next === 'unread') delete readProgress[id];
   else readProgress[id] = next;
-  localStorage.setItem('readProgress', JSON.stringify(readProgress));
+  localStorage.setItem('llm-wiki-reading-progress', JSON.stringify(readProgress));
   render();
 }
 
 function updateProgress() {
   const done    = notes.filter(n => readProgress[n.id] === 'done').length;
   const reading = notes.filter(n => readProgress[n.id] === 'reading').length;
+  const unread  = notes.length - done - reading;
   const total   = notes.length;
   const pct     = total > 0 ? (done / total * 100) : 0;
 
   const statEl = document.getElementById('progress-stat');
   const fillEl = document.getElementById('progress-fill');
-  if (statEl) statEl.textContent = `${done} / ${total} done${reading > 0 ? ' · ' + reading + ' reading' : ''}`;
+  if (statEl) statEl.textContent = `${done} of ${total} notes done`;
   if (fillEl) fillEl.style.width = pct.toFixed(1) + '%';
+
+  document.querySelectorAll('.progress-filter-btn').forEach(btn => {
+    const pf = btn.dataset.pf;
+    const count = pf === 'all' ? total : pf === 'unread' ? unread : pf === 'reading' ? reading : done;
+    const label = pf.charAt(0).toUpperCase() + pf.slice(1);
+    btn.textContent = `${label} (${count})`;
+    btn.classList.toggle('active', btn.dataset.pf === progressFilter);
+  });
 }
 
 // ── theme color for timeline cards ───────────────────────────────────────
@@ -1346,8 +1377,6 @@ async function init() {
   document.querySelectorAll('.progress-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       progressFilter = btn.dataset.pf;
-      document.querySelectorAll('.progress-filter-btn').forEach(b =>
-        b.classList.toggle('active', b.dataset.pf === progressFilter));
       render();
     });
   });
@@ -1469,7 +1498,7 @@ function makeCard(n) {
     : '';
 
   const status    = getReadStatus(n.id);
-  const statusHtml = `<span class="status-badge ${status}" data-id="${escAttr(n.id)}">${statusLabel(status)}</span>`;
+  const statusHtml = `<span class="status-badge ${status}" data-id="${escAttr(n.id)}" title="Click to cycle reading status">${statusLabel(status)}</span>`;
 
   const tagsHtml = n.tags.slice(0, 6).map(t =>
     `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
@@ -1479,15 +1508,13 @@ function makeCard(n) {
     <div class="card-top">
       <span class="card-title">${escHtml(n.title)}</span>
       <div class="card-meta">
+        ${statusHtml}
         ${yearHtml}
         ${citHtml}
       </div>
     </div>
     <p class="card-tldr">${tldrHtml}</p>
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
-      <div class="tags">${tagsHtml}</div>
-      ${statusHtml}
-    </div>
+    <div class="tags">${tagsHtml}</div>
   `;
 
   card.querySelectorAll('.tag').forEach(el =>
