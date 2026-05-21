@@ -25,7 +25,7 @@
       --bg-overlay: rgba(22,27,34,.9);
     }
 
-    body.light {
+    [data-theme="light"] {
       --bg:         #ffffff;
       --surface:    #f6f8fa;
       --surface2:   #eaeef2;
@@ -102,6 +102,30 @@
       font-size: .65rem; font-family: inherit;
       color: var(--muted);
     }
+
+    /* ── THREE-WAY THEME TOGGLE ──────────────────────────────────────── */
+    .theme-controls {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+      gap: 1px;
+      flex-shrink: 0;
+    }
+
+    .theme-opt {
+      background: none; border: none;
+      color: var(--muted);
+      border-radius: 6px;
+      min-width: 30px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; cursor: pointer;
+      padding: 0 6px;
+      transition: background .12s, color .12s;
+    }
+    .theme-opt:hover { color: var(--text); background: var(--surface); }
+    .theme-opt.active { background: var(--accent); color: #fff; }
 
     /* ── GRAPH WRAP ──────────────────────────────────────────────────── */
     #graph-wrap {
@@ -311,7 +335,7 @@
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 4px; padding: 1px 5px;
     }
-    body.light #panel-body code { color: #b45309; }
+    [data-theme="light"] #panel-body code { color: #b45309; }
     #panel-body pre {
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 8px; padding: 14px; overflow-x: auto; margin: 12px 0;
@@ -380,18 +404,28 @@
     }
     .tf-clear:hover { color: var(--text); border-color: var(--muted); }
 
-    /* ── LEGEND ──────────────────────────────────────────────────────── */
-    #legend {
+    /* ── COLOR LEGEND (top-left) ─────────────────────────────────────── */
+    #color-legend {
+      position: absolute; top: 70px; left: 20px; z-index: 50;
+      background: var(--bg-overlay);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px;
+      backdrop-filter: blur(8px);
+      min-width: 190px;
+    }
+
+    /* ── SIZE LEGEND (bottom-left) ───────────────────────────────────── */
+    #size-legend {
       position: absolute; bottom: 20px; left: 20px; z-index: 50;
       background: var(--bg-overlay);
       border: 1px solid var(--border);
-      border-radius: 8px; padding: 12px 14px;
+      border-radius: 8px; padding: 10px 14px;
       backdrop-filter: blur(8px);
-      min-width: 200px;
+      min-width: 160px;
     }
 
     .legend-title {
-      font-size: .65rem; font-weight: 600;
+      font-size: .63rem; font-weight: 600;
       color: var(--muted); letter-spacing: .08em;
       text-transform: uppercase; margin-bottom: 8px;
     }
@@ -406,11 +440,15 @@
       width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
     }
 
-    .legend-note {
-      font-size: .63rem; color: var(--muted);
-      margin-top: 10px; padding-top: 8px;
-      border-top: 1px solid var(--border);
-      line-height: 1.5;
+    /* Size legend rows */
+    .sz-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 5px; font-size: .7rem; color: var(--muted);
+    }
+    .sz-row:last-child { margin-bottom: 0; }
+    .sz-cell {
+      width: 28px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
 
     /* ── NODE COUNT BADGE ────────────────────────────────────────────── */
@@ -422,21 +460,6 @@
       border-radius: 6px; padding: 6px 12px;
       backdrop-filter: blur(8px);
     }
-
-    /* ── THEME TOGGLE ────────────────────────────────────────────────── */
-    .theme-btn {
-      flex-shrink: 0;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 6px;
-      width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; line-height: 1;
-      cursor: pointer;
-      transition: border-color .12s, color .12s;
-    }
-    .theme-btn:hover { border-color: var(--muted); color: var(--text); }
 
     /* ── RESET BUTTON ────────────────────────────────────────────────── */
     #reset-btn {
@@ -469,7 +492,13 @@
     <span class="hint-key"><kbd>click</kbd> open note</span>
     <span class="hint-key"><kbd>hover</kbd> highlight links</span>
   </div>
-  <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
+
+  <!-- Three-way theme toggle -->
+  <div class="theme-controls" id="theme-controls">
+    <button class="theme-opt" data-ap="system" title="Use system preference">sys</button>
+    <button class="theme-opt" data-ap="dark"   title="Dark mode">☾</button>
+    <button class="theme-opt" data-ap="light"  title="Light mode">☀</button>
+  </div>
 </header>
 
 <!-- ── GRAPH ─────────────────────────────────────────────────────────────── -->
@@ -500,9 +529,38 @@
   <div id="panel-body"></div>
 </div>
 
-<!-- ── LEGEND ────────────────────────────────────────────────────────────── -->
-<div id="legend">
+<!-- ── COLOR LEGEND (top-left) ───────────────────────────────────────────── -->
+<div id="color-legend">
   <div class="legend-title">Color = theme</div>
+</div>
+
+<!-- ── SIZE LEGEND (bottom-left) ─────────────────────────────────────────── -->
+<div id="size-legend">
+  <div class="legend-title">Node size</div>
+  <div class="sz-row">
+    <div class="sz-cell">
+      <svg width="26" height="26"><circle cx="13" cy="13" r="12" fill="#7c3aed" fill-opacity=".65" stroke="#a78bfa" stroke-width="1.5"/></svg>
+    </div>
+    <span>100k citations</span>
+  </div>
+  <div class="sz-row">
+    <div class="sz-cell">
+      <svg width="22" height="22"><circle cx="11" cy="11" r="9" fill="#7c3aed" fill-opacity=".65" stroke="#a78bfa" stroke-width="1.5"/></svg>
+    </div>
+    <span>10k citations</span>
+  </div>
+  <div class="sz-row">
+    <div class="sz-cell">
+      <svg width="16" height="16"><circle cx="8" cy="8" r="6.5" fill="#7c3aed" fill-opacity=".65" stroke="#a78bfa" stroke-width="1.5"/></svg>
+    </div>
+    <span>1k citations</span>
+  </div>
+  <div class="sz-row">
+    <div class="sz-cell">
+      <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#64748b" fill-opacity=".6" stroke="#94a3b8" stroke-width="1.5"/></svg>
+    </div>
+    <span>link count</span>
+  </div>
 </div>
 
 <!-- ── STATUS ────────────────────────────────────────────────────────────── -->
@@ -514,39 +572,94 @@
 <script>
 "use strict";
 
-// ── theme ─────────────────────────────────────────────────────────────────
+// ── Three-way theme (system / dark / light) ───────────────────────────────
 (function () {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') document.body.classList.add('light');
+  const pref = localStorage.getItem('appearance') || 'dark';
+  const eff  = pref === 'light' ? 'light'
+             : pref === 'dark'  ? 'dark'
+             : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', eff);
 })();
 
-const getCSSVar = v => getComputedStyle(document.body).getPropertyValue(v).trim();
+function setupTheme(onToggle) {
+  const opts = document.querySelectorAll('.theme-opt');
+  const cur  = localStorage.getItem('appearance') || 'dark';
+  opts.forEach(btn => btn.classList.toggle('active', btn.dataset.ap === cur));
 
-// ── Category + color map ─────────────────────────────────────────────────
-const CAT_COLORS = {
-  index:        { color: '#f59e0b', label: 'Index / Meta'       },
-  foundational: { color: '#7c3aed', label: 'Foundational'       },
-  moe:          { color: '#ea580c', label: 'Mixture-of-Experts'  },
-  ssm:          { color: '#0d9488', label: 'State Space Models'  },
-  attention:    { color: '#2563eb', label: 'Attention / KV'      },
-  posttraining: { color: '#e11d48', label: 'Post-training / RL'  },
-  efficiency:   { color: '#16a34a', label: 'Efficiency / HW'     },
-  other:        { color: '#64748b', label: 'Other'               },
+  opts.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pref = btn.dataset.ap;
+      localStorage.setItem('appearance', pref);
+      const eff = pref === 'light' ? 'light'
+                : pref === 'dark'  ? 'dark'
+                : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', eff);
+      opts.forEach(b => b.classList.toggle('active', b.dataset.ap === pref));
+      if (onToggle) onToggle();
+    });
+  });
+
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', mq => {
+    if ((localStorage.getItem('appearance') || 'dark') === 'system') {
+      document.documentElement.setAttribute('data-theme', mq.matches ? 'light' : 'dark');
+      if (onToggle) onToggle();
+    }
+  });
+}
+
+const getCSSVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+// ── Theme-aware category color maps ──────────────────────────────────────
+const CAT_DARK = {
+  index:        { color: '#f59e0b', label: 'Index / Meta'        },
+  foundational: { color: '#059669', label: 'Foundations'          },
+  moe:          { color: '#ea580c', label: 'Mixture-of-Experts'   },
+  ssm:          { color: '#7c3aed', label: 'State Space Models'   },
+  hardware:     { color: '#2563eb', label: 'Hardware & Systems'   },
+  inference:    { color: '#d97706', label: 'Inference Optim.'     },
+  attention:    { color: '#60a5fa', label: 'Attention / KV'       },
+  posttraining: { color: '#e11d48', label: 'Post-training / RL'   },
+  glossary:     { color: '#0d9488', label: 'Concepts & Glossary'  },
+  benchmarks:   { color: '#f43f5e', label: 'Benchmarks'           },
+  other:        { color: '#64748b', label: 'Other'                },
 };
+
+const CAT_LIGHT = {
+  index:        { color: '#b45309', label: 'Index / Meta'        },
+  foundational: { color: '#047857', label: 'Foundations'          },
+  moe:          { color: '#c2410c', label: 'Mixture-of-Experts'   },
+  ssm:          { color: '#6d28d9', label: 'State Space Models'   },
+  hardware:     { color: '#1d4ed8', label: 'Hardware & Systems'   },
+  inference:    { color: '#92400e', label: 'Inference Optim.'     },
+  attention:    { color: '#1d4ed8', label: 'Attention / KV'       },
+  posttraining: { color: '#9f1239', label: 'Post-training / RL'   },
+  glossary:     { color: '#0f766e', label: 'Concepts & Glossary'  },
+  benchmarks:   { color: '#be123c', label: 'Benchmarks'           },
+  other:        { color: '#475569', label: 'Other'                },
+};
+
+function getCatColors() {
+  return document.documentElement.getAttribute('data-theme') === 'light' ? CAT_LIGHT : CAT_DARK;
+}
 
 function categorize(note) {
   const t = new Set(note.tags);
-  if (t.has('index') || t.has('meta') || t.has('dashboard'))           return 'index';
-  if (t.has('foundational') || t.has('architecture'))                  return 'foundational';
-  if (t.has('moe') || t.has('routing'))                                return 'moe';
+  if (t.has('index') || t.has('meta') || t.has('dashboard'))             return 'index';
+  if (t.has('glossary'))                                                  return 'glossary';
+  if (t.has('benchmarks') || t.has('evaluation'))                        return 'benchmarks';
+  if (t.has('foundational') || t.has('architecture'))                    return 'foundational';
+  if (t.has('hardware') || t.has('gpu') || t.has('tpu') ||
+      t.has('asic') || t.has('fpga') || t.has('kernel-fusion'))          return 'hardware';
+  if (t.has('inference') || t.has('speculative-decoding') ||
+      t.has('kv-cache') || t.has('throughput') || t.has('draft-model'))  return 'inference';
   if (t.has('ssm') || t.has('linear-time') || t.has('recurrence') ||
-      t.has('mamba'))                                                   return 'ssm';
+      t.has('mamba') || t.has('lstm') || t.has('rnn') ||
+      t.has('linear-attention'))                                          return 'ssm';
+  if (t.has('moe') || t.has('routing') || t.has('sparse'))              return 'moe';
   if (t.has('post-training') || t.has('rl') || t.has('reward') ||
-      t.has('distillation'))                                            return 'posttraining';
-  if (t.has('attention') || t.has('kv-cache') || t.has('long-context')||
-      t.has('compression') || t.has('sparse-attention'))               return 'attention';
-  if (t.has('inference') || t.has('efficiency') || t.has('quantization')||
-      t.has('hardware') || t.has('throughput') || t.has('kernel-fusion'))return 'efficiency';
+      t.has('distillation') || t.has('rlhf'))                            return 'posttraining';
+  if (t.has('attention') || t.has('long-context') ||
+      t.has('compression') || t.has('sparse-attention'))                 return 'attention';
   return 'other';
 }
 
@@ -573,11 +686,10 @@ function fmtCit(n) {
 // ── Node radius based on citation_count or inCount ──────────────────────
 function nodeRadius(n, inCnt) {
   if (n.citation_count) {
-    // log10 scale: 1K → 13, 10K → 19, 100K → 25
+    // log10 scale: 1K→13, 10K→19, 100K→25
     const r = 7 + (Math.log10(n.citation_count) - 2) * 6;
     return Math.max(r, 11);
   }
-  // Fallback: incoming link count
   return 6 + Math.sqrt(inCnt || 0) * 2.2;
 }
 
@@ -632,7 +744,7 @@ async function main() {
     n.links.forEach(l => { if (idSet.has(l)) inCount[l] = (inCount[l] || 0) + 1; });
   });
 
-  // Nodes — size by citation_count if available, else inCount
+  // Nodes
   const nodes = raw.map(n => ({
     id:             n.id,
     title:          n.title,
@@ -659,7 +771,7 @@ async function main() {
     });
   });
 
-  // Adjacency for hover (bidirectional lookup)
+  // Adjacency for hover
   const adj = new Map();
   edges.forEach(e => {
     if (!adj.has(e.source)) adj.set(e.source, new Set());
@@ -679,9 +791,10 @@ async function main() {
     .attr('width', width)
     .attr('height', height);
 
-  // Arrowhead markers
+  // Arrowhead markers — one per category + dimmed
   const defs = svg.append('defs');
-  Object.entries(CAT_COLORS).forEach(([cat, { color }]) => {
+  const catColors = getCatColors();
+  Object.entries(catColors).forEach(([cat, { color }]) => {
     defs.append('marker')
       .attr('id', `arr-${cat}`)
       .attr('viewBox', '0 -4 8 8')
@@ -692,7 +805,7 @@ async function main() {
         .attr('d', 'M0,-4L8,0L0,4')
         .attr('fill', color).attr('fill-opacity', .75);
   });
-  const dimArrowPath = defs.append('marker')
+  defs.append('marker')
     .attr('id', 'arr-dim')
     .attr('viewBox', '0 -4 8 8')
     .attr('refX', 8).attr('refY', 0)
@@ -748,23 +861,23 @@ async function main() {
           })
       );
 
-  // Glow ring (shown on hover)
+  // Glow ring
   nodeSel.append('circle')
     .attr('class', 'node-ring')
     .attr('r', d => d.r + 5)
-    .attr('stroke', d => CAT_COLORS[d.cat].color);
+    .attr('stroke', d => getCatColors()[d.cat].color);
 
   // Main circle
   nodeSel.append('circle')
     .attr('class', 'node-circle')
     .attr('r', d => d.r)
-    .attr('fill',         d => CAT_COLORS[d.cat].color)
+    .attr('fill',         d => getCatColors()[d.cat].color)
     .attr('fill-opacity', .78)
-    .attr('stroke',       d => CAT_COLORS[d.cat].color)
+    .attr('stroke',       d => getCatColors()[d.cat].color)
     .attr('stroke-width', 1.5)
     .attr('stroke-opacity', .55);
 
-  // Labels — below the node
+  // Labels
   nodeSel.append('text')
     .attr('class', 'node-label')
     .attr('text-anchor', 'middle')
@@ -778,6 +891,7 @@ async function main() {
 
   function applyHover(id) {
     hovered = id;
+    const cc = getCatColors();
 
     linkSel
       .attr('class', l => {
@@ -787,7 +901,7 @@ async function main() {
       })
       .attr('stroke', l => {
         const s = l.source.id;
-        if (s === id || l.target.id === id) return CAT_COLORS[nodes.find(n=>n.id===s).cat].color;
+        if (s === id || l.target.id === id) return cc[nodes.find(n=>n.id===s).cat].color;
         return getCSSVar('--border');
       })
       .attr('marker-end', l => {
@@ -858,6 +972,32 @@ async function main() {
     nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
   });
 
+  // ── Update all node/link/marker colors on theme change ────────────────
+  function applyNodeColors() {
+    const cc = getCatColors();
+
+    // Update arrowhead markers
+    Object.entries(cc).forEach(([cat, { color }]) => {
+      d3.select(`#arr-${cat} path`).attr('fill', color);
+    });
+    d3.select('#arr-dim path').attr('fill', getCSSVar('--border'));
+
+    // Update circles and rings
+    nodeSel.select('.node-circle')
+      .attr('fill',   d => cc[d.cat].color)
+      .attr('stroke', d => cc[d.cat].color);
+    nodeSel.select('.node-ring')
+      .attr('stroke', d => cc[d.cat].color);
+
+    // Update links (only if not in hover state)
+    if (!hovered) {
+      linkSel.attr('stroke', getCSSVar('--border'));
+    }
+
+    // Rebuild color legend
+    buildColorLegend(cc, usedCats);
+  }
+
   // ── Side Panel ────────────────────────────────────────────────────────
   const panel          = document.getElementById('panel');
   const panelCat       = document.getElementById('panel-cat');
@@ -888,7 +1028,8 @@ async function main() {
     const d = byId[id];
     if (!d) return;
 
-    const { color, label } = CAT_COLORS[categorize(d)] || CAT_COLORS.other;
+    const cc = getCatColors();
+    const { color, label } = cc[categorize(d)] || cc.other;
     panelCat.textContent  = label;
     panelCat.style.color  = color;
 
@@ -944,7 +1085,7 @@ async function main() {
     panel.classList.remove('open');
   }
 
-  // ── Tag filter (applied to the graph) ─────────────────────────────────
+  // ── Tag filter ────────────────────────────────────────────────────────
   const tagBar = document.getElementById('tag-filter-bar');
 
   function nodeMatchesActiveTags(n) {
@@ -1002,31 +1143,32 @@ async function main() {
     applyTagFilter();
   }
 
-  // ── Legend ───────────────────────────────────────────────────────────
-  const legend = document.getElementById('legend');
+  // ── Color Legend ─────────────────────────────────────────────────────
   const usedCats = [...new Set(nodes.map(n => n.cat))];
-  usedCats.forEach(cat => {
-    const { color, label } = CAT_COLORS[cat];
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `
-      <span class="legend-dot" style="background:${color}"></span>
-      <span>${label}</span>
-    `;
-    item.style.cursor = 'pointer';
-    item.addEventListener('click', () => {
-      const target = nodes.find(n => n.cat === cat);
-      if (target && hovered !== target.id) applyHover(target.id);
-      else clearHover();
-    });
-    legend.appendChild(item);
-  });
 
-  // Size legend note
-  const sizeNote = document.createElement('div');
-  sizeNote.className = 'legend-note';
-  sizeNote.innerHTML = 'Node size = citation count<br>where available, else link count';
-  legend.appendChild(sizeNote);
+  function buildColorLegend(cc, cats) {
+    const legend = document.getElementById('color-legend');
+    legend.innerHTML = '<div class="legend-title">Color = theme</div>';
+    cats.forEach(cat => {
+      if (!cc[cat]) return;
+      const { color, label } = cc[cat];
+      const item = document.createElement('div');
+      item.className = 'legend-item';
+      item.innerHTML = `
+        <span class="legend-dot" style="background:${color}"></span>
+        <span>${label}</span>
+      `;
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', () => {
+        const target = nodes.find(n => n.cat === cat);
+        if (target && hovered !== target.id) applyHover(target.id);
+        else clearHover();
+      });
+      legend.appendChild(item);
+    });
+  }
+
+  buildColorLegend(getCatColors(), usedCats);
 
   // ── Status ───────────────────────────────────────────────────────────
   const citedCount = nodes.filter(n => n.citation_count > 0).length;
@@ -1053,24 +1195,12 @@ async function main() {
     sim.force('center', d3.forceCenter(w / 2, h / 2).strength(0.08));
   });
 
-  return { dimArrowPath, linkSel };
+  return { applyNodeColors };
 }
 
 async function init() {
-  const { dimArrowPath, linkSel } = await main();
-
-  const btn = document.getElementById('theme-btn');
-  btn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
-
-  btn.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    btn.textContent = isLight ? '☀' : '☾';
-
-    const border = getCSSVar('--border');
-    dimArrowPath.attr('fill', border);
-    linkSel.filter('.link:not(.lit):not(.dimmed)').attr('stroke', border);
-  });
+  const { applyNodeColors } = await main();
+  setupTheme(applyNodeColors);
 }
 
 init();

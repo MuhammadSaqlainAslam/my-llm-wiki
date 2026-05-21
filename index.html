@@ -30,7 +30,7 @@
       --bq-color:    #b8a0e8;
     }
 
-    body.light {
+    [data-theme="light"] {
       --bg:          #ffffff;
       --surface:     #f6f8fa;
       --surface2:    #eaeef2;
@@ -180,20 +180,29 @@
       white-space: nowrap; flex-shrink: 0;
     }
 
-    /* ── THEME TOGGLE ────────────────────────────────────────────────── */
-    .theme-btn {
-      flex-shrink: 0;
-      background: none;
+    /* ── THREE-WAY THEME TOGGLE ─────────────────────────────────────── */
+    .theme-controls {
+      display: flex;
+      background: var(--surface2);
       border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+      gap: 1px;
+      flex-shrink: 0;
+    }
+
+    .theme-opt {
+      background: none; border: none;
       color: var(--muted);
       border-radius: 6px;
-      width: 32px; height: 32px;
+      min-width: 30px; height: 26px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; line-height: 1;
-      cursor: pointer;
-      transition: border-color .12s, color .12s;
+      font-size: .78rem; cursor: pointer;
+      padding: 0 6px;
+      transition: background .12s, color .12s;
     }
-    .theme-btn:hover { border-color: var(--muted); color: var(--text); }
+    .theme-opt:hover { color: var(--text); background: var(--surface); }
+    .theme-opt.active { background: var(--accent); color: #fff; }
 
     /* ── LAYOUT ─────────────────────────────────────────────────────── */
     #app {
@@ -236,6 +245,56 @@
       position: absolute; bottom: -1px; left: 0; right: 0;
       height: 2px; background: var(--accent);
       border-radius: 1px 1px 0 0;
+    }
+
+    /* ── PROGRESS SECTION ────────────────────────────────────────────── */
+    #progress-section {
+      display: none;
+      padding: 7px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    #progress-section.show { display: block; }
+
+    .progress-row {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .progress-filter-group {
+      display: flex; gap: 3px; flex-shrink: 0;
+    }
+
+    .progress-filter-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 5px;
+      padding: 3px 9px; font-size: .69rem;
+      cursor: pointer;
+      transition: background .12s, color .12s, border-color .12s;
+    }
+    .progress-filter-btn:hover { color: var(--text); border-color: var(--muted); }
+    .progress-filter-btn.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
+    .progress-right {
+      flex: 1; display: flex; align-items: center; gap: 10px;
+    }
+
+    #progress-stat {
+      font-size: .71rem; color: var(--muted); white-space: nowrap;
+    }
+
+    .progress-track {
+      flex: 1; height: 4px;
+      background: var(--surface2);
+      border-radius: 2px; overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%; background: var(--accent);
+      border-radius: 2px; transition: width .3s ease;
+      min-width: 0;
     }
 
     /* ── RESULT BAR ──────────────────────────────────────────────────── */
@@ -320,6 +379,21 @@
       border-radius: 10px; padding: 1px 7px;
       white-space: nowrap;
     }
+
+    /* ── STATUS BADGE (reading progress) ────────────────────────────── */
+    .status-badge {
+      display: inline-flex; align-items: center;
+      font-size: .62rem; font-weight: 600;
+      padding: 2px 7px; border-radius: 8px;
+      cursor: pointer; user-select: none;
+      border: 1px solid;
+      transition: background .12s, color .12s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .status-badge.unread  { background: transparent; color: var(--muted); border-color: var(--border); }
+    .status-badge.reading { background: rgba(245,158,11,.14); color: #fbbf24; border-color: rgba(245,158,11,.4); }
+    .status-badge.done    { background: rgba(16,185,129,.14); color: #34d399; border-color: rgba(16,185,129,.4); }
+    .status-badge:hover { opacity: .8; }
 
     .card-tldr {
       font-size: .81rem; color: var(--muted); line-height: 1.6;
@@ -627,7 +701,7 @@
       transition: background .1s;
       border-bottom: 1px solid rgba(255,255,255,.03);
     }
-    body.light .ce-item { border-bottom-color: rgba(0,0,0,.04); }
+    [data-theme="light"] .ce-item { border-bottom-color: rgba(0,0,0,.04); }
 
     .ce-item:hover { background: var(--surface2); }
     .ce-item.active { background: var(--accent-dim); border-left: 2px solid var(--accent); }
@@ -661,7 +735,7 @@
       border-radius: 3px; height: 4px;
       margin-bottom: 2px; overflow: hidden;
     }
-    body.light .ce-bar-track { background: var(--border); }
+    [data-theme="light"] .ce-bar-track { background: var(--border); }
 
     .ce-bar-fill {
       height: 100%; border-radius: 3px;
@@ -904,6 +978,76 @@
       font-size: .88rem;
     }
 
+    /* ── TIMELINE ────────────────────────────────────────────────────── */
+    #timeline-wrap {
+      display: none;
+      flex: 1;
+      overflow: auto;
+      padding: 20px 24px;
+    }
+    #timeline-wrap.show { display: block; }
+
+    #timeline-scroll {
+      display: flex;
+      gap: 0;
+      min-height: 100%;
+      align-items: flex-start;
+    }
+
+    .tl-col {
+      width: 158px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+    }
+    .tl-col:last-child { border-right: none; }
+
+    .tl-year-hd {
+      font-size: .7rem; font-weight: 700;
+      color: var(--accent-lt);
+      letter-spacing: .07em; text-transform: uppercase;
+      padding: 0 10px 7px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 10px;
+      position: sticky; top: 0;
+      background: var(--bg); z-index: 1;
+    }
+
+    .tl-cards {
+      padding: 0 8px 16px;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+
+    .tl-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 9px 10px;
+      cursor: pointer;
+      transition: box-shadow .12s, opacity .12s;
+    }
+    .tl-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,.2); }
+
+    .tl-card-title {
+      font-size: .76rem; font-weight: 600; color: var(--text);
+      line-height: 1.35; margin-bottom: 5px;
+    }
+
+    .tl-card-tags {
+      display: flex; flex-wrap: wrap; gap: 3px;
+    }
+
+    .tl-tag {
+      font-size: .59rem; color: var(--muted);
+      background: var(--surface2);
+      border-radius: 8px; padding: 1px 5px;
+    }
+
+    .tl-empty {
+      font-size: .78rem; color: var(--muted);
+      font-style: italic; padding: 8px 10px;
+    }
+
     /* ── MOBILE ──────────────────────────────────────────────────────── */
     @media (max-width: 720px) {
       header { padding: 0 16px; flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 10px; }
@@ -927,6 +1071,9 @@
       .ce-wrap { flex-direction: column; height: 100%; }
       .ce-left { width: 100%; height: 40%; border-right: none; border-bottom: 1px solid var(--border); }
       .ce-right { padding: 16px 18px; }
+
+      #timeline-wrap { padding: 12px 16px; }
+      .tl-col { width: 140px; }
     }
   </style>
 </head>
@@ -956,7 +1103,13 @@
   </div>
 
   <div class="header-count" id="header-count"></div>
-  <button id="theme-btn" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">☾</button>
+
+  <!-- Three-way theme toggle -->
+  <div class="theme-controls" id="theme-controls">
+    <button class="theme-opt" data-ap="system" title="Use system preference">sys</button>
+    <button class="theme-opt" data-ap="dark"   title="Dark mode">☾</button>
+    <button class="theme-opt" data-ap="light"  title="Light mode">☀</button>
+  </div>
 </header>
 
 <!-- ── APP ───────────────────────────────────────────────────────────────── -->
@@ -970,6 +1123,25 @@
       <button class="tab-btn active" data-tab="all">All</button>
       <button class="tab-btn" data-tab="top-cited">Citation Explorer</button>
       <button class="tab-btn" data-tab="by-theme">By Theme</button>
+      <button class="tab-btn" data-tab="timeline">Timeline</button>
+    </div>
+
+    <!-- reading progress section -->
+    <div id="progress-section">
+      <div class="progress-row">
+        <div class="progress-filter-group">
+          <button class="progress-filter-btn active" data-pf="all">All</button>
+          <button class="progress-filter-btn" data-pf="unread">Unread</button>
+          <button class="progress-filter-btn" data-pf="reading">Reading</button>
+          <button class="progress-filter-btn" data-pf="done">Done</button>
+        </div>
+        <div class="progress-right">
+          <span id="progress-stat"></span>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- normal browse area -->
@@ -993,6 +1165,11 @@
         <div class="ce-left" id="ce-left"></div>
         <div class="ce-right" id="ce-right"></div>
       </div>
+    </div>
+
+    <!-- timeline (shown when timeline tab active) -->
+    <div id="timeline-wrap">
+      <div id="timeline-scroll"></div>
     </div>
 
   </div>
@@ -1029,19 +1206,37 @@
 <script>
 "use strict";
 
-// ── theme ─────────────────────────────────────────────────────────────────
+// ── Three-way theme (system / dark / light) ───────────────────────────────
 (function () {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') document.body.classList.add('light');
+  const pref = localStorage.getItem('appearance') || 'dark';
+  const eff  = pref === 'light' ? 'light'
+             : pref === 'dark'  ? 'dark'
+             : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', eff);
 })();
 
 function setupTheme() {
-  const btn = document.getElementById('theme-btn');
-  btn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
-  btn.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    btn.textContent = isLight ? '☀' : '☾';
+  const opts = document.querySelectorAll('.theme-opt');
+  const cur  = localStorage.getItem('appearance') || 'dark';
+  opts.forEach(btn => btn.classList.toggle('active', btn.dataset.ap === cur));
+
+  opts.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pref = btn.dataset.ap;
+      localStorage.setItem('appearance', pref);
+      const eff = pref === 'light' ? 'light'
+                : pref === 'dark'  ? 'dark'
+                : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', eff);
+      opts.forEach(b => b.classList.toggle('active', b.dataset.ap === pref));
+    });
+  });
+
+  // React to OS-level changes when in system mode
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', mq => {
+    if ((localStorage.getItem('appearance') || 'dark') === 'system') {
+      document.documentElement.setAttribute('data-theme', mq.matches ? 'light' : 'dark');
+    }
   });
 }
 
@@ -1056,6 +1251,56 @@ let sortBy     = 'title';
 let activeTab  = 'all';
 let ceSelectedId = null;
 let ceQuery      = '';
+let progressFilter = 'all';
+
+// ── reading progress ──────────────────────────────────────────────────────
+let readProgress = {};
+try { readProgress = JSON.parse(localStorage.getItem('readProgress') || '{}'); } catch(e) {}
+
+function getReadStatus(id) { return readProgress[id] || 'unread'; }
+
+function statusLabel(s) {
+  if (s === 'reading') return '◐ reading';
+  if (s === 'done')    return '● done';
+  return '○ unread';
+}
+
+function cycleStatus(id, e) {
+  e.stopPropagation();
+  const cur  = getReadStatus(id);
+  const next = cur === 'unread' ? 'reading' : cur === 'reading' ? 'done' : 'unread';
+  if (next === 'unread') delete readProgress[id];
+  else readProgress[id] = next;
+  localStorage.setItem('readProgress', JSON.stringify(readProgress));
+  render();
+}
+
+function updateProgress() {
+  const done    = notes.filter(n => readProgress[n.id] === 'done').length;
+  const reading = notes.filter(n => readProgress[n.id] === 'reading').length;
+  const total   = notes.length;
+  const pct     = total > 0 ? (done / total * 100) : 0;
+
+  const statEl = document.getElementById('progress-stat');
+  const fillEl = document.getElementById('progress-fill');
+  if (statEl) statEl.textContent = `${done} / ${total} done${reading > 0 ? ' · ' + reading + ' reading' : ''}`;
+  if (fillEl) fillEl.style.width = pct.toFixed(1) + '%';
+}
+
+// ── theme color for timeline cards ───────────────────────────────────────
+function themeColorOf(n) {
+  const t = new Set(n.tags);
+  if (t.has('foundational') || t.has('architecture')) return '#059669';
+  if (t.has('hardware') || t.has('gpu') || t.has('tpu') || t.has('asic') || t.has('fpga') || t.has('kernel-fusion')) return '#2563eb';
+  if (t.has('inference') || t.has('speculative-decoding') || t.has('kv-cache') || t.has('draft-model') || t.has('throughput')) return '#d97706';
+  if (t.has('glossary')) return '#0d9488';
+  if (t.has('benchmarks') || t.has('evaluation')) return '#f43f5e';
+  if (t.has('ssm') || t.has('mamba') || t.has('lstm') || t.has('linear-time') || t.has('recurrence')) return '#7c3aed';
+  if (t.has('moe') || t.has('routing') || t.has('sparse')) return '#ea580c';
+  if (t.has('post-training') || t.has('rl') || t.has('rlhf') || t.has('reward')) return '#e11d48';
+  if (t.has('attention') || t.has('long-context') || t.has('compression')) return '#60a5fa';
+  return '#64748b';
+}
 
 // ── refs ─────────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
@@ -1076,6 +1321,8 @@ const browseArea     = $('browse-area');
 const ceExplorer     = $('ce-explorer');
 const ceLeft         = $('ce-left');
 const ceRight        = $('ce-right');
+const progressSection = $('progress-section');
+const timelineWrap   = $('timeline-wrap');
 
 // ── load ─────────────────────────────────────────────────────────────────
 async function init() {
@@ -1092,6 +1339,15 @@ async function init() {
       activeTab = btn.dataset.tab;
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      render();
+    });
+  });
+
+  document.querySelectorAll('.progress-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      progressFilter = btn.dataset.pf;
+      document.querySelectorAll('.progress-filter-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.pf === progressFilter));
       render();
     });
   });
@@ -1148,6 +1404,7 @@ function filteredNotes() {
     for (const t of activeTags) {
       if (!n.tags.includes(t)) return false;
     }
+    if (progressFilter !== 'all' && getReadStatus(n.id) !== progressFilter) return false;
     if (!q) return true;
     return (
       n.title.toLowerCase().includes(q) ||
@@ -1211,6 +1468,9 @@ function makeCard(n) {
     ? `<span class="citation-badge">🔖 ${fmtCit(n.citation_count)} citations</span>`
     : '';
 
+  const status    = getReadStatus(n.id);
+  const statusHtml = `<span class="status-badge ${status}" data-id="${escAttr(n.id)}">${statusLabel(status)}</span>`;
+
   const tagsHtml = n.tags.slice(0, 6).map(t =>
     `<span class="tag${activeTags.has(t) ? ' active-tag' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`
   ).join('');
@@ -1224,7 +1484,10 @@ function makeCard(n) {
       </div>
     </div>
     <p class="card-tldr">${tldrHtml}</p>
-    <div class="tags">${tagsHtml}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+      <div class="tags">${tagsHtml}</div>
+      ${statusHtml}
+    </div>
   `;
 
   card.querySelectorAll('.tag').forEach(el =>
@@ -1234,6 +1497,7 @@ function makeCard(n) {
     })
   );
 
+  card.querySelector('.status-badge').addEventListener('click', e => cycleStatus(n.id, e));
   card.addEventListener('click', () => openNote(n.id));
   return card;
 }
@@ -1346,11 +1610,71 @@ function renderByTheme() {
   renderFilters();
 }
 
+// ── TIMELINE ─────────────────────────────────────────────────────────────
+function renderTimeline() {
+  const tlScroll = document.getElementById('timeline-scroll');
+  tlScroll.innerHTML = '';
+
+  const years = [];
+  for (let y = 2017; y <= 2026; y++) years.push(String(y));
+
+  const grouped = {};
+  years.forEach(y => grouped[y] = []);
+  grouped['Reference'] = [];
+
+  notes.forEach(n => {
+    const y = String(n.year || '');
+    if (years.includes(y)) grouped[y].push(n);
+    else grouped['Reference'].push(n);
+  });
+
+  const filterFn = n => {
+    if (progressFilter === 'all') return true;
+    return getReadStatus(n.id) === progressFilter;
+  };
+
+  [...years, 'Reference'].forEach(year => {
+    const items = (grouped[year] || []).filter(filterFn);
+    if (items.length === 0) return;
+
+    const col = document.createElement('div');
+    col.className = 'tl-col';
+
+    const hd = document.createElement('div');
+    hd.className = 'tl-year-hd';
+    hd.textContent = year;
+    col.appendChild(hd);
+
+    const cardsWrap = document.createElement('div');
+    cardsWrap.className = 'tl-cards';
+
+    items.forEach(n => {
+      const color = themeColorOf(n);
+      const card = document.createElement('div');
+      card.className = 'tl-card';
+      card.style.borderLeftColor = color;
+      card.innerHTML = `
+        <div class="tl-card-title">${escHtml(n.title)}</div>
+        <div class="tl-card-tags">${
+          n.tags.slice(0, 3).map(t => `<span class="tl-tag">${escHtml(t)}</span>`).join('')
+        }</div>
+      `;
+      card.addEventListener('click', () => openNote(n.id));
+      cardsWrap.appendChild(card);
+    });
+
+    col.appendChild(cardsWrap);
+    tlScroll.appendChild(col);
+  });
+
+  if (tlScroll.children.length === 0) {
+    tlScroll.innerHTML = '<div class="tl-empty" style="padding:40px 20px;color:var(--muted);font-size:.88rem;">No notes match the current filter.</div>';
+  }
+}
+
 // ── CITATION EXPLORER ─────────────────────────────────────────────────────
 
 function renderTopCited() {
-  browseArea.style.display  = 'none';
-  ceExplorer.style.display  = 'flex';
   panel.classList.remove('open');
   openId = null;
 
@@ -1442,7 +1766,6 @@ function renderCeSummary() {
   const cited     = notes.filter(n => n.citation_count > 0);
   const totalCit  = cited.reduce((s, n) => s + (n.citation_count || 0), 0);
   const topPaper  = [...cited].sort((a, b) => b.citation_count - a.citation_count)[0];
-  const mambaNote = byId['Mamba'] || byId['mamba_linear_time'];
 
   ceRight.innerHTML = `
     <div class="ce-summary-title">Citation Overview</div>
@@ -1643,18 +1966,24 @@ function renderCeDetail(n) {
 
 // ── MAIN RENDER DISPATCH ──────────────────────────────────────────────────
 function render() {
+  const isBrowse = activeTab === 'all' || activeTab === 'by-theme';
+
+  browseArea.style.display     = isBrowse ? '' : 'none';
+  ceExplorer.style.display     = activeTab === 'top-cited' ? 'flex' : 'none';
+  timelineWrap.classList.toggle('show', activeTab === 'timeline');
+  progressSection.classList.toggle('show', activeTab !== 'top-cited');
+
   if (activeTab === 'top-cited') {
-    browseArea.style.display = 'none';
-    ceExplorer.style.display = 'flex';
     renderTopCited();
+  } else if (activeTab === 'by-theme') {
+    renderByTheme();
+    updateProgress();
+  } else if (activeTab === 'timeline') {
+    renderTimeline();
+    updateProgress();
   } else {
-    browseArea.style.display = '';
-    ceExplorer.style.display = 'none';
-    if (activeTab === 'by-theme') {
-      renderByTheme();
-    } else {
-      renderAll();
-    }
+    renderAll();
+    updateProgress();
   }
 }
 
@@ -1694,7 +2023,7 @@ function openNote(id) {
 
   panel.classList.add('open');
   panelBody.scrollTop = 0;
-  if (activeTab !== 'top-cited') render();
+  if (activeTab !== 'top-cited' && activeTab !== 'timeline') render();
 }
 
 // ── KaTeX renderer ───────────────────────────────────────────────────────
@@ -1714,7 +2043,7 @@ function renderMath(el) {
 function closePanel() {
   panel.classList.remove('open');
   openId = null;
-  if (activeTab !== 'top-cited') render();
+  if (activeTab !== 'top-cited' && activeTab !== 'timeline') render();
 }
 
 // ── tag toggle ───────────────────────────────────────────────────────────
