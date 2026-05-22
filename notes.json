@@ -4432,6 +4432,43 @@
     "html": "<h2>TL;DR</h2>\n<p>XPOS (Sun et al., 2022) is a positional encoding that multiplies the query and key vectors by position-dependent scalars $\\xi_m$ that decay exponentially with distance: the attention score between positions $m$ and $n$ includes a factor $\\xi_m / \\xi_n = \\zeta^{n-m}$ for $\\zeta < 1$. This decaying attention aligns naturally with [[RetNet]]'s retention mechanism, and the resulting model extrapolates better to sequences longer than those seen during training.</p>\n<h2>Intuition</h2>\n<p>Standard [[RoPE]] rotates query/key vectors by position-dependent angles, encoding relative positions through the dot product. XPOS adds an exponential decay on top: the effective attention between positions $m$ and $n$ decays with $|m - n|$ even before the softmax. For [[RetNet]], this decay is the retention mechanism's $\\gamma^{n-m}$ factor — XPOS provides the positional encoding that works harmoniously with this structure.</p>\n<p>The practical effect: when the model is evaluated on sequences longer than its training context, the XPOS decay naturally suppresses very distant tokens (distance &gt; training length), preventing out-of-distribution positional encodings from destabilizing the attention.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li><strong>It enables RetNet to generalize to longer sequences than training.</strong> The decay structure is self-regularizing at long distances.</li>\n<li><strong>It's designed for the retention mechanism.</strong> Unlike RoPE (which targets softmax attention), XPOS is designed for linear attention with decay — matching RetNet's architecture.</li>\n</ul>\n<h2>Where It Appears in This Wiki</h2>\n<ul>\n<li>[[RetNet]] — XPOS is the positional encoding used for multi-scale retention</li>\n</ul>\n<h2>Related Concepts</h2>\n<p>[[RetNet]] · [[Retention mechanism]] · [[RoPE]] · [[Transformer]] · [[Exponential decay]]</p>"
   },
   {
+    "id": "llm.c",
+    "title": "llm.c",
+    "authors": "",
+    "tags": [
+      "LLM inference",
+      "training",
+      "CUDA",
+      "C",
+      "hardware acceleration",
+      "GPT-2",
+      "deep learning",
+      "neural network",
+      "flash attention"
+    ],
+    "year": "2024",
+    "tldr": "LLM pretraining in pure C and CUDA with no PyTorch or Python dependency; reproduces GPT-2/GPT-3 series and runs ~7% faster than PyTorch Nightly, with a simple ~1000-line CPU fp32 reference alongside a high-performance CUDA path with cuDNN Flash Attention.",
+    "aliases": [],
+    "links": [
+      "nanoGPT",
+      "FlashAttention-2",
+      "HBM",
+      "memory-hierarchy",
+      "Systolic-array",
+      "minbpe",
+      "hardware-acceleration",
+      "LLM-inference",
+      "Inference-optimization",
+      "Sequence-parallelism",
+      "scaling",
+      "micrograd"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h1>llm.c</h1>\n<p><strong>Repository:</strong> <a href=\"https://github.com/karpathy/llm.c\">karpathy/llm.c</a><br />\n<strong>Author:</strong> Andrej Karpathy<br />\n<strong>Year:</strong> 2024</p>\n<h2>Overview</h2>\n<p>llm.c implements LLM pretraining in <strong>plain C and CUDA</strong>, eliminating the 245 MB PyTorch and 107 MB CPython dependencies. The primary focus is reproducing the GPT-2 and GPT-3 model series. It currently runs approximately <strong>7% faster than PyTorch Nightly</strong> on the same hardware.</p>\n<p>The project is a spiritual successor to [[nanoGPT]], sharing its <code>train_gpt2.py</code> PyTorch reference implementation as a baseline.</p>\n<h2>Code Structure</h2>\n<table>\n<thead>\n<tr>\n<th>File</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>train_gpt2.cu</code></td>\n<td>Main CUDA training file (bleeding-edge, mixed precision)</td>\n</tr>\n<tr>\n<td><code>train_gpt2.c</code></td>\n<td>Simple CPU fp32 reference, ~1,000 lines, single file</td>\n</tr>\n<tr>\n<td><code>train_gpt2.py</code></td>\n<td>PyTorch reference (tweaked nanoGPT)</td>\n</tr>\n<tr>\n<td><code>test_gpt2.cu</code></td>\n<td>GPU unit tests vs. PyTorch reference</td>\n</tr>\n</tbody>\n</table>\n<h2>Performance Features</h2>\n<ul>\n<li><strong>[[FlashAttention-2]]</strong> via cuDNN (optional, <code>USE_CUDNN=1</code>) — reduces memory and speeds up attention</li>\n<li><strong>Mixed precision</strong> (fp32 / bf16) training paths</li>\n<li><strong>Multi-GPU / Multi-node</strong> support for large-scale training</li>\n<li>~7% wall-clock speedup vs. PyTorch Nightly for GPT-2 124M</li>\n</ul>\n<h2>Hardware &amp; Memory</h2>\n<p>The design is explicitly hardware-aware:\n- Targets [[HBM]] bandwidth as the primary bottleneck\n- Fused CUDA kernels reduce round-trips through the [[memory hierarchy]]\n- cuDNN Flash Attention leverages [[Systolic array]] units in Tensor Cores</p>\n<h2>Quick Start (GPU, mixed precision)</h2>\n<pre><code class=\"language-bash\">chmod u+x ./dev/download_starter_pack.sh\n./dev/download_starter_pack.sh\nmake train_gpt2cu USE_CUDNN=1\n./train_gpt2cu\n</code></pre>\n<h2>Quick Start (CPU only)</h2>\n<pre><code class=\"language-bash\">make train_gpt2\nOMP_NUM_THREADS=8 ./train_gpt2\n</code></pre>\n<h2>Datasets</h2>\n<p>Data scripts in <code>/dev/data/</code> download, tokenize (GPT-2 BPE via [[minbpe]]-compatible format), and save tokens as <code>.bin</code> files readable from C (uint16 token IDs, 1024-byte header).</p>\n<h2>Relation to Wiki Themes</h2>\n<p>llm.c represents the [[hardware acceleration]] and [[LLM inference]]/training frontier: eliminating framework overhead, maximising [[HBM]] bandwidth, and leveraging [[FlashAttention-2]] within a minimal codebase. It is the practical counterpart to theoretical work on [[Inference optimization]], [[Sequence parallelism]], and [[scaling]]. The CPU fp32 path serves as an accessible reference analogous to [[micrograd]] for understanding raw forward/backward pass mechanics.</p>"
+  },
+  {
     "id": "mLSTM",
     "title": "mLSTM (matrix xLSTM cell)",
     "authors": "",
@@ -4456,6 +4493,96 @@
     "arxiv": "",
     "cited_by_details": null,
     "html": "<h1>mLSTM (matrix xLSTM cell)</h1>\n<p>The mLSTM cell maintains a matrix state $C_t \\in \\mathbb{R}^{d \\times d}$ updated via the [[Covariance update rule]] $C_t = f_t C_{t-1} + i_t v_t k_t^\\top$. Crucially, the gates $f_t, i_t$ depend only on the current input $x_t$, not on the previous hidden state — this breaks the LSTM's hidden-to-hidden recurrence and makes the cell <strong>fully parallelizable in training time</strong>, just like attention. Retrieval is $C_t q_t$, equivalent to one step of [[Linear attention]] with built-in [[Exponential gating]]. mLSTM provides the [[Matrix memory]] that gives [[xLSTM]] its associative-recall ability.</p>\n<h2>Where it appears</h2>\n<ul>\n<li>[[xLSTM]]</li>\n</ul>\n<hr />\n<p><em>Related: [[Matrix memory]] · [[Covariance update rule]] · [[sLSTM]] · [[Linear attention]]</em></p>"
+  },
+  {
+    "id": "micrograd",
+    "title": "micrograd",
+    "authors": "",
+    "tags": [
+      "autograd",
+      "backpropagation",
+      "deep learning",
+      "neural network",
+      "educational",
+      "scalar"
+    ],
+    "year": "2020",
+    "tldr": "A ~150-line scalar-valued autograd engine implementing reverse-mode autodiff over a dynamically built DAG, plus a tiny PyTorch-like neural network library on top — ideal for understanding backpropagation from first principles.",
+    "aliases": [],
+    "links": [
+      "deep-learning",
+      "neural-network",
+      "transformer",
+      "RLHF",
+      "nanoGPT",
+      "llm.c"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h1>micrograd</h1>\n<p><strong>Repository:</strong> <a href=\"https://github.com/karpathy/micrograd\">karpathy/micrograd</a><br />\n<strong>Author:</strong> Andrej Karpathy<br />\n<strong>Year:</strong> 2020<br />\n<strong>License:</strong> MIT</p>\n<h2>Overview</h2>\n<p>micrograd is an educational scalar autograd engine — essentially the smallest possible implementation of the core machinery that powers all modern [[deep learning]] frameworks. It implements <strong>reverse-mode automatic differentiation</strong> (backpropagation) over a dynamically constructed directed acyclic graph (DAG).</p>\n<p>The entire engine is ~100 lines of Python; the neural network library built on top is ~50 lines.</p>\n<h2>Architecture</h2>\n<h3>Engine (<code>engine.py</code>)</h3>\n<ul>\n<li><code>Value</code> class wraps a scalar float and tracks its computational history</li>\n<li>Supports: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>**</code>, <code>relu</code>, <code>tanh</code>, <code>exp</code></li>\n<li><code>.backward()</code> runs topological sort and applies chain rule recursively</li>\n</ul>\n<h3>Neural Network Library (<code>nn.py</code>)</h3>\n<ul>\n<li><code>Neuron</code> — single neuron with weights, bias, and activation</li>\n<li><code>Layer</code> — a list of Neurons</li>\n<li><code>MLP</code> — multi-layer perceptron stacking Layers</li>\n</ul>\n<h2>Example</h2>\n<pre><code class=\"language-python\">from micrograd.engine import Value\n\na = Value(-4.0)\nb = Value(2.0)\nc = a + b\nd = a * b + b**3\ng = (c - d)**2 / 2.0\ng.backward()\n\nprint(a.grad)  # dg/da\nprint(b.grad)  # dg/db\n</code></pre>\n<h2>Why It Matters</h2>\n<table>\n<thead>\n<tr>\n<th>Concept</th>\n<th>Illustration in micrograd</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Forward pass</td>\n<td>Python operator overloading builds the DAG</td>\n</tr>\n<tr>\n<td>Backward pass</td>\n<td><code>_backward</code> closures store local gradient functions</td>\n</tr>\n<tr>\n<td>Chain rule</td>\n<td>Topological traversal accumulates <code>.grad</code></td>\n</tr>\n<tr>\n<td>Dynamic graph</td>\n<td>DAG rebuilt every forward pass (like PyTorch eager mode)</td>\n</tr>\n</tbody>\n</table>\n<h2>Relation to Wiki Themes</h2>\n<p>micrograd is the conceptual foundation beneath all [[neural network]] training. Understanding it is prerequisite to understanding how [[transformer]] training, [[RLHF]], and other gradient-based methods work. See [[nanoGPT]] for a full GPT training stack, or [[llm.c]] for a C/CUDA implementation without any autograd framework.</p>"
+  },
+  {
+    "id": "minbpe",
+    "title": "minbpe",
+    "authors": "",
+    "tags": [
+      "tokenization",
+      "BPE",
+      "byte-pair encoding",
+      "language model",
+      "GPT-2",
+      "GPT-4",
+      "educational"
+    ],
+    "year": "2024",
+    "tldr": "Minimal, clean Python implementation of byte-level Byte Pair Encoding (BPE) tokenization — the algorithm used by GPT-2 through GPT-4 — with train/encode/decode support and a GPT-4-compatible tokenizer wrapper.",
+    "aliases": [],
+    "links": [
+      "language-model",
+      "KV-cache",
+      "speculative-decoding",
+      "scaling",
+      "nanoGPT",
+      "llm.c"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h1>minbpe</h1>\n<p><strong>Repository:</strong> <a href=\"https://github.com/karpathy/minbpe\">karpathy/minbpe</a><br />\n<strong>Author:</strong> Andrej Karpathy<br />\n<strong>Year:</strong> 2024</p>\n<h2>Overview</h2>\n<p>minbpe provides the cleanest possible reference implementation of <strong>Byte Pair Encoding (BPE)</strong> tokenization, the algorithm at the heart of virtually every modern large [[language model]] tokenizer (GPT, Llama, Mistral, Claude, etc.).</p>\n<p>BPE was introduced for NLP by Sennrich et al. (2015) and popularised for LLMs by the GPT-2 paper. It operates on UTF-8 bytes, iteratively merging the most frequent adjacent token pairs to build a vocabulary.</p>\n<h2>Tokenizer Classes</h2>\n<table>\n<thead>\n<tr>\n<th>Class</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>BasicTokenizer</code></td>\n<td>Simplest BPE, runs directly on raw text</td>\n</tr>\n<tr>\n<td><code>RegexTokenizer</code></td>\n<td>Adds regex pre-splitting by category (letters, numbers, punctuation) — matches GPT-2/GPT-4 behaviour</td>\n</tr>\n<tr>\n<td><code>GPT4Tokenizer</code></td>\n<td>Thin wrapper around <code>RegexTokenizer</code> reproducing GPT-4 / tiktoken <code>cl100k_base</code> exactly</td>\n</tr>\n</tbody>\n</table>\n<p>All three implement the same three-method interface: <strong>train</strong>, <strong>encode</strong>, <strong>decode</strong>.</p>\n<h2>Key Design Points</h2>\n<ul>\n<li><strong>Byte-level:</strong> vocabulary always starts with all 256 raw bytes; merges are learned on top</li>\n<li><strong>Special tokens:</strong> registered explicitly via <code>register_special_tokens()</code> to avoid accidental tokenization of attacker-controlled data</li>\n<li><strong>Save/load:</strong> <code>.model</code> file (loadable) + <code>.vocab</code> file (human-readable)</li>\n<li>Training ~25 seconds on an M1 MacBook for a moderate dataset</li>\n</ul>\n<h2>Example</h2>\n<pre><code class=\"language-python\">from minbpe import RegexTokenizer\ntok = RegexTokenizer()\ntok.train(text, vocab_size=32768)\nids = tok.encode(&quot;hello world&quot;)\nprint(tok.decode(ids))  # &quot;hello world&quot;\ntok.save(&quot;tok32k&quot;)\n</code></pre>\n<h2>GPT-4 Parity Verification</h2>\n<pre><code class=\"language-python\">from minbpe import GPT4Tokenizer\nimport tiktoken\n\ntext = &quot;hello123!!!? (안녕하세요!) 😉&quot;\nenc = tiktoken.get_encoding(&quot;cl100k_base&quot;)\ntok = GPT4Tokenizer()\nassert enc.encode(text) == tok.encode(text)  # ✓ identical\n</code></pre>\n<h2>Relation to Wiki Themes</h2>\n<p>Tokenization is the first stage of any LLM pipeline and directly affects [[KV cache]] size (fewer tokens = smaller cache), [[speculative decoding]] draft quality, and vocabulary-level [[scaling]] decisions. minbpe makes the BPE mechanics transparent and hackable, complementing [[nanoGPT]] (training) and [[llm.c]] (C/CUDA inference).</p>"
+  },
+  {
+    "id": "nanoGPT",
+    "title": "nanoGPT",
+    "authors": "",
+    "tags": [
+      "transformer",
+      "language model",
+      "GPT-2",
+      "training",
+      "deep learning",
+      "neural network",
+      "educational"
+    ],
+    "year": "2022",
+    "tldr": "The simplest, fastest repository for training and fine-tuning medium-sized GPTs; a clean rewrite of minGPT that reproduces GPT-2 (124M) on OpenWebText in ~4 days on 8×A100s, in ~300 lines each for training loop and model definition. Now deprecated in favour of nanochat (Nov 2025).",
+    "aliases": [],
+    "links": [
+      "transformer",
+      "language-model",
+      "RoPE",
+      "FlashAttention-2",
+      "llm.c",
+      "minbpe",
+      "micrograd",
+      "neural-network",
+      "scaling",
+      "Sequence-parallelism"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h1>nanoGPT</h1>\n<p><strong>Repository:</strong> <a href=\"https://github.com/karpathy/nanoGPT\">karpathy/nanoGPT</a><br />\n<strong>Author:</strong> Andrej Karpathy<br />\n<strong>Year:</strong> 2022<br />\n<strong>Status:</strong> Deprecated (Nov 2025) — superseded by <a href=\"https://github.com/karpathy/nanochat\">nanochat</a></p>\n<h2>Overview</h2>\n<p>nanoGPT is a minimal, readable codebase for training and fine-tuning GPT-style [[transformer]] language models. The entire implementation lives in two ~300-line files:</p>\n<ul>\n<li><code>train.py</code> — a straightforward training loop with DDP support  </li>\n<li><code>model.py</code> — a GPT model definition that can load OpenAI GPT-2 weights</li>\n</ul>\n<p>Its design philosophy prioritises <em>practicality over pedagogy</em>, making it easy to hack for custom [[language model]] experiments.</p>\n<h2>Key Features</h2>\n<table>\n<thead>\n<tr>\n<th>Feature</th>\n<th>Detail</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Baseline reproduce</td>\n<td>GPT-2 124M on OpenWebText, val loss ~2.85</td>\n</tr>\n<tr>\n<td>Hardware target</td>\n<td>Single 8×A100 40 GB node, ~4 days</td>\n</tr>\n<tr>\n<td>Distributed training</td>\n<td>PyTorch DDP (<code>torchrun</code>) across multiple nodes</td>\n</tr>\n<tr>\n<td>Compile support</td>\n<td>PyTorch 2.0 <code>torch.compile</code> for speed</td>\n</tr>\n<tr>\n<td>Device support</td>\n<td>CUDA, CPU, Apple Silicon MPS</td>\n</tr>\n<tr>\n<td>Tokenizer</td>\n<td>OpenAI <code>tiktoken</code> (BPE)</td>\n</tr>\n</tbody>\n</table>\n<h2>Architecture</h2>\n<ul>\n<li>Standard decoder-only Transformer (identical to GPT-2)  </li>\n<li>Configurable: layers, heads, embedding size, context length (<code>block_size</code>)  </li>\n<li>Optional weight loading from GPT-2 (up to 1.3B parameters)  </li>\n<li>[[RoPE]] and [[FlashAttention-2]] not built-in, but easily added</li>\n</ul>\n<h2>Quick Start</h2>\n<pre><code class=\"language-bash\">pip install torch numpy transformers datasets tiktoken wandb tqdm\npython data/shakespeare_char/prepare.py\npython train.py config/train_shakespeare_char.py\npython sample.py --out_dir=out-shakespeare-char\n</code></pre>\n<h2>Relation to Other Projects</h2>\n<ul>\n<li>Predecessor: <strong>minGPT</strong> (more educational)  </li>\n<li>Successor: <strong>llm.c</strong> (C/CUDA, faster, no PyTorch) → see [[llm.c]]  </li>\n<li>Tokenizer companion: <strong>minbpe</strong> → see [[minbpe]]  </li>\n<li>Autograd engine: <strong>micrograd</strong> → see [[micrograd]]</li>\n</ul>\n<h2>Relevance to Wiki Themes</h2>\n<p>nanoGPT is a canonical reference implementation of the [[transformer]] [[neural network]] architecture for [[language model]] pretraining. It demonstrates [[scaling]] considerations (batch size, context length, model size) and serves as the pedagogical baseline against which hardware-accelerated systems like [[FlashAttention-2]] and [[Sequence parallelism]] are often benchmarked.</p>"
   },
   {
     "id": "sLSTM",
