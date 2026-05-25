@@ -1269,12 +1269,55 @@
     }
 
     /* ── SEARCH HIGHLIGHT ───────────────────────────────────────────── */
-    .search-mark {
-      background: rgba(124,58,237,.22);
+    .search-highlight {
+      background: #7c3aed33;
       color: inherit;
-      border-radius: 2px;
-      padding: 0 1px;
+      border-radius: 3px;
+      padding: 0 2px;
+      font-weight: 500;
+      scroll-margin-top: 80px;
     }
+    .search-highlight.active {
+      background: #7c3aed99;
+      color: #fff;
+      border-radius: 3px;
+      outline: 2px solid #7c3aed;
+    }
+
+    /* ── MATCH NAV BAR ──────────────────────────────────────────────── */
+    #match-nav {
+      display: none;
+      align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      font-size: .75rem; color: var(--muted);
+      flex-shrink: 0;
+    }
+    #match-nav.show { display: flex; }
+
+    .match-nav-term {
+      font-weight: 600; color: var(--accent-lt);
+      white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis; max-width: 180px;
+    }
+
+    .match-nav-count {
+      white-space: nowrap; flex: 1;
+    }
+
+    .match-nav-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 5px;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; cursor: pointer; flex-shrink: 0;
+      transition: border-color .12s, color .12s, background .12s;
+      line-height: 1;
+    }
+    .match-nav-btn:hover { border-color: var(--accent); color: var(--accent-lt); background: var(--accent-dim); }
+    .match-nav-btn:disabled { opacity: .35; cursor: default; }
+    .match-nav-btn:disabled:hover { border-color: var(--border); color: var(--muted); background: none; }
 
     /* ── BACKLINK BADGE (card) ───────────────────────────────────────── */
     .backlink-badge {
@@ -1614,6 +1657,18 @@
         <div id="panel-tags" class="tags"></div>
       </div>
 
+      <!-- match navigation bar — only shown when search is active -->
+      <div id="match-nav">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <span class="match-nav-term" id="match-nav-term"></span>
+        <span class="match-nav-count" id="match-nav-count"></span>
+        <button class="match-nav-btn" id="match-prev" title="Previous match (Shift+Enter)">‹</button>
+        <button class="match-nav-btn" id="match-next" title="Next match (Enter)">›</button>
+      </div>
+
       <div id="panel-body"></div>
 
     </div>
@@ -1687,6 +1742,8 @@ let ceSelectedId = null;
 let ceQuery      = '';
 let progressFilter = 'all';
 let compareSet     = new Set(); // up to 3 paper IDs
+let matchEls       = [];        // current search-highlight <mark> elements
+let matchIdx       = 0;         // active match index
 
 // ── reading progress ──────────────────────────────────────────────────────
 let readProgress = {};
@@ -1768,6 +1825,11 @@ const ceRight        = $('ce-right');
 const progressSection = $('progress-section');
 const timelineWrap   = $('timeline-wrap');
 const agentWrap      = $('agent-wrap');
+const matchNav       = $('match-nav');
+const matchNavTerm   = $('match-nav-term');
+const matchNavCount  = $('match-nav-count');
+const matchPrev      = $('match-prev');
+const matchNext      = $('match-next');
 
 // ── load ─────────────────────────────────────────────────────────────────
 async function init() {
@@ -2642,40 +2704,103 @@ function openNote(id) {
     })
   );
 
-  if (query) highlightSearch(panelBody, query);
+  // Reset match state before new highlights
+  hideMatchNav();
+
   renderBacklinks(n, panelBody);
   renderMath(panelBody);
 
   panel.classList.add('open');
-  panelBody.scrollTop = 0;
+  // Only reset scroll when no search active (search will scroll to first match)
+  if (!query) panelBody.scrollTop = 0;
   if (activeTab !== 'top-cited' && activeTab !== 'timeline') render();
+
+  // Highlight after panel is open so scrollIntoView works correctly
+  if (query) requestAnimationFrame(() => highlightSearch(panelBody, query));
 }
 
-// ── search term highlight ────────────────────────────────────────────────
+// ── search highlight + match navigation ──────────────────────────────────
 function highlightSearch(el, q) {
-  if (!q) return;
+  matchEls = [];
+  matchIdx = 0;
+
+  if (!q) { hideMatchNav(); return; }
+
   const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const re = new RegExp(escaped, 'gi');
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+
+  // Walk all text nodes, skip script/style
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode: node => {
+      const tag = node.parentElement && node.parentElement.tagName;
+      return (tag === 'SCRIPT' || tag === 'STYLE')
+        ? NodeFilter.FILTER_REJECT
+        : NodeFilter.FILTER_ACCEPT;
+    }
+  });
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
+
   nodes.forEach(node => {
     if (!node.textContent.toLowerCase().includes(q.toLowerCase())) return;
     const frag = document.createDocumentFragment();
-    let last = 0;
-    let m;
+    let last = 0, m;
     re.lastIndex = 0;
     while ((m = re.exec(node.textContent)) !== null) {
-      if (m.index > last) frag.appendChild(document.createTextNode(node.textContent.slice(last, m.index)));
+      if (m.index > last)
+        frag.appendChild(document.createTextNode(node.textContent.slice(last, m.index)));
       const mark = document.createElement('mark');
-      mark.className = 'search-mark';
+      mark.className = 'search-highlight';
       mark.textContent = m[0];
       frag.appendChild(mark);
+      matchEls.push(mark);
       last = m.index + m[0].length;
     }
-    if (last < node.textContent.length) frag.appendChild(document.createTextNode(node.textContent.slice(last)));
+    if (last < node.textContent.length)
+      frag.appendChild(document.createTextNode(node.textContent.slice(last)));
     node.parentNode.replaceChild(frag, node);
   });
+
+  if (matchEls.length === 0) { hideMatchNav(); return; }
+
+  // Activate first match and scroll to it
+  setActiveMatch(0, /* scroll */ true);
+  showMatchNav(q);
+}
+
+function setActiveMatch(idx, scroll) {
+  if (matchEls.length === 0) return;
+  matchEls.forEach(m => m.classList.remove('active'));
+  matchIdx = ((idx % matchEls.length) + matchEls.length) % matchEls.length;
+  matchEls[matchIdx].classList.add('active');
+  if (scroll) {
+    matchEls[matchIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  updateMatchNavCount();
+}
+
+function showMatchNav(q) {
+  matchNav.classList.add('show');
+  matchNavTerm.textContent = `"${q}"`;
+  updateMatchNavCount();
+}
+
+function hideMatchNav() {
+  matchNav.classList.remove('show');
+  matchEls = [];
+  matchIdx = 0;
+}
+
+function updateMatchNavCount() {
+  if (matchEls.length === 0) {
+    matchNavCount.textContent = 'no matches';
+    matchPrev.disabled = true;
+    matchNext.disabled = true;
+  } else {
+    matchNavCount.textContent = `${matchIdx + 1} of ${matchEls.length}`;
+    matchPrev.disabled = matchEls.length <= 1;
+    matchNext.disabled = matchEls.length <= 1;
+  }
 }
 
 // ── backlinks panel ──────────────────────────────────────────────────────
@@ -2858,6 +2983,7 @@ function renderMath(el) {
 function closePanel() {
   panel.classList.remove('open');
   openId = null;
+  hideMatchNav();
   if (activeTab !== 'top-cited' && activeTab !== 'timeline' && activeTab !== 'agent') render();
 }
 
@@ -2890,6 +3016,7 @@ function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
 // ── events ────────────────────────────────────────────────────────────────
 searchEl.addEventListener('input', () => {
   query = searchEl.value.trim();
+  if (!query) hideMatchNav();
   if (activeTab !== 'top-cited') render();
 });
 
@@ -2921,6 +3048,10 @@ document.addEventListener('keydown', e => {
     searchEl.select();
   }
 });
+
+// Match navigation buttons
+matchNext.addEventListener('click', () => setActiveMatch(matchIdx + 1, true));
+matchPrev.addEventListener('click', () => setActiveMatch(matchIdx - 1, true));
 
 // Compare tray buttons
 document.getElementById('compare-open-btn').addEventListener('click', () => {
