@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="280" height="72" viewBox="0 0 280 72">
-  <!-- Transparent background -->
-  <!-- Red H square icon -->
+  <!-- Transparent background — white text for dark backgrounds -->
+  <!-- Red H square icon — same in both modes -->
   <rect x="0" y="4" width="60" height="64" rx="3" fill="#E73534"/>
   <text x="30" y="56" text-anchor="middle"
         font-size="52" font-weight="900"
         fill="#ffffff" font-family="Arial Black,Arial,sans-serif">h</text>
-  <!-- Vertical divider -->
-  <line x1="76" y1="8" x2="76" y2="64" stroke="#cccccc" stroke-width="1"/>
-  <!-- FOXCONN text — dark for light backgrounds -->
+  <!-- Vertical divider — subtle on dark bg -->
+  <line x1="76" y1="8" x2="76" y2="64" stroke="#555555" stroke-width="1"/>
+  <!-- FOXCONN text — white for dark backgrounds -->
   <text x="182" y="38" text-anchor="middle"
         font-size="28" font-weight="900"
-        fill="#1a1a1a" font-family="Arial Black,Arial,sans-serif"
+        fill="#ffffff" font-family="Arial Black,Arial,sans-serif"
         letter-spacing="2">FOXCONN</text>
   <!-- Registered trademark -->
   <text x="265" y="18" text-anchor="middle"
-        font-size="11" fill="#1a1a1a" font-family="Arial,sans-serif">®</text>
-  <!-- Subtitle -->
+        font-size="11" fill="#ffffff" font-family="Arial,sans-serif">®</text>
+  <!-- Subtitle — light gray for dark backgrounds -->
   <text x="182" y="58" text-anchor="middle"
         font-size="9.5" font-weight="400"
-        fill="#555555" font-family="Arial,sans-serif"
+        fill="#aaaaaa" font-family="Arial,sans-serif"
         letter-spacing="2">HON HAI TECHNOLOGY GROUP</text>
 </svg>

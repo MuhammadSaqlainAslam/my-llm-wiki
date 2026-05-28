@@ -1687,17 +1687,10 @@
     .nav-logo-wrap {
       display: flex; align-items: center;
       margin-right: 20px; flex-shrink: 0;
-      background: #ffffff; border-radius: 8px;
-      padding: 6px 12px; border: 1px solid rgba(0,0,0,.1);
     }
     .nav-logo {
-      height: 52px; width: auto;
+      height: 48px; width: auto; max-width: 240px;
       object-fit: contain; display: block;
-    }
-    [data-theme="dark"] .nav-logo-wrap,
-    [data-theme="light"] .nav-logo-wrap,
-    [data-theme="system"] .nav-logo-wrap {
-      background: #ffffff; border-radius: 8px; padding: 6px 12px;
     }
 
     /* ── FOOTER ─────────────────────────────────────────────────────── */
@@ -1711,19 +1704,10 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 32px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
     }
-    .footer-logo-wrap {
-      display: flex; align-items: center; flex-shrink: 0;
-      background: #ffffff; border-radius: 10px;
-      padding: 10px 20px; border: 1px solid rgba(0,0,0,.1);
-    }
+    .footer-logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
     .footer-logo {
-      height: 80px; width: auto;
+      height: 72px; width: auto; max-width: 300px;
       object-fit: contain; display: block;
-    }
-    [data-theme="dark"] .footer-logo-wrap,
-    [data-theme="light"] .footer-logo-wrap,
-    [data-theme="system"] .footer-logo-wrap {
-      background: #ffffff; border-radius: 10px; padding: 10px 20px;
     }
     .footer-credit {
       font-size: 13px; color: var(--muted); text-align: center;
@@ -1748,10 +1732,10 @@
 <!-- ── HEADER ────────────────────────────────────────────────────────────── -->
 <header>
   <div class="nav-logo-wrap">
-    <img src="assets/foxconn-logo.png"
+    <img src="assets/foxconn-logo.svg"
          alt="Hon Hai Technology Group"
          class="nav-logo"
-         onerror="this.src='assets/foxconn-logo.svg'">
+         onerror="this.src='assets/foxconn-logo.png';this.onerror=null">
   </div>
   <div class="brand">
     <div class="brand-title">HHRI-AI Research Wiki<span class="dot">.</span></div>
@@ -1927,6 +1911,18 @@
              : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   document.documentElement.setAttribute('data-theme', eff);
 })();
+
+// ── Theme-aware logo switching ─────────────────────────────────────────────
+function updateLogoForTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const src = isDark ? 'assets/foxconn-logo-dark.svg' : 'assets/foxconn-logo.svg';
+  document.querySelectorAll('.nav-logo, .footer-logo').forEach(img => {
+    img.src = src;
+  });
+}
+new MutationObserver(updateLogoForTheme)
+  .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+document.addEventListener('DOMContentLoaded', updateLogoForTheme);
 
 function setupTheme() {
   const opts = document.querySelectorAll('.theme-opt');
@@ -3494,10 +3490,10 @@ init();
   <div class="footer-inner">
     <div class="footer-left">
       <div class="footer-logo-wrap">
-        <img src="assets/foxconn-logo.png"
+        <img src="assets/foxconn-logo.svg"
              alt="Foxconn — Hon Hai Technology Group"
              class="footer-logo"
-             onerror="this.src='assets/foxconn-logo.svg'">
+             onerror="this.src='assets/foxconn-logo.png';this.onerror=null">
       </div>
     </div>
     <div class="footer-center">
