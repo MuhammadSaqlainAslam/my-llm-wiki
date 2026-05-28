@@ -1612,7 +1612,10 @@
     }
     [data-theme="dark"] .flag-counter-wrap { background: #161b22; border-color: #30363d; }
     [data-theme="light"] .flag-counter-wrap { background: #ffffff; border-color: #d0d7de; }
-    .flag-counter-wrap img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+    .flag-counter-img {
+      cursor: default; pointer-events: none;
+      display: block; max-width: 100%; height: auto; margin: 0 auto;
+    }
     .fc-note {
       font-size: 11px; color: var(--muted); margin: 8px 0 0; text-align: center;
     }
@@ -3394,10 +3397,10 @@ init();
 <section id="visitor-countries">
   <div class="visitor-inner">
     <div class="flag-counter-wrap">
-      <a href="https://info.flagcounter.com/HHRI" target="_blank" rel="noopener">
-        <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
-             alt="Flag Counter — Visitors by Country">
-      </a>
+      <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
+           alt="Visitors by Country — Flag Counter"
+           class="flag-counter-img"
+           onerror="this.parentElement.style.display='none'">
       <p class="fc-note">
         Live visitor tracking — automatically updated on every visit ·
         <a href="https://flagcounter.com" target="_blank" rel="noopener">Flag Counter</a>
