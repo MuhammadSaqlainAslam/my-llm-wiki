@@ -514,14 +514,16 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 16px; flex-wrap: wrap;
     }
-    .footer-logo { height: 28px; width: auto; opacity: .7; }
+    .footer-logo-wrap { display: flex; align-items: center; }
+    .footer-logo { height: 36px; width: auto; max-width: 160px; object-fit: contain; }
+    [data-theme="light"] .footer-logo { background: #1a1a1a; border-radius: 6px; padding: 3px 6px; }
     .footer-credit {
       font-size: 11px; color: var(--muted); text-align: center;
       margin: 0; line-height: 1.5;
     }
     .footer-credit strong { color: var(--text); }
-    .footer-credit a { color: #7c3aed; text-decoration: none; }
-    .footer-credit a:hover { text-decoration: underline; }
+    .footer-link { color: #cc0000; text-decoration: none; font-weight: 500; }
+    .footer-link:hover { text-decoration: underline; color: #ff2222; }
     .footer-copy { font-size: 10px; color: var(--muted); opacity: .6; margin: 0; }
     .footer-right { font-size: 11px; color: var(--muted); }
   </style>
@@ -1291,16 +1293,19 @@ init();
 <footer id="site-footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <img src="assets/hhri-logo.png"
-           alt="Hon Hai Research Institute"
-           class="footer-logo"
-           onerror="this.src='assets/hhri-logo.svg';this.onerror=function(){this.style.display='none'}">
+      <div class="footer-logo-wrap">
+        <img src="assets/foxconn-logo.svg"
+             alt="Foxconn — Hon Hai Technology Group"
+             class="footer-logo"
+             onerror="this.style.display='none'">
+      </div>
     </div>
     <div class="footer-center">
       <p class="footer-credit">
         Designed by<br>
         <strong>Artificial Intelligence Research Center</strong><br>
-        <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener">
+        <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener"
+           class="footer-link">
           Hon Hai Research Institute
         </a>
       </p>

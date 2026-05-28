@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <rect width="200" height="60" rx="4" fill="#1a1a1a"/>
+  <rect x="8" y="8" width="44" height="44" rx="3" fill="#cc0000"/>
+  <text x="30" y="40" text-anchor="middle"
+        font-size="34" font-weight="900"
+        fill="white" font-family="Arial Black,Arial,sans-serif">h</text>
+  <text x="126" y="30" text-anchor="middle"
+        font-size="19" font-weight="900"
+        fill="white" font-family="Arial Black,Arial,sans-serif"
+        letter-spacing="1.5">FOXCONN</text>
+  <text x="123" y="46" text-anchor="middle"
+        font-size="7" font-weight="400"
+        fill="#cccccc" font-family="Arial,sans-serif"
+        letter-spacing="2.2">HON HAI TECHNOLOGY GROUP</text>
+  <circle cx="176" cy="18" r="4.5" fill="none" stroke="white" stroke-width="0.8"/>
+  <text x="176" y="21" text-anchor="middle"
+        font-size="5.5" fill="white" font-family="Arial,sans-serif">R</text>
+</svg>
