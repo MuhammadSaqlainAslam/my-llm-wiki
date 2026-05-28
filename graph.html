@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LLM Wiki — Knowledge Graph</title>
+  <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
+  <title>HHRI Research Wiki — Knowledge Graph</title>
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "37b0ea0ace544dc89dc44237601d4a92"}'></script>
+  <!-- End Cloudflare Web Analytics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -207,6 +212,14 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .tt-arxiv {
+      font-size: .7rem; color: var(--accent-lt); margin-top: 5px;
+      opacity: .8;
+    }
+    .tt-hint {
+      font-size: .68rem; color: var(--muted); opacity: .6;
+      margin-top: 5px; font-style: italic;
+    }
 
     /* ── SIDE PANEL ──────────────────────────────────────────────────── */
     #panel {
@@ -359,6 +372,22 @@
     }
     #panel-body a:hover { color: #c4b5fd; }
 
+    /* ── Panel action buttons (arXiv + wiki) ───────────────────────── */
+    #panel-actions {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 10px 18px 4px;
+    }
+    .panel-action-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .74rem; padding: 5px 12px; border-radius: 6px;
+      border: 1px solid var(--border); color: var(--muted);
+      text-decoration: none; background: var(--surface2);
+      transition: all .15s; cursor: pointer;
+    }
+    .panel-action-btn:hover { color: var(--accent-lt); border-color: var(--accent-ring); background: var(--surface); }
+    .panel-action-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .panel-action-btn.primary:hover { background: #6d28d9; border-color: #6d28d9; }
+
     /* obsidian-only blocks */
     .obsidian-note {
       background: var(--surface2);
@@ -470,6 +499,31 @@
       transition: color .12s, border-color .12s;
     }
     #reset-btn:hover { color: var(--text); border-color: var(--muted); }
+
+    /* ── FOOTER ─────────────────────────────────────────────────────── */
+    #site-footer {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      border-top: 1px solid var(--border);
+      padding: 10px 24px;
+      background: var(--bg-overlay);
+      backdrop-filter: blur(8px);
+      z-index: 40;
+      display: none; /* hidden by default on graph page — too much overlap */
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-logo { height: 28px; width: auto; opacity: .7; }
+    .footer-credit {
+      font-size: 11px; color: var(--muted); text-align: center;
+      margin: 0; line-height: 1.5;
+    }
+    .footer-credit strong { color: var(--text); }
+    .footer-credit a { color: #7c3aed; text-decoration: none; }
+    .footer-credit a:hover { text-decoration: underline; }
+    .footer-copy { font-size: 10px; color: var(--muted); opacity: .6; margin: 0; }
+    .footer-right { font-size: 11px; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -478,7 +532,7 @@
 <header>
   <div>
     <div class="brand-title">Knowledge Graph<span class="dot">.</span></div>
-    <div class="brand-sub">LLM Wiki — force-directed concept map · Curated by Saqlain</div>
+    <div class="brand-sub">HHRI Research Wiki — force-directed concept map · Curated by Saqlain</div>
   </div>
 
   <nav class="site-nav">
@@ -525,6 +579,7 @@
     </div>
     <div id="panel-title"></div>
     <div id="panel-tags"></div>
+    <div id="panel-actions"></div>
   </div>
   <div id="panel-body"></div>
 </div>
@@ -717,12 +772,15 @@ function showTooltip(event, d) {
   const citPart  = d.citation_count
     ? `📚 ${fmtCit(d.citation_count)} citations — sized by academic impact`
     : `⬅ ${d.inCount} wiki backlink${d.inCount !== 1 ? 's' : ''} — sized by local graph density`;
+  const tldrShort = d.tldr ? d.tldr.slice(0, 100) + (d.tldr.length > 100 ? '…' : '') : '';
+  const arxivPart = d.arxiv ? `<div class="tt-arxiv">📄 arxiv.org/abs/${esc(d.arxiv)}</div>` : '';
 
   tooltip.innerHTML = `
     <div class="tt-title">${esc(d.title)}</div>
-    ${yearPart ? `<div class="tt-meta">${yearPart}</div>` : ''}
-    <div class="tt-citations">${citPart}</div>
-    ${d.tldr ? `<div class="tt-tldr">${esc(d.tldr)}</div>` : ''}
+    ${yearPart ? `<div class="tt-meta">${yearPart}${d.citation_count ? ' · ' + fmtCit(d.citation_count) + ' citations' : ''}</div>` : ''}
+    ${tldrShort ? `<div class="tt-tldr">${esc(tldrShort)}</div>` : ''}
+    ${arxivPart}
+    <div class="tt-hint">Click to open details</div>
   `;
   tooltip.style.display = 'block';
   positionTooltip(event);
@@ -764,6 +822,7 @@ async function main() {
     tldr:           n.tldr,
     year:           n.year,
     citation_count: n.citation_count || 0,
+    arxiv:          n.arxiv || '',
     cat:            categorize(n),
     inCount:        inCount[n.id] || 0,
     r:              getNodeRadius(n),
@@ -1068,6 +1127,15 @@ async function main() {
       })
     );
 
+    const panelActions = document.getElementById('panel-actions');
+    if (panelActions) {
+      const arxivBtn = d.arxiv
+        ? `<a class="panel-action-btn primary" href="https://arxiv.org/abs/${esc(d.arxiv)}" target="_blank" rel="noopener">📄 Read on arXiv</a>`
+        : '';
+      const wikiBtn = `<a class="panel-action-btn" href="index.html#${esc(id)}" target="_blank" rel="noopener">🔗 Open in wiki</a>`;
+      panelActions.innerHTML = arxivBtn + wikiBtn;
+    }
+
     panelBody.innerHTML = resolveWikilinks(d.html || '');
     panelBody.querySelectorAll('a.wl').forEach(a =>
       a.addEventListener('click', e => {
@@ -1216,6 +1284,39 @@ async function init() {
 }
 
 init();
+</script>
+
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img src="assets/hhri-logo.png"
+           alt="Hon Hai Research Institute"
+           class="footer-logo"
+           onerror="this.src='assets/hhri-logo.svg';this.onerror=function(){this.style.display='none'}">
+    </div>
+    <div class="footer-center">
+      <p class="footer-credit">
+        Designed by <strong>Artificial Intelligence Research Center</strong><br>
+        <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener">
+          Hon Hai Research Institute
+        </a>
+      </p>
+      <p class="footer-copy">© 2025 Hon Hai Research Institute. Content sourced from academic papers. MIT License.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-stats" id="footer-stats"></p>
+    </div>
+  </div>
+</footer>
+<script>
+fetch('notes.json')
+  .then(r => r.json())
+  .then(notes => {
+    const papers   = notes.filter(n => !n.tags?.includes('glossary')).length;
+    const concepts = notes.filter(n =>  n.tags?.includes('glossary')).length;
+    const el = document.getElementById('footer-stats');
+    if (el) el.innerHTML = `${notes.length} notes · ${papers} papers · ${concepts} concepts`;
+  }).catch(() => {});
 </script>
 </body>
 </html>

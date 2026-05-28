@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LLM Wiki</title>
+  <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
+  <title>HHRI Research Wiki</title>
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "37b0ea0ace544dc89dc44237601d4a92"}'></script>
+  <!-- End Cloudflare Web Analytics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -1501,6 +1506,57 @@
       overflow: hidden;
     }
 
+    /* ── COMPARE TABLE (enhanced mode) ─────────────────────────────── */
+    .cmp-mode-wrap {
+      display: flex; gap: 4px; align-items: center; flex: 1; justify-content: center;
+    }
+    .cmp-mode-btn {
+      font-size: .72rem; padding: 4px 11px; border-radius: 6px;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--muted); cursor: pointer; transition: all .15s;
+    }
+    .cmp-mode-btn.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+    .cmp-mode-btn:hover:not(.active) { background: var(--surface2); color: var(--text); }
+
+    #compare-key-diffs {
+      padding: 7px 20px; font-size: .76rem; color: var(--muted);
+      border-bottom: 1px solid var(--border); display: none;
+      background: var(--surface2);
+    }
+    #compare-key-diffs.show { display: block; }
+    #compare-key-diffs strong { color: #7c3aed; }
+
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table {
+      width: 100%; border-collapse: collapse; font-size: .82rem;
+    }
+    .compare-table th {
+      padding: 12px 16px; text-align: left;
+      font-size: .82rem; font-weight: 700; color: var(--text);
+      border-bottom: 2px solid var(--border);
+      background: var(--surface); position: sticky; top: 0; z-index: 2;
+    }
+    .compare-table th.cmp-lbl-th {
+      font-size: .62rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .07em; min-width: 130px; max-width: 155px;
+      background: var(--surface2); font-weight: 600;
+    }
+    .compare-table td {
+      padding: 9px 16px; vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted); line-height: 1.55;
+    }
+    .compare-table td.cmp-label {
+      font-size: .62rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; background: var(--surface2);
+      color: var(--muted); white-space: nowrap; vertical-align: middle;
+    }
+    .compare-table td.cmp-label.diff { color: #7c3aed; }
+    .compare-table tbody tr.cmp-alt-row td:not(.cmp-label) { background: var(--surface); }
+    .compare-table tbody tr:not(.cmp-alt-row) td:not(.cmp-label) { background: var(--bg); }
+
     /* ── MOBILE ──────────────────────────────────────────────────────── */
     @media (max-width: 720px) {
       header { padding: 0 16px; flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 10px; }
@@ -1528,6 +1584,35 @@
       #timeline-wrap { padding: 12px 16px; }
       .tl-col { width: 140px; }
     }
+
+    /* ── FOOTER ─────────────────────────────────────────────────────── */
+    #site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      margin-top: 48px;
+      background: var(--surface);
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
+    }
+    .footer-logo { height: 40px; width: auto; opacity: .85; }
+    .footer-credit {
+      font-size: 13px; color: var(--muted); text-align: center;
+      margin: 0 0 4px; line-height: 1.6;
+    }
+    .footer-credit strong { color: var(--text); }
+    .footer-credit a { color: #7c3aed; text-decoration: none; }
+    .footer-credit a:hover { text-decoration: underline; }
+    .footer-copy {
+      font-size: 11px; color: var(--muted); opacity: .7;
+      text-align: center; margin: 0;
+    }
+    .footer-right { font-size: 12px; color: var(--muted); text-align: right; }
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-right { text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -1535,8 +1620,8 @@
 <!-- ── HEADER ────────────────────────────────────────────────────────────── -->
 <header>
   <div class="brand">
-    <div class="brand-title">LLM Wiki<span class="dot">.</span></div>
-    <div class="brand-sub">AI research knowledge base — papers, concepts &amp; intuitions · Curated by Saqlain</div>
+    <div class="brand-title">HHRI Research Wiki<span class="dot">.</span></div>
+    <div class="brand-sub">AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute</div>
   </div>
 
   <nav class="site-nav">
@@ -1687,8 +1772,13 @@
 <div id="compare-panel">
   <div class="compare-panel-hd">
     <div class="compare-panel-title">Comparing papers</div>
+    <div class="cmp-mode-wrap" id="cmp-mode-wrap">
+      <button class="cmp-mode-btn active" data-mode="technical">⊞ Technical</button>
+      <button class="cmp-mode-btn" data-mode="summary">≡ Summary</button>
+    </div>
     <button class="compare-close-btn" id="compare-panel-close">✕ Close</button>
   </div>
+  <div id="compare-key-diffs"></div>
   <div class="compare-cols" id="compare-cols"></div>
 </div>
 
@@ -1742,6 +1832,7 @@ let ceSelectedId = null;
 let ceQuery      = '';
 let progressFilter = 'all';
 let compareSet     = new Set(); // up to 3 paper IDs
+let cmpMode        = 'technical'; // 'technical' | 'summary'
 let matchEls       = [];        // current search-highlight <mark> elements
 let matchIdx       = 0;         // active match index
 
@@ -2891,77 +2982,196 @@ function renderCompareTray() {
 }
 
 function renderComparePanel() {
-  const panel = document.getElementById('compare-panel');
-  const cols  = document.getElementById('compare-cols');
-  const ids   = [...compareSet];
+  const panel       = document.getElementById('compare-panel');
+  const cols        = document.getElementById('compare-cols');
+  const keyDiffsEl  = document.getElementById('compare-key-diffs');
+  const ids         = [...compareSet];
+  const colColors   = ['#7c3aed', '#0d9488', '#d97706'];
 
-  const colColors = ['#7c3aed', '#0d9488', '#d97706'];
+  // ── Mode toggle wiring (idempotent) ─────────────────────────────────
+  document.querySelectorAll('.cmp-mode-btn').forEach(btn => {
+    btn.onclick = () => {
+      cmpMode = btn.dataset.mode;
+      document.querySelectorAll('.cmp-mode-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.mode === cmpMode));
+      renderComparePanel();
+    };
+  });
 
-  cols.style.gridTemplateColumns = `repeat(${ids.length}, 1fr)`;
+  // ── Text helpers ─────────────────────────────────────────────────────
+  function htmlToText(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return (d.textContent || '').replace(/\s+/g, ' ').trim();
+  }
 
-  cols.innerHTML = ids.map((id, i) => {
-    const n = byId[id];
-    if (!n) return '';
-    const status = getReadStatus(id);
-    const statusSymbol = statusLabel(status);
-    const blCount = n.backlinks ? n.backlinks.length : 0;
+  function firstSentence(text, max = 200) {
+    if (!text || !text.trim()) return '—';
+    const m = text.trim().match(/^[^.!?]+[.!?]/);
+    const s = m ? m[0].trim() : text.trim().slice(0, max);
+    return s.length > max ? s.slice(0, max) + '…' : s;
+  }
 
-    const wikiLinksHtml = (n.links || [])
-      .filter(lid => byId[lid])
-      .slice(0, 5)
-      .map(lid => `<a href="#" class="backlink-pill" data-noteid="${escAttr(lid)}">${escHtml(byId[lid].title)}</a>`)
-      .join('') || '<span style="color:var(--muted);font-size:.78rem">—</span>';
+  function findSentence(text, keywords, max = 200) {
+    const sentences = text.match(/[^.!?\n]+[.!?]+/g) || [];
+    for (const kw of keywords) {
+      const s = sentences.find(s => s.toLowerCase().includes(kw.toLowerCase()));
+      if (s) { const t = s.trim(); return t.length > max ? t.slice(0, max) + '…' : t; }
+    }
+    return '—';
+  }
 
-    // Extract plain-text excerpt from search_text
-    const excerpt = n.search_text
-      ? n.search_text.slice(0, 500).replace(/\s+/g, ' ')
-      : '';
+  function findAfterHeader(text, headers, max = 200) {
+    const lower = text.toLowerCase();
+    for (const h of headers) {
+      const idx = lower.indexOf(h.toLowerCase());
+      if (idx === -1) continue;
+      const after = text.slice(idx + h.length).replace(/^[\s:#*]+/, '').trim();
+      return firstSentence(after, max);
+    }
+    return '—';
+  }
 
-    return `
-      <div class="compare-col" style="border-color:${colColors[i]}44;border-top:3px solid ${colColors[i]}">
-        <div class="compare-col-hd">
-          <div class="compare-col-title">${escHtml(n.title)}</div>
-          <div class="compare-col-meta">
-            ${n.year ? `<span class="year-badge">${escHtml(n.year)}</span>` : ''}
-            ${n.citation_count ? `<span class="citation-badge">📚 ${fmtCit(n.citation_count)}</span>` : ''}
-            <span class="status-badge ${status}" style="width:20px;height:20px;font-size:.78rem">${statusSymbol}</span>
-            ${blCount > 0 ? `<span class="backlink-badge">← ${blCount}</span>` : ''}
-          </div>
-        </div>
-        <div class="compare-col-body">
-          <div class="compare-row-label">TL;DR</div>
-          <div class="compare-row-val">${escHtml(n.tldr || 'No summary.')}</div>
+  // ── Field extractor ─────────────────────────────────────────────────
+  function extractField(n, fieldKey) {
+    const raw = htmlToText(n.html || '');
+    switch (fieldKey) {
+      case 'core_innovation':
+        if (n.tldr) return n.tldr.slice(0, 220);
+        return findAfterHeader(raw, ['## Core Idea', '## TL;DR', '## What Is', '## Overview', '## Introduction']);
 
-          <div class="compare-row-label">Themes</div>
-          <div class="compare-row-val">
-            ${n.tags.slice(0, 5).map(t => `<span class="tag" style="cursor:default">${escHtml(t)}</span>`).join(' ')}
-          </div>
+      case 'architecture': {
+        const archMap = { ssm:'SSM', transformer:'Transformer', hybrid:'Hybrid', rnn:'RNN',
+          moe:'MoE', mamba:'Mamba (SSM)', attention:'Attention', diffusion:'Diffusion', rl:'RL', 'state-space':'SSM' };
+        const found = n.tags.map(t => archMap[t.toLowerCase()]).filter(Boolean);
+        if (found.length > 0) return [...new Set(found)].join(' + ');
+        return findSentence(raw, ['architecture', 'model is', 'designed as'], 120);
+      }
 
-          <div class="compare-row-label">Year · Citations</div>
-          <div class="compare-row-val">${n.year || '—'} · ${n.citation_count ? fmtCit(n.citation_count) + ' citations' : 'no data'}</div>
+      case 'complexity':
+        return findSentence(raw, ['O(n²)', 'O(n^2)', 'O(n log n)', 'O(n)', 'quadratic', 'linear time', 'subquadratic']);
 
-          <div class="compare-row-label">Wiki links (outgoing)</div>
-          <div class="compare-row-val">${wikiLinksHtml}</div>
+      case 'formula': {
+        const lines = raw.split('\n');
+        const line = lines.find(l =>
+          /O\(n[²2]?\)|softmax|log P|attn|∑|∫|δ|α|β|σ/.test(l) ||
+          (/=/.test(l) && l.length < 120 && /[A-Z][a-z]/.test(l))
+        );
+        return line ? line.trim().slice(0, 160) : '—';
+      }
 
-          <div class="compare-row-label">Body excerpt</div>
-          <div class="compare-excerpt">${escHtml(excerpt)}</div>
-        </div>
-      </div>`;
+      case 'benchmark':
+        return findSentence(raw, ['%', '×', 'throughput', 'speedup', 'state of the art', 'outperforms', 'sota', 'surpasses', 'achieves', 'beats']);
+
+      case 'hardware':
+        return findSentence(raw, ['H100', 'A100', 'GPU', 'HBM', 'SRAM', 'CUDA', 'TPU', 'hardware-aware', 'memory bandwidth', 'memory-efficient']);
+
+      case 'limitations':
+        return findAfterHeader(raw, ['## Limitations', '## Weaknesses', '## Downsides', '## Drawbacks', '## Challenges', '## Caveats']);
+
+      case 'vs_transformer': {
+        const sents = raw.match(/[^.!?\n]+[.!?]+/g) || [];
+        const s = sents.find(s => {
+          const sl = s.toLowerCase();
+          return sl.includes('transformer') &&
+            (sl.includes('better') || sl.includes('faster') || sl.includes('unlike') ||
+             sl.includes('compared') || sl.includes('instead of') || sl.includes('replaces') || sl.includes('advantage'));
+        });
+        return s ? (s.trim().length > 200 ? s.trim().slice(0, 200) + '…' : s.trim()) : '—';
+      }
+
+      case 'year_citations': {
+        const cc = n.citation_count ? fmtCit(n.citation_count) + ' citations' : 'no data';
+        return `${n.year || '—'} · ${cc}`;
+      }
+
+      case 'reading_status': {
+        const st = getReadStatus(n.id);
+        return st === 'done' ? '✓ Done' : st === 'reading' ? '◑ Reading' : '○ Unread';
+      }
+
+      case '_tags':
+        return n.tags.slice(0, 6).join(', ') || '—';
+
+      default: return '—';
+    }
+  }
+
+  // ── Field definitions ────────────────────────────────────────────────
+  const TECH_FIELDS = [
+    { key:'core_innovation', label:'Core Innovation' },
+    { key:'architecture',    label:'Architecture Type' },
+    { key:'complexity',      label:'Sequence Complexity' },
+    { key:'formula',         label:'Key Formula / Mechanism' },
+    { key:'benchmark',       label:'Best Benchmark Result' },
+    { key:'hardware',        label:'Hardware Requirement' },
+    { key:'limitations',     label:'Limitations' },
+    { key:'vs_transformer',  label:'vs Transformer' },
+    { key:'year_citations',  label:'Year & Citations' },
+    { key:'reading_status',  label:'Reading Status' },
+  ];
+  const SUMM_FIELDS = [
+    { key:'core_innovation', label:'TL;DR' },
+    { key:'year_citations',  label:'Year & Citations' },
+    { key:'_tags',           label:'Tags' },
+    { key:'reading_status',  label:'Reading Status' },
+  ];
+
+  const papers = ids.map(id => byId[id]).filter(Boolean);
+  const activeFields = cmpMode === 'summary' ? SUMM_FIELDS : TECH_FIELDS;
+
+  // Extract all values and detect differences
+  const fieldData = activeFields.map(f => {
+    const values = papers.map(n => extractField(n, f.key));
+    const nonDash = values.filter(v => v !== '—');
+    const differs = nonDash.length > 1 && nonDash.some(v => v !== nonDash[0]);
+    return { ...f, values, differs };
+  });
+
+  // Key differences banner (technical mode only)
+  if (cmpMode === 'technical') {
+    const diffLabels = fieldData
+      .filter(f => f.differs && f.key !== 'reading_status' && f.key !== 'year_citations')
+      .map(f => f.label);
+    if (diffLabels.length > 0) {
+      keyDiffsEl.innerHTML = `<strong>Key differences:</strong> ${diffLabels.join(', ')}`;
+      keyDiffsEl.classList.add('show');
+    } else {
+      keyDiffsEl.classList.remove('show');
+    }
+  } else {
+    keyDiffsEl.classList.remove('show');
+  }
+
+  // ── Build HTML table ─────────────────────────────────────────────────
+  const headerCells = papers.map((n, i) =>
+    `<th style="border-top:3px solid ${colColors[i]};color:${colColors[i]}">${escHtml(n.title)}</th>`
+  ).join('');
+
+  const bodyRows = fieldData.map((fd, ri) => {
+    const labelClass = 'cmp-label' + (fd.differs ? ' diff' : ' same');
+    const valueCells = fd.values.map((v, ci) => {
+      if (fd.key === '_tags') {
+        const tagHtml = papers[ci].tags.slice(0, 6)
+          .map(t => `<span class="tag" style="cursor:default;font-size:.7rem;padding:2px 7px">${escHtml(t)}</span>`)
+          .join(' ');
+        return `<td>${tagHtml}</td>`;
+      }
+      return `<td>${escHtml(v)}</td>`;
+    }).join('');
+    const rowClass = ri % 2 !== 0 ? ' class="cmp-alt-row"' : '';
+    return `<tr${rowClass}><td class="${labelClass}">${escHtml(fd.label)}</td>${valueCells}</tr>`;
   }).join('');
 
-  // Wire wikilinks inside comparison panel
-  cols.querySelectorAll('a.backlink-pill[data-noteid]').forEach(a =>
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      renderComparePanel(); // re-render won't close; just open note after closing panel
-      document.getElementById('compare-panel').classList.remove('show');
-      activeTab = 'all';
-      document.querySelectorAll('.tab-btn').forEach(b =>
-        b.classList.toggle('active', b.dataset.tab === 'all'));
-      render();
-      openNote(a.dataset.noteid);
-    })
-  );
+  cols.innerHTML = `<div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead><tr>
+        <th class="cmp-lbl-th">Attribute</th>
+        ${headerCells}
+      </tr></thead>
+      <tbody>${bodyRows}</tbody>
+    </table>
+  </div>`;
 
   panel.classList.add('show');
 }
@@ -3070,6 +3280,39 @@ document.getElementById('compare-panel-close').addEventListener('click', () => {
 
 setupTheme();
 init();
+</script>
+
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img src="assets/hhri-logo.png"
+           alt="Hon Hai Research Institute"
+           class="footer-logo"
+           onerror="this.src='assets/hhri-logo.svg';this.onerror=function(){this.style.display='none'}">
+    </div>
+    <div class="footer-center">
+      <p class="footer-credit">
+        Designed by <strong>Artificial Intelligence Research Center</strong><br>
+        <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener">
+          Hon Hai Research Institute
+        </a>
+      </p>
+      <p class="footer-copy">© 2025 Hon Hai Research Institute. Content sourced from academic papers. MIT License.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-stats" id="footer-stats"></p>
+    </div>
+  </div>
+</footer>
+<script>
+fetch('notes.json')
+  .then(r => r.json())
+  .then(notes => {
+    const papers   = notes.filter(n => !n.tags?.includes('glossary')).length;
+    const concepts = notes.filter(n =>  n.tags?.includes('glossary')).length;
+    const el = document.getElementById('footer-stats');
+    if (el) el.innerHTML = `${notes.length} notes · ${papers} papers · ${concepts} concepts`;
+  }).catch(() => {});
 </script>
 </body>
 </html>

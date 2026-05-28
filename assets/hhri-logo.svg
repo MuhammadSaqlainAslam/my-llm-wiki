@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="140" height="44" viewBox="0 0 140 44">
+  <rect width="140" height="44" rx="6"
+        fill="#7c3aed" opacity="0.08"/>
+  <rect x="1" y="1" width="138" height="42" rx="5"
+        fill="none" stroke="#7c3aed"
+        stroke-width="0.5" opacity="0.3"/>
+  <text x="70" y="16" text-anchor="middle"
+        font-size="9" fill="#7c3aed"
+        font-family="system-ui,-apple-system,sans-serif"
+        font-weight="700" letter-spacing="0.5">
+    HON HAI RESEARCH
+  </text>
+  <line x1="20" y1="22" x2="120" y2="22"
+        stroke="#7c3aed" stroke-width="0.4"
+        opacity="0.3"/>
+  <text x="70" y="33" text-anchor="middle"
+        font-size="8" fill="#7c3aed"
+        font-family="system-ui,-apple-system,sans-serif"
+        letter-spacing="1">
+    INSTITUTE
+  </text>
+</svg>
