@@ -1600,74 +1600,25 @@
       max-width: 1200px; margin: 0 auto;
       display: flex; justify-content: center; align-items: flex-start;
     }
-    /* ── VISITOR TRACKING ───────────────────────────────────────────── */
-    .visitor-map-wrap { width: 100%; }
-    .world-map-container {
-      position: relative; background: var(--bg);
-      border: 0.5px solid var(--border); border-radius: 8px;
-      padding: 16px; margin-bottom: 16px; overflow: hidden;
+    /* ── FLAG COUNTER ────────────────────────────────────────────────── */
+    .flag-counter-wrap {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
     }
-    .world-map-svg { width: 100%; height: auto; max-height: 300px; }
-    .map-country {
-      fill: var(--surface2); stroke: var(--surface); stroke-width: 1;
-      transition: fill 0.3s ease; cursor: pointer;
+    [data-theme="dark"] .flag-counter-wrap { background: #161b22; border-color: #30363d; }
+    [data-theme="light"] .flag-counter-wrap { background: #f6f8fa; border-color: #d0d7de; }
+    .flag-counter-img {
+      cursor: default; pointer-events: none;
+      max-width: 100%; height: auto;
+      border-radius: 6px; display: block; margin: 0 auto;
     }
-    .map-country:hover { fill: rgba(124,58,237,.33); stroke: #7c3aed; }
-    .map-visited { fill: #7c3aed; stroke: #5b21b6; }
-    .map-tooltip {
-      position: absolute; background: var(--surface);
-      border: 0.5px solid var(--border); border-radius: 6px;
-      padding: 6px 10px; font-size: 12px; color: var(--text);
-      pointer-events: none; white-space: nowrap;
-      top: 12px; right: 12px; display: flex; gap: 8px; align-items: center;
-    }
-    .map-loading {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; padding: 20px; font-size: 13px; color: var(--muted);
-    }
-    .map-spinner {
-      width: 16px; height: 16px;
-      border: 2px solid var(--border); border-top-color: #7c3aed;
-      border-radius: 50%; animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .your-location {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 12px; color: var(--muted); margin-top: 8px;
-      padding: 6px 10px; background: var(--surface); border-radius: 6px;
-      border: 0.5px solid rgba(124,58,237,.2);
-    }
-    .location-dot {
-      width: 8px; height: 8px; background: #7c3aed;
-      border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0;
-    }
-    @keyframes pulse {
-      0%,100% { opacity:1; transform:scale(1); }
-      50% { opacity:.5; transform:scale(1.3); }
-    }
-    .country-rank-list { margin-bottom: 12px; }
-    .rank-row {
-      display: flex; align-items: center; gap: 8px; padding: 6px 0;
-      border-bottom: 0.5px solid var(--border);
-    }
-    .rank-row:last-child { border-bottom: none; }
-    .rank-num { font-size: 11px; color: var(--muted); width: 18px; flex-shrink: 0; text-align: right; }
-    .rank-flag { font-size: 18px; flex-shrink: 0; line-height: 1; }
-    .rank-name {
-      font-size: 13px; color: var(--text); flex: 1; min-width: 0;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .rank-bar-track { width: 80px; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
-    .rank-bar-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #0d9488); border-radius: 3px; transition: width .5s ease; }
-    .rank-visits { font-size: 12px; color: var(--text); font-weight: 500; width: 32px; text-align: right; flex-shrink: 0; }
-    .rank-pct { font-size: 11px; color: var(--muted); width: 32px; text-align: right; flex-shrink: 0; }
-    .rank-loading, .rank-empty { font-size: 12px; color: var(--muted); font-style: italic; text-align: center; padding: 12px; }
-    .visitor-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-top: 0.5px solid var(--border); margin-top: 4px;
-    }
-    .visitor-total-label { font-size: 12px; color: var(--muted); }
-    .visitor-total-num { font-size: 20px; font-weight: 700; color: #7c3aed; }
     @media (max-width: 600px) {
       #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
     }
@@ -3443,105 +3394,12 @@ init();
 
 <section id="visitor-countries">
   <div class="visitor-inner">
-    <div class="visitor-map-wrap">
-
-      <!-- SVG World Map -->
-      <div class="world-map-container" id="world-map-container">
-        <div class="map-loading" id="map-loading">
-          <div class="map-spinner"></div>
-          <p>Detecting your location…</p>
-        </div>
-        <svg id="world-map" viewBox="0 0 1000 500"
-             xmlns="http://www.w3.org/2000/svg" class="world-map-svg">
-          <!-- North America -->
-          <path id="country-US" class="map-country" data-country="United States"
-            d="M150,140 L280,140 L290,180 L270,220 L200,230 L160,200 L140,170 Z"/>
-          <path id="country-CA" class="map-country" data-country="Canada"
-            d="M150,80 L290,80 L290,140 L150,140 Z"/>
-          <path id="country-MX" class="map-country" data-country="Mexico"
-            d="M160,220 L250,220 L240,260 L180,260 Z"/>
-          <!-- South America -->
-          <path id="country-BR" class="map-country" data-country="Brazil"
-            d="M230,270 L310,260 L320,340 L260,370 L220,340 Z"/>
-          <!-- Europe -->
-          <path id="country-GB" class="map-country" data-country="United Kingdom"
-            d="M440,110 L455,110 L458,130 L440,132 Z"/>
-          <path id="country-DE" class="map-country" data-country="Germany"
-            d="M460,115 L480,115 L482,135 L460,135 Z"/>
-          <path id="country-FR" class="map-country" data-country="France"
-            d="M445,130 L468,128 L470,152 L445,152 Z"/>
-          <path id="country-NL" class="map-country" data-country="Netherlands"
-            d="M455,110 L470,110 L470,118 L455,118 Z"/>
-          <path id="country-SE" class="map-country" data-country="Sweden"
-            d="M470,70 L485,68 L487,108 L470,110 Z"/>
-          <path id="country-CH" class="map-country" data-country="Switzerland"
-            d="M460,148 L478,148 L478,160 L460,160 Z"/>
-          <path id="country-IT" class="map-country" data-country="Italy"
-            d="M465,155 L480,152 L485,185 L470,188 Z"/>
-          <path id="country-ES" class="map-country" data-country="Spain"
-            d="M430,148 L462,148 L462,170 L430,170 Z"/>
-          <path id="country-PL" class="map-country" data-country="Poland"
-            d="M480,108 L500,106 L502,128 L480,130 Z"/>
-          <path id="country-RU" class="map-country" data-country="Russia"
-            d="M500,60 L750,55 L755,130 L500,135 Z"/>
-          <path id="country-TR" class="map-country" data-country="Turkey"
-            d="M510,155 L570,152 L572,175 L510,178 Z"/>
-          <!-- Middle East -->
-          <path id="country-AE" class="map-country" data-country="United Arab Emirates"
-            d="M590,185 L615,183 L617,200 L590,201 Z"/>
-          <!-- Asia -->
-          <path id="country-CN" class="map-country" data-country="China"
-            d="M680,130 L790,125 L800,185 L760,210 L680,200 L665,170 Z"/>
-          <path id="country-JP" class="map-country" data-country="Japan"
-            d="M800,130 L818,128 L822,160 L804,162 Z"/>
-          <path id="country-KR" class="map-country" data-country="South Korea"
-            d="M782,148 L798,146 L800,165 L782,166 Z"/>
-          <path id="country-IN" class="map-country" data-country="India"
-            d="M650,170 L700,165 L710,220 L670,235 L640,210 Z"/>
-          <path id="country-TW" class="map-country" data-country="Taiwan"
-            d="M790,178 L800,176 L802,190 L790,191 Z"/>
-          <path id="country-SG" class="map-country" data-country="Singapore"
-            d="M730,250 L738,250 L739,257 L730,257 Z"/>
-          <path id="country-TH" class="map-country" data-country="Thailand"
-            d="M710,210 L730,208 L732,238 L710,240 Z"/>
-          <path id="country-VN" class="map-country" data-country="Vietnam"
-            d="M730,195 L748,192 L750,235 L730,238 Z"/>
-          <path id="country-MY" class="map-country" data-country="Malaysia"
-            d="M718,238 L748,236 L750,252 L718,254 Z"/>
-          <path id="country-PH" class="map-country" data-country="Philippines"
-            d="M780,200 L800,198 L802,230 L780,232 Z"/>
-          <path id="country-ID" class="map-country" data-country="Indonesia"
-            d="M730,258 L820,255 L822,278 L730,280 Z"/>
-          <path id="country-HK" class="map-country" data-country="Hong Kong"
-            d="M780,192 L790,191 L791,198 L780,198 Z"/>
-          <!-- Africa -->
-          <path id="country-ZA" class="map-country" data-country="South Africa"
-            d="M490,340 L530,338 L532,375 L490,376 Z"/>
-          <!-- Oceania -->
-          <path id="country-AU" class="map-country" data-country="Australia"
-            d="M760,300 L860,295 L865,365 L760,368 Z"/>
-        </svg>
-        <div class="map-tooltip" id="map-tooltip" style="display:none">
-          <span id="tooltip-country"></span>
-          <span id="tooltip-visits"></span>
-        </div>
-        <div class="your-location" id="your-location" style="display:none">
-          <span class="location-dot"></span>
-          <span id="your-country-text"></span>
-        </div>
-      </div>
-
-      <!-- Country rank list -->
-      <div class="country-rank-list" id="country-rank-list">
-        <p class="rank-loading">Loading visitor data…</p>
-      </div>
-
-      <!-- Total counter -->
-      <div class="visitor-total-row">
-        <span class="visitor-total-label">Total visits tracked</span>
-        <span class="visitor-total-num" id="visitor-total-num">0</span>
-      </div>
-
+    <div class="flag-counter-wrap">
+      <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
+           alt="Visitors by Country"
+           class="flag-counter-img"
+           border="0"
+           onerror="this.parentElement.style.display='none'">
     </div>
   </div>
 </section>
@@ -3581,134 +3439,6 @@ fetch('notes.json')
     const el = document.getElementById('footer-stats');
     if (el) el.innerHTML = `${notes.length} notes · ${papers} papers · ${concepts} concepts`;
   }).catch(() => {});
-</script>
-<script>
-// ── VISITOR TRACKING SYSTEM ────────────────────────────────────────────────
-const VIS_KEY = 'hhri-wiki-visitors-v2';
-
-const COUNTRY_FLAGS = {
-  'Taiwan':'🇹🇼','United States':'🇺🇸','Japan':'🇯🇵','China':'🇨🇳',
-  'South Korea':'🇰🇷','United Kingdom':'🇬🇧','Germany':'🇩🇪','France':'🇫🇷',
-  'Singapore':'🇸🇬','India':'🇮🇳','Australia':'🇦🇺','Canada':'🇨🇦',
-  'Brazil':'🇧🇷','Mexico':'🇲🇽','United Arab Emirates':'🇦🇪','South Africa':'🇿🇦',
-  'Netherlands':'🇳🇱','Sweden':'🇸🇪','Italy':'🇮🇹','Spain':'🇪🇸',
-  'Russia':'🇷🇺','Poland':'🇵🇱','Turkey':'🇹🇷','Indonesia':'🇮🇩',
-  'Thailand':'🇹🇭','Vietnam':'🇻🇳','Malaysia':'🇲🇾','Philippines':'🇵🇭',
-  'Hong Kong':'🇭🇰','Switzerland':'🇨🇭',
-};
-
-function loadVisitorData() {
-  try { return JSON.parse(localStorage.getItem(VIS_KEY)) || { countries:{}, total:0 }; }
-  catch { return { countries:{}, total:0 }; }
-}
-
-function saveVisitorData(data) {
-  try { localStorage.setItem(VIS_KEY, JSON.stringify(data)); } catch(e) {}
-}
-
-async function detectAndRecordVisitor() {
-  if (sessionStorage.getItem('vis-recorded')) return loadVisitorData();
-  try {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 5000);
-    const res = await fetch('https://ipapi.co/json/', { signal: ctrl.signal });
-    clearTimeout(tid);
-    const geo = await res.json();
-    const country = geo.country_name || 'Unknown';
-    const data = loadVisitorData();
-    data.countries[country] = (data.countries[country] || 0) + 1;
-    data.total = (data.total || 0) + 1;
-    saveVisitorData(data);
-    sessionStorage.setItem('vis-recorded', '1');
-    sessionStorage.setItem('vis-country', country);
-    return data;
-  } catch(e) {
-    return loadVisitorData();
-  }
-}
-
-function highlightMapCountry(countryName, visits) {
-  document.querySelectorAll('.map-country').forEach(path => {
-    if (path.dataset.country === countryName) {
-      path.classList.add('map-visited');
-      const intensity = Math.min(visits / 20, 1);
-      const r = Math.round(124 + intensity * 60);
-      const g = Math.round(58  - intensity * 20);
-      const b = Math.round(237 - intensity * 100);
-      path.style.fill = `rgb(${r},${g},${b})`;
-    }
-  });
-}
-
-function renderCountryRankList(data) {
-  const list = document.getElementById('country-rank-list');
-  if (!list) return;
-  const sorted = Object.entries(data.countries).sort((a,b) => b[1]-a[1]).slice(0,15);
-  if (!sorted.length) {
-    list.innerHTML = '<p class="rank-empty">Be the first visitor! Your country will appear here.</p>';
-    return;
-  }
-  const maxV = sorted[0][1];
-  list.innerHTML = sorted.map(([country, visits], i) => {
-    const flag = COUNTRY_FLAGS[country] || '🌍';
-    const pct  = Math.round(visits / data.total * 100);
-    const barW = Math.round(visits / maxV * 100);
-    return `<div class="rank-row">
-      <span class="rank-num">${i+1}</span>
-      <span class="rank-flag">${flag}</span>
-      <span class="rank-name">${country}</span>
-      <div class="rank-bar-track"><div class="rank-bar-fill" style="width:${barW}%"></div></div>
-      <span class="rank-visits">${visits.toLocaleString()}</span>
-      <span class="rank-pct">${pct}%</span>
-    </div>`;
-  }).join('');
-  const tot = document.getElementById('visitor-total-num');
-  if (tot) tot.textContent = data.total.toLocaleString();
-}
-
-function renderWorldMap(data) {
-  Object.entries(data.countries).forEach(([country, visits]) =>
-    highlightMapCountry(country, visits));
-  document.querySelectorAll('.map-country').forEach(path => {
-    path.addEventListener('mouseenter', () => {
-      const tt = document.getElementById('map-tooltip');
-      const country = path.dataset.country;
-      const visits = data.countries[country];
-      if (tt && visits) {
-        document.getElementById('tooltip-country').textContent =
-          `${COUNTRY_FLAGS[country]||'🌍'} ${country}`;
-        document.getElementById('tooltip-visits').textContent =
-          `${visits} visit${visits>1?'s':''}`;
-        tt.style.display = 'flex';
-      }
-    });
-    path.addEventListener('mouseleave', () => {
-      const tt = document.getElementById('map-tooltip');
-      if (tt) tt.style.display = 'none';
-    });
-  });
-}
-
-function showYourLocation(country) {
-  const el   = document.getElementById('your-location');
-  const text = document.getElementById('your-country-text');
-  if (el && text && country) {
-    text.textContent = `You are visiting from ${COUNTRY_FLAGS[country]||'🌍'} ${country}`;
-    el.style.display = 'flex';
-  }
-}
-
-async function initVisitorTracking() {
-  const data = await detectAndRecordVisitor();
-  const loading = document.getElementById('map-loading');
-  if (loading) loading.style.display = 'none';
-  renderWorldMap(data);
-  renderCountryRankList(data);
-  const myCountry = sessionStorage.getItem('vis-country');
-  if (myCountry) showYourLocation(myCountry);
-}
-
-document.addEventListener('DOMContentLoaded', initVisitorTracking);
 </script>
 </body>
 </html>
