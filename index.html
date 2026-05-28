@@ -1585,6 +1585,68 @@
       .tl-col { width: 140px; }
     }
 
+    /* ── VISITOR COUNTER ────────────────────────────────────────────── */
+    #visitor-countries {
+      border-top: 1px solid var(--border);
+      padding: 32px;
+      background: var(--surface);
+    }
+    .visitor-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap;
+    }
+    .visitor-flag-col {
+      flex: 0 0 auto;
+    }
+    .visitor-flag-col img {
+      display: block; border: 1px solid var(--border); border-radius: 4px;
+    }
+    .visitor-stats-col {
+      flex: 1 1 280px;
+    }
+    .visitor-stats-hd {
+      font-size: 13px; font-weight: 600; color: var(--text);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .visitor-stats-hd span { color: var(--muted); font-weight: 400; font-size: 12px; }
+    .visitor-country-list {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+    }
+    .visitor-country-chip {
+      font-size: 12px; padding: 3px 9px; border-radius: 12px;
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border); white-space: nowrap;
+    }
+    .visitor-edit-btn {
+      font-size: 11px; color: var(--muted); background: none;
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 3px 8px; cursor: pointer; margin-top: 4px;
+    }
+    .visitor-edit-btn:hover { color: var(--text); border-color: var(--accent); }
+    .visitor-edit-area {
+      margin-top: 10px; display: none;
+    }
+    .visitor-edit-area.open { display: block; }
+    .visitor-edit-area textarea {
+      width: 100%; min-height: 80px; font-size: 12px; font-family: monospace;
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px; resize: vertical;
+    }
+    .visitor-edit-actions { display: flex; gap: 8px; margin-top: 6px; }
+    .visitor-save-btn {
+      font-size: 12px; padding: 4px 12px; border-radius: 4px; cursor: pointer;
+      background: var(--accent); color: #fff; border: none;
+    }
+    .visitor-save-btn:hover { opacity: .85; }
+    .visitor-cancel-btn {
+      font-size: 12px; padding: 4px 12px; border-radius: 4px; cursor: pointer;
+      background: none; color: var(--muted); border: 1px solid var(--border);
+    }
+    .visitor-cancel-btn:hover { color: var(--text); }
+    @media (max-width: 600px) {
+      .visitor-inner { flex-direction: column; }
+    }
+
     /* ── FOOTER ─────────────────────────────────────────────────────── */
     #site-footer {
       border-top: 1px solid var(--border);
@@ -3077,11 +3139,23 @@ function renderComparePanel() {
         return findSentence(raw, ['H100', 'A100', 'GPU', 'HBM', 'SRAM', 'CUDA', 'TPU', 'hardware-aware', 'memory bandwidth', 'memory-efficient']);
 
       case 'limitations': {
+        // Strategy 1: heading in HTML (most reliable — actual section)
+        const htmlHeadMatch = (n.html || '').match(/<h[23][^>]*>\s*(?:Limitations?|Weaknesses?|Drawbacks?|Downsides?|Challenges?|Caveats?)\s*<\/h[23]>\s*([\s\S]{20,400}?)(?=<h[123]|$)/i);
+        if (htmlHeadMatch) {
+          const snippet = htmlToText(htmlHeadMatch[1]).replace(/\s+/g, ' ').trim();
+          if (snippet.length > 10) return firstSentence(snippet, 200);
+        }
+        // Strategy 2: bare heading in stripped text (second-pass findAfterHeader)
         const limHead = findAfterHeader(raw, ['## Limitations', '## Weaknesses', '## Downsides', '## Drawbacks', '## Challenges', '## Caveats']);
         if (limHead !== '—') return limHead;
-        // Fallback: sentence containing weakness/drawback/limitation keywords
-        const limKw = findSentence(raw, ['weakness', 'drawback', 'downside', 'limitation', 'however,', 'but does not', 'does not handle', 'struggle']);
-        return limKw;
+        // Strategy 3: keyword patterns
+        const limKw = findSentence(raw, ['does not scale', 'cannot handle', 'fails to', 'limited by', 'weakness', 'drawback', 'downside', 'limitation', 'struggle', 'but does not', 'does not handle', 'however,']);
+        if (limKw !== '—') return limKw;
+        // Strategy 4: tag-based hints
+        if (n.tags?.includes('attention') || n.tags?.includes('transformer')) return 'Quadratic O(n²) attention cost limits long-context efficiency.';
+        if (n.tags?.includes('ssm') || n.tags?.includes('mamba')) return 'Selective recall may miss fine-grained token interactions vs. full attention.';
+        if (n.tags?.includes('moe')) return 'Load imbalance and communication overhead between experts.';
+        return '—';
       }
 
       case 'vs_transformer': {
@@ -3196,18 +3270,26 @@ function renderComparePanel() {
 
 // ── KaTeX renderer ───────────────────────────────────────────────────────
 function renderMath(el) {
-  if (typeof renderMathInElement !== 'function') return;
-  renderMathInElement(el, {
-    delimiters: [
-      { left: '$$', right: '$$', display: true  },
-      { left: '$',  right: '$',  display: false },
-      { left: '\\(', right: '\\)', display: false },
-      { left: '\\[', right: '\\]', display: true  }
-    ],
-    throwOnError: false,
-    errorColor: '#cc0000',
-    strict: false
-  });
+  if (typeof renderMathInElement === 'undefined') {
+    setTimeout(() => renderMath(el), 500);
+    return;
+  }
+  try {
+    renderMathInElement(el, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true  },
+        { left: '$',  right: '$',  display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true  }
+      ],
+      throwOnError: false,
+      errorColor: '#cc0000',
+      strict: false,
+      trust: true
+    });
+  } catch(e) {
+    console.warn('KaTeX render error:', e);
+  }
 }
 
 function closePanel() {
@@ -3302,6 +3384,35 @@ setupTheme();
 init();
 </script>
 
+<section id="visitor-countries">
+  <div class="visitor-inner">
+    <div class="visitor-flag-col">
+      <a href="https://info.flagcounter.com/HHRI" target="_blank" rel="noopener">
+        <img src="https://s11.flagcounter.com/count2/HHRI/bg_161b22/txt_8b949e/border_30363d/columns_4/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
+             alt="Flag Counter" width="200">
+      </a>
+    </div>
+    <div class="visitor-stats-col">
+      <div class="visitor-stats-hd">
+        Visitors by country
+        <span id="visitor-last-updated"></span>
+      </div>
+      <div class="visitor-country-list" id="visitor-country-list">
+        <span class="visitor-country-chip" style="color:var(--muted)">No data yet</span>
+      </div>
+      <button class="visitor-edit-btn" onclick="toggleCountryEdit()">✎ Update stats</button>
+      <div class="visitor-edit-area" id="visitor-edit-area">
+        <textarea id="visitor-edit-input"
+          placeholder='One per line: "Taiwan 1,234" or "US 890"'></textarea>
+        <div class="visitor-edit-actions">
+          <button class="visitor-save-btn" onclick="saveCountryStats()">Save</button>
+          <button class="visitor-cancel-btn" onclick="toggleCountryEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer id="site-footer">
   <div class="footer-inner">
     <div class="footer-left">
@@ -3334,6 +3445,61 @@ fetch('notes.json')
     const el = document.getElementById('footer-stats');
     if (el) el.innerHTML = `${notes.length} notes · ${papers} papers · ${concepts} concepts`;
   }).catch(() => {});
+</script>
+<script>
+// ── Visitor country stats (localStorage-backed manual editor) ──────────────
+const COUNTRY_STATS_KEY = 'hhri-wiki-country-stats';
+
+function loadCountryStats() {
+  try { return JSON.parse(localStorage.getItem(COUNTRY_STATS_KEY)) || null; } catch { return null; }
+}
+
+function saveCountryStats() {
+  const raw = document.getElementById('visitor-edit-input').value.trim();
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+  const entries = lines.map(l => {
+    const m = l.match(/^(.+?)\s+([\d,]+)\s*$/);
+    return m ? { country: m[1].trim(), visits: m[2] } : null;
+  }).filter(Boolean);
+  const data = { entries, updated: new Date().toISOString().slice(0, 10) };
+  localStorage.setItem(COUNTRY_STATS_KEY, JSON.stringify(data));
+  toggleCountryEdit();
+  renderCountryStats(data);
+}
+
+function renderCountryStats(data) {
+  const list = document.getElementById('visitor-country-list');
+  const ts   = document.getElementById('visitor-last-updated');
+  if (!list) return;
+  if (!data || !data.entries || !data.entries.length) {
+    list.innerHTML = '<span class="visitor-country-chip" style="color:var(--muted)">No data yet</span>';
+    return;
+  }
+  list.innerHTML = data.entries.map(e =>
+    `<span class="visitor-country-chip">${e.country} <strong>${e.visits}</strong></span>`
+  ).join('');
+  if (ts && data.updated) ts.textContent = `· updated ${data.updated}`;
+}
+
+function toggleCountryEdit() {
+  const area = document.getElementById('visitor-edit-area');
+  const inp  = document.getElementById('visitor-edit-input');
+  if (!area) return;
+  const isOpen = area.classList.toggle('open');
+  if (isOpen) {
+    const data = loadCountryStats();
+    if (data && data.entries) {
+      inp.value = data.entries.map(e => `${e.country} ${e.visits}`).join('\n');
+    } else {
+      inp.value = '';
+    }
+    inp.focus();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCountryStats(loadCountryStats());
+});
 </script>
 </body>
 </html>
