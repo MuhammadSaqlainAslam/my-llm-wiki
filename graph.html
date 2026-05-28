@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
-  <title>HHRI Research Wiki — Knowledge Graph</title>
+  <title>HHRI-AI Research Wiki — Knowledge Graph</title>
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
     data-cf-beacon='{"token": "37b0ea0ace544dc89dc44237601d4a92"}'></script>
@@ -532,7 +532,7 @@
 <header>
   <div>
     <div class="brand-title">Knowledge Graph<span class="dot">.</span></div>
-    <div class="brand-sub">HHRI Research Wiki — force-directed concept map · Curated by Saqlain</div>
+    <div class="brand-sub">HHRI-AI Research Wiki — force-directed concept map · Curated by Saqlain</div>
   </div>
 
   <nav class="site-nav">
@@ -1153,7 +1153,9 @@ async function main() {
           { left: '\\(', right: '\\)', display: false },
           { left: '\\[', right: '\\]', display: true  }
         ],
-        throwOnError: false
+        throwOnError: false,
+        errorColor: '#cc0000',
+        strict: false
       });
     }
 
@@ -1296,7 +1298,8 @@ init();
     </div>
     <div class="footer-center">
       <p class="footer-credit">
-        Designed by <strong>Artificial Intelligence Research Center</strong><br>
+        Designed by<br>
+        <strong>Artificial Intelligence Research Center</strong><br>
         <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener">
           Hon Hai Research Institute
         </a>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
-  <title>HHRI Research Wiki</title>
+  <title>HHRI-AI Research Wiki</title>
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
     data-cf-beacon='{"token": "37b0ea0ace544dc89dc44237601d4a92"}'></script>
@@ -1620,7 +1620,7 @@
 <!-- ── HEADER ────────────────────────────────────────────────────────────── -->
 <header>
   <div class="brand">
-    <div class="brand-title">HHRI Research Wiki<span class="dot">.</span></div>
+    <div class="brand-title">HHRI-AI Research Wiki<span class="dot">.</span></div>
     <div class="brand-sub">AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute</div>
   </div>
 
@@ -3023,11 +3023,21 @@ function renderComparePanel() {
 
   function findAfterHeader(text, headers, max = 200) {
     const lower = text.toLowerCase();
+    // First pass: try exact header strings (including ## prefix for markdown source)
     for (const h of headers) {
       const idx = lower.indexOf(h.toLowerCase());
       if (idx === -1) continue;
-      const after = text.slice(idx + h.length).replace(/^[\s:#*]+/, '').trim();
-      return firstSentence(after, max);
+      const after = text.slice(idx + h.length).replace(/^[\s:#*\-]+/, '').trim();
+      if (after.length > 10) return firstSentence(after, max);
+    }
+    // Second pass: strip ## prefix and try bare heading text (for HTML-stripped content)
+    for (const h of headers) {
+      const bare = h.replace(/^#+\s*/, '').trim();
+      if (!bare) continue;
+      const idx = lower.indexOf(bare.toLowerCase());
+      if (idx === -1) continue;
+      const after = text.slice(idx + bare.length).replace(/^[\s:#*\-]+/, '').trim();
+      if (after.length > 10) return firstSentence(after, max);
     }
     return '—';
   }
@@ -3066,8 +3076,13 @@ function renderComparePanel() {
       case 'hardware':
         return findSentence(raw, ['H100', 'A100', 'GPU', 'HBM', 'SRAM', 'CUDA', 'TPU', 'hardware-aware', 'memory bandwidth', 'memory-efficient']);
 
-      case 'limitations':
-        return findAfterHeader(raw, ['## Limitations', '## Weaknesses', '## Downsides', '## Drawbacks', '## Challenges', '## Caveats']);
+      case 'limitations': {
+        const limHead = findAfterHeader(raw, ['## Limitations', '## Weaknesses', '## Downsides', '## Drawbacks', '## Challenges', '## Caveats']);
+        if (limHead !== '—') return limHead;
+        // Fallback: sentence containing weakness/drawback/limitation keywords
+        const limKw = findSentence(raw, ['weakness', 'drawback', 'downside', 'limitation', 'however,', 'but does not', 'does not handle', 'struggle']);
+        return limKw;
+      }
 
       case 'vs_transformer': {
         const sents = raw.match(/[^.!?\n]+[.!?]+/g) || [];
@@ -3173,6 +3188,9 @@ function renderComparePanel() {
     </table>
   </div>`;
 
+  // Render any LaTeX that appeared in extracted field values
+  renderMath(cols);
+
   panel.classList.add('show');
 }
 
@@ -3186,7 +3204,9 @@ function renderMath(el) {
       { left: '\\(', right: '\\)', display: false },
       { left: '\\[', right: '\\]', display: true  }
     ],
-    throwOnError: false
+    throwOnError: false,
+    errorColor: '#cc0000',
+    strict: false
   });
 }
 
@@ -3292,7 +3312,8 @@ init();
     </div>
     <div class="footer-center">
       <p class="footer-credit">
-        Designed by <strong>Artificial Intelligence Research Center</strong><br>
+        Designed by<br>
+        <strong>Artificial Intelligence Research Center</strong><br>
         <a href="https://hhri.foxconn.com/en/about-us" target="_blank" rel="noopener">
           Hon Hai Research Institute
         </a>
