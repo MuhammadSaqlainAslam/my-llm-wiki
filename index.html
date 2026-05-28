@@ -1587,50 +1587,85 @@
 
     /* ── VISITOR COUNTER ────────────────────────────────────────────── */
     #visitor-countries {
-      border-top: 1px solid var(--border);
       padding: 32px;
+      border-top: 0.5px solid var(--border);
+      margin-top: 32px;
       background: var(--surface);
+      border-radius: 8px;
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-bottom: 16px;
     }
     .visitor-inner {
       max-width: 1200px; margin: 0 auto;
       display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap;
     }
-    .visitor-flag-col {
-      flex: 0 0 auto;
+    .visitor-flag-col { flex: 0 0 auto; }
+    .visitor-stats-col { flex: 1 1 280px; }
+    /* Flag counter card — fixed light background so flags are always readable */
+    .flag-counter-wrap {
+      background: #f6f8fa;
+      border: 0.5px solid #d0d7de;
+      border-radius: 8px;
+      padding: 16px;
     }
-    .visitor-flag-col img {
-      display: block; border: 1px solid var(--border); border-radius: 4px;
+    [data-theme="dark"] .flag-counter-wrap {
+      background: #161b22;
+      border-color: #30363d;
     }
-    .visitor-stats-col {
-      flex: 1 1 280px;
+    [data-theme="light"] .flag-counter-wrap {
+      background: #ffffff;
+      border-color: #d0d7de;
     }
-    .visitor-stats-hd {
-      font-size: 13px; font-weight: 600; color: var(--text);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    .flag-counter-wrap img { display: block; max-width: 100%; }
+    /* Manual stats card */
+    .manual-stats-wrap {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
     }
-    .visitor-stats-hd span { color: var(--muted); font-weight: 400; font-size: 12px; }
-    .visitor-country-list {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+    /* Section labels */
+    .vc-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
+      margin: 0 0 12px; display: flex; align-items: center; gap: 8px;
+      padding-bottom: 8px; border-bottom: 0.5px solid var(--border);
     }
-    .visitor-country-chip {
-      font-size: 12px; padding: 3px 9px; border-radius: 12px;
-      background: var(--surface2); color: var(--text);
-      border: 1px solid var(--border); white-space: nowrap;
+    /* Country bar chart */
+    .country-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .country-name {
+      font-size: 13px; color: var(--text); width: 130px; flex-shrink: 0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
+    .country-bar-track {
+      flex: 1; height: 8px; background: var(--surface2);
+      border-radius: 3px; overflow: hidden;
+    }
+    .country-bar-fill {
+      height: 8px;
+      background: linear-gradient(90deg, #7c3aed, #0d9488);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .country-pct {
+      font-size: 12px; color: var(--muted); width: 40px;
+      text-align: right; font-weight: 500;
+    }
+    .total-num { font-size: 24px; font-weight: 700; color: #7c3aed; }
+    /* Edit controls */
     .visitor-edit-btn {
       font-size: 11px; color: var(--muted); background: none;
       border: 1px solid var(--border); border-radius: 4px;
-      padding: 3px 8px; cursor: pointer; margin-top: 4px;
+      padding: 3px 8px; cursor: pointer; margin-top: 10px; display: block;
     }
     .visitor-edit-btn:hover { color: var(--text); border-color: var(--accent); }
-    .visitor-edit-area {
-      margin-top: 10px; display: none;
-    }
+    .visitor-edit-area { margin-top: 10px; display: none; }
     .visitor-edit-area.open { display: block; }
     .visitor-edit-area textarea {
       width: 100%; min-height: 80px; font-size: 12px; font-family: monospace;
-      background: var(--bg); color: var(--text); border: 1px solid var(--border);
-      border-radius: 4px; padding: 8px; resize: vertical;
+      background: var(--surface); color: var(--text); border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px; resize: vertical; box-sizing: border-box;
     }
     .visitor-edit-actions { display: flex; gap: 8px; margin-top: 6px; }
     .visitor-save-btn {
@@ -1644,6 +1679,7 @@
     }
     .visitor-cancel-btn:hover { color: var(--text); }
     @media (max-width: 600px) {
+      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
       .visitor-inner { flex-direction: column; }
     }
 
@@ -3387,26 +3423,31 @@ init();
 <section id="visitor-countries">
   <div class="visitor-inner">
     <div class="visitor-flag-col">
-      <a href="https://info.flagcounter.com/HHRI" target="_blank" rel="noopener">
-        <img src="https://s11.flagcounter.com/count2/HHRI/bg_161b22/txt_8b949e/border_30363d/columns_4/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
-             alt="Flag Counter" width="200">
-      </a>
+      <div class="vc-label">🌍 Live Traffic</div>
+      <div class="flag-counter-wrap">
+        <a href="https://info.flagcounter.com/HHRI" target="_blank" rel="noopener">
+          <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_6/maxflags_24/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
+               alt="Flag Counter">
+        </a>
+      </div>
     </div>
     <div class="visitor-stats-col">
-      <div class="visitor-stats-hd">
-        Visitors by country
-        <span id="visitor-last-updated"></span>
-      </div>
-      <div class="visitor-country-list" id="visitor-country-list">
-        <span class="visitor-country-chip" style="color:var(--muted)">No data yet</span>
-      </div>
-      <button class="visitor-edit-btn" onclick="toggleCountryEdit()">✎ Update stats</button>
-      <div class="visitor-edit-area" id="visitor-edit-area">
-        <textarea id="visitor-edit-input"
-          placeholder='One per line: "Taiwan 1,234" or "US 890"'></textarea>
-        <div class="visitor-edit-actions">
-          <button class="visitor-save-btn" onclick="saveCountryStats()">Save</button>
-          <button class="visitor-cancel-btn" onclick="toggleCountryEdit()">Cancel</button>
+      <div class="manual-stats-wrap">
+        <div class="vc-label">
+          📊 Visitors by Country
+          <span id="visitor-last-updated" style="font-weight:400;text-transform:none;letter-spacing:0"></span>
+        </div>
+        <div id="visitor-country-list">
+          <span style="font-size:13px;color:var(--muted)">No data yet — click "Update stats" to add country breakdown from Cloudflare.</span>
+        </div>
+        <button class="visitor-edit-btn" onclick="toggleCountryEdit()">✎ Update stats</button>
+        <div class="visitor-edit-area" id="visitor-edit-area">
+          <textarea id="visitor-edit-input"
+            placeholder='One per line: "Taiwan 1,234" or "US 890"'></textarea>
+          <div class="visitor-edit-actions">
+            <button class="visitor-save-btn" onclick="saveCountryStats()">Save</button>
+            <button class="visitor-cancel-btn" onclick="toggleCountryEdit()">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3472,13 +3513,30 @@ function renderCountryStats(data) {
   const ts   = document.getElementById('visitor-last-updated');
   if (!list) return;
   if (!data || !data.entries || !data.entries.length) {
-    list.innerHTML = '<span class="visitor-country-chip" style="color:var(--muted)">No data yet</span>';
+    list.innerHTML = '<span style="font-size:13px;color:var(--muted)">No data yet — click "Update stats" to add country breakdown from Cloudflare.</span>';
     return;
   }
-  list.innerHTML = data.entries.map(e =>
-    `<span class="visitor-country-chip">${e.country} <strong>${e.visits}</strong></span>`
-  ).join('');
-  if (ts && data.updated) ts.textContent = `· updated ${data.updated}`;
+  const entries = data.entries.map(e => ({
+    country: e.country,
+    visits: parseInt(String(e.visits).replace(/,/g, ''), 10) || 0
+  }));
+  const total = entries.reduce((s, e) => s + e.visits, 0);
+  const max   = Math.max(...entries.map(e => e.visits), 1);
+  list.innerHTML = `
+    <div style="margin-bottom:14px">
+      <span class="total-num">${total.toLocaleString()}</span>
+      <span style="font-size:12px;color:var(--muted);margin-left:6px">total visits</span>
+    </div>
+    ${entries.map(e => `
+      <div class="country-row">
+        <span class="country-name">${e.country}</span>
+        <div class="country-bar-track">
+          <div class="country-bar-fill" style="width:${Math.round(e.visits / max * 100)}%"></div>
+        </div>
+        <span class="country-pct">${total ? Math.round(e.visits / total * 100) : 0}%</span>
+      </div>`).join('')}
+  `;
+  if (ts && data.updated) ts.textContent = `· ${data.updated}`;
 }
 
 function toggleCountryEdit() {
