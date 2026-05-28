@@ -1686,42 +1686,44 @@
     /* ── NAV LOGO ───────────────────────────────────────────────────── */
     .nav-logo-wrap {
       display: flex; align-items: center;
-      padding: 8px 16px; margin-right: 16px; flex-shrink: 0;
+      margin-right: 20px; flex-shrink: 0;
+      background: #ffffff; border-radius: 8px;
+      padding: 6px 12px; border: 1px solid rgba(0,0,0,.1);
     }
     .nav-logo {
-      height: 40px; width: auto; max-width: 200px;
-      object-fit: contain; object-position: left center;
+      height: 52px; width: auto;
+      object-fit: contain; display: block;
     }
-    [data-theme="dark"] .nav-logo-wrap {
-      background: transparent; border-radius: 6px;
-    }
+    [data-theme="dark"] .nav-logo-wrap,
     [data-theme="light"] .nav-logo-wrap,
     [data-theme="system"] .nav-logo-wrap {
-      background: #1a1a1a; border-radius: 6px; padding: 8px 16px;
+      background: #ffffff; border-radius: 8px; padding: 6px 12px;
     }
 
     /* ── FOOTER ─────────────────────────────────────────────────────── */
     #site-footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 32px;
+      border-top: 0.5px solid var(--border);
+      padding: 28px 32px;
       margin-top: 48px;
       background: var(--surface);
     }
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 24px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
+      gap: 32px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
     }
-    .footer-logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
+    .footer-logo-wrap {
+      display: flex; align-items: center; flex-shrink: 0;
+      background: #ffffff; border-radius: 10px;
+      padding: 10px 20px; border: 1px solid rgba(0,0,0,.1);
+    }
     .footer-logo {
-      height: 72px; width: auto; max-width: 260px;
-      object-fit: contain; object-position: left center;
+      height: 80px; width: auto;
+      object-fit: contain; display: block;
     }
-    [data-theme="dark"] .footer-logo-wrap {
-      background: transparent; padding: 12px 24px; border-radius: 8px;
-    }
+    [data-theme="dark"] .footer-logo-wrap,
     [data-theme="light"] .footer-logo-wrap,
     [data-theme="system"] .footer-logo-wrap {
-      background: #1a1a1a; border-radius: 8px; padding: 12px 24px;
+      background: #ffffff; border-radius: 10px; padding: 10px 20px;
     }
     .footer-credit {
       font-size: 13px; color: var(--muted); text-align: center;
