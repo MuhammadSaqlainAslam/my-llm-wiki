@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
   <title>HHRI-AI Research Wiki</title>
   <!-- Cloudflare Web Analytics -->
@@ -1558,31 +1558,132 @@
     .compare-table tbody tr:not(.cmp-alt-row) td:not(.cmp-label) { background: var(--bg); }
 
     /* ── MOBILE ──────────────────────────────────────────────────────── */
-    @media (max-width: 720px) {
-      header { padding: 0 16px; flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 10px; }
+    /* ── GLOBAL MOBILE / TOUCH BASE ─────────────────────────────────────── */
+    * { -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overscroll-behavior-y: none; }
+    button, .tab-btn, .filter-pill, .match-nav-btn,
+    .compare-open-btn, .compare-clear-btn, .theme-opt { touch-action: manipulation; }
+    #panel-body, .ce-left, #timeline-wrap { overscroll-behavior: contain; }
+
+    /* ── MOBILE BACKDROP (bottom-sheet panel) ───────────────────────────── */
+    #panel-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.45); z-index: 240;
+    }
+    #panel-backdrop.visible { display: block; }
+
+    @media (max-width: 768px) {
+      /* ── Header ──────────────────────────────────────────────────────── */
+      header { padding: 10px 14px; flex-wrap: wrap; height: auto; gap: 8px; }
       .kbd { display: none; }
       .header-count { display: none; }
+      .nav-logo { height: 32px; max-width: 150px; }
+      .nav-logo-wrap { margin-right: 10px; }
+      .brand-title { font-size: 15px; }
+      .brand-sub { display: none; }
+      .site-nav { gap: 14px; }
       .search-wrap { order: 3; max-width: 100%; flex-basis: 100%; }
+      #search {
+        font-size: 16px;            /* ≥16px prevents iOS focus zoom */
+        height: 46px; padding: 10px 14px 10px 38px;
+      }
 
+      /* ── App layout ──────────────────────────────────────────────────── */
       #app { flex-direction: column; height: auto; min-height: calc(100vh - 80px); }
       #browse-area { overflow: visible; }
-      #panel {
-        width: 100% !important;
-        border-left: none !important;
-        border-top: 1px solid transparent;
-        max-height: 0;
-        transition: max-height .3s ease, border-color .3s;
+
+      /* ── Tab bar — horizontal scroll ─────────────────────────────────── */
+      .tab-bar {
+        overflow-x: auto; flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
       }
-      #panel.open { max-height: 80vh; border-top-color: var(--border); }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .tab-btn { flex-shrink: 0; white-space: nowrap; min-height: 44px; }
+
+      /* ── Note cards — single column ──────────────────────────────────── */
+      #grid { grid-template-columns: 1fr; gap: 10px; padding: 0 12px 16px; }
+      .card { padding: 14px; }
+      .card-title { font-size: 15px; }
+      .card-tldr { font-size: 13px; }
+
+      /* ── Filter pills — wrap, tappable ───────────────────────────────── */
+      #active-filters { padding: 0 12px; }
+      .filter-pill { min-height: 32px; display: inline-flex; align-items: center; }
+      .tag { padding: 4px 9px; font-size: 12px; }
+
+      /* ── Detail panel — full-screen bottom sheet ─────────────────────── */
+      #panel {
+        position: fixed; left: 0; right: 0; bottom: 0; top: auto;
+        width: 100% !important; max-height: none;
+        height: 88vh;
+        border-left: none !important;
+        border-top: 1px solid var(--border);
+        border-radius: 16px 16px 0 0;
+        z-index: 250;
+        transform: translateY(100%);
+        transition: transform .3s cubic-bezier(.4,0,.2,1);
+        box-shadow: 0 -6px 28px rgba(0,0,0,.28);
+        overflow: hidden;
+      }
+      #panel.open { transform: translateY(0); }
       #panel-inner { width: 100%; }
+      /* Drag handle */
+      #panel-topbar { position: relative; padding-top: 18px; }
+      #panel-topbar::before {
+        content: ''; position: absolute; top: 7px; left: 50%;
+        transform: translateX(-50%);
+        width: 36px; height: 4px; border-radius: 2px;
+        background: var(--border);
+      }
+      #close-btn { min-width: 40px; min-height: 40px; }
 
-      #ce-explorer { flex: none; height: 80vh; }
-      .ce-wrap { flex-direction: column; height: 100%; }
-      .ce-left { width: 100%; height: 40%; border-right: none; border-bottom: 1px solid var(--border); }
-      .ce-right { padding: 16px 18px; }
+      /* ── Citation Explorer — stacked panels ──────────────────────────── */
+      #ce-explorer { flex: none; height: auto; min-height: 80vh; }
+      .ce-wrap { flex-direction: column; height: auto; }
+      .ce-left { width: 100%; max-height: 45vh; overflow-y: auto;
+                 border-right: none; border-bottom: 1px solid var(--border);
+                 -webkit-overflow-scrolling: touch; }
+      .ce-right { width: 100%; padding: 14px 16px; }
+      .ce-summary-grid { grid-template-columns: 1fr 1fr; }
 
-      #timeline-wrap { padding: 12px 16px; }
-      .tl-col { width: 140px; }
+      /* ── Timeline — vertical stack ───────────────────────────────────── */
+      #timeline-wrap { padding: 12px 14px; }
+      #timeline-scroll { flex-direction: column; }
+      .tl-col {
+        width: 100%; border-right: none;
+        border-bottom: 1px solid var(--border); padding-bottom: 10px;
+      }
+
+      /* ── Comparison tray + panel ─────────────────────────────────────── */
+      #compare-tray { padding: 10px 12px; }
+      #compare-panel { padding: 16px 12px; }
+      .compare-table-wrap { -webkit-overflow-scrolling: touch; }
+
+      /* ── Match navigation — sticky, larger buttons ───────────────────── */
+      #match-nav { padding: 8px 12px; position: sticky; top: 0; z-index: 10; }
+      .match-nav-btn { min-width: 36px; min-height: 36px; }
+
+      /* ── Agent tab grids ─────────────────────────────────────────────── */
+      .agent-cmd-grid    { grid-template-columns: 1fr; }
+      .agent-sources-grid { grid-template-columns: 1fr 1fr; }
+      .agent-stats-row   { grid-template-columns: 1fr 1fr; }
+
+      /* ── Reading progress ────────────────────────────────────────────── */
+      #progress-section { padding: 0 12px; }
+      .progress-card { padding: 12px; }
+
+      /* ── Touch targets + iOS zoom guard ──────────────────────────────── */
+      input, select, textarea { font-size: 16px !important; }
+      .tab-btn, .compare-open-btn, .compare-clear-btn,
+      .compare-close-btn, .theme-opt { min-height: 44px; }
+
+      /* ── Footer + visitor ────────────────────────────────────────────── */
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+      .footer-right { text-align: center; }
+      .footer-logo { height: 52px; }
+      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 16px; }
+      .flag-counter-wrap { max-width: 100%; }
+      .flag-counter-img { max-width: 100%; }
     }
 
     /* ── VISITOR COUNTER ────────────────────────────────────────────── */
@@ -1819,6 +1920,9 @@
 
 </div>
 
+<!-- mobile bottom-sheet backdrop -->
+<div id="panel-backdrop"></div>
+
 <!-- ── COMPARISON TRAY ───────────────────────────────────────────────────── -->
 <div id="compare-tray">
   <div class="compare-tray-pills" id="compare-tray-pills"></div>
@@ -1979,6 +2083,7 @@ const panelTitle     = $('panel-title');
 const panelTags      = $('panel-tags');
 const panelBody      = $('panel-body');
 const closeBtn       = $('close-btn');
+const panelBackdrop  = $('panel-backdrop');
 const browseArea     = $('browse-area');
 const ceExplorer     = $('ce-explorer');
 const ceLeft         = $('ce-left');
@@ -2872,6 +2977,11 @@ function openNote(id) {
   renderMath(panelBody);
 
   panel.classList.add('open');
+  // Mobile: show backdrop + lock background scroll for bottom-sheet
+  if (window.innerWidth <= 768) {
+    panelBackdrop.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
   // Only reset scroll when no search active (search will scroll to first match)
   if (!query) panelBody.scrollTop = 0;
   if (activeTab !== 'top-cited' && activeTab !== 'timeline') render();
@@ -3302,10 +3412,24 @@ function renderMath(el) {
 
 function closePanel() {
   panel.classList.remove('open');
+  // Mobile: hide backdrop + restore background scroll
+  panelBackdrop.classList.remove('visible');
+  document.body.style.overflow = '';
   openId = null;
   hideMatchNav();
   if (activeTab !== 'top-cited' && activeTab !== 'timeline' && activeTab !== 'agent') render();
 }
+
+// Mobile bottom-sheet: tap backdrop or swipe down to close
+panelBackdrop.addEventListener('click', closePanel);
+let _panelTouchY = 0;
+panel.addEventListener('touchstart', e => {
+  _panelTouchY = e.touches[0].clientY;
+}, { passive: true });
+panel.addEventListener('touchmove', e => {
+  // Only treat as dismiss gesture when the body is scrolled to the top
+  if (panelBody.scrollTop <= 0 && e.touches[0].clientY - _panelTouchY > 80) closePanel();
+}, { passive: true });
 
 // ── tag toggle ───────────────────────────────────────────────────────────
 function toggleTag(tag) {

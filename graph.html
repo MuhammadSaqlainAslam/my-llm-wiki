@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute">
   <title>HHRI-AI Research Wiki — Knowledge Graph</title>
   <!-- Cloudflare Web Analytics -->
@@ -528,6 +528,71 @@
     .footer-link:hover { color: #ff4444; text-decoration: underline; }
     .footer-copy { font-size: 10px; color: var(--muted); opacity: .6; margin: 0; }
     .footer-right { font-size: 11px; color: var(--muted); }
+
+    /* ── GLOBAL MOBILE / TOUCH BASE ─────────────────────────────────────── */
+    * { -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; }
+    button, .theme-opt { touch-action: manipulation; }
+    #panel-body { overscroll-behavior: contain; }
+
+    /* mobile graph notice — hidden on desktop, shown ≤768px */
+    .mobile-graph-notice { display: none; }
+
+    /* mobile bottom-sheet backdrop */
+    #panel-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.45); z-index: 240;
+    }
+    #panel-backdrop.visible { display: block; }
+
+    @media (max-width: 768px) {
+      /* Header — compact single area */
+      header { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 8px; }
+      .header-hint { display: none; }
+      .nav-logo { height: 32px; max-width: 150px; }
+      .brand-sub { display: none; }
+
+      /* Graph fills area below the (taller, wrapped) header */
+      #graph-wrap { inset: 104px 0 0 0; }
+      .node-label { font-size: 11px; }
+
+      /* Mobile usage tip banner */
+      .mobile-graph-notice {
+        display: block; position: fixed;
+        left: 8px; right: 8px; top: 108px; z-index: 60;
+        background: var(--bg-overlay);
+        border: 1px solid var(--accent); border-radius: 10px;
+        padding: 9px 14px; font-size: 12px; color: var(--text);
+        text-align: center; pointer-events: none;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 18px rgba(0,0,0,.3);
+      }
+
+      /* Detail panel — full-screen bottom sheet */
+      #panel {
+        top: auto; right: 0; left: 0; bottom: 0;
+        width: 100%; max-width: 100%;
+        height: 85vh;
+        border-left: none; border-top: 1px solid var(--border);
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        transition: transform .3s cubic-bezier(.4,0,.2,1);
+        box-shadow: 0 -6px 28px rgba(0,0,0,.32);
+      }
+      #panel.open { transform: translateY(0); }
+      /* Drag handle */
+      #panel-topbar { position: relative; padding-top: 18px; }
+      #panel-topbar::before {
+        content: ''; position: absolute; top: 7px; left: 50%;
+        transform: translateX(-50%);
+        width: 36px; height: 4px; border-radius: 2px; background: var(--border);
+      }
+      #panel-close { min-width: 40px; min-height: 40px; }
+
+      /* Footer (if ever shown) stacks */
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .footer-logo { height: 48px; }
+    }
   </style>
 </head>
 <body>
@@ -563,6 +628,12 @@
 <div id="graph-wrap">
   <svg id="graph"></svg>
 </div>
+
+<!-- mobile usage tip (shown only ≤768px via CSS) -->
+<div class="mobile-graph-notice">💡 Pinch to zoom · drag nodes · tap a node to open its note</div>
+
+<!-- mobile bottom-sheet backdrop -->
+<div id="panel-backdrop"></div>
 
 <!-- ── TOOLTIP ───────────────────────────────────────────────────────────── -->
 <div id="tooltip"></div>
@@ -1085,6 +1156,7 @@ async function main() {
 
   // ── Side Panel ────────────────────────────────────────────────────────
   const panel          = document.getElementById('panel');
+  const panelBackdrop  = document.getElementById('panel-backdrop');
   const panelCat       = document.getElementById('panel-cat');
   const panelYear      = document.getElementById('panel-year');
   const panelCitations = document.getElementById('panel-citations');
@@ -1175,11 +1247,28 @@ async function main() {
 
     panelBody.scrollTop = 0;
     panel.classList.add('open');
+    // Mobile: show backdrop + lock background scroll for bottom-sheet
+    if (window.innerWidth <= 768) {
+      panelBackdrop.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function closePanel() {
     panel.classList.remove('open');
+    panelBackdrop.classList.remove('visible');
+    document.body.style.overflow = '';
   }
+
+  // Mobile bottom-sheet: tap backdrop or swipe down to close
+  panelBackdrop.addEventListener('click', closePanel);
+  let _gPanelTouchY = 0;
+  panel.addEventListener('touchstart', e => {
+    _gPanelTouchY = e.touches[0].clientY;
+  }, { passive: true });
+  panel.addEventListener('touchmove', e => {
+    if (panelBody.scrollTop <= 0 && e.touches[0].clientY - _gPanelTouchY > 80) closePanel();
+  }, { passive: true });
 
   // ── Tag filter ────────────────────────────────────────────────────────
   const tagBar = document.getElementById('tag-filter-bar');
