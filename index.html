@@ -428,6 +428,37 @@
 
     .card-tldr em { font-style: italic; opacity: .6; }
 
+    /* ── arXiv LINK (card footer + detail badge) ─────────────────────── */
+    .card-footer {
+      margin-top: 8px; padding-top: 8px;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .card-footer:empty { display: none; }
+
+    .arxiv-link {
+      font-size: 11px; color: var(--accent);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px;
+      border: 0.5px solid var(--accent-ring);
+      border-radius: 20px;
+      transition: background .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .arxiv-link:hover { background: var(--accent-dim); border-color: var(--accent); }
+
+    .arxiv-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--accent);
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 0.5px solid var(--accent-ring);
+      border-radius: 8px;
+      transition: background .15s, border-color .15s;
+    }
+    .arxiv-badge:hover { background: var(--accent-dim); border-color: var(--accent); }
+
     /* ── TAGS ────────────────────────────────────────────────────────── */
     .tags { display: flex; flex-wrap: wrap; gap: 5px; }
 
@@ -1888,6 +1919,7 @@
           <div class="panel-meta">
             <span id="panel-year"></span>
             <span id="panel-citations"></span>
+            <a id="panel-arxiv" class="arxiv-badge" target="_blank" rel="noopener" style="display:none">📄 Read on arXiv →</a>
           </div>
           <button id="close-btn">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
@@ -2079,6 +2111,7 @@ const filterBar      = $('active-filters');
 const panel          = $('panel');
 const panelYear      = $('panel-year');
 const panelCitations = $('panel-citations');
+const panelArxiv     = $('panel-arxiv');
 const panelTitle     = $('panel-title');
 const panelTags      = $('panel-tags');
 const panelBody      = $('panel-body');
@@ -2256,6 +2289,10 @@ function makeCard(n) {
   const isComparing = compareSet.has(n.id);
   const compareBtnHtml = `<button class="compare-btn${isComparing ? ' comparing' : ''}" data-id="${escAttr(n.id)}">${isComparing ? '✓ Comparing' : '⊕ Compare'}</button>`;
 
+  const arxivHtml = n.arxiv
+    ? `<a href="https://arxiv.org/abs/${escAttr(n.arxiv)}" target="_blank" rel="noopener" class="arxiv-link" onclick="event.stopPropagation()">📄 arXiv:${escHtml(n.arxiv)}</a>`
+    : '';
+
   card.innerHTML = `
     <div class="card-top">
       <span class="card-title">${escHtml(n.title)}</span>
@@ -2268,6 +2305,7 @@ function makeCard(n) {
     </div>
     <p class="card-tldr">${tldrHtml}</p>
     <div class="tags">${tagsHtml}</div>
+    ${arxivHtml ? `<div class="card-footer">${arxivHtml}</div>` : ''}
     ${compareBtnHtml}
   `;
 
@@ -2951,6 +2989,13 @@ function openNote(id) {
     panelCitations.style.display = 'inline-block';
   } else {
     panelCitations.style.display = 'none';
+  }
+
+  if (n.arxiv) {
+    panelArxiv.href = `https://arxiv.org/abs/${n.arxiv}`;
+    panelArxiv.style.display = 'inline-flex';
+  } else {
+    panelArxiv.style.display = 'none';
   }
 
   panelTitle.textContent = n.title;
