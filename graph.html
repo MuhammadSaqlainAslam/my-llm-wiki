@@ -14,6 +14,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <!-- Prism.js — syntax highlighting for fenced code blocks -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -361,6 +370,19 @@
     @media (max-width: 768px) {
       #panel-body pre { padding: 12px; margin: 10px 0; }
     }
+
+    /* ── Prism syntax-highlight tokens (theme-aware) ─────────────────── */
+    #panel-body .token.comment, #panel-body .token.prolog, #panel-body .token.doctype, #panel-body .token.cdata { color: #8b949e; font-style: italic; }
+    #panel-body .token.keyword, #panel-body .token.operator, #panel-body .token.boolean { color: #ff7b72; }
+    #panel-body .token.string, #panel-body .token.char { color: #a5d6ff; }
+    #panel-body .token.function, #panel-body .token.class-name { color: #d2a8ff; }
+    #panel-body .token.number, #panel-body .token.constant, #panel-body .token.builtin { color: #79c0ff; }
+    #panel-body .token.punctuation { color: var(--muted); }
+    [data-theme="light"] #panel-body .token.comment, [data-theme="light"] #panel-body .token.prolog { color: #6e7781; }
+    [data-theme="light"] #panel-body .token.keyword, [data-theme="light"] #panel-body .token.operator, [data-theme="light"] #panel-body .token.boolean { color: #cf222e; }
+    [data-theme="light"] #panel-body .token.string, [data-theme="light"] #panel-body .token.char { color: #0a3069; }
+    [data-theme="light"] #panel-body .token.function, [data-theme="light"] #panel-body .token.class-name { color: #8250df; }
+    [data-theme="light"] #panel-body .token.number, [data-theme="light"] #panel-body .token.constant, [data-theme="light"] #panel-body .token.builtin { color: #0550ae; }
     #panel-body table {
       width: 100%; border-collapse: collapse;
       font-size: .8rem; margin: 14px 0;
@@ -1251,6 +1273,9 @@ async function main() {
         strict: false
       });
     }
+
+    // Syntax-highlight fenced code blocks (graceful no-op if Prism not loaded)
+    if (window.Prism) Prism.highlightAllUnder(panelBody);
 
     panelBody.scrollTop = 0;
     panel.classList.add('open');
