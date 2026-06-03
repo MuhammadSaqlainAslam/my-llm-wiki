@@ -2902,6 +2902,7 @@ function renderAgent() {
   const svgSearch = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`;
   const svgMerge  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h3M18 15V9a3 3 0 0 0-3-3H9"/></svg>`;
   const svgRadar  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="2"/><path d="M6 12a6 6 0 0 1 6-6M6 12a6 6 0 0 0 6 6M18 12a6 6 0 0 0-6-6M18 12a6 6 0 0 1-6 6"/><circle cx="12" cy="12" r="10"/></svg>`;
+  const svgSync   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`;
   const svgCopy   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
   const svgCheck  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
 
@@ -2953,6 +2954,11 @@ function renderAgent() {
           'python3 agent.py daily',
           '',
           'Searches cs.LG, cs.CL, cs.AI &plus; 6 GitHub repos &plus; 4 blogs')}
+      ${cmdCard(svgSync, '#0891b2', 'Update citations',
+          'Sync citation counts from Semantic Scholar for all papers',
+          'python3 agent.py update-citations',
+          '',
+          'Queries Semantic Scholar API &middot; updates all citation_count fields &middot; rebuilds web demo &middot; run monthly')}
     </div>
 
     <div class="agent-section-title">Sources monitored</div>
@@ -2986,6 +2992,11 @@ function renderAgent() {
         <div class="agent-stat-label">Sources watched</div>
         <div class="agent-stat-value">5</div>
         <div class="agent-stat-sub">arXiv · GitHub · blogs · YT · Scholar</div>
+      </div>
+      <div class="agent-stat-card">
+        <div class="agent-stat-label">Citations updated</div>
+        <div class="agent-stat-value" id="citations-updated" style="font-size:1.05rem">June 2026</div>
+        <div class="agent-stat-sub">Semantic Scholar live API</div>
       </div>
     </div>
 
