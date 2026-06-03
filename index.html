@@ -2251,14 +2251,16 @@ function citBarHex(n) {
 
 // ── wikilink resolver ────────────────────────────────────────────────────
 function resolveWikilinks(html) {
+  // [[target]], [[target#heading]], [[target|display]] — honor the display alias
   return html.replace(
-    /\[\[([^\]|#]+?)(?:[|#][^\]]*)?\]\]/g,
-    (_, ref) => {
-      const label = ref.trim();
-      const id = label.replace(/\s+/g, '-');
-      const exists = byId[id] || byId[label];
+    /\[\[([^\]|#]+?)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g,
+    (_, ref, alias) => {
+      const target = ref.trim();
+      const id = target.replace(/\s+/g, '-');
+      const exists = byId[id] || byId[target];
       const cls = exists ? 'wikilink' : 'wikilink missing';
-      const resolvedId = exists ? (byId[id] ? id : label) : id;
+      const resolvedId = exists ? (byId[id] ? id : target) : id;
+      const label = (alias && alias.trim()) ? alias.trim() : target;
       return `<a href="#" class="${cls}" data-noteid="${resolvedId}">${label}</a>`;
     }
   );
