@@ -350,10 +350,17 @@
     }
     [data-theme="light"] #panel-body code { color: #b45309; }
     #panel-body pre {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px; overflow-x: auto; margin: 12px 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px; padding: 14px 16px; overflow-x: auto; margin: 14px 0;
+      -webkit-overflow-scrolling: touch;
     }
-    #panel-body pre code { background: none; border: none; padding: 0; color: var(--text); }
+    [data-theme="light"] #panel-body pre { background: #eff2f6; border-color: #d0d7de; }
+    #panel-body pre code { background: none; border: none; padding: 0; color: var(--text); white-space: pre; display: block; }
+    @media (max-width: 768px) {
+      #panel-body pre { padding: 12px; margin: 10px 0; }
+    }
     #panel-body table {
       width: 100%; border-collapse: collapse;
       font-size: .8rem; margin: 14px 0;
