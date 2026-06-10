@@ -2377,13 +2377,16 @@ function isPaper(note) {
   if (note.arxiv && note.arxiv.trim() !== '') return true;
   // Real citation count → it's a paper
   if ((note.citation_count || 0) > 0) return true;
-  // Glossary / stub / meta tags → not a paper
+  // Glossary / stub / meta / navigation tags → not a paper
   const tags = note.tags || [];
-  if (tags.some(t => ['glossary','stub','meta','index','dashboard'].includes(t.toLowerCase())))
+  if (tags.some(t => ['glossary','stub','meta','index','dashboard',
+                       'navigation','quality','standards'].includes(t.toLowerCase())))
     return false;
   // Has a publication year in range → likely a paper
   const year = parseInt(String(note.year || '').slice(0, 4));
   if (year >= 2010 && year <= 2030) return true;
+  // Has an authors field → likely a paper
+  if (note.authors && note.authors.trim() !== '') return true;
   return false;
 }
 
