@@ -1402,6 +1402,29 @@
       margin-left: 6px;
     }
 
+    /* ── CARD HIGHLIGHT MODE (Enter key) ────────────────────────────────── */
+    .card.search-highlighted {
+      border-color: #7c3aed !important;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.15) !important;
+      background: rgba(124,58,237,0.03);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+    .card.search-dimmed {
+      opacity: 0.2;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    mark.search-mark {
+      background: rgba(124,58,237,0.22);
+      color: inherit;
+      border-radius: 3px;
+      padding: 0 2px;
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .card.search-dimmed { opacity: 0.3; }
+    }
+
     /* ── MATCH NAV BAR ──────────────────────────────────────────────── */
     #match-nav {
       display: none;
@@ -2121,8 +2144,9 @@ let ceQuery      = '';
 let progressFilter = 'all';
 let compareSet     = new Set(); // up to 3 paper IDs
 let cmpMode        = 'technical'; // 'technical' | 'summary'
-let matchEls       = [];        // current search-highlight <mark> elements
-let matchIdx       = 0;         // active match index
+let matchEls           = [];    // current search-highlight <mark> elements
+let matchIdx           = 0;    // active match index
+let searchHighlightMode = false; // true while Enter-key card highlighting is active
 
 // ── reading progress ──────────────────────────────────────────────────────
 let readProgress = {};
@@ -2440,10 +2464,10 @@ function renderAll() {
   emptyEl.classList.toggle('show', visible.length === 0);
 
   const enterHint = (query && visible.length > 0)
-    ? `<span class="enter-hint">↵ Enter to open ${visible.length === 1 ? '' : 'first'}</span>`
+    ? `<span class="enter-hint">↵ Enter to highlight</span>`
     : '';
   resultBar.innerHTML = `
-    <span>${visible.length} of ${notes.length} notes${enterHint}</span>
+    <span id="result-count-msg">${visible.length} of ${notes.length} notes${enterHint}</span>
     <select class="sort-select" id="sort-select">
       <option value="title"${sortBy === 'title' ? ' selected' : ''}>Sort: Title A–Z</option>
       <option value="year"${sortBy === 'year' ? ' selected' : ''}>Sort: Year (newest)</option>
@@ -2464,7 +2488,7 @@ function renderAll() {
 function renderByTheme() {
   const visible = filteredNotes();
 
-  resultBar.innerHTML = `<span>${visible.length} of ${notes.length} notes</span>`;
+  resultBar.innerHTML = `<span id="result-count-msg">${visible.length} of ${notes.length} notes</span>`;
   emptyEl.classList.toggle('show', visible.length === 0);
 
   clearGrid();
@@ -3602,22 +3626,116 @@ function escHtml(s) {
 }
 function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
 
+// ── card highlight mode (Enter key) ──────────────────────────────────────
+function applyCardHighlighting(term) {
+  const termLower = term.toLowerCase();
+  const cards = [...grid.querySelectorAll('.card')];
+  let matchCount = 0;
+
+  cards.forEach(card => {
+    const note = byId[card.dataset.id] || {};
+    const isMatch = (
+      (note.title       && note.title.toLowerCase().includes(termLower)) ||
+      (note.tags        && note.tags.some(t => t.toLowerCase().includes(termLower))) ||
+      (note.tldr        && note.tldr.toLowerCase().includes(termLower)) ||
+      (note.search_text && note.search_text.includes(termLower))
+    );
+    if (isMatch) {
+      matchCount++;
+      card.classList.add('search-highlighted');
+      card.classList.remove('search-dimmed');
+      highlightTextInCard(card, term);
+    } else {
+      card.classList.add('search-dimmed');
+      card.classList.remove('search-highlighted');
+    }
+  });
+
+  const countMsg = document.getElementById('result-count-msg');
+  if (countMsg) {
+    countMsg.innerHTML =
+      (matchCount > 0
+        ? `<strong>${matchCount}</strong> matching card${matchCount !== 1 ? 's' : ''} highlighted`
+        : `No matches`) +
+      ` <span class="enter-hint">Esc to clear</span>`;
+  }
+}
+
+function clearCardHighlighting() {
+  grid.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('search-highlighted', 'search-dimmed');
+    card.querySelectorAll('mark.search-mark').forEach(mark => {
+      mark.replaceWith(document.createTextNode(mark.textContent));
+    });
+  });
+}
+
+function highlightTextInCard(card, term) {
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(escaped, 'gi');
+
+  ['.card-title', '.card-tldr'].forEach(sel => {
+    const el = card.querySelector(sel);
+    if (!el) return;
+
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        const tag = node.parentElement?.tagName;
+        return (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'MARK')
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+    textNodes.forEach(textNode => {
+      if (!textNode.textContent.toLowerCase().includes(term.toLowerCase())) return;
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+      re.lastIndex = 0;
+      while ((m = re.exec(textNode.textContent)) !== null) {
+        if (m.index > last)
+          frag.appendChild(document.createTextNode(textNode.textContent.slice(last, m.index)));
+        const mark = document.createElement('mark');
+        mark.className = 'search-mark';
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+      }
+      if (last < textNode.textContent.length)
+        frag.appendChild(document.createTextNode(textNode.textContent.slice(last)));
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+  });
+}
+
 // ── events ────────────────────────────────────────────────────────────────
 searchEl.addEventListener('input', () => {
+  if (searchHighlightMode) {
+    searchHighlightMode = false;
+    clearCardHighlighting();
+  }
   query = searchEl.value.trim();
   if (!query) hideMatchNav();
   if (activeTab !== 'top-cited') render();
 });
 
 searchEl.addEventListener('keydown', e => {
-  if (e.key !== 'Enter') return;
-  e.preventDefault();
-  const firstCard = grid.querySelector('.card');
-  if (!firstCard) return;
-  firstCard.click();
-  firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  firstCard.classList.add('search-pulse');
-  setTimeout(() => firstCard.classList.remove('search-pulse'), 1000);
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const term = searchEl.value.trim();
+    if (!term) return;
+    searchHighlightMode = true;
+    applyCardHighlighting(term);
+    return;
+  }
+  if (e.key === 'Escape') {
+    searchEl.value = '';
+    searchHighlightMode = false;
+    clearCardHighlighting();
+    searchEl.dispatchEvent(new Event('input'));
+  }
 });
 
 closeBtn.addEventListener('click', closePanel);
