@@ -2023,17 +2023,20 @@
     <!-- normal browse area -->
     <div id="browse-area">
 
-      <!-- search mode selector — hidden until user types -->
-      <div class="search-modes" id="search-modes" style="display:none">
+      <!-- search mode selector — always visible -->
+      <div class="search-modes" id="search-modes">
         <button class="mode-btn" data-mode="papers"
-                onclick="setSearchMode('papers')">📄 Papers</button>
+                title="Search academic papers only (filters by arXiv / citations)"
+                onclick="setSearchMode('papers')">📄 Papers only</button>
         <button class="mode-btn active" data-mode="concepts"
-                onclick="setSearchMode('concepts')">💡 Concepts</button>
+                title="Search all notes by title, tags and summaries"
+                onclick="setSearchMode('concepts')">💡 All notes</button>
         <button class="mode-btn" data-mode="fulltext"
+                title="Search complete note content including body text"
                 onclick="setSearchMode('fulltext')">🔍 Full text</button>
       </div>
-      <p class="mode-desc" id="mode-desc" style="display:none">
-        Searching titles, tags and summaries
+      <p class="mode-desc" id="mode-desc">
+        All notes — searching titles, tags and summaries
       </p>
 
       <div id="result-bar"></div>
@@ -2364,15 +2367,31 @@ function resolveWikilinks(html) {
 
 // ── search mode helpers ───────────────────────────────────────────────────
 const MODE_DESCRIPTIONS = {
-  papers:   'Searching paper titles and tags only',
-  concepts: 'Searching titles, tags and summaries',
-  fulltext: 'Searching complete note content',
+  papers:   'Academic papers only — filtered by title and tags',
+  concepts: 'All notes — searching titles, tags and summaries',
+  fulltext: 'All notes — searching complete content including body text',
 };
+
+function isPaper(note) {
+  // arXiv ID → definitely a paper
+  if (note.arxiv && note.arxiv.trim() !== '') return true;
+  // Real citation count → it's a paper
+  if ((note.citation_count || 0) > 0) return true;
+  // Glossary / stub / meta tags → not a paper
+  const tags = note.tags || [];
+  if (tags.some(t => ['glossary','stub','meta','index','dashboard'].includes(t.toLowerCase())))
+    return false;
+  // Has a publication year in range → likely a paper
+  const year = parseInt(String(note.year || '').slice(0, 4));
+  if (year >= 2010 && year <= 2030) return true;
+  return false;
+}
 
 function matchesSearch(note, term) {
   const t = (term || '').toLowerCase().trim();
   if (!t) return true;
   if (currentSearchMode === 'papers') {
+    if (!isPaper(note)) return false;
     return (
       note.title.toLowerCase().includes(t) ||
       (note.tags || []).some(tag => tag.toLowerCase().includes(t))
@@ -3804,11 +3823,6 @@ searchEl.addEventListener('input', () => {
   }
   query = searchEl.value.trim();
   if (!query) hideMatchNav();
-  // Show/hide mode selector
-  const modesEl   = document.getElementById('search-modes');
-  const modeDescEl = document.getElementById('mode-desc');
-  if (modesEl)    modesEl.style.display    = query ? 'flex'  : 'none';
-  if (modeDescEl) modeDescEl.style.display = query ? 'block' : 'none';
   if (activeTab !== 'top-cited') render();
 });
 
