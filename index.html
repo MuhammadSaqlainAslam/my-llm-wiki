@@ -1383,6 +1383,25 @@
       outline: 2px solid #7c3aed;
     }
 
+    /* ── SEARCH ENTER FEEDBACK ──────────────────────────────────────────── */
+    .search-pulse {
+      animation: card-pulse 0.6s ease;
+    }
+    @keyframes card-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); }
+      50%  { box-shadow: 0 0 0 8px rgba(124,58,237,0); border-color: #7c3aed; }
+      100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+    }
+    .enter-hint {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 6px;
+    }
+
     /* ── MATCH NAV BAR ──────────────────────────────────────────────── */
     #match-nav {
       display: none;
@@ -2420,8 +2439,11 @@ function renderAll() {
   const visible = sortedNotes(filteredNotes());
   emptyEl.classList.toggle('show', visible.length === 0);
 
+  const enterHint = (query && visible.length > 0)
+    ? `<span class="enter-hint">↵ Enter to open ${visible.length === 1 ? '' : 'first'}</span>`
+    : '';
   resultBar.innerHTML = `
-    <span>${visible.length} of ${notes.length} notes</span>
+    <span>${visible.length} of ${notes.length} notes${enterHint}</span>
     <select class="sort-select" id="sort-select">
       <option value="title"${sortBy === 'title' ? ' selected' : ''}>Sort: Title A–Z</option>
       <option value="year"${sortBy === 'year' ? ' selected' : ''}>Sort: Year (newest)</option>
@@ -3585,6 +3607,17 @@ searchEl.addEventListener('input', () => {
   query = searchEl.value.trim();
   if (!query) hideMatchNav();
   if (activeTab !== 'top-cited') render();
+});
+
+searchEl.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const firstCard = grid.querySelector('.card');
+  if (!firstCard) return;
+  firstCard.click();
+  firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  firstCard.classList.add('search-pulse');
+  setTimeout(() => firstCard.classList.remove('search-pulse'), 1000);
 });
 
 closeBtn.addEventListener('click', closePanel);

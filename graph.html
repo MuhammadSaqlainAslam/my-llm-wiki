@@ -580,12 +580,38 @@
     }
     #panel-backdrop.visible { display: block; }
 
+    /* ── GRAPH SEARCH ─────────────────────────────────────────────────── */
+    .graph-search-wrap {
+      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+    }
+    .graph-search-input {
+      width: 220px;
+      padding: 6px 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .graph-search-input:focus {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 2px rgba(124,58,237,0.15);
+    }
+    .graph-search-input.found { border-color: #7c3aed; }
+    .graph-search-hint {
+      font-size: 11px; color: var(--muted); white-space: nowrap;
+    }
+
     @media (max-width: 768px) {
       /* Header — compact single area */
       header { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 8px; }
       .header-hint { display: none; }
       .nav-logo { height: 32px; max-width: 150px; }
       .brand-sub { display: none; }
+      .graph-search-hint { display: none; }
+      .graph-search-input { width: 100%; }
 
       /* Graph fills area below the (taller, wrapped) header */
       #graph-wrap { inset: 104px 0 0 0; }
@@ -643,6 +669,13 @@
     <a href="index.html">Browse notes</a>
     <a href="graph.html" class="active">Knowledge graph</a>
   </nav>
+
+  <div class="graph-search-wrap">
+    <input type="text" id="graph-search" class="graph-search-input"
+           placeholder="Search nodes… (press /)"
+           autocomplete="off" spellcheck="false">
+    <span class="graph-search-hint">↵ Enter to highlight</span>
+  </div>
 
   <div class="header-hint">
     <span class="hint-key"><kbd>scroll</kbd> zoom</span>
@@ -1409,9 +1442,97 @@ async function main() {
         .translate(-width / 2, -height / 2));
   });
 
+  // ── Graph search ──────────────────────────────────────────────────────
+  const graphSearchEl = document.getElementById('graph-search');
+
+  if (graphSearchEl) {
+    graphSearchEl.addEventListener('input', () => {
+      const term = graphSearchEl.value.toLowerCase().trim();
+
+      if (!term) {
+        nodeSel.select('.node-circle').attr('class', 'node-circle');
+        nodeSel.select('.node-label').attr('class', 'node-label');
+        linkSel.attr('class', 'link');
+        return;
+      }
+
+      nodeSel.each(function(d) {
+        const matches = (
+          (d.title  && d.title.toLowerCase().includes(term)) ||
+          (d.tags   && d.tags.some(t => t.toLowerCase().includes(term)))
+        );
+        d3.select(this).select('.node-circle')
+          .attr('class', 'node-circle' + (matches ? '' : ' dimmed'))
+          .style('stroke', matches ? '#7c3aed' : null)
+          .style('stroke-width', matches ? 2 : null);
+        d3.select(this).select('.node-label')
+          .attr('class', 'node-label' + (matches ? '' : ' dimmed'));
+      });
+      linkSel.attr('class', 'link dimmed');
+    });
+
+    graphSearchEl.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        graphSearchEl.value = '';
+        graphSearchEl.dispatchEvent(new Event('input'));
+        return;
+      }
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+
+      const term = graphSearchEl.value.toLowerCase().trim();
+      if (!term) return;
+
+      let bestNode = null, bestScore = -1;
+      nodeSel.each(function(d) {
+        let score = 0;
+        const t = (d.title || '').toLowerCase();
+        if (t === term)                   score = 100;
+        else if (t.startsWith(term))      score = 80;
+        else if (t.includes(term))        score = 60;
+        else if (d.tags && d.tags.some(tag => tag.toLowerCase().includes(term))) score = 40;
+        else if ((d.tldr || '').toLowerCase().includes(term)) score = 20;
+        if (score > bestScore) { bestScore = score; bestNode = d; }
+      });
+
+      if (!bestNode || bestScore < 0) return;
+
+      const svgEl  = document.getElementById('graph');
+      const w = svgEl.clientWidth, h = svgEl.clientHeight;
+      const transform = d3.zoomIdentity
+        .translate(w / 2, h / 2)
+        .scale(1.5)
+        .translate(-bestNode.x, -bestNode.y);
+
+      svg.transition().duration(750).call(zoom.transform, transform);
+
+      nodeSel.each(function(d) {
+        if (d.id !== bestNode.id) return;
+        d3.select(this).select('.node-circle')
+          .transition().duration(200)
+            .style('stroke', '#7c3aed')
+            .style('stroke-width', 4)
+            .style('filter', 'drop-shadow(0 0 8px #7c3aed)')
+          .transition().duration(500)
+            .style('stroke-width', 2.5)
+            .style('filter', 'drop-shadow(0 0 4px #7c3aed)');
+      });
+
+      openPanel(bestNode.id);
+
+      graphSearchEl.classList.add('found');
+      setTimeout(() => graphSearchEl.classList.remove('found'), 1000);
+    });
+  }
+
   // ── Keyboard ──────────────────────────────────────────────────────────
   document.addEventListener('keydown', e => {
+    const inInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
     if (e.key === 'Escape') { closePanel(); clearHover(); hideTooltip(); }
+    if (e.key === '/' && !e.metaKey && !e.ctrlKey && !inInput) {
+      e.preventDefault();
+      if (graphSearchEl) { graphSearchEl.focus(); graphSearchEl.select(); }
+    }
   });
 
   window.addEventListener('resize', () => {
