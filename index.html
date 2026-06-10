@@ -1402,6 +1402,44 @@
       margin-left: 6px;
     }
 
+    /* ── SEARCH MODE SELECTOR ──────────────────────────────────────────── */
+    .search-modes {
+      display: flex; gap: 4px;
+      padding: 8px 12px 4px;
+    }
+    .mode-btn {
+      padding: 4px 13px;
+      font-size: 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface2);
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+      white-space: nowrap;
+    }
+    .mode-btn:hover {
+      border-color: #7c3aed88;
+      color: var(--text);
+    }
+    .mode-btn.active {
+      background: #7c3aed;
+      border-color: #7c3aed;
+      color: #fff;
+      font-weight: 500;
+    }
+    .mode-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0;
+      padding: 0 14px 6px;
+      min-height: 16px;
+    }
+    @media (max-width: 480px) {
+      .search-modes { flex-wrap: wrap; }
+      .mode-btn { flex: 1; text-align: center; min-width: 80px; }
+    }
+
     /* ── CARD HIGHLIGHT MODE (Enter key) ────────────────────────────────── */
     .card.search-highlighted {
       border-color: #7c3aed !important;
@@ -1984,6 +2022,20 @@
 
     <!-- normal browse area -->
     <div id="browse-area">
+
+      <!-- search mode selector — hidden until user types -->
+      <div class="search-modes" id="search-modes" style="display:none">
+        <button class="mode-btn" data-mode="papers"
+                onclick="setSearchMode('papers')">📄 Papers</button>
+        <button class="mode-btn active" data-mode="concepts"
+                onclick="setSearchMode('concepts')">💡 Concepts</button>
+        <button class="mode-btn" data-mode="fulltext"
+                onclick="setSearchMode('fulltext')">🔍 Full text</button>
+      </div>
+      <p class="mode-desc" id="mode-desc" style="display:none">
+        Searching titles, tags and summaries
+      </p>
+
       <div id="result-bar"></div>
       <div id="active-filters"></div>
       <div id="grid">
@@ -2146,7 +2198,8 @@ let compareSet     = new Set(); // up to 3 paper IDs
 let cmpMode        = 'technical'; // 'technical' | 'summary'
 let matchEls           = [];    // current search-highlight <mark> elements
 let matchIdx           = 0;    // active match index
-let searchHighlightMode = false; // true while Enter-key card highlighting is active
+let searchHighlightMode  = false;  // true while Enter-key card highlighting is active
+let currentSearchMode   = 'concepts'; // 'papers' | 'concepts' | 'fulltext'
 
 // ── reading progress ──────────────────────────────────────────────────────
 let readProgress = {};
@@ -2309,22 +2362,61 @@ function resolveWikilinks(html) {
   );
 }
 
+// ── search mode helpers ───────────────────────────────────────────────────
+const MODE_DESCRIPTIONS = {
+  papers:   'Searching paper titles and tags only',
+  concepts: 'Searching titles, tags and summaries',
+  fulltext: 'Searching complete note content',
+};
+
+function matchesSearch(note, term) {
+  const t = (term || '').toLowerCase().trim();
+  if (!t) return true;
+  if (currentSearchMode === 'papers') {
+    return (
+      note.title.toLowerCase().includes(t) ||
+      (note.tags || []).some(tag => tag.toLowerCase().includes(t))
+    );
+  }
+  if (currentSearchMode === 'concepts') {
+    return (
+      note.title.toLowerCase().includes(t) ||
+      (note.tags || []).some(tag => tag.toLowerCase().includes(t)) ||
+      (note.tldr && note.tldr.toLowerCase().includes(t))
+    );
+  }
+  // fulltext
+  return (
+    note.title.toLowerCase().includes(t) ||
+    (note.tags || []).some(tag => tag.toLowerCase().includes(t)) ||
+    (note.tldr && note.tldr.toLowerCase().includes(t)) ||
+    (note.search_text && note.search_text.includes(t))
+  );
+}
+
+function setSearchMode(mode) {
+  currentSearchMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(btn =>
+    btn.classList.toggle('active', btn.dataset.mode === mode)
+  );
+  const descEl = document.getElementById('mode-desc');
+  if (descEl) descEl.textContent = MODE_DESCRIPTIONS[mode] || '';
+  // Exit highlight mode and re-run search with new mode
+  if (searchHighlightMode) {
+    searchHighlightMode = false;
+    clearCardHighlighting();
+  }
+  if (query) searchEl.dispatchEvent(new Event('input'));
+}
+
 // ── filtering + sorting ──────────────────────────────────────────────────
 function filteredNotes() {
-  const q = query.toLowerCase().trim();
   return notes.filter(n => {
     for (const t of activeTags) {
       if (!n.tags.includes(t)) return false;
     }
     if (progressFilter !== 'all' && getReadStatus(n.id) !== progressFilter) return false;
-    if (!q) return true;
-    // Priority order: title → tags → tldr → full body text
-    return (
-      n.title.toLowerCase().includes(q) ||
-      n.tags.some(t => t.toLowerCase().includes(q)) ||
-      (n.tldr && n.tldr.toLowerCase().includes(q)) ||
-      (n.search_text && n.search_text.includes(q))
-    );
+    return matchesSearch(n, query);
   });
 }
 
@@ -3628,18 +3720,12 @@ function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
 
 // ── card highlight mode (Enter key) ──────────────────────────────────────
 function applyCardHighlighting(term) {
-  const termLower = term.toLowerCase();
   const cards = [...grid.querySelectorAll('.card')];
   let matchCount = 0;
 
   cards.forEach(card => {
     const note = byId[card.dataset.id] || {};
-    const isMatch = (
-      (note.title       && note.title.toLowerCase().includes(termLower)) ||
-      (note.tags        && note.tags.some(t => t.toLowerCase().includes(termLower))) ||
-      (note.tldr        && note.tldr.toLowerCase().includes(termLower)) ||
-      (note.search_text && note.search_text.includes(termLower))
-    );
+    const isMatch = matchesSearch(note, term);
     if (isMatch) {
       matchCount++;
       card.classList.add('search-highlighted');
@@ -3718,6 +3804,11 @@ searchEl.addEventListener('input', () => {
   }
   query = searchEl.value.trim();
   if (!query) hideMatchNav();
+  // Show/hide mode selector
+  const modesEl   = document.getElementById('search-modes');
+  const modeDescEl = document.getElementById('mode-desc');
+  if (modesEl)    modesEl.style.display    = query ? 'flex'  : 'none';
+  if (modeDescEl) modeDescEl.style.display = query ? 'block' : 'none';
   if (activeTab !== 'top-cited') render();
 });
 
