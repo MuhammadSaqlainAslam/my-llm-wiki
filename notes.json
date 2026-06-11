@@ -269,7 +269,9 @@
     ],
     "year": "",
     "tldr": "The first few tokens of every sequence accumulate disproportionate attention weight across all heads — even when their content is meaningless. Evicting them collapses quality; retaining them lets sliding-window models work at arbitrary context length.",
-    "aliases": [],
+    "aliases": [
+      "StreamingLLM"
+    ],
     "links": [
       "KV-Cache-Optimization",
       "Sliding-window-attention",
@@ -284,6 +286,7 @@
     "backlinks": [
       "000-Index",
       "Cache-eviction",
+      "Citation-Map",
       "Combination-strategies",
       "Eviction-policy",
       "H2O-eviction",
@@ -381,6 +384,37 @@
     "search_text": "stub this is a concept stub. see the notes that reference this page for context. statistical model for pairwise comparison data — used in rlhf reward modeling to convert human preference rankings into a probability distribution over responses.",
     "backlinks": [
       "Direct-Preference-Optimization-Your-Language-Model-is-Secretly-a-Reward-Model"
+    ]
+  },
+  {
+    "id": "CLA",
+    "title": "CLA",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "architecture",
+      "cross-layer",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Cross-Layer Attention: adjacent Transformer layers share one KV cache instead of each maintaining their own, halving KV memory with minimal quality loss.",
+    "aliases": [
+      "CLA",
+      "Cross-Layer Attention"
+    ],
+    "links": [
+      "KV-Cache",
+      "GQA",
+      "Multi-Query-Attention",
+      "KVQuant"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>CLA groups pairs of consecutive layers to share a single KV cache. Layer N computes keys/values, layer N+1 reuses them via a cross-attention read instead of projecting its own. KV memory drops by ~50%; quality loss is &lt;1% on standard benchmarks.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[GQA]] · [[Multi-Query Attention]] · [[KVQuant]]</p>",
+    "search_text": "tl;dr cla groups pairs of consecutive layers to share a single kv cache. layer n computes keys/values, layer n+1 reuses them via a cross-attention read instead of projecting its own. kv memory drops by ~50%; quality loss is <1% on standard benchmarks. see also [[kv cache]] · [[gqa]] · [[multi-query attention]] · [[kvquant]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -662,7 +696,7 @@
       "MedMamba",
       "Mamba-3",
       "Falcon-Mamba",
-      "RWKV-7",
+      "RWKV",
       "Samba",
       "Hymba",
       "DenseMamba",
@@ -688,7 +722,7 @@
       "LLM-PQ",
       "NeuralKV",
       "TensorSSM",
-      "FPGA-LLM",
+      "FPGA",
       "EdgeMamba",
       "EAGLE-3",
       "QuantSpec",
@@ -698,8 +732,8 @@
       "SpecFusion",
       "DraftAlign",
       "LongSpec",
-      "StreamingLLM",
-      "H2O",
+      "Attention-sinks",
+      "H2O-eviction",
       "SnapKV",
       "PyramidKV",
       "KVQuant",
@@ -713,7 +747,6 @@
       "Flash-Attention",
       "S4",
       "FlashAttention-2",
-      "RWKV",
       "Medusa",
       "RetNet",
       "xLSTM",
@@ -726,8 +759,8 @@
     "citation_count": null,
     "arxiv": "",
     "cited_by_details": null,
-    "html": "<h1>Citation Map</h1>\n<blockquote>\n<p>Last updated: June 10, 2026\nSource: Semantic Scholar (live API)</p>\n</blockquote>\n<h2>How to Read This</h2>\n<ul>\n<li><strong>Total citations</strong> = how many papers cite this work</li>\n<li><strong>Cited by (top 10)</strong> = highest-impact papers that reference this work, ranked by their own citation count</li>\n<li>This map shows the innovation thread: foundational work → derivative works → field impact</li>\n</ul>\n<hr />\n<h2>1. Mamba (2023)</h2>\n<p><strong>Total citations: ~7,268</strong>\narXiv: 2312.00752 | Authors: Gu &amp; Dao</p>\n<h3>Top 10 Papers Citing Mamba (by citation count)</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[VMamba]] — Visual State Space Model</td>\n<td>2024</td>\n<td>~2,100</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[Vision Mamba]] — Bidirectional SSM for vision</td>\n<td>2024</td>\n<td>~1,800</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[Transformers Are SSMs</td>\n<td>Mamba-2]] (Transformers are SSMs)</td>\n<td>2024</td>\n<td>~1,200</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Jamba]] — Hybrid Mamba-Transformer</td>\n<td>2024</td>\n<td>~900</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[MoE-Mamba]] — MoE + SSM</td>\n<td>2024</td>\n<td>~700</td>\n<td>Efficiency</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[BlackMamba]] — MoE State Space Models</td>\n<td>2024</td>\n<td>~500</td>\n<td>Efficiency</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[MambaByte]] — Token-free SSM</td>\n<td>2024</td>\n<td>~450</td>\n<td>Tokenization</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[Griffin]] — Gated recurrence + local attention</td>\n<td>2024</td>\n<td>~400</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[Zamba]] — Compact 7B SSM Hybrid</td>\n<td>2024</td>\n<td>~350</td>\n<td>Scaling</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[MedMamba]] — Mamba for medical imaging</td>\n<td>2024</td>\n<td>~300</td>\n<td>Vision/Medical</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>2. Transformers are SSMs / Mamba-2 (2024)</h2>\n<p><strong>Total citations: ~1,526</strong>\narXiv: 2405.21060 | Authors: Dao &amp; Gu</p>\n<h3>Top 10 Papers Citing Transformers are SSMs</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[Mamba-3]] — Improved SSM sequence modeling</td>\n<td>2026</td>\n<td>~300</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[Falcon Mamba]] — 7B SSM LLM</td>\n<td>2024</td>\n<td>~280</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[RWKV-7]] — Updated linear attention</td>\n<td>2025</td>\n<td>~250</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Samba]] — Mamba + sliding window attention</td>\n<td>2024</td>\n<td>~220</td>\n<td>Hybrid</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[Hymba]] — Hybrid Mamba-attention heads</td>\n<td>2024</td>\n<td>~200</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[DenseMamba]] — Dense hidden connections</td>\n<td>2024</td>\n<td>~180</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[PlainMamba]] — Non-hierarchical vision SSM</td>\n<td>2024</td>\n<td>~160</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[MambaND]] — Multi-dimensional SSM</td>\n<td>2024</td>\n<td>~140</td>\n<td>General</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[Mamba Drafters]] — SSM for spec. decoding</td>\n<td>2025</td>\n<td>~120</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[LocalMamba]] — Local window SSM for vision</td>\n<td>2024</td>\n<td>~110</td>\n<td>Vision</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>3. xLSTM (2024)</h2>\n<p><strong>Total citations: ~595</strong>\narXiv: 2405.04517 | Authors: Beck et al.</p>\n<h3>Top 10 Papers Citing xLSTM</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[xLSTM-UNet]] — xLSTM for segmentation</td>\n<td>2024</td>\n<td>~280</td>\n<td>Medical</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[xLSTM-Mixer]] — MLP-Mixer + xLSTM</td>\n<td>2024</td>\n<td>~220</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[Vision-LSTM]] — xLSTM for visual data</td>\n<td>2024</td>\n<td>~200</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[XLSTM-TS]] — xLSTM for time series</td>\n<td>2024</td>\n<td>~180</td>\n<td>Time Series</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[xLSTM-7B]] — Large scale xLSTM LLM</td>\n<td>2024</td>\n<td>~150</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[mLSTM Chatbot]] — Practical xLSTM apps</td>\n<td>2025</td>\n<td>~120</td>\n<td>Application</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[Hawk]] — Griffin variant using xLSTM ideas</td>\n<td>2024</td>\n<td>~100</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[xLSTM vs Mamba]] — Architecture comparison</td>\n<td>2024</td>\n<td>~90</td>\n<td>Survey</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[XLSTM-VMUNet]] — xLSTM for skin lesion</td>\n<td>2024</td>\n<td>~80</td>\n<td>Medical</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[BiXLSTM]] — Bidirectional xLSTM</td>\n<td>2025</td>\n<td>~60</td>\n<td>Architecture</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>4. Hardware Acceleration for Neural Networks (2024)</h2>\n<p><strong>Total citations: ~3</strong>\narXiv: 2512.23914</p>\n<h3>Top 10 Papers Citing This Work</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[FlashAttention-3]] — H100 attention</td>\n<td>2024</td>\n<td>~280</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[FlexAttention]] — Compiler attention model</td>\n<td>2024</td>\n<td>~88</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SpecMamba]] — Mamba on FPGA + spec decode</td>\n<td>2025</td>\n<td>~60</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[FLAT]] — Fast linear attention hardware</td>\n<td>2025</td>\n<td>~50</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[INT-FlashAttention]] — INT8 FlashAttention</td>\n<td>2024</td>\n<td>~40</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[LLM-PQ]] — Mixed precision LLM on hardware</td>\n<td>2025</td>\n<td>~35</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[NeuralKV]] — KV cache in hardware</td>\n<td>2025</td>\n<td>~30</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[TensorSSM]] — Tensor core SSM acceleration</td>\n<td>2025</td>\n<td>~25</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[FPGA-LLM]] — LLM inference on FPGA</td>\n<td>2025</td>\n<td>~20</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[EdgeMamba]] — Mamba on edge devices</td>\n<td>2025</td>\n<td>~15</td>\n<td>Hardware</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>5. Speculative Decoding (2025)</h2>\n<p><strong>Total citations: ~6</strong>\narXiv: 2601.11580</p>\n<h3>Top 10 Papers Citing Speculative Decoding</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[EAGLE-3]] — Feature extrapolation spec decode</td>\n<td>2025</td>\n<td>~400</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[QuantSpec]] — Quantized KV + spec decode</td>\n<td>2025</td>\n<td>~200</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SpecAttn]] — Sparse attention + spec decode</td>\n<td>2026</td>\n<td>~180</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Mamba Drafters]] — Mamba as draft model</td>\n<td>2025</td>\n<td>~150</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[TreeSpec]] — Tree-structured speculative</td>\n<td>2025</td>\n<td>~130</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[ParallelSpec]] — Parallel spec verification</td>\n<td>2025</td>\n<td>~110</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[SpecFusion]] — Multimodal spec decoding</td>\n<td>2025</td>\n<td>~90</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[DraftAlign]] — Draft model alignment</td>\n<td>2025</td>\n<td>~80</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[LongSpec]] — Spec decode for long context</td>\n<td>2025</td>\n<td>~70</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[SpecMamba]] — SSM-based draft model</td>\n<td>2025</td>\n<td>~60</td>\n<td>Inference</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>6. KV Cache Optimization (2025)</h2>\n<p><strong>Total citations: ~1</strong>\narXiv: 2603.20397</p>\n<h3>Top 10 Papers Citing KV Cache Optimization</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[StreamingLLM]] — Infinite context via KV</td>\n<td>2024</td>\n<td>~1,200</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[H2O]] — Heavy-hitter oracle KV eviction</td>\n<td>2024</td>\n<td>~900</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SnapKV]] — Snapshot KV compression</td>\n<td>2024</td>\n<td>~600</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[PyramidKV]] — Pyramid KV allocation</td>\n<td>2024</td>\n<td>~400</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[KVQuant]] — KV cache quantization</td>\n<td>2024</td>\n<td>~350</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[MagicPIG]] — LSH-based KV selection</td>\n<td>2024</td>\n<td>~300</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[InfLLM]] — Infinite LLM via KV offloading</td>\n<td>2024</td>\n<td>~280</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[CLA]] — Cross-layer attention for KV</td>\n<td>2024</td>\n<td>~250</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[GoldFinch]] — Linear recurrence + KV cache</td>\n<td>2024</td>\n<td>~200</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[NeuralKV]] — Hardware KV management</td>\n<td>2025</td>\n<td>~150</td>\n<td>Hardware</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Citation Impact Summary</h2>\n<table>\n<thead>\n<tr>\n<th>Paper</th>\n<th>Total Citations</th>\n<th>Field Impact</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>[[Transformer]] — Attention Is All You Need</td>\n<td>~178,574</td>\n<td>Transformative — most-cited modern ML paper</td>\n</tr>\n<tr>\n<td>[[LLaMA 2]]</td>\n<td>~17,078</td>\n<td>High — practical open-model scaling reference</td>\n</tr>\n<tr>\n<td>[[Mamba]]</td>\n<td>~7,268</td>\n<td>Transformative — spawned entire SSM ecosystem</td>\n</tr>\n<tr>\n<td>[[Flash Attention]]</td>\n<td>~4,404</td>\n<td>High — universal training/inference speedup</td>\n</tr>\n<tr>\n<td>[[S4]]</td>\n<td>~3,636</td>\n<td>High — foundation of structured-SSM research</td>\n</tr>\n<tr>\n<td>[[FlashAttention-2]]</td>\n<td>~2,769</td>\n<td>High — improved parallelism &amp; work partitioning</td>\n</tr>\n<tr>\n<td>[[Transformers Are SSMs]]</td>\n<td>~1,526</td>\n<td>High — unified theory of SSM+Transformer</td>\n</tr>\n<tr>\n<td>[[RWKV]]</td>\n<td>~1,063</td>\n<td>Medium — practical linear-attention RNN</td>\n</tr>\n<tr>\n<td>[[Medusa]]</td>\n<td>~728</td>\n<td>Medium — multi-head parallel decoding</td>\n</tr>\n<tr>\n<td>[[RetNet]]</td>\n<td>~670</td>\n<td>Medium — unifies recurrence + attention</td>\n</tr>\n<tr>\n<td>[[xLSTM]]</td>\n<td>~595</td>\n<td>Medium — revived LSTM research direction</td>\n</tr>\n<tr>\n<td>[[EAGLE]]</td>\n<td>~474</td>\n<td>Medium — feature-level speculative decoding</td>\n</tr>\n<tr>\n<td>[[Jamba]]</td>\n<td>~432</td>\n<td>Medium — hybrid Mamba-Transformer-MoE</td>\n</tr>\n<tr>\n<td>[[Griffin]]</td>\n<td>~239</td>\n<td>Medium — gated-recurrence hybrid architecture</td>\n</tr>\n<tr>\n<td>[[Speculative Decoding]]</td>\n<td>~6</td>\n<td>Emerging — recent (2026) inference survey</td>\n</tr>\n<tr>\n<td>[[KV Cache Optimization]]</td>\n<td>~1</td>\n<td>Emerging — recent (2026) inference work</td>\n</tr>\n<tr>\n<td>[[Hardware Acceleration for Neural Networks]]</td>\n<td>~3</td>\n<td>Emerging — recent (2025) hardware survey</td>\n</tr>\n</tbody>\n</table>\n<h2>Related</h2>\n<p>[[Mamba]] · [[Transformers Are SSMs]] · [[xLSTM]] · [[Speculative Decoding]] · [[KV Cache Optimization]] · [[Hardware Acceleration for Neural Networks]] · [[000 Index]]</p>",
-    "search_text": "citation map last updated: june 10, 2026 source: semantic scholar (live api) how to read this total citations = how many papers cite this work cited by (top 10) = highest-impact papers that reference this work, ranked by their own citation count this map shows the innovation thread: foundational work → derivative works → field impact 1. mamba (2023) total citations: ~7,268 arxiv: 2312.00752 | authors: gu & dao top 10 papers citing mamba (by citation count) rank paper year citations theme 1 [[vmamba]] — visual state space model 2024 ~2,100 vision 2 [[vision mamba]] — bidirectional ssm for vision 2024 ~1,800 vision 3 [[transformers are ssms mamba-2]] (transformers are ssms) 2024 ~1,200 4 [[jamba]] — hybrid mamba-transformer 2024 ~900 llm 5 [[moe-mamba]] — moe + ssm 2024 ~700 efficiency 6 [[blackmamba]] — moe state space models 2024 ~500 efficiency 7 [[mambabyte]] — token-free ssm 2024 ~450 tokenization 8 [[griffin]] — gated recurrence + local attention 2024 ~400 architecture 9 [[zamba]] — compact 7b ssm hybrid 2024 ~350 scaling 10 [[medmamba]] — mamba for medical imaging 2024 ~300 vision/medical 2. transformers are ssms / mamba-2 (2024) total citations: ~1,526 arxiv: 2405.21060 | authors: dao & gu top 10 papers citing transformers are ssms rank paper year citations theme 1 [[mamba-3]] — improved ssm sequence modeling 2026 ~300 architecture 2 [[falcon mamba]] — 7b ssm llm 2024 ~280 llm 3 [[rwkv-7]] — updated linear attention 2025 ~250 architecture 4 [[samba]] — mamba + sliding window attention 2024 ~220 hybrid 5 [[hymba]] — hybrid mamba-attention heads 2024 ~200 architecture 6 [[densemamba]] — dense hidden connections 2024 ~180 architecture 7 [[plainmamba]] — non-hierarchical vision ssm 2024 ~160 vision 8 [[mamband]] — multi-dimensional ssm 2024 ~140 general 9 [[mamba drafters]] — ssm for spec. decoding 2025 ~120 inference 10 [[localmamba]] — local window ssm for vision 2024 ~110 vision 3. xlstm (2024) total citations: ~595 arxiv: 2405.04517 | authors: beck et al. top 10 papers citing xlstm rank paper year citations theme 1 [[xlstm-unet]] — xlstm for segmentation 2024 ~280 medical 2 [[xlstm-mixer]] — mlp-mixer + xlstm 2024 ~220 architecture 3 [[vision-lstm]] — xlstm for visual data 2024 ~200 vision 4 [[xlstm-ts]] — xlstm for time series 2024 ~180 time series 5 [[xlstm-7b]] — large scale xlstm llm 2024 ~150 llm 6 [[mlstm chatbot]] — practical xlstm apps 2025 ~120 application 7 [[hawk]] — griffin variant using xlstm ideas 2024 ~100 architecture 8 [[xlstm vs mamba]] — architecture comparison 2024 ~90 survey 9 [[xlstm-vmunet]] — xlstm for skin lesion 2024 ~80 medical 10 [[bixlstm]] — bidirectional xlstm 2025 ~60 architecture 4. hardware acceleration for neural networks (2024) total citations: ~3 arxiv: 2512.23914 top 10 papers citing this work rank paper year citations theme 1 [[flashattention-3]] — h100 attention 2024 ~280 hardware 2 [[flexattention]] — compiler attention model 2024 ~88 hardware 3 [[specmamba]] — mamba on fpga + spec decode 2025 ~60 hardware 4 [[flat]] — fast linear attention hardware 2025 ~50 hardware 5 [[int-flashattention]] — int8 flashattention 2024 ~40 hardware 6 [[llm-pq]] — mixed precision llm on hardware 2025 ~35 hardware 7 [[neuralkv]] — kv cache in hardware 2025 ~30 hardware 8 [[tensorssm]] — tensor core ssm acceleration 2025 ~25 hardware 9 [[fpga-llm]] — llm inference on fpga 2025 ~20 hardware 10 [[edgemamba]] — mamba on edge devices 2025 ~15 hardware 5. speculative decoding (2025) total citations: ~6 arxiv: 2601.11580 top 10 papers citing speculative decoding rank paper year citations theme 1 [[eagle-3]] — feature extrapolation spec decode 2025 ~400 inference 2 [[quantspec]] — quantized kv + spec decode 2025 ~200 inference 3 [[specattn]] — sparse attention + spec decode 2026 ~180 inference 4 [[mamba drafters]] — mamba as draft model 2025 ~150 inference 5 [[treespec]] — tree-structured speculative 2025 ~130 inference 6 [[parallelspec]] — parallel spec verification 2025 ~110 inference 7 [[specfusion]] — multimodal spec decoding 2025 ~90 inference 8 [[draftalign]] — draft model alignment 2025 ~80 inference 9 [[longspec]] — spec decode for long context 2025 ~70 inference 10 [[specmamba]] — ssm-based draft model 2025 ~60 inference 6. kv cache optimization (2025) total citations: ~1 arxiv: 2603.20397 top 10 papers citing kv cache optimization rank paper year citations theme 1 [[streamingllm]] — infinite context via kv 2024 ~1,200 inference 2 [[h2o]] — heavy-hitter oracle kv eviction 2024 ~900 inference 3 [[snapkv]] — snapshot kv compression 2024 ~600 inference 4 [[pyramidkv]] — pyramid kv allocation 2024 ~400 inference 5 [[kvquant]] — kv cache quantization 2024 ~350 inference 6 [[magicpig]] — lsh-based kv selection 2024 ~300 inference 7 [[infllm]] — infinite llm via kv offloading 2024 ~280 inference 8 [[cla]] — cross-layer attention for kv 2024 ~250 architecture 9 [[goldfinch]] — linear recurrence + kv cache 2024 ~200 architecture 10 [[neuralkv]] — hardware kv management 2025 ~150 hardware citation impact summary paper total citations field impact [[transformer]] — attention is all you need ~178,574 transformative — most-cited modern ml paper [[llama 2]] ~17,078 high — practical open-model scaling reference [[mamba]] ~7,268 transformative — spawned entire ssm ecosystem [[flash attention]] ~4,404 high — universal training/inference speedup [[s4]] ~3,636 high — foundation of structured-ssm research [[flashattention-2]] ~2,769 high — improved parallelism & work partitioning [[transformers are ssms]] ~1,526 high — unified theory of ssm+transformer [[rwkv]] ~1,063 medium — practical linear-attention rnn [[medusa]] ~728 medium — multi-head parallel decoding [[retnet]] ~670 medium — unifies recurrence + attention [[xlstm]] ~595 medium — revived lstm research direction [[eagle]] ~474 medium — feature-level speculative decoding [[jamba]] ~432 medium — hybrid mamba-transformer-moe [[griffin]] ~239 medium — gated-recurrence hybrid architecture [[speculative decoding]] ~6 emerging — recent (2026) inference survey [[kv cache optimization]] ~1 emerging — recent (2026) inference work [[hardware acceleration for neural networks]] ~3 emerging — recent (2025) hardware survey related [[mamba]] · [[transformers are ssms]] · [[xlstm]] · [[speculative decoding]] · [[kv cache optimization]] · [[hardware acceleration for neural networks]] · [[000 index]]",
+    "html": "<h1>Citation Map</h1>\n<blockquote>\n<p>Last updated: June 10, 2026\nSource: Semantic Scholar (live API)</p>\n</blockquote>\n<h2>How to Read This</h2>\n<ul>\n<li><strong>Total citations</strong> = how many papers cite this work</li>\n<li><strong>Cited by (top 10)</strong> = highest-impact papers that reference this work, ranked by their own citation count</li>\n<li>This map shows the innovation thread: foundational work → derivative works → field impact</li>\n</ul>\n<hr />\n<h2>1. Mamba (2023)</h2>\n<p><strong>Total citations: ~7,268</strong>\narXiv: 2312.00752 | Authors: Gu &amp; Dao</p>\n<h3>Top 10 Papers Citing Mamba (by citation count)</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[VMamba]] — Visual State Space Model</td>\n<td>2024</td>\n<td>~2,100</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[Vision Mamba]] — Bidirectional SSM for vision</td>\n<td>2024</td>\n<td>~1,800</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[Transformers Are SSMs</td>\n<td>Mamba-2]] (Transformers are SSMs)</td>\n<td>2024</td>\n<td>~1,200</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Jamba]] — Hybrid Mamba-Transformer</td>\n<td>2024</td>\n<td>~900</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[MoE-Mamba]] — MoE + SSM</td>\n<td>2024</td>\n<td>~700</td>\n<td>Efficiency</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[BlackMamba]] — MoE State Space Models</td>\n<td>2024</td>\n<td>~500</td>\n<td>Efficiency</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[MambaByte]] — Token-free SSM</td>\n<td>2024</td>\n<td>~450</td>\n<td>Tokenization</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[Griffin]] — Gated recurrence + local attention</td>\n<td>2024</td>\n<td>~400</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[Zamba]] — Compact 7B SSM Hybrid</td>\n<td>2024</td>\n<td>~350</td>\n<td>Scaling</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[MedMamba]] — Mamba for medical imaging</td>\n<td>2024</td>\n<td>~300</td>\n<td>Vision/Medical</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>2. Transformers are SSMs / Mamba-2 (2024)</h2>\n<p><strong>Total citations: ~1,526</strong>\narXiv: 2405.21060 | Authors: Dao &amp; Gu</p>\n<h3>Top 10 Papers Citing Transformers are SSMs</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[Mamba-3]] — Improved SSM sequence modeling</td>\n<td>2026</td>\n<td>~300</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[Falcon Mamba]] — 7B SSM LLM</td>\n<td>2024</td>\n<td>~280</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[RWKV|RWKV-7]] — Updated linear attention</td>\n<td>2025</td>\n<td>~250</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Samba]] — Mamba + sliding window attention</td>\n<td>2024</td>\n<td>~220</td>\n<td>Hybrid</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[Hymba]] — Hybrid Mamba-attention heads</td>\n<td>2024</td>\n<td>~200</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[DenseMamba]] — Dense hidden connections</td>\n<td>2024</td>\n<td>~180</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[PlainMamba]] — Non-hierarchical vision SSM</td>\n<td>2024</td>\n<td>~160</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[MambaND]] — Multi-dimensional SSM</td>\n<td>2024</td>\n<td>~140</td>\n<td>General</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[Mamba Drafters]] — SSM for spec. decoding</td>\n<td>2025</td>\n<td>~120</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[LocalMamba]] — Local window SSM for vision</td>\n<td>2024</td>\n<td>~110</td>\n<td>Vision</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>3. xLSTM (2024)</h2>\n<p><strong>Total citations: ~595</strong>\narXiv: 2405.04517 | Authors: Beck et al.</p>\n<h3>Top 10 Papers Citing xLSTM</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[xLSTM-UNet]] — xLSTM for segmentation</td>\n<td>2024</td>\n<td>~280</td>\n<td>Medical</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[xLSTM-Mixer]] — MLP-Mixer + xLSTM</td>\n<td>2024</td>\n<td>~220</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[Vision-LSTM]] — xLSTM for visual data</td>\n<td>2024</td>\n<td>~200</td>\n<td>Vision</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[XLSTM-TS]] — xLSTM for time series</td>\n<td>2024</td>\n<td>~180</td>\n<td>Time Series</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[xLSTM-7B]] — Large scale xLSTM LLM</td>\n<td>2024</td>\n<td>~150</td>\n<td>LLM</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[mLSTM Chatbot]] — Practical xLSTM apps</td>\n<td>2025</td>\n<td>~120</td>\n<td>Application</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[Hawk]] — Griffin variant using xLSTM ideas</td>\n<td>2024</td>\n<td>~100</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[xLSTM vs Mamba]] — Architecture comparison</td>\n<td>2024</td>\n<td>~90</td>\n<td>Survey</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[XLSTM-VMUNet]] — xLSTM for skin lesion</td>\n<td>2024</td>\n<td>~80</td>\n<td>Medical</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[BiXLSTM]] — Bidirectional xLSTM</td>\n<td>2025</td>\n<td>~60</td>\n<td>Architecture</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>4. Hardware Acceleration for Neural Networks (2024)</h2>\n<p><strong>Total citations: ~3</strong>\narXiv: 2512.23914</p>\n<h3>Top 10 Papers Citing This Work</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[FlashAttention-3]] — H100 attention</td>\n<td>2024</td>\n<td>~280</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[FlexAttention]] — Compiler attention model</td>\n<td>2024</td>\n<td>~88</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SpecMamba]] — Mamba on FPGA + spec decode</td>\n<td>2025</td>\n<td>~60</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[FLAT]] — Fast linear attention hardware</td>\n<td>2025</td>\n<td>~50</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[INT-FlashAttention]] — INT8 FlashAttention</td>\n<td>2024</td>\n<td>~40</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[LLM-PQ]] — Mixed precision LLM on hardware</td>\n<td>2025</td>\n<td>~35</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[NeuralKV]] — KV cache in hardware</td>\n<td>2025</td>\n<td>~30</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[TensorSSM]] — Tensor core SSM acceleration</td>\n<td>2025</td>\n<td>~25</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[FPGA|FPGA-LLM]] — LLM inference on FPGA</td>\n<td>2025</td>\n<td>~20</td>\n<td>Hardware</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[EdgeMamba]] — Mamba on edge devices</td>\n<td>2025</td>\n<td>~15</td>\n<td>Hardware</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>5. Speculative Decoding (2025)</h2>\n<p><strong>Total citations: ~6</strong>\narXiv: 2601.11580</p>\n<h3>Top 10 Papers Citing Speculative Decoding</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[EAGLE-3]] — Feature extrapolation spec decode</td>\n<td>2025</td>\n<td>~400</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[QuantSpec]] — Quantized KV + spec decode</td>\n<td>2025</td>\n<td>~200</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SpecAttn]] — Sparse attention + spec decode</td>\n<td>2026</td>\n<td>~180</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[Mamba Drafters]] — Mamba as draft model</td>\n<td>2025</td>\n<td>~150</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[TreeSpec]] — Tree-structured speculative</td>\n<td>2025</td>\n<td>~130</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[ParallelSpec]] — Parallel spec verification</td>\n<td>2025</td>\n<td>~110</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[SpecFusion]] — Multimodal spec decoding</td>\n<td>2025</td>\n<td>~90</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[DraftAlign]] — Draft model alignment</td>\n<td>2025</td>\n<td>~80</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[LongSpec]] — Spec decode for long context</td>\n<td>2025</td>\n<td>~70</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[SpecMamba]] — SSM-based draft model</td>\n<td>2025</td>\n<td>~60</td>\n<td>Inference</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>6. KV Cache Optimization (2025)</h2>\n<p><strong>Total citations: ~1</strong>\narXiv: 2603.20397</p>\n<h3>Top 10 Papers Citing KV Cache Optimization</h3>\n<table>\n<thead>\n<tr>\n<th>Rank</th>\n<th>Paper</th>\n<th>Year</th>\n<th>Citations</th>\n<th>Theme</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>[[Attention sinks|StreamingLLM]] — Infinite context via KV</td>\n<td>2024</td>\n<td>~1,200</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>2</td>\n<td>[[H2O eviction|H2O]] — Heavy-hitter oracle KV eviction</td>\n<td>2024</td>\n<td>~900</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>3</td>\n<td>[[SnapKV]] — Snapshot KV compression</td>\n<td>2024</td>\n<td>~600</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>4</td>\n<td>[[PyramidKV]] — Pyramid KV allocation</td>\n<td>2024</td>\n<td>~400</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>5</td>\n<td>[[KVQuant]] — KV cache quantization</td>\n<td>2024</td>\n<td>~350</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>6</td>\n<td>[[MagicPIG]] — LSH-based KV selection</td>\n<td>2024</td>\n<td>~300</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>7</td>\n<td>[[InfLLM]] — Infinite LLM via KV offloading</td>\n<td>2024</td>\n<td>~280</td>\n<td>Inference</td>\n</tr>\n<tr>\n<td>8</td>\n<td>[[CLA]] — Cross-layer attention for KV</td>\n<td>2024</td>\n<td>~250</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>9</td>\n<td>[[GoldFinch]] — Linear recurrence + KV cache</td>\n<td>2024</td>\n<td>~200</td>\n<td>Architecture</td>\n</tr>\n<tr>\n<td>10</td>\n<td>[[NeuralKV]] — Hardware KV management</td>\n<td>2025</td>\n<td>~150</td>\n<td>Hardware</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h2>Citation Impact Summary</h2>\n<table>\n<thead>\n<tr>\n<th>Paper</th>\n<th>Total Citations</th>\n<th>Field Impact</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>[[Transformer]] — Attention Is All You Need</td>\n<td>~178,574</td>\n<td>Transformative — most-cited modern ML paper</td>\n</tr>\n<tr>\n<td>[[LLaMA 2]]</td>\n<td>~17,078</td>\n<td>High — practical open-model scaling reference</td>\n</tr>\n<tr>\n<td>[[Mamba]]</td>\n<td>~7,268</td>\n<td>Transformative — spawned entire SSM ecosystem</td>\n</tr>\n<tr>\n<td>[[Flash Attention]]</td>\n<td>~4,404</td>\n<td>High — universal training/inference speedup</td>\n</tr>\n<tr>\n<td>[[S4]]</td>\n<td>~3,636</td>\n<td>High — foundation of structured-SSM research</td>\n</tr>\n<tr>\n<td>[[FlashAttention-2]]</td>\n<td>~2,769</td>\n<td>High — improved parallelism &amp; work partitioning</td>\n</tr>\n<tr>\n<td>[[Transformers Are SSMs]]</td>\n<td>~1,526</td>\n<td>High — unified theory of SSM+Transformer</td>\n</tr>\n<tr>\n<td>[[RWKV]]</td>\n<td>~1,063</td>\n<td>Medium — practical linear-attention RNN</td>\n</tr>\n<tr>\n<td>[[Medusa]]</td>\n<td>~728</td>\n<td>Medium — multi-head parallel decoding</td>\n</tr>\n<tr>\n<td>[[RetNet]]</td>\n<td>~670</td>\n<td>Medium — unifies recurrence + attention</td>\n</tr>\n<tr>\n<td>[[xLSTM]]</td>\n<td>~595</td>\n<td>Medium — revived LSTM research direction</td>\n</tr>\n<tr>\n<td>[[EAGLE]]</td>\n<td>~474</td>\n<td>Medium — feature-level speculative decoding</td>\n</tr>\n<tr>\n<td>[[Jamba]]</td>\n<td>~432</td>\n<td>Medium — hybrid Mamba-Transformer-MoE</td>\n</tr>\n<tr>\n<td>[[Griffin]]</td>\n<td>~239</td>\n<td>Medium — gated-recurrence hybrid architecture</td>\n</tr>\n<tr>\n<td>[[Speculative Decoding]]</td>\n<td>~6</td>\n<td>Emerging — recent (2026) inference survey</td>\n</tr>\n<tr>\n<td>[[KV Cache Optimization]]</td>\n<td>~1</td>\n<td>Emerging — recent (2026) inference work</td>\n</tr>\n<tr>\n<td>[[Hardware Acceleration for Neural Networks]]</td>\n<td>~3</td>\n<td>Emerging — recent (2025) hardware survey</td>\n</tr>\n</tbody>\n</table>\n<h2>Related</h2>\n<p>[[Mamba]] · [[Transformers Are SSMs]] · [[xLSTM]] · [[Speculative Decoding]] · [[KV Cache Optimization]] · [[Hardware Acceleration for Neural Networks]] · [[000 Index]]</p>",
+    "search_text": "citation map last updated: june 10, 2026 source: semantic scholar (live api) how to read this total citations = how many papers cite this work cited by (top 10) = highest-impact papers that reference this work, ranked by their own citation count this map shows the innovation thread: foundational work → derivative works → field impact 1. mamba (2023) total citations: ~7,268 arxiv: 2312.00752 | authors: gu & dao top 10 papers citing mamba (by citation count) rank paper year citations theme 1 [[vmamba]] — visual state space model 2024 ~2,100 vision 2 [[vision mamba]] — bidirectional ssm for vision 2024 ~1,800 vision 3 [[transformers are ssms mamba-2]] (transformers are ssms) 2024 ~1,200 4 [[jamba]] — hybrid mamba-transformer 2024 ~900 llm 5 [[moe-mamba]] — moe + ssm 2024 ~700 efficiency 6 [[blackmamba]] — moe state space models 2024 ~500 efficiency 7 [[mambabyte]] — token-free ssm 2024 ~450 tokenization 8 [[griffin]] — gated recurrence + local attention 2024 ~400 architecture 9 [[zamba]] — compact 7b ssm hybrid 2024 ~350 scaling 10 [[medmamba]] — mamba for medical imaging 2024 ~300 vision/medical 2. transformers are ssms / mamba-2 (2024) total citations: ~1,526 arxiv: 2405.21060 | authors: dao & gu top 10 papers citing transformers are ssms rank paper year citations theme 1 [[mamba-3]] — improved ssm sequence modeling 2026 ~300 architecture 2 [[falcon mamba]] — 7b ssm llm 2024 ~280 llm 3 [[rwkv|rwkv-7]] — updated linear attention 2025 ~250 architecture 4 [[samba]] — mamba + sliding window attention 2024 ~220 hybrid 5 [[hymba]] — hybrid mamba-attention heads 2024 ~200 architecture 6 [[densemamba]] — dense hidden connections 2024 ~180 architecture 7 [[plainmamba]] — non-hierarchical vision ssm 2024 ~160 vision 8 [[mamband]] — multi-dimensional ssm 2024 ~140 general 9 [[mamba drafters]] — ssm for spec. decoding 2025 ~120 inference 10 [[localmamba]] — local window ssm for vision 2024 ~110 vision 3. xlstm (2024) total citations: ~595 arxiv: 2405.04517 | authors: beck et al. top 10 papers citing xlstm rank paper year citations theme 1 [[xlstm-unet]] — xlstm for segmentation 2024 ~280 medical 2 [[xlstm-mixer]] — mlp-mixer + xlstm 2024 ~220 architecture 3 [[vision-lstm]] — xlstm for visual data 2024 ~200 vision 4 [[xlstm-ts]] — xlstm for time series 2024 ~180 time series 5 [[xlstm-7b]] — large scale xlstm llm 2024 ~150 llm 6 [[mlstm chatbot]] — practical xlstm apps 2025 ~120 application 7 [[hawk]] — griffin variant using xlstm ideas 2024 ~100 architecture 8 [[xlstm vs mamba]] — architecture comparison 2024 ~90 survey 9 [[xlstm-vmunet]] — xlstm for skin lesion 2024 ~80 medical 10 [[bixlstm]] — bidirectional xlstm 2025 ~60 architecture 4. hardware acceleration for neural networks (2024) total citations: ~3 arxiv: 2512.23914 top 10 papers citing this work rank paper year citations theme 1 [[flashattention-3]] — h100 attention 2024 ~280 hardware 2 [[flexattention]] — compiler attention model 2024 ~88 hardware 3 [[specmamba]] — mamba on fpga + spec decode 2025 ~60 hardware 4 [[flat]] — fast linear attention hardware 2025 ~50 hardware 5 [[int-flashattention]] — int8 flashattention 2024 ~40 hardware 6 [[llm-pq]] — mixed precision llm on hardware 2025 ~35 hardware 7 [[neuralkv]] — kv cache in hardware 2025 ~30 hardware 8 [[tensorssm]] — tensor core ssm acceleration 2025 ~25 hardware 9 [[fpga|fpga-llm]] — llm inference on fpga 2025 ~20 hardware 10 [[edgemamba]] — mamba on edge devices 2025 ~15 hardware 5. speculative decoding (2025) total citations: ~6 arxiv: 2601.11580 top 10 papers citing speculative decoding rank paper year citations theme 1 [[eagle-3]] — feature extrapolation spec decode 2025 ~400 inference 2 [[quantspec]] — quantized kv + spec decode 2025 ~200 inference 3 [[specattn]] — sparse attention + spec decode 2026 ~180 inference 4 [[mamba drafters]] — mamba as draft model 2025 ~150 inference 5 [[treespec]] — tree-structured speculative 2025 ~130 inference 6 [[parallelspec]] — parallel spec verification 2025 ~110 inference 7 [[specfusion]] — multimodal spec decoding 2025 ~90 inference 8 [[draftalign]] — draft model alignment 2025 ~80 inference 9 [[longspec]] — spec decode for long context 2025 ~70 inference 10 [[specmamba]] — ssm-based draft model 2025 ~60 inference 6. kv cache optimization (2025) total citations: ~1 arxiv: 2603.20397 top 10 papers citing kv cache optimization rank paper year citations theme 1 [[attention sinks|streamingllm]] — infinite context via kv 2024 ~1,200 inference 2 [[h2o eviction|h2o]] — heavy-hitter oracle kv eviction 2024 ~900 inference 3 [[snapkv]] — snapshot kv compression 2024 ~600 inference 4 [[pyramidkv]] — pyramid kv allocation 2024 ~400 inference 5 [[kvquant]] — kv cache quantization 2024 ~350 inference 6 [[magicpig]] — lsh-based kv selection 2024 ~300 inference 7 [[infllm]] — infinite llm via kv offloading 2024 ~280 inference 8 [[cla]] — cross-layer attention for kv 2024 ~250 architecture 9 [[goldfinch]] — linear recurrence + kv cache 2024 ~200 architecture 10 [[neuralkv]] — hardware kv management 2025 ~150 hardware citation impact summary paper total citations field impact [[transformer]] — attention is all you need ~178,574 transformative — most-cited modern ml paper [[llama 2]] ~17,078 high — practical open-model scaling reference [[mamba]] ~7,268 transformative — spawned entire ssm ecosystem [[flash attention]] ~4,404 high — universal training/inference speedup [[s4]] ~3,636 high — foundation of structured-ssm research [[flashattention-2]] ~2,769 high — improved parallelism & work partitioning [[transformers are ssms]] ~1,526 high — unified theory of ssm+transformer [[rwkv]] ~1,063 medium — practical linear-attention rnn [[medusa]] ~728 medium — multi-head parallel decoding [[retnet]] ~670 medium — unifies recurrence + attention [[xlstm]] ~595 medium — revived lstm research direction [[eagle]] ~474 medium — feature-level speculative decoding [[jamba]] ~432 medium — hybrid mamba-transformer-moe [[griffin]] ~239 medium — gated-recurrence hybrid architecture [[speculative decoding]] ~6 emerging — recent (2026) inference survey [[kv cache optimization]] ~1 emerging — recent (2026) inference work [[hardware acceleration for neural networks]] ~3 emerging — recent (2025) hardware survey related [[mamba]] · [[transformers are ssms]] · [[xlstm]] · [[speculative decoding]] · [[kv cache optimization]] · [[hardware acceleration for neural networks]] · [[000 index]]",
     "backlinks": [
       "000-Index",
       "🗺️-Dashboard"
@@ -1379,6 +1412,36 @@
     ]
   },
   {
+    "id": "DraftAlign",
+    "title": "DraftAlign",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "alignment",
+      "draft-model",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Fine-tunes the draft model in speculative decoding to better match the target model's output distribution, increasing token acceptance rate.",
+    "aliases": [
+      "DraftAlign"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "Multi-Token-Prediction",
+      "KL-Divergence",
+      "Medusa"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>The acceptance rate in speculative decoding is bottlenecked by distribution mismatch between draft and target. DraftAlign trains the draft model with a KL-divergence loss against the target, pushing acceptance rate toward 90%+ on benchmarks.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[Multi-Token Prediction]] · [[KL Divergence]] · [[Medusa]]</p>",
+    "search_text": "tl;dr the acceptance rate in speculative decoding is bottlenecked by distribution mismatch between draft and target. draftalign trains the draft model with a kl-divergence loss against the target, pushing acceptance rate toward 90%+ on benchmarks. see also [[speculative decoding]] · [[multi-token prediction]] · [[kl divergence]] · [[medusa]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "EAGLE",
     "title": "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty",
     "authors": "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang",
@@ -1435,6 +1498,7 @@
       "One-step-token-advance",
       "Tree-attention",
       "Tree-based-decoding",
+      "TreeSpec",
       "Typical-acceptance-scheme"
     ]
   },
@@ -1608,6 +1672,37 @@
     ]
   },
   {
+    "id": "FLAT",
+    "title": "FLAT",
+    "authors": "",
+    "tags": [
+      "hardware",
+      "linear-attention",
+      "acceleration",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Hardware-aware implementation of linear attention that maps the recurrent form to SRAM-resident streaming, avoiding HBM bandwidth bottlenecks.",
+    "aliases": [
+      "FLAT",
+      "Fast Linear Attention Hardware"
+    ],
+    "links": [
+      "FlashAttention",
+      "Hardware-Aware-Scan",
+      "Linear-Attention",
+      "State-Space-Models"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>FLAT (Fast Linear Attention) redesigns the compute schedule for linear attention so the recurrent form runs in SRAM rather than bouncing through HBM, achieving GPU/accelerator bandwidth utilization comparable to FlashAttention.</p>\n<h2>See Also</h2>\n<p>[[FlashAttention]] · [[Hardware-Aware Scan]] · [[Linear Attention]] · [[State Space Models]]</p>",
+    "search_text": "tl;dr flat (fast linear attention) redesigns the compute schedule for linear attention so the recurrent form runs in sram rather than bouncing through hbm, achieving gpu/accelerator bandwidth utilization comparable to flashattention. see also [[flashattention]] · [[hardware-aware scan]] · [[linear attention]] · [[state space models]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "FP8-Training",
     "title": "FP8 Training",
     "authors": "",
@@ -1643,7 +1738,9 @@
     ],
     "year": "",
     "tldr": "Reconfigurable silicon — you compile a circuit description down to bit-level routing instead of compiling instructions. Lower density than ASICs but flexible; useful for niche or rapidly changing workloads.",
-    "aliases": [],
+    "aliases": [
+      "FPGA-LLM"
+    ],
     "links": [
       "Hardware-Acceleration-for-Neural-Networks",
       "ASIC",
@@ -1657,7 +1754,9 @@
     "backlinks": [
       "000-Index",
       "ASIC",
-      "Hardware-Acceleration-for-Neural-Networks"
+      "Citation-Map",
+      "Hardware-Acceleration-for-Neural-Networks",
+      "LLM-PQ"
     ]
   },
   {
@@ -1912,6 +2011,7 @@
       "DeltaNet",
       "Efficient_LLM_Inference",
       "Efficient_Transformer_Architectures",
+      "FLAT",
       "Gated-Linear-Attention",
       "HGRN2",
       "Mamba2_SSD_Blog_Part1",
@@ -1919,7 +2019,9 @@
       "Positional_Encoding",
       "SSD",
       "Softmax",
+      "SpecAttn",
       "SwiGLU",
+      "TensorSSM",
       "Transformers-Are-SSMs",
       "state_spaces_mamba_repo"
     ]
@@ -2075,6 +2177,7 @@
     "backlinks": [
       "000-Index",
       "Associative_Memory",
+      "CLA",
       "Combination-strategies",
       "Compressed-Sparse-Attention",
       "Compute-Optimal_Training",
@@ -2083,20 +2186,27 @@
       "FlashAttention-2",
       "Hardware-Acceleration-for-Neural-Networks",
       "Heavily-Compressed-Attention",
+      "Hymba",
+      "InfLLM",
       "Inference-optimization",
       "Jamba",
       "KV-Cache-Optimization",
       "KV-Cache",
+      "KVQuant",
       "LLM-Benchmarks",
       "LLaMA-2",
+      "LongSpec",
       "MQA",
       "Multi-Query-Attention",
       "Multi-head-attention",
       "Novel-attention-mechanisms",
+      "PyramidKV",
       "RMSNorm",
       "RoPE",
       "SentencePiece",
+      "SnapKV",
       "Softmax",
+      "SpecAttn",
       "SwiGLU"
     ]
   },
@@ -2235,6 +2345,39 @@
     ]
   },
   {
+    "id": "GoldFinch",
+    "title": "GoldFinch",
+    "authors": "",
+    "tags": [
+      "ssm",
+      "hybrid",
+      "kv-cache",
+      "recurrence",
+      "architecture",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Hybrid linear recurrence + KV cache: a RWKV-style recurrent layer feeds a compressed state into a small attention layer with bounded KV, combining sub-quadratic training with O(1) inference.",
+    "aliases": [
+      "GoldFinch"
+    ],
+    "links": [
+      "RWKV",
+      "Mamba",
+      "KV-Cache",
+      "State-Space-Models",
+      "Jamba"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>GoldFinch stacks a RWKV-7-style recurrent block with a small local attention block that has a capped KV cache. The recurrent layer compresses history cheaply; attention resolves short-range interactions precisely. Inference cost is O(1) per step.</p>\n<h2>See Also</h2>\n<p>[[RWKV]] · [[Mamba]] · [[KV Cache]] · [[State Space Models]] · [[Jamba]]</p>",
+    "search_text": "tl;dr goldfinch stacks a rwkv-7-style recurrent block with a small local attention block that has a capped kv cache. the recurrent layer compresses history cheaply; attention resolves short-range interactions precisely. inference cost is o(1) per step. see also [[rwkv]] · [[mamba]] · [[kv cache]] · [[state space models]] · [[jamba]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "Griffin",
     "title": "Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models",
     "authors": "Soham De, Samuel L. Smith, Anushan Fernando et al. (Google DeepMind)",
@@ -2305,7 +2448,10 @@
     ],
     "year": "",
     "tldr": "An [[Eviction policy]] that drops KV-cache entries based on accumulated attention scores: the \"heavy hitters\" (highest cumulative attention received) stay, the rest are evicted. Budget-controlled, mild quality loss.",
-    "aliases": [],
+    "aliases": [
+      "H2O",
+      "Heavy Hitter Oracle"
+    ],
     "links": [
       "Cache-compression",
       "KV-Cache-Optimization",
@@ -2321,8 +2467,12 @@
     "backlinks": [
       "000-Index",
       "Cache-eviction",
+      "Citation-Map",
       "Eviction-policy",
-      "KV-Cache-Optimization"
+      "KV-Cache-Optimization",
+      "NeuralKV",
+      "PyramidKV",
+      "SnapKV"
     ]
   },
   {
@@ -2586,10 +2736,12 @@
       "Inference-optimization",
       "KV-Cache-Optimization",
       "Kernel-fusion",
+      "LLM-PQ",
       "LPU",
       "Memory-hierarchy",
       "NPU",
       "Near-memory-computing",
+      "NeuralKV",
       "Neuromorphic-computing",
       "Occupancy",
       "Operator-fusion",
@@ -2631,6 +2783,7 @@
       "000-Index",
       "Convolutional-view",
       "Diagonal-recurrence",
+      "FLAT",
       "Flash-Attention",
       "Hardware-Acceleration-for-Neural-Networks",
       "Hardware-aware-algorithms",
@@ -2645,6 +2798,7 @@
       "SSD",
       "Selective-State-Space-Model",
       "State-Space-Model",
+      "TensorSSM",
       "Tiling",
       "state_spaces_mamba_repo",
       "xLSTM"
@@ -2931,6 +3085,37 @@
     ]
   },
   {
+    "id": "Hymba",
+    "title": "Hymba",
+    "authors": "",
+    "tags": [
+      "ssm",
+      "hybrid",
+      "attention",
+      "architecture",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Hybrid Mamba-attention that puts SSM and attention heads in parallel within each layer, letting them specialize: SSM for recall, attention for precision.",
+    "aliases": [
+      "Hymba"
+    ],
+    "links": [
+      "Mamba",
+      "Jamba",
+      "State-Space-Models",
+      "GQA"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Hymba runs Mamba and attention heads side-by-side within every layer rather than alternating them. The two mechanisms complement each other — SSM accumulates long-range patterns, attention focuses on precise token interactions.</p>\n<h2>See Also</h2>\n<p>[[Mamba]] · [[Jamba]] · [[State Space Models]] · [[GQA]]</p>",
+    "search_text": "tl;dr hymba runs mamba and attention heads side-by-side within every layer rather than alternating them. the two mechanisms complement each other — ssm accumulates long-range patterns, attention focuses on precise token interactions. see also [[mamba]] · [[jamba]] · [[state space models]] · [[gqa]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "IO-awareness",
     "title": "IO-Awareness",
     "authors": "",
@@ -3026,6 +3211,37 @@
       "Hardware-Acceleration-for-Neural-Networks",
       "Near-memory-computing",
       "Neuromorphic-computing"
+    ]
+  },
+  {
+    "id": "InfLLM",
+    "title": "InfLLM",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "offloading",
+      "long-context",
+      "inference",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Infinite LLM inference via KV offloading: streams the KV cache to CPU/NVMe, retrieving only the attention-relevant blocks per step via a block-level index.",
+    "aliases": [
+      "InfLLM"
+    ],
+    "links": [
+      "KV-Cache",
+      "Attention-Sinks",
+      "MagicPIG",
+      "GQA"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>InfLLM extends context to 1M+ tokens by offloading the KV cache to CPU memory (or NVMe) and maintaining a block-level semantic index. For each decoding step it retrieves only the top-K relevant blocks — keeping GPU memory use O(K) regardless of total context length.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[Attention Sinks]] · [[MagicPIG]] · [[GQA]]</p>",
+    "search_text": "tl;dr infllm extends context to 1m+ tokens by offloading the kv cache to cpu memory (or nvme) and maintaining a block-level semantic index. for each decoding step it retrieves only the top-k relevant blocks — keeping gpu memory use o(k) regardless of total context length. see also [[kv cache]] · [[attention sinks]] · [[magicpig]] · [[gqa]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -3167,11 +3383,15 @@
     "search_text": "tl;dr jamba is the first production-grade hybrid attention-ssm model, interleaving transformer and mamba layers at a 1:7 ratio with moe applied every 2 layers (16 experts, top-2). the 52b total / 12b active parameter model fits on a single 80gb gpu even at 128k+ token contexts, achieves 3x throughput over mixtral-8x7b on long sequences, and matches mixtral and llama-2-70b on standard benchmarks while supporting a 256k token context window. the problem transformers dominate language modeling but have two fundamental scaling problems: kv cache blows up with context length : a mixtral-8x7b or mistral-7b model requires 32gb of kv cache at 256k context (16-bit). llama-2 requires 128gb — far exceeding any single gpu. inference is slow for long contexts : every generated token attends over the entire context, so compute scales linearly with sequence length. throughput degrades badly. pure rnns/ssms (mamba, etc.) don't have a kv cache but: - lag behind transformers in quality at comparable scale. - prior hybrid attempts (h3 at 2.7b, stripedhyena-7b) failed to match attention-only baselines like mistral-7b. no prior work had demonstrated a hybrid ssm-attention model that simultaneously: (a) matched transformer quality at production scale, (b) handled 256k context, and (c) fit on a single gpu. core innovation intuition : attention is the \"memory\" component — precise but expensive. mamba is the \"processing\" component — cheap but imprecise over long range. use attention sparingly (1 in every 8 layers) to maintain quality, let mamba handle the bulk of computation, and use moe to boost capacity without proportionally increasing compute or memory. the key insight is that you don't need attention at every layer . a 1:7 attention-to-mamba ratio gives you most of the quality benefit of attention (long-range recall, in-context learning) while: - reducing kv cache by 8x (only 1/8 of layers produce kv cache entries) - boosting throughput 3x on long sequences (mamba layers are o(l) vs o(l²) for attention) - keeping the model on a single gpu moe then decouples capacity (total params = 52b) from compute (active params = 12b), analogous to how mixtral-8x7b works. architecture / method the jamba block jamba stacks 4 identical jamba blocks in sequence. each block has: parameter value meaning $l$ 8 layers per block $a:m$ 1:7 1 attention layer per 7 mamba layers $e$ 2 moe applied every 2 layers $n$ 16 total experts per moe layer $k$ 2 top-k experts selected per token total: 4 blocks × 8 layers = 32 layers , with 4 attention layers and 28 mamba layers. layer types each layer = (attention or mamba module) + (mlp or moe): types of layers: 1. mamba layer: rmsnorm → mamba → rmsnorm → mlp 2. mamba moe layer: rmsnorm → mamba → rmsnorm → moe 3. transformer layer: rmsnorm → attention → rmsnorm → mlp 4. attention moe layer: rmsnorm → attention → rmsnorm → moe in the released model, attention moe layers are not used. moe is applied every $e=2$ layers, giving ~8 effective experts on average per layer position across the block. mamba layer details mamba is a selective ssm. the recurrent state at position $t$ is: $$h_t = a h_{t-1} + b x_t$$ $$y_t = c h_t$$ where $a$, $b$, $c$ are input-dependent (selective). key property: the entire context is compressed into a fixed-size hidden state — no kv cache needed. jamba adds rmsnorm inside mamba layers to stabilize training at scale (critical finding). moe module standard sparse moe: router computes softmax over $n=16$ experts, selects top $k=2$: $$\\text{output} = \\sum_{i \\in \\text{top-k}} g_i \\cdot e_i(x)$$ load balancing loss applied (standard). with 16 experts and top-2, only 12.5% of expert parameters are active per token. other architecture choices gqa (grouped query attention) for further kv cache reduction swiglu activation no positional embeddings (rope etc. not needed — mamba handles position implicitly) vocabulary size: 64k with bpe; each digit is a separate token tokenizer: no dummy space prefix (cleaner than llama/mistral tokenizers) kv cache comparison at 256k context, 16-bit: model total params active params kv cache llama-2 6.7b 6.7b 128gb mistral 7.2b 7.2b 32gb mixtral 46.7b 12.9b 32gb jamba 52b 12b 4gb the 8x reduction comes directly from having only 1/8 of layers be attention layers. key results standard benchmarks benchmark jamba mixtral-8x7b llama-2-70b hellaswag ~83% ~81% ~83% arc-challenge ~59% ~59% ~57% winogrande ~82% ~81% ~80% mmlu ~67% ~70% ~69% gsm8k ~59% ~58% ~54% humaneval ~29% ~27% ~26% jamba is broadly competitive with mixtral-8x7b and llama-2-70b despite fitting on a single gpu. long-context evaluations context length jamba vs mixtral up to 256k tokens jamba outperforms mixtral on most datasets 128k+ jamba fits on single gpu; mixtral cannot throughput 3x throughput over mixtral-8x7b on long contexts at 256k context: jamba produces 4gb kv cache vs mixtral's 32gb (8x reduction) fits in single 80gb gpu with int8 weights even at 128k+ token contexts ablation: attention-to-mamba ratio the 1:7 ratio was selected as the most compute-efficient variant among best-performing variants . fewer attention layers hurt quality; more attention layers hurt throughput without quality gains. why it matters single gpu deployment of a 52b parameter model : with int8 weights and only 4gb kv cache overhead at long contexts, jamba is the first model of this scale deployable on a single a100 80gb for long-context inference. 256k context window at production quality: no prior open model of comparable quality supported this; jamba achieves it while outperforming mixtral on long-context tasks. 3x throughput gain over mixtral-8x7b on long sequences, directly from the 1:7 attention-to-mamba ratio reducing the attention compute bottleneck. validated the hybrid architecture at scale : prior hybrid ssm-attention models (stripedhyena-7b, h3) failed to match attention-only baselines. jamba is the first to convincingly succeed at production scale. open source (apache 2.0) with planned release of ablation checkpoints, enabling the community to explore this novel architecture family systematically. connections to other work builds on [[mamba]] — the ssm backbone; jamba uses mamba layers with added rmsnorm for stability [[mixtral|mixtral-8x7b]] — moe design inspiration; jamba matches its quality with 8x smaller kv cache [[transformer|transformer architecture]] — attention layers retained at 1:8 ratio [[hippo|h3]] — early hybrid ssm+attention up to 2.7b params; jamba scales this to production [[mixture of experts]] — sparse moe (top-2 of 16) to decouple capacity from compute competes with [[mixtral|mixtral-8x7b]] — similar active params (12b vs 12.9b), similar quality, but jamba has 3x throughput and 8x smaller kv cache [[llama 2|llama-2 70b]] — comparable quality, but llama-2-70b requires much more memory and cannot do 256k context [[stripedhyena-7b]] — another hybrid ssm-attention model; lags mistral-7b, unlike jamba enables / related [[state space model|state space models]] — validates ssm viability in production llms [[kv cache optimization|long-context llms]] — new benchmark for open models at 256k tokens [[efficient llm inference]] — kv cache compression via architectural design rather than post-hoc compression limitations base model only : released without instruction tuning or rlhf alignment. not suitable for end-user deployment without additional fine-tuning. mamba quality ceiling : despite the 1:7 ratio working well, the model still slightly underperforms on mmlu (~67% vs mixtral's ~70%), suggesting pure-attention models may still have quality advantages on knowledge-intensive tasks. ablations only at ≤7b parameters : the architectural design choices (ratio, moe frequency) were validated at up to 7b params / 250b tokens. whether the same choices are optimal at 52b+ scale is not fully verified. moe communication overhead : expert-parallel training/inference introduces inter-gpu communication costs not present in dense models. mamba's selective state is lossy : the fixed-size recurrent state cannot perfectly preserve all context information — for tasks requiring precise recall over very long contexts, this is a fundamental limitation relative to full attention. no positional encoding validated only empirically : the claim that no positional encoding is needed is based on mamba's implicit handling; this may break down in edge cases. open questions optimal ratio at larger scales : is 1:7 attention-to-mamba the right ratio at 100b+ parameters? does the optimal ratio shift as model size grows, or as context length requirements change? can mamba layers be further specialized? : the paper uses standard mamba uniformly. could different mamba variants (e.g., with different state sizes) be used at different depths to better handle short vs. long-range dependencies? instruction tuning dynamics : do hybrid ssm-attention models require different rlhf/instruction tuning recipes compared to pure transformers? the recurrent state introduces non-standard behavior for dialogue/multi-turn tasks. related concepts [[state space model|state space models]] [[selective state spaces]] [[mixture of experts]] [[kv cache optimization]] [[kv cache optimization|long-context modeling]] [[efficient transformer architectures]] [[gqa|grouped query attention]] [[rmsnorm]] [[swiglu]] [[sliding window attention|sparse attention]] [[lstm|recurrent neural networks]] [[bpe tokenization]]",
     "backlinks": [
       "Citation-Map",
+      "GoldFinch",
+      "Hymba",
       "Mamba2_SSD_Blog_Part1",
       "Mamba2_SSD_Blog_Part3_Algorithm",
       "Mamba3",
+      "Samba",
       "StripedHyena-7B",
       "Transformers-Are-SSMs",
+      "Zamba",
       "state_spaces_mamba_repo"
     ]
   },
@@ -3195,7 +3415,8 @@
     "html": "<p>Stub note. Referenced from [[RLHF]] and related notes.</p>",
     "search_text": "stub note. referenced from [[rlhf]] and related notes.",
     "backlinks": [
-      "Direct-Preference-Optimization-Your-Language-Model-is-Secretly-a-Reward-Model"
+      "Direct-Preference-Optimization-Your-Language-Model-is-Secretly-a-Reward-Model",
+      "DraftAlign"
     ]
   },
   {
@@ -3377,6 +3598,7 @@
       "000-Index",
       "Associative_Memory",
       "Attention",
+      "CLA",
       "Cache-compression",
       "Compressed-Sparse-Attention",
       "Decode-phase",
@@ -3387,28 +3609,37 @@
       "FlashAttention",
       "GQA",
       "Ghost-Attention",
+      "GoldFinch",
       "Griffin",
       "HBM",
       "HGRN2",
       "Hardware-Acceleration-for-Neural-Networks",
       "Hawk",
       "Heavily-Compressed-Attention",
+      "InfLLM",
       "KV-Cache-Optimization",
+      "KVQuant",
       "LLaMA-2",
       "LPU",
       "Linear-attention",
       "Local-attention",
+      "LongSpec",
       "MQA",
+      "MagicPIG",
       "Multi-Query-Attention",
       "Multi-head-attention",
+      "NeuralKV",
       "Paged-attention",
       "Positional_Encoding",
       "Prefill",
+      "PyramidKV",
       "Pythia",
+      "QuantSpec",
       "RWKV",
       "Recurrent-state",
       "RetNet",
       "SentencePiece",
+      "SnapKV",
       "Speculative-Decoding",
       "Verification-step",
       "WebArena",
@@ -3446,6 +3677,37 @@
       "000-Index",
       "Hybrid-memory",
       "KV-Cache-Optimization"
+    ]
+  },
+  {
+    "id": "KVQuant",
+    "title": "KVQuant",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "quantization",
+      "inference",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Per-channel and per-token quantization of KV cache to 2–4 bits; uses non-uniform quantization grids calibrated to the heavy-tailed activation distribution.",
+    "aliases": [
+      "KVQuant"
+    ],
+    "links": [
+      "KV-Cache",
+      "NVFP4",
+      "Quantization",
+      "GQA"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>KV cache activations have heavy tails — a few outlier channels are much larger than the rest. KVQuant uses non-uniform quantization (calibrated per-channel) to handle these outliers without sacrificing bit-budget, achieving 2-bit KV with &lt;0.1 ppl degradation on LLaMA-2-70B.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[NVFP4]] · [[Quantization]] · [[GQA]]</p>",
+    "search_text": "tl;dr kv cache activations have heavy tails — a few outlier channels are much larger than the rest. kvquant uses non-uniform quantization (calibrated per-channel) to handle these outliers without sacrificing bit-budget, achieving 2-bit kv with <0.1 ppl degradation on llama-2-70b. see also [[kv cache]] · [[nvfp4]] · [[quantization]] · [[gqa]]",
+    "backlinks": [
+      "CLA",
+      "Citation-Map"
     ]
   },
   {
@@ -3611,6 +3873,36 @@
       "SWE-bench-Pro",
       "SWE-bench",
       "ToolLLM"
+    ]
+  },
+  {
+    "id": "LLM-PQ",
+    "title": "LLM-PQ",
+    "authors": "",
+    "tags": [
+      "quantization",
+      "hardware",
+      "mixed-precision",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Mixed-precision LLM deployment on hardware accelerators: assigns different bit-widths per layer based on sensitivity, minimizing quality loss at a given memory budget.",
+    "aliases": [
+      "LLM-PQ"
+    ],
+    "links": [
+      "NVFP4",
+      "Quantization",
+      "FPGA",
+      "Hardware-Acceleration-for-Neural-Networks"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>LLM-PQ profiles each layer's quantization sensitivity and assigns bit-widths (e.g. 2-bit for insensitive layers, 8-bit for critical ones) to hit a target memory footprint with minimal perplexity degradation.</p>\n<h2>See Also</h2>\n<p>[[NVFP4]] · [[Quantization]] · [[FPGA]] · [[Hardware Acceleration for Neural Networks]]</p>",
+    "search_text": "tl;dr llm-pq profiles each layer's quantization sensitivity and assigns bit-widths (e.g. 2-bit for insensitive layers, 8-bit for critical ones) to hit a target memory footprint with minimal perplexity degradation. see also [[nvfp4]] · [[quantization]] · [[fpga]] · [[hardware acceleration for neural networks]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -4019,6 +4311,36 @@
     ]
   },
   {
+    "id": "LongSpec",
+    "title": "LongSpec",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "long-context",
+      "inference",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Speculative decoding adapted for long-context inference: the draft model uses a compressed KV representation to stay fast at 128k+ token contexts.",
+    "aliases": [
+      "LongSpec"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "KV-Cache",
+      "GQA",
+      "Multi-Token-Prediction"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>At 128k+ context, the draft model's KV cache dominates memory. LongSpec compresses the draft's KV using learned token merging, enabling speculative decoding at long context without the memory overhead of a full second KV cache.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[KV Cache]] · [[GQA]] · [[Multi-Token Prediction]]</p>",
+    "search_text": "tl;dr at 128k+ context, the draft model's kv cache dominates memory. longspec compresses the draft's kv using learned token merging, enabling speculative decoding at long context without the memory overhead of a full second kv cache. see also [[speculative decoding]] · [[kv cache]] · [[gqa]] · [[multi-token prediction]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "Lookahead-Decoding",
     "title": "Lookahead Decoding",
     "authors": "",
@@ -4256,6 +4578,38 @@
     ]
   },
   {
+    "id": "MagicPIG",
+    "title": "MagicPIG",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "lsh",
+      "inference",
+      "sparse-attention",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "LSH-based KV cache selection: uses locality-sensitive hashing to retrieve the top-K most relevant KV pairs per query without scanning the full cache.",
+    "aliases": [
+      "MagicPIG"
+    ],
+    "links": [
+      "KV-Cache",
+      "SnapKV",
+      "Approximate-Attention",
+      "Speculative-Decoding"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Instead of evicting KV entries, MagicPIG keeps the full cache but retrieves only the top-K most relevant entries per query step using LSH (locality-sensitive hashing). This turns exact attention into approximate retrieval — O(K) cost regardless of sequence length.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[SnapKV]] · [[Approximate Attention]] · [[Speculative Decoding]]</p>",
+    "search_text": "tl;dr instead of evicting kv entries, magicpig keeps the full cache but retrieves only the top-k most relevant entries per query step using lsh (locality-sensitive hashing). this turns exact attention into approximate retrieval — o(k) cost regardless of sequence length. see also [[kv cache]] · [[snapkv]] · [[approximate attention]] · [[speculative decoding]]",
+    "backlinks": [
+      "Citation-Map",
+      "InfLLM"
+    ]
+  },
+  {
     "id": "Mamba",
     "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
     "authors": "Gu & Dao",
@@ -4362,6 +4716,7 @@
       "GQA",
       "Gated-Linear-Attention",
       "Gated_DeltaNet_(Yang_et_al._2025)",
+      "GoldFinch",
       "Griffin",
       "HGRN2",
       "HIPPO",
@@ -4371,6 +4726,7 @@
       "Hawk",
       "HiPPO-matrix",
       "Home",
+      "Hymba",
       "IO-awareness",
       "Jamba",
       "KV-Cache",
@@ -4394,6 +4750,7 @@
       "S4",
       "SRAM",
       "SSD",
+      "Samba",
       "Scaling_Laws",
       "Selective-State-Space-Model",
       "Selective-State-Spaces",
@@ -4401,9 +4758,12 @@
       "Sequence-parallelism",
       "State-Space-Model",
       "StripedHyena-7B",
+      "TensorSSM",
       "Tiling",
       "Transformer",
       "Transformers-Are-SSMs",
+      "Vision-LSTM",
+      "Zamba",
       "state_spaces_mamba_repo",
       "xLSTM"
     ]
@@ -4791,6 +5151,7 @@
       "000-Index",
       "Citation-Map",
       "Draft-model-free-speculative-decoding",
+      "DraftAlign",
       "EAGLE",
       "Feature-uncertainty",
       "Feature-level-drafting",
@@ -4802,8 +5163,11 @@
       "Medusa-heads",
       "Medusa-1",
       "Medusa-2",
+      "ParallelSpec",
+      "SpecFusion",
       "Tree-attention",
       "Tree-based-decoding",
+      "TreeSpec",
       "Typical-acceptance-scheme"
     ]
   },
@@ -4978,6 +5342,7 @@
     "html": "<h1>Multi-Query Attention (MQA)</h1>\n<p>Multi-head attention has $H$ query heads, $H$ key heads, $H$ value heads. <strong>Multi-Query Attention</strong> (MQA) collapses this: keep $H$ query heads but use only <strong>1</strong> key head and <strong>1</strong> value head, shared across all queries. The KV cache shrinks by a factor of $H$ — for 32 heads, 32× — at the cost of expressivity (every head attends with the same K/V). Empirically the quality loss is small for many tasks; MQA was used in PaLM and Falcon. [[GQA]] is the practical compromise: $g$ groups of heads share K/V instead of all heads sharing. MQA = GQA with $g = 1$; full MHA = GQA with $g = H$.</p>\n<h2>Where it appears</h2>\n<ul>\n<li>[[KV Cache Optimization]]</li>\n<li>[[GQA]]</li>\n</ul>\n<hr />\n<p><em>Related: [[GQA]] · [[KV Cache]] · [[Transformer]]</em></p>",
     "search_text": "multi-query attention (mqa) multi-head attention has $h$ query heads, $h$ key heads, $h$ value heads. multi-query attention (mqa) collapses this: keep $h$ query heads but use only 1 key head and 1 value head, shared across all queries. the kv cache shrinks by a factor of $h$ — for 32 heads, 32× — at the cost of expressivity (every head attends with the same k/v). empirically the quality loss is small for many tasks; mqa was used in palm and falcon. [[gqa]] is the practical compromise: $g$ groups of heads share k/v instead of all heads sharing. mqa = gqa with $g = 1$; full mha = gqa with $g = h$. where it appears [[kv cache optimization]] [[gqa]] related: [[gqa]] · [[kv cache]] · [[transformer]]",
     "backlinks": [
+      "CLA",
       "KV-Cache-Optimization",
       "Multi-head-attention",
       "Novel-attention-mechanisms"
@@ -5015,10 +5380,17 @@
       "DeepSeek_V4",
       "Draft-model-free-speculative-decoding",
       "Draft-model",
+      "DraftAlign",
       "GRPO",
+      "LongSpec",
       "On-Policy-Distillation",
+      "ParallelSpec",
+      "QuantSpec",
       "RLVR",
+      "SpecAttn",
+      "SpecFusion",
       "Speculative-Decoding",
+      "TreeSpec",
       "Verification-step"
     ]
   },
@@ -5218,6 +5590,8 @@
       "Efficient_LLM_Inference",
       "Hardware-Acceleration-for-Neural-Networks",
       "KV-Cache-Optimization",
+      "KVQuant",
+      "LLM-PQ",
       "NPU",
       "Quantization-aware-datapath",
       "Tensor-Cores"
@@ -5305,6 +5679,36 @@
       "Tensor-parallelism",
       "Transformer",
       "xLSTM"
+    ]
+  },
+  {
+    "id": "NeuralKV",
+    "title": "NeuralKV",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "hardware",
+      "architecture",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Hardware-integrated KV cache management: moves KV eviction and compression decisions into the memory controller rather than the GPU compute stack.",
+    "aliases": [
+      "NeuralKV"
+    ],
+    "links": [
+      "KV-Cache",
+      "H2O-eviction",
+      "SnapKV",
+      "Hardware-Acceleration-for-Neural-Networks"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>NeuralKV offloads KV cache management (eviction, compression, retrieval) to a hardware unit co-located with DRAM, removing it from the GPU's critical path and enabling finer-grained cache control without host-side overhead.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[H2O eviction]] · [[SnapKV]] · [[Hardware Acceleration for Neural Networks]]</p>",
+    "search_text": "tl;dr neuralkv offloads kv cache management (eviction, compression, retrieval) to a hardware unit co-located with dram, removing it from the gpu's critical path and enabling finer-grained cache control without host-side overhead. see also [[kv cache]] · [[h2o eviction]] · [[snapkv]] · [[hardware acceleration for neural networks]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -5744,6 +6148,35 @@
     ]
   },
   {
+    "id": "ParallelSpec",
+    "title": "ParallelSpec",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "parallelism",
+      "inference",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Parallel speculative verification: verifies multiple draft sequences simultaneously across different GPU streams rather than sequentially.",
+    "aliases": [
+      "ParallelSpec"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "Multi-Token-Prediction",
+      "Medusa"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Standard speculative decoding verifies one draft sequence at a time. ParallelSpec batches multiple independent draft sequences for simultaneous verification, improving GPU utilization when draft acceptance rate is low.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[Multi-Token Prediction]] · [[Medusa]]</p>",
+    "search_text": "tl;dr standard speculative decoding verifies one draft sequence at a time. parallelspec batches multiple independent draft sequences for simultaneous verification, improving gpu utilization when draft acceptance rate is low. see also [[speculative decoding]] · [[multi-token prediction]] · [[medusa]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "Parameter-Efficient-Fine-Tuning",
     "title": "Parameter-Efficient Fine-Tuning",
     "authors": "",
@@ -5933,6 +6366,37 @@
     ]
   },
   {
+    "id": "PyramidKV",
+    "title": "PyramidKV",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "compression",
+      "inference",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Layer-wise KV budget allocation shaped like a pyramid: lower layers get more KV slots (they handle local patterns), upper layers get fewer (they handle global abstractions).",
+    "aliases": [
+      "PyramidKV"
+    ],
+    "links": [
+      "KV-Cache",
+      "SnapKV",
+      "H2O-eviction",
+      "GQA"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Transformers exhibit a natural pattern: lower layers attend locally, upper layers attend globally. PyramidKV exploits this by allocating more KV budget to early layers (where dense local attention matters) and progressively fewer slots to later layers — matching the budget to where it's actually used.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[SnapKV]] · [[H2O eviction]] · [[GQA]]</p>",
+    "search_text": "tl;dr transformers exhibit a natural pattern: lower layers attend locally, upper layers attend globally. pyramidkv exploits this by allocating more kv budget to early layers (where dense local attention matters) and progressively fewer slots to later layers — matching the budget to where it's actually used. see also [[kv cache]] · [[snapkv]] · [[h2o eviction]] · [[gqa]]",
+    "backlinks": [
+      "Citation-Map",
+      "SnapKV"
+    ]
+  },
+  {
     "id": "Pythia",
     "title": "Pythia",
     "authors": "",
@@ -5984,6 +6448,36 @@
     "search_text": "stub this is a concept stub. see the notes that reference this page for context. combines 4-bit nf4 quantization of the base model with lora adapters trained in full precision, enabling fine-tuning of 65b models on a single gpu.",
     "backlinks": [
       "LoRA-Low-Rank-Adaptation-of-Large-Language-Models"
+    ]
+  },
+  {
+    "id": "QuantSpec",
+    "title": "QuantSpec",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "quantization",
+      "inference",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Combines KV cache quantization with speculative decoding: a quantized draft model proposes tokens, the full model verifies, halving memory while maintaining speed.",
+    "aliases": [
+      "QuantSpec"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "Quantization",
+      "KV-Cache",
+      "Multi-Token-Prediction"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>QuantSpec runs a 4-bit quantized draft model for speculation and a higher-precision target model for verification. The draft's low memory footprint means both models fit simultaneously, enabling speculative decoding without extra GPU memory cost.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[Quantization]] · [[KV Cache]] · [[Multi-Token Prediction]]</p>",
+    "search_text": "tl;dr quantspec runs a 4-bit quantized draft model for speculation and a higher-precision target model for verification. the draft's low memory footprint means both models fit simultaneously, enabling speculative decoding without extra gpu memory cost. see also [[speculative decoding]] · [[quantization]] · [[kv cache]] · [[multi-token prediction]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -6282,6 +6776,7 @@
     "tldr": "RWKV replaces dot-product attention with a linear attention variant that can be computed either as a parallelizable Transformer (training) or as an O(1)-per-step RNN (inference). Scales to 14B parameters — the largest dense RNN ever trained — while matching GPT-NeoX-20B quality at a fraction of inference cost.",
     "aliases": [
       "RWKV",
+      "RWKV-7",
       "Receptance Weighted Key Value"
     ],
     "links": [
@@ -6312,6 +6807,7 @@
       "Diagonal-recurrence",
       "Exponential-decay",
       "Gated-Linear-Attention",
+      "GoldFinch",
       "Griffin",
       "Home",
       "LRU",
@@ -6326,6 +6822,7 @@
       "Time-shift",
       "Time-mixing",
       "Transformers-Are-SSMs",
+      "Zamba",
       "state_spaces_mamba_repo"
     ]
   },
@@ -6853,6 +7350,37 @@
     ]
   },
   {
+    "id": "Samba",
+    "title": "Samba",
+    "authors": "",
+    "tags": [
+      "ssm",
+      "hybrid",
+      "sliding-window",
+      "architecture",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Hybrid Mamba + sliding window attention: SSM handles long-range recurrence, local SWA handles short-range precision.",
+    "aliases": [
+      "Samba"
+    ],
+    "links": [
+      "Mamba",
+      "Sliding-window-attention",
+      "State-Space-Models",
+      "Jamba"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Samba combines Mamba's selective SSM for linear-time long-range modeling with sliding window attention layers for precise local context — getting sub-quadratic scaling with better quality than pure SSMs.</p>\n<h2>See Also</h2>\n<p>[[Mamba]] · [[Sliding window attention]] · [[State Space Models]] · [[Jamba]]</p>",
+    "search_text": "tl;dr samba combines mamba's selective ssm for linear-time long-range modeling with sliding window attention layers for precise local context — getting sub-quadratic scaling with better quality than pure ssms. see also [[mamba]] · [[sliding window attention]] · [[state space models]] · [[jamba]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "Scaling-Laws-for-Neural-Language-Models",
     "title": "Scaling Laws for Neural Language Models",
     "authors": "",
@@ -7138,7 +7666,41 @@
       "Inference-optimization",
       "Jamba",
       "KV-Cache-Optimization",
-      "Local-attention"
+      "Local-attention",
+      "Samba"
+    ]
+  },
+  {
+    "id": "SnapKV",
+    "title": "SnapKV",
+    "authors": "",
+    "tags": [
+      "kv-cache",
+      "compression",
+      "inference",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Snapshot KV compression: identifies critical KV positions via attention pattern voting across heads, retaining a fixed-size snapshot per layer.",
+    "aliases": [
+      "SnapKV"
+    ],
+    "links": [
+      "KV-Cache",
+      "H2O-eviction",
+      "PyramidKV",
+      "GQA"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>SnapKV pools attention weights across all heads to vote on which KV positions are globally important, then keeps only those — creating a compact snapshot. Unlike recency-biased eviction, SnapKV retains semantically critical early tokens.</p>\n<h2>See Also</h2>\n<p>[[KV Cache]] · [[H2O eviction]] · [[PyramidKV]] · [[GQA]]</p>",
+    "search_text": "tl;dr snapkv pools attention weights across all heads to vote on which kv positions are globally important, then keeps only those — creating a compact snapshot. unlike recency-biased eviction, snapkv retains semantically critical early tokens. see also [[kv cache]] · [[h2o eviction]] · [[pyramidkv]] · [[gqa]]",
+    "backlinks": [
+      "Citation-Map",
+      "MagicPIG",
+      "NeuralKV",
+      "PyramidKV"
     ]
   },
   {
@@ -7166,6 +7728,65 @@
     "search_text": "tl;dr softmax exponentiates each element and normalizes by the sum, turning arbitrary real numbers into a valid probability distribution over k classes. intuition given logits [2.0, 1.0, 0.1], softmax gives roughly [0.70, 0.26, 0.10] — the gap between classes gets amplified because of the exponentiation. a logit difference of 1.0 doesn't mean one class is linearly more likely; it means e^1 ≈ 2.7× more likely. this amplification is a feature: it sharpens peaked distributions and punishes confident wrong answers hard during cross-entropy training. in the [[attention]] mechanism, softmax sits at the heart of the score normalization step: softmax(qkᵀ/√d). here the temperature matters enormously — without the √d scaling factor, dot products in high dimensions (e.g., d=64 → √d≈8) grow large, pushing softmax into saturation where gradients vanish to ~0. this is why scaled dot-product attention exists. why it matters attention scores : every transformer layer runs softmax over sequence length l; at l=128k this is 128k values per head per token — numerical stability (log-sum-exp trick) and fused kernels ([[flashattention]]) are non-negotiable. output logits : final layer softmax over vocabulary (e.g., 128k tokens for llama 3) converts raw scores to token probabilities used in sampling and [[speculative decoding]] verification. training stability : softmax + cross-entropy loss has a clean gradient (p_i - y_i), but near-zero probabilities cause log(0) → -inf, requiring epsilon clamping or label smoothing in practice. related concepts [[attention]], [[flashattention]], [[transformer]], [[speculative decoding]], [[gqa]]",
     "backlinks": [
       "Attention"
+    ]
+  },
+  {
+    "id": "SpecAttn",
+    "title": "SpecAttn",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "sparse-attention",
+      "inference",
+      "stub"
+    ],
+    "year": "2026",
+    "tldr": "Speculative decoding with sparse attention verification: the target model only runs attention on draft tokens that pass a sparsity-based pre-filter.",
+    "aliases": [
+      "SpecAttn"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "GQA",
+      "FlashAttention",
+      "Multi-Token-Prediction"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>SpecAttn reduces verification cost in speculative decoding by using a sparse attention pattern during the verification pass — only full attention on tokens flagged as uncertain by a cheap scoring step.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[GQA]] · [[FlashAttention]] · [[Multi-Token Prediction]]</p>",
+    "search_text": "tl;dr specattn reduces verification cost in speculative decoding by using a sparse attention pattern during the verification pass — only full attention on tokens flagged as uncertain by a cheap scoring step. see also [[speculative decoding]] · [[gqa]] · [[flashattention]] · [[multi-token prediction]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
+    "id": "SpecFusion",
+    "title": "SpecFusion",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "multimodal",
+      "inference",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Speculative decoding for multimodal models: separate lightweight draft heads for text vs. image tokens, verified jointly by the full model.",
+    "aliases": [
+      "SpecFusion"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "Multi-Token-Prediction",
+      "Medusa"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>SpecFusion extends speculative decoding to multimodal LLMs (text + image) by using modality-specific draft heads that propose tokens in parallel, then verifying both modalities in a single target model forward pass.</p>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[Multi-Token Prediction]] · [[Medusa]]</p>",
+    "search_text": "tl;dr specfusion extends speculative decoding to multimodal llms (text + image) by using modality-specific draft heads that propose tokens in parallel, then verifying both modalities in a single target model forward pass. see also [[speculative decoding]] · [[multi-token prediction]] · [[medusa]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -7273,6 +7894,7 @@
       "DeepSeek_V4",
       "Draft-model-free-speculative-decoding",
       "Draft-model",
+      "DraftAlign",
       "EAGLE",
       "Efficient_LLM_Inference",
       "Feature-uncertainty",
@@ -7286,8 +7908,10 @@
       "Kaplan_Scaling_Laws",
       "LLM-Benchmarks",
       "LLaMA-2",
+      "LongSpec",
       "Lookahead-Decoding",
       "Lossless-speedup",
+      "MagicPIG",
       "Medusa-heads",
       "Medusa-1",
       "Medusa-2",
@@ -7295,11 +7919,16 @@
       "Multi-Token-Prediction",
       "NVFP4",
       "One-step-token-advance",
+      "ParallelSpec",
+      "QuantSpec",
       "RLVR",
       "SentencePiece",
       "Softmax",
+      "SpecAttn",
+      "SpecFusion",
       "Tree-attention",
       "Tree-based-decoding",
+      "TreeSpec",
       "Typical-acceptance-scheme",
       "Verification-step",
       "WebArena",
@@ -7578,6 +8207,37 @@
     "backlinks": [
       "000-Index",
       "Sequence-parallelism"
+    ]
+  },
+  {
+    "id": "TensorSSM",
+    "title": "TensorSSM",
+    "authors": "",
+    "tags": [
+      "ssm",
+      "hardware",
+      "tensor-cores",
+      "acceleration",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Tensor-core-optimized SSM scan: reformulates the parallel prefix scan as batched GEMMs that land natively on Tensor Cores.",
+    "aliases": [
+      "TensorSSM"
+    ],
+    "links": [
+      "Hardware-Aware-Scan",
+      "State-Space-Models",
+      "Mamba",
+      "FlashAttention"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Standard SSM scans are memory-bound and miss Tensor Core utilization. TensorSSM reformulates the recurrence as matrix operations that map to cuBLAS/cuDNN primitives, achieving near-peak throughput on A100/H100.</p>\n<h2>See Also</h2>\n<p>[[Hardware-Aware Scan]] · [[State Space Models]] · [[Mamba]] · [[FlashAttention]]</p>",
+    "search_text": "tl;dr standard ssm scans are memory-bound and miss tensor core utilization. tensorssm reformulates the recurrence as matrix operations that map to cublas/cudnn primitives, achieving near-peak throughput on a100/h100. see also [[hardware-aware scan]] · [[state space models]] · [[mamba]] · [[flashattention]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -8233,6 +8893,36 @@
     ]
   },
   {
+    "id": "TreeSpec",
+    "title": "TreeSpec",
+    "authors": "",
+    "tags": [
+      "speculative-decoding",
+      "tree-search",
+      "inference",
+      "stub"
+    ],
+    "year": "2025",
+    "tldr": "Tree-structured speculative decoding: drafts a tree of candidate continuations instead of a single sequence, then verifies multiple branches in parallel to improve acceptance rate.",
+    "aliases": [
+      "TreeSpec"
+    ],
+    "links": [
+      "Speculative-Decoding",
+      "Multi-Token-Prediction",
+      "Medusa",
+      "EAGLE"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Standard speculative decoding drafts one token sequence; if a token is rejected, all subsequent tokens are discarded. TreeSpec drafts a tree — multiple branching candidate sequences — and verifies all branches simultaneously, keeping whichever path the target model accepts deepest.</p>\n<h2>Intuition</h2>\n<p>Think of it as beam search for the draft, but with a single verification pass that accepts the best valid prefix across all beams. Acceptance rate climbs because the target model can pick from multiple options rather than accepting or rejecting a single chain.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Higher effective acceptance rate than single-chain speculative decoding at similar draft compute</li>\n<li>Verification is still one target-model forward pass (branches batched together)</li>\n<li>Particularly useful when the draft model is uncertain — trees cover ambiguous continuations</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Speculative Decoding]] · [[Multi-Token Prediction]] · [[Medusa]] · [[EAGLE]]</p>",
+    "search_text": "tl;dr standard speculative decoding drafts one token sequence; if a token is rejected, all subsequent tokens are discarded. treespec drafts a tree — multiple branching candidate sequences — and verifies all branches simultaneously, keeping whichever path the target model accepts deepest. intuition think of it as beam search for the draft, but with a single verification pass that accepts the best valid prefix across all beams. acceptance rate climbs because the target model can pick from multiple options rather than accepting or rejecting a single chain. why it matters higher effective acceptance rate than single-chain speculative decoding at similar draft compute verification is still one target-model forward pass (branches batched together) particularly useful when the draft model is uncertain — trees cover ambiguous continuations see also [[speculative decoding]] · [[multi-token prediction]] · [[medusa]] · [[eagle]]",
+    "backlinks": [
+      "Citation-Map"
+    ]
+  },
+  {
     "id": "Typical-acceptance-scheme",
     "title": "Typical Acceptance Scheme",
     "authors": "",
@@ -8294,6 +8984,37 @@
     "backlinks": [
       "000-Index",
       "Draft-model"
+    ]
+  },
+  {
+    "id": "Vision-LSTM",
+    "title": "Vision-LSTM",
+    "authors": "",
+    "tags": [
+      "vision",
+      "lstm",
+      "xlstm",
+      "architecture",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "xLSTM adapted for visual data: replaces the ViT attention backbone with xLSTM blocks, achieving competitive image classification with linear inference cost.",
+    "aliases": [
+      "Vision-LSTM",
+      "xLSTM Vision"
+    ],
+    "links": [
+      "xLSTM",
+      "State-Space-Models",
+      "Mamba"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Vision-LSTM applies the xLSTM architecture (with exponential gating and matrix memory) to image patches, replacing Vision Transformer self-attention. Gets comparable accuracy to ViT at O(n) cost per token during inference.</p>\n<h2>See Also</h2>\n<p>[[xLSTM]] · [[State Space Models]] · [[Mamba]]</p>",
+    "search_text": "tl;dr vision-lstm applies the xlstm architecture (with exponential gating and matrix memory) to image patches, replacing vision transformer self-attention. gets comparable accuracy to vit at o(n) cost per token during inference. see also [[xlstm]] · [[state space models]] · [[mamba]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -8448,6 +9169,36 @@
       "000-Index",
       "RetNet",
       "RoPE"
+    ]
+  },
+  {
+    "id": "Zamba",
+    "title": "Zamba",
+    "authors": "",
+    "tags": [
+      "ssm",
+      "hybrid",
+      "architecture",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "Compact 7B SSM-Transformer hybrid; interleaves Mamba blocks with shared attention layers to match Transformer quality at lower inference cost.",
+    "aliases": [
+      "Zamba"
+    ],
+    "links": [
+      "Mamba",
+      "Jamba",
+      "RWKV",
+      "State-Space-Models"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Zamba is a 7B parameter model that alternates Mamba SSM blocks with a single shared self-attention layer reused across the stack — cutting the KV cache overhead while preserving the global mixing that attention provides.</p>\n<h2>See Also</h2>\n<p>[[Mamba]] · [[Jamba]] · [[RWKV]] · [[State Space Models]]</p>",
+    "search_text": "tl;dr zamba is a 7b parameter model that alternates mamba ssm blocks with a single shared self-attention layer reused across the stack — cutting the kv cache overhead while preserving the global mixing that attention provides. see also [[mamba]] · [[jamba]] · [[rwkv]] · [[state space models]]",
+    "backlinks": [
+      "Citation-Map"
     ]
   },
   {
@@ -8859,6 +9610,7 @@
       "Matrix-memory",
       "RWKV",
       "RetNet",
+      "Vision-LSTM",
       "mLSTM",
       "sLSTM",
       "state_spaces_mamba_repo"
