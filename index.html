@@ -149,6 +149,29 @@
       border-radius: 4px; padding: 1px 5px; pointer-events: none;
     }
 
+    /* search clear button */
+    .search-clear-btn {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      width: 18px; height: 18px; border-radius: 50%; border: none;
+      background: var(--muted); color: var(--bg);
+      font-size: 10px; font-weight: 700; cursor: pointer;
+      display: none; align-items: center; justify-content: center;
+      line-height: 1; padding: 0; flex-shrink: 0;
+      transition: background .15s, transform .15s;
+    }
+    .search-clear-btn:hover {
+      background: var(--text);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .search-clear-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+    #search.has-value { padding-right: 36px; }
+    @media (max-width: 768px) {
+      .search-clear-btn { width: 22px; height: 22px; font-size: 11px; right: 12px; }
+      #search.has-value { padding-right: 42px; }
+    }
+
     /* active filter bar */
     #active-filters {
       display: none; flex-wrap: wrap; align-items: center; gap: 6px;
@@ -1970,7 +1993,10 @@
     <input id="search" type="text"
            placeholder="Search titles, tags, full text… (press /)"
            autocomplete="off" spellcheck="false">
-    <span class="kbd">⌘K</span>
+    <button class="search-clear-btn" id="search-clear-btn"
+            onclick="clearSearch()" aria-label="Clear search"
+            title="Clear search" style="display:none">✕</button>
+    <span class="kbd" id="search-kbd">⌘K</span>
   </div>
 
   <div class="header-count" id="header-count"></div>
@@ -3818,6 +3844,26 @@ function highlightTextInCard(card, term) {
   });
 }
 
+// ── search clear button ───────────────────────────────────────────────────
+const searchClearBtn = document.getElementById('search-clear-btn');
+const searchKbd      = document.getElementById('search-kbd');
+
+function updateSearchClearBtn() {
+  const hasVal = searchEl.value.length > 0;
+  searchClearBtn.style.display = hasVal ? 'flex' : 'none';
+  if (searchKbd) searchKbd.style.display = hasVal ? 'none' : '';
+  searchEl.classList.toggle('has-value', hasVal);
+}
+
+function clearSearch() {
+  searchEl.value = '';
+  searchHighlightMode = false;
+  clearCardHighlighting();
+  updateSearchClearBtn();
+  searchEl.dispatchEvent(new Event('input'));
+  searchEl.focus();
+}
+
 // ── events ────────────────────────────────────────────────────────────────
 searchEl.addEventListener('input', () => {
   if (searchHighlightMode) {
@@ -3827,6 +3873,7 @@ searchEl.addEventListener('input', () => {
   query = searchEl.value.trim();
   if (!query) hideMatchNav();
   if (activeTab !== 'top-cited') render();
+  updateSearchClearBtn();
 });
 
 searchEl.addEventListener('keydown', e => {
@@ -3839,10 +3886,7 @@ searchEl.addEventListener('keydown', e => {
     return;
   }
   if (e.key === 'Escape') {
-    searchEl.value = '';
-    searchHighlightMode = false;
-    clearCardHighlighting();
-    searchEl.dispatchEvent(new Event('input'));
+    clearSearch();
   }
 });
 
