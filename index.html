@@ -1465,9 +1465,15 @@
 
     /* ── CARD HIGHLIGHT MODE (Enter key) ────────────────────────────────── */
     .card.search-highlighted {
+      border-color: rgba(124,58,237,0.45) !important;
+      box-shadow: 0 0 0 2px rgba(124,58,237,0.08) !important;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+    .card.search-highlighted-active {
       border-color: #7c3aed !important;
-      box-shadow: 0 0 0 3px rgba(124,58,237,0.15) !important;
-      background: rgba(124,58,237,0.03);
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.28), 0 0 22px rgba(124,58,237,0.18) !important;
+      background: rgba(124,58,237,0.05);
+      position: relative; z-index: 1;
       transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
     }
     .card.search-dimmed {
@@ -2228,6 +2234,8 @@ let cmpMode        = 'technical'; // 'technical' | 'summary'
 let matchEls           = [];    // current search-highlight <mark> elements
 let matchIdx           = 0;    // active match index
 let searchHighlightMode  = false;  // true while Enter-key card highlighting is active
+let highlightedCards   = [];    // matching card elements in step-highlight mode
+let highlightStep      = -1;    // current step index (-1 = not yet stepped)
 let currentSearchMode   = 'concepts'; // 'papers' | 'concepts' | 'fulltext'
 
 // ── reading progress ──────────────────────────────────────────────────────
@@ -2604,7 +2612,7 @@ function renderAll() {
   emptyEl.classList.toggle('show', visible.length === 0);
 
   const enterHint = (query && visible.length > 0)
-    ? `<span class="enter-hint">↵ Enter to highlight</span>`
+    ? `<span class="enter-hint">↵ Enter to highlight one by one</span>`
     : '';
   resultBar.innerHTML = `
     <span id="result-count-msg">${visible.length} of ${notes.length} notes${enterHint}</span>
@@ -3769,39 +3777,54 @@ function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
 // ── card highlight mode (Enter key) ──────────────────────────────────────
 function applyCardHighlighting(term) {
   const cards = [...grid.querySelectorAll('.card')];
-  let matchCount = 0;
+  highlightedCards = [];
 
   cards.forEach(card => {
     const note = byId[card.dataset.id] || {};
     const isMatch = matchesSearch(note, term);
     if (isMatch) {
-      matchCount++;
+      highlightedCards.push(card);
       card.classList.add('search-highlighted');
-      card.classList.remove('search-dimmed');
+      card.classList.remove('search-dimmed', 'search-highlighted-active');
       highlightTextInCard(card, term);
     } else {
       card.classList.add('search-dimmed');
-      card.classList.remove('search-highlighted');
+      card.classList.remove('search-highlighted', 'search-highlighted-active');
     }
   });
+
+  highlightStep = -1;
+  advanceHighlight();
+}
+
+function advanceHighlight() {
+  if (highlightedCards.length === 0) return;
+
+  if (highlightStep >= 0 && highlightStep < highlightedCards.length)
+    highlightedCards[highlightStep].classList.remove('search-highlighted-active');
+
+  highlightStep = (highlightStep + 1) % highlightedCards.length;
+  const active = highlightedCards[highlightStep];
+  active.classList.add('search-highlighted-active');
+  active.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   const countMsg = document.getElementById('result-count-msg');
   if (countMsg) {
     countMsg.innerHTML =
-      (matchCount > 0
-        ? `<strong>${matchCount}</strong> matching card${matchCount !== 1 ? 's' : ''} highlighted`
-        : `No matches`) +
-      ` <span class="enter-hint">Esc to clear</span>`;
+      `<strong>${highlightStep + 1}</strong> of ${highlightedCards.length} note${highlightedCards.length !== 1 ? 's' : ''} highlighted` +
+      ` <span class="enter-hint">↵ next · Esc to clear</span>`;
   }
 }
 
 function clearCardHighlighting() {
   grid.querySelectorAll('.card').forEach(card => {
-    card.classList.remove('search-highlighted', 'search-dimmed');
+    card.classList.remove('search-highlighted', 'search-highlighted-active', 'search-dimmed');
     card.querySelectorAll('mark.search-mark').forEach(mark => {
       mark.replaceWith(document.createTextNode(mark.textContent));
     });
   });
+  highlightedCards = [];
+  highlightStep = -1;
 }
 
 function highlightTextInCard(card, term) {
@@ -3881,8 +3904,12 @@ searchEl.addEventListener('keydown', e => {
     e.preventDefault();
     const term = searchEl.value.trim();
     if (!term) return;
-    searchHighlightMode = true;
-    applyCardHighlighting(term);
+    if (!searchHighlightMode) {
+      searchHighlightMode = true;
+      applyCardHighlighting(term);
+    } else {
+      advanceHighlight();
+    }
     return;
   }
   if (e.key === 'Escape') {
