@@ -549,11 +549,6 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 16px; flex-wrap: wrap;
     }
-    .footer-logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
-    .footer-logo {
-      height: 72px; width: auto; max-width: 300px;
-      object-fit: contain; display: block;
-    }
     .footer-credit {
       font-size: 11px; color: var(--muted); text-align: center;
       margin: 0; line-height: 1.5;
@@ -608,7 +603,6 @@
       /* Header — compact single area */
       header { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 8px; }
       .header-hint { display: none; }
-      .nav-logo { height: 32px; max-width: 150px; }
       .brand-sub { display: none; }
       .graph-search-hint { display: none; }
       .graph-search-input { width: 100%; }
@@ -652,7 +646,6 @@
 
       /* Footer (if ever shown) stacks */
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
-      .footer-logo { height: 48px; }
     }
   </style>
 </head>
@@ -787,16 +780,6 @@
              : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   document.documentElement.setAttribute('data-theme', eff);
 })();
-
-// ── Theme-aware logo switching ─────────────────────────────────────────────
-function updateLogoForTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const src = isDark ? 'assets/foxconn-logo-dark.svg' : 'assets/foxconn-logo.svg';
-  document.querySelectorAll('.footer-logo').forEach(img => { img.src = src; });
-}
-new MutationObserver(updateLogoForTheme)
-  .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-document.addEventListener('DOMContentLoaded', updateLogoForTheme);
 
 function setupTheme(onToggle) {
   const opts = document.querySelectorAll('.theme-opt');
@@ -1554,14 +1537,6 @@ init();
 
 <footer id="site-footer">
   <div class="footer-inner">
-    <div class="footer-left">
-      <div class="footer-logo-wrap">
-        <img src="assets/foxconn-logo.svg"
-             alt="Foxconn — Hon Hai Technology Group"
-             class="footer-logo"
-             onerror="this.src='assets/foxconn-logo.png';this.onerror=null">
-      </div>
-    </div>
     <div class="footer-center">
       <p class="footer-credit">
         Designed by<br>

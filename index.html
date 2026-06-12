@@ -1800,8 +1800,6 @@
       header { padding: 10px 14px; flex-wrap: wrap; height: auto; gap: 8px; }
       .kbd { display: none; }
       .header-count { display: none; }
-      .nav-logo { height: 32px; max-width: 150px; }
-      .nav-logo-wrap { margin-right: 10px; }
       .brand-title { font-size: 15px; }
       .brand-sub { display: none; }
       .site-nav { gap: 14px; }
@@ -1903,7 +1901,6 @@
       /* ── Footer + visitor ────────────────────────────────────────────── */
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
       .footer-right { text-align: center; }
-      .footer-logo { height: 52px; }
       #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 16px; }
       .flag-counter-wrap { max-width: 100%; }
       .flag-counter-img { max-width: 100%; }
@@ -1947,16 +1944,6 @@
       #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
     }
 
-    /* ── NAV LOGO ───────────────────────────────────────────────────── */
-    .nav-logo-wrap {
-      display: flex; align-items: center;
-      margin-right: 20px; flex-shrink: 0;
-    }
-    .nav-logo {
-      height: 48px; width: auto; max-width: 240px;
-      object-fit: contain; display: block;
-    }
-
     /* ── FOOTER ─────────────────────────────────────────────────────── */
     #site-footer {
       border-top: 0.5px solid var(--border);
@@ -1967,11 +1954,6 @@
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
       gap: 32px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
-    }
-    .footer-logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
-    .footer-logo {
-      height: 72px; width: auto; max-width: 300px;
-      object-fit: contain; display: block;
     }
     .footer-credit {
       font-size: 13px; color: var(--muted); text-align: center;
@@ -1995,12 +1977,6 @@
 
 <!-- ── HEADER ────────────────────────────────────────────────────────────── -->
 <header>
-  <div class="nav-logo-wrap">
-    <img src="assets/foxconn-logo.svg"
-         alt="Hon Hai Technology Group"
-         class="nav-logo"
-         onerror="this.src='assets/foxconn-logo.png';this.onerror=null">
-  </div>
   <div class="brand">
     <div class="brand-title">HHRI-AI Research Wiki<span class="dot">.</span></div>
     <div class="brand-sub">AI research knowledge base — papers, concepts &amp; intuitions | Hon Hai Research Institute</div>
@@ -2199,18 +2175,6 @@
              : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   document.documentElement.setAttribute('data-theme', eff);
 })();
-
-// ── Theme-aware logo switching ─────────────────────────────────────────────
-function updateLogoForTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const src = isDark ? 'assets/foxconn-logo-dark.svg' : 'assets/foxconn-logo.svg';
-  document.querySelectorAll('.nav-logo, .footer-logo').forEach(img => {
-    img.src = src;
-  });
-}
-new MutationObserver(updateLogoForTheme)
-  .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-document.addEventListener('DOMContentLoaded', updateLogoForTheme);
 
 function setupTheme() {
   const opts = document.querySelectorAll('.theme-opt');
@@ -4003,14 +3967,6 @@ init();
 
 <footer id="site-footer">
   <div class="footer-inner">
-    <div class="footer-left">
-      <div class="footer-logo-wrap">
-        <img src="assets/foxconn-logo.svg"
-             alt="Foxconn — Hon Hai Technology Group"
-             class="footer-logo"
-             onerror="this.src='assets/foxconn-logo.png';this.onerror=null">
-      </div>
-    </div>
     <div class="footer-center">
       <p class="footer-credit">
         Designed by<br>
