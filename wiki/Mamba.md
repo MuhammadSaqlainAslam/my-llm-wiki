@@ -13,7 +13,7 @@ cited_by_details:
     year: 2024
     citations: 2100
     theme: "vision"
-    arxiv: "2401.13460"
+    arxiv: "2401.10166"
   - title: "Vision Mamba"
     year: 2024
     citations: 1800
@@ -53,7 +53,7 @@ cited_by_details:
     year: 2024
     citations: 350
     theme: "scaling"
-    arxiv: "2405.18719"
+    arxiv: "2405.16712"
   - title: "MedMamba"
     year: 2024
     citations: 300

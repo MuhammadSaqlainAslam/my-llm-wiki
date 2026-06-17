@@ -280,6 +280,32 @@ def check_already_in_wiki(title: str) -> bool:
     return False
 
 
+def _sanitize_cited_by_details(content: str) -> str:
+    """Strip unverified arXiv IDs from cited_by_details entries before writing a note.
+    Removes individual bad arxiv: lines; does not reject the whole entry or note.
+    Calls verify_arxiv_paper() for each entry that carries an arxiv field.
+    """
+    if "cited_by_details:" not in content:
+        return content
+
+    def strip_if_bad(m):
+        chunk = m.group(0)
+        arxiv_m = re.search(r'([ \t]*arxiv:\s*["\']?(\d{4}\.\d{4,5}[a-z0-9]*)["\']?[ \t]*\n)', chunk)
+        if not arxiv_m:
+            return chunk
+        arxiv_id = arxiv_m.group(2)
+        title_m = re.search(r'-\s+title:\s*["\']?(.+?)["\']?[ \t]*\n', chunk)
+        if not title_m:
+            return chunk
+        claimed_title = title_m.group(1).strip()
+        is_valid, _ = verify_arxiv_paper(arxiv_id, claimed_title)
+        if not is_valid:
+            return chunk.replace(arxiv_m.group(1), "")
+        return chunk
+
+    return re.sub(r'(?m)(^  - title:[^\n]*\n(?:^    [^\n]*\n)*)', strip_if_bad, content)
+
+
 def write_content_note(filename: str, content: str) -> dict:
     """Write a markdown note to wiki/ for non-PDF content (GitHub, blog, YouTube)."""
     content = _strip_md_fence(content)
@@ -485,7 +511,8 @@ def execute_tool(name: str, inputs: dict) -> str:
     elif name == "check_wiki":
         result = {"exists": check_already_in_wiki(inputs["title"])}
     elif name == "write_note":
-        result = write_content_note(inputs["filename"], inputs["content"])
+        clean_content = _sanitize_cited_by_details(inputs["content"])
+        result = write_content_note(inputs["filename"], clean_content)
     elif name == "done":
         result = inputs
     else:
