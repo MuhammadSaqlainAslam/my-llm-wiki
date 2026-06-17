@@ -32,27 +32,22 @@ cited_by_details:
     year: 2025
     citations: 130
     theme: "inference"
-    arxiv: "2502.00003"
   - title: "LongSpec"
     year: 2025
     citations: 70
     theme: "inference"
-    arxiv: "2502.00004"
   - title: "SpecFusion"
     year: 2025
     citations: 90
     theme: "inference"
-    arxiv: "2503.00005"
   - title: "DraftAlign"
     year: 2025
     citations: 80
     theme: "inference"
-    arxiv: "2503.00006"
   - title: "ParallelSpec"
     year: 2025
     citations: 110
     theme: "inference"
-    arxiv: "2503.00007"
   - title: "SpecMamba"
     year: 2025
     citations: 60

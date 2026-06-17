@@ -34,32 +34,26 @@ cited_by_details:
     year: 2025
     citations: 50
     theme: "hardware"
-    arxiv: "2502.00009"
   - title: "LLM-PQ"
     year: 2025
     citations: 35
     theme: "hardware"
-    arxiv: "2502.00010"
   - title: "NeuralKV"
     year: 2025
     citations: 30
     theme: "hardware"
-    arxiv: "2502.00008"
   - title: "TensorSSM"
     year: 2025
     citations: 25
     theme: "hardware"
-    arxiv: "2502.00011"
   - title: "FPGA-LLM"
     year: 2025
     citations: 20
     theme: "hardware"
-    arxiv: "2502.00012"
   - title: "EdgeMamba"
     year: 2025
     citations: 15
     theme: "hardware"
-    arxiv: "2502.00013"
 ---
 
 # Hardware Acceleration for Neural Networks

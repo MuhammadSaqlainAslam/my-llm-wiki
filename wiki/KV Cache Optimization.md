@@ -59,7 +59,6 @@ cited_by_details:
     year: 2025
     citations: 150
     theme: "hardware"
-    arxiv: "2502.00008"
 ---
 
 # KV Cache Optimization

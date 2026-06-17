@@ -19,7 +19,6 @@ cited_by_details:
     year: 2024
     citations: 220
     theme: "architecture"
-    arxiv: "2407.08083"
   - title: "Vision-LSTM"
     year: 2024
     citations: 200
@@ -34,7 +33,6 @@ cited_by_details:
     year: 2024
     citations: 150
     theme: "llm"
-    arxiv: "2407.08083"
   - title: "Hawk"
     year: 2024
     citations: 100
@@ -44,22 +42,18 @@ cited_by_details:
     year: 2025
     citations: 80
     theme: "application"
-    arxiv: "2502.00001"
   - title: "BiXLSTM"
     year: 2025
     citations: 60
     theme: "architecture"
-    arxiv: "2502.00002"
   - title: "XLSTM-VMUNet"
     year: 2024
     citations: 80
     theme: "medical"
-    arxiv: "2411.17462"
   - title: "xLSTM vs Mamba survey"
     year: 2024
     citations: 90
     theme: "survey"
-    arxiv: "2406.00000"
 ---
 
 # xLSTM: Extended Long Short-Term Memory
