@@ -249,5 +249,33 @@
       "AdaVoMP (2606.18231) \u2014 relevance 1/10, 3D mechanical properties",
       "Multiple astrophysics/physics/biology papers \u2014 off-theme"
     ]
+  },
+  {
+    "timestamp": "2026-06-16T20:23:36.609022",
+    "mode": "daily",
+    "topic": null,
+    "added": [
+      "Variable-Width_Transformers.pdf (arXiv:2606.18246)",
+      "ConSA_Hybrid_Attention.pdf (arXiv:2606.18056)",
+      "Looped_World_Models.pdf (arXiv:2606.18208)",
+      "Fixed_Point_Reasoning_Model.pdf (arXiv:2606.18206)"
+    ],
+    "skipped": [
+      "nanoGPT (already in wiki)",
+      "micrograd (already in wiki)",
+      "minbpe (already in wiki)",
+      "llm.c (already in wiki)",
+      "Adaptive Volumetric Mechanical Properties (out of scope)",
+      "Ram-pressure stripping at z=4.3 (out of scope - astrophysics)",
+      "Polarized online discourse model (out of scope - social science)",
+      "FR3D 3D World Model (low relevance - autonomous driving vision)",
+      "UniAR Multimodal Autoregressive Modeling (low relevance - multimodal vision-gen)",
+      "MOCHI Motion Enhancement (out of scope - motion capture)",
+      "EventDrive VLM (low relevance - event camera driving)",
+      "EBench Mobile Manipulation (out of scope - robotics)",
+      "Quantum LDPC Decoding papers (out of scope - quantum computing)",
+      "PAHSPECS (out of scope - astrophysics)",
+      "One-Step Token-to-Waveform / MeanFlow TTS (low relevance - audio synthesis)"
+    ]
   }
 ]
