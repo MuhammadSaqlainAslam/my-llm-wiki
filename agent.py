@@ -226,6 +226,51 @@ def download_pdf(arxiv_id: str, filename: str) -> dict:
         return {"status": "error", "error": str(e)}
 
 
+def verify_arxiv_paper(arxiv_id: str, claimed_title: str) -> tuple:
+    """Fetch the real arXiv title via the API and compare with claimed_title.
+
+    Uses the arXiv Atom API (no key required) for reliable structured output.
+    Returns (is_valid: bool, real_title: str | None).
+    Fails closed — returns (False, None) on any network error so hallucinated
+    IDs are never silently accepted.
+
+    Word-overlap similarity >= 0.6 required (common stopwords excluded).
+    """
+    try:
+        params = urllib.parse.urlencode({"id_list": arxiv_id, "max_results": 1})
+        url = f"http://export.arxiv.org/api/query?{params}"
+        req = urllib.request.Request(url, headers={"User-Agent": "LLMWikiAgent/1.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            tree = ET.parse(r)
+        ns = {"atom": "http://www.w3.org/2005/Atom"}
+        entries = tree.findall("atom:entry", ns)
+        if not entries:
+            print(f"  ⚠️  VERIFY {arxiv_id}: ID not found on arXiv — skipping")
+            return (False, None)
+        real_title = re.sub(r"\s+", " ", entries[0].find("atom:title", ns).text).strip()
+
+        stopwords = {"the", "a", "an", "of", "for", "and", "in", "on", "with", "to", "via"}
+        def norm(s):
+            return set(re.sub(r"[^\w\s]", "", s.lower()).split()) - stopwords
+
+        claimed_words = norm(claimed_title)
+        real_words    = norm(real_title)
+        overlap       = len(claimed_words & real_words)
+        min_len       = min(len(claimed_words), len(real_words))
+        similarity    = overlap / min_len if min_len > 0 else 0.0
+        is_valid      = similarity >= 0.6
+
+        if is_valid:
+            print(f"  ✓  VERIFY {arxiv_id}: '{real_title}' (sim={similarity:.2f})")
+        else:
+            print(f"  ⚠️  VERIFY {arxiv_id}: claimed '{claimed_title}' vs "
+                  f"real '{real_title}' (sim={similarity:.2f}) — MISMATCH, skipping")
+        return (is_valid, real_title)
+    except Exception as e:
+        print(f"  ⚠️  Could not verify {arxiv_id}: {e} — failing closed")
+        return (False, None)
+
+
 def check_already_in_wiki(title: str) -> bool:
     """True if a note with a similar title already exists in wiki/."""
     needle = title.lower().replace(" ", "")
@@ -419,7 +464,24 @@ def execute_tool(name: str, inputs: dict) -> str:
     elif name == "get_youtube_transcript":
         result = get_youtube_transcript(inputs["video_id"])
     elif name == "download_pdf":
-        result = download_pdf(inputs["arxiv_id"], inputs["filename"])
+        arxiv_id     = inputs["arxiv_id"]
+        filename     = inputs["filename"]
+        claimed_title = re.sub(r"\.pdf$", "", filename, flags=re.IGNORECASE)
+        claimed_title = re.sub(r"[_\-]", " ", claimed_title).strip()
+        is_valid, real_title = verify_arxiv_paper(arxiv_id, claimed_title)
+        if not is_valid:
+            result = {
+                "status":        "skipped_unverified",
+                "arxiv_id":      arxiv_id,
+                "claimed_title": claimed_title,
+                "real_title":    real_title,
+                "message":       (
+                    "Title mismatch between claimed and real arXiv entry "
+                    "(or ID not found); paper not downloaded"
+                ),
+            }
+        else:
+            result = download_pdf(arxiv_id, filename)
     elif name == "check_wiki":
         result = {"exists": check_already_in_wiki(inputs["title"])}
     elif name == "write_note":
