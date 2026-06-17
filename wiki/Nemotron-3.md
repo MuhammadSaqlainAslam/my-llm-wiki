@@ -1,6 +1,5 @@
 ---
 title: "Nemotron 3: Efficient and Open Intelligence"
-arxiv: "2305.09301"
 authors: "NVIDIA"
 year: 2025
 citation_count: 14

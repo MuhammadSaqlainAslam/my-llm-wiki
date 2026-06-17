@@ -8,7 +8,6 @@ tldr: "A survey of every chip family running neural networks today — GPUs with
 aliases: [Hardware Acceleration Survey, NN Accelerators]
 theme: hardware
 citation_count: 4
-arxiv: "2512.23914"
 cited_by_top: ["FlashAttention-3", "FlexAttention", "SpecMamba", "FLAT", "INT-FlashAttention", "LLM-PQ", "NeuralKV", "TensorSSM", "FPGA-LLM", "EdgeMamba"]
 cited_by_details:
   - title: "FlashAttention-3"

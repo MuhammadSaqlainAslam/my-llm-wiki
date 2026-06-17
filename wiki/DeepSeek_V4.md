@@ -1,6 +1,5 @@
 ---
 title: "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence"
-arxiv: "2504.05411"
 authors: "DeepSeek-AI"
 year: 2026
 citation_count: 8
