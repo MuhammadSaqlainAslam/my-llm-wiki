@@ -172,6 +172,75 @@
     ]
   },
   {
+    "id": "ALBERT",
+    "title": "ALBERT",
+    "authors": "",
+    "tags": [
+      "bert",
+      "parameter-sharing",
+      "factorization",
+      "pretraining",
+      "nlp",
+      "stub"
+    ],
+    "year": "2019",
+    "tldr": "Parameter-efficient BERT variant that uses cross-layer weight sharing (all encoder layers share one parameter set) and factorized embedding parameterization — achieving similar performance to BERT-large with 18× fewer parameters, making it an early looped-transformer proof of concept.",
+    "aliases": [
+      "ALBERT",
+      "A Lite BERT"
+    ],
+    "links": [
+      "Universal-Transformer",
+      "Looped-World-Models",
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Adaptive-Computation-Time",
+      "Deep-Equilibrium-Models",
+      "Attention-Is-All-You-Need"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>BERT stacks 24 separate transformer layers. ALBERT asks: what if all 24 layers were <em>the same</em> layer, repeated 24 times? It also factorizes the embedding matrix into a small lookup table × a projection, saving parameters at the vocabulary dimension. With these two tricks, ALBERT-xxlarge matches or beats BERT-large on GLUE/SQuAD with far fewer parameters (though similar FLOPs — weight sharing saves storage, not compute).</p>\n<h2>Intuition</h2>\n<p>ALBERT is one of the earliest empirical validations that layer weight sharing doesn't kill performance in Transformers. The same parameters can be applied repeatedly to refine a hidden state — a key insight that motivates [[Universal Transformer]], [[Looped World Models|LoopWM]], and [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers|FPRM]].</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Early proof that parameter-shared (looped) Transformers can match individually-parameterized ones</li>\n<li>Separates <em>parameter count</em> from <em>effective depth</em> — a theme revisited by every looped architecture paper since</li>\n<li>Used as a comparison baseline for looped world models and reasoning models</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Universal Transformer]] · [[Looped World Models]] · [[Adaptive Computation Time]] · [[Deep Equilibrium Models]] · [[Attention Is All You Need]]</p>",
+    "search_text": "tl;dr bert stacks 24 separate transformer layers. albert asks: what if all 24 layers were the same layer, repeated 24 times? it also factorizes the embedding matrix into a small lookup table × a projection, saving parameters at the vocabulary dimension. with these two tricks, albert-xxlarge matches or beats bert-large on glue/squad with far fewer parameters (though similar flops — weight sharing saves storage, not compute). intuition albert is one of the earliest empirical validations that layer weight sharing doesn't kill performance in transformers. the same parameters can be applied repeatedly to refine a hidden state — a key insight that motivates [[universal transformer]], [[looped world models|loopwm]], and [[fixed-point reasoners stable and adaptive deep looped transformers|fprm]]. why it matters early proof that parameter-shared (looped) transformers can match individually-parameterized ones separates parameter count from effective depth — a theme revisited by every looped architecture paper since used as a comparison baseline for looped world models and reasoning models see also [[universal transformer]] · [[looped world models]] · [[adaptive computation time]] · [[deep equilibrium models]] · [[attention is all you need]]",
+    "backlinks": [
+      "Looped-World-Models"
+    ]
+  },
+  {
+    "id": "ARC-AGI-Benchmark",
+    "title": "ARC-AGI Benchmark",
+    "authors": "",
+    "tags": [
+      "benchmark",
+      "reasoning",
+      "agi",
+      "evaluation",
+      "few-shot",
+      "stub"
+    ],
+    "year": "2019",
+    "tldr": "François Chollet's 2019 benchmark for measuring abstract reasoning rather than pattern memorization: each task shows 3-5 input/output grid examples and asks the model to infer the hidden rule and apply it to a new grid — humans solve ~84%, best LLMs reach ~50-60%.",
+    "aliases": [
+      "ARC",
+      "Abstraction and Reasoning Corpus",
+      "ARC-AGI"
+    ],
+    "links": [
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Test-Time-Compute-Scaling",
+      "Chain-of-Thought-Prompting",
+      "Adaptive-Computation-Time"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>ARC presents colored pixel grids. Each task has a handful of demonstrations showing a transformation rule — \"reflect about the vertical axis\", \"fill enclosed regions\", \"extend the pattern\" — and asks the solver to apply it to a test grid. The key property is that each task is unique: you cannot memorize the answer from training data. You must perform genuine inductive generalization.</p>\n<h2>Intuition</h2>\n<p>Imagine IQ-test-style matrix puzzles, but grid-shaped. A human who has never seen the task before will usually solve it in seconds — the rule is always \"simple\" by some reasonable human prior. LLMs that have ingested the entire internet often fail because the rule isn't statistically predictable from prior text; it requires truly composing primitives from scratch.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Designed to be resistant to dataset memorization — new test tasks are always held out</li>\n<li>Highlights the gap between statistical pattern matching and core knowledge reasoning</li>\n<li>Used as a benchmark in looped reasoning models: [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers|FPRM]], HRM, TRM claim progress here</li>\n<li>ARC-AGI-2 (2025) raised the bar further; top models still far below human level</li>\n</ul>\n<h2>Current State (2025-2026)</h2>\n<p>Best results come from hybrid approaches: search-augmented programs + LLM scoring. Pure LLMs (even GPT-4o, Claude 3.7) plateau in the 50–60% range on ARC-AGI-1; ARC-AGI-2 is harder still.</p>\n<h2>See Also</h2>\n<p>[[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers]] · [[Test-Time Compute Scaling]] · [[Chain-of-Thought Prompting]] · [[Adaptive Computation Time]]</p>",
+    "search_text": "tl;dr arc presents colored pixel grids. each task has a handful of demonstrations showing a transformation rule — \"reflect about the vertical axis\", \"fill enclosed regions\", \"extend the pattern\" — and asks the solver to apply it to a test grid. the key property is that each task is unique: you cannot memorize the answer from training data. you must perform genuine inductive generalization. intuition imagine iq-test-style matrix puzzles, but grid-shaped. a human who has never seen the task before will usually solve it in seconds — the rule is always \"simple\" by some reasonable human prior. llms that have ingested the entire internet often fail because the rule isn't statistically predictable from prior text; it requires truly composing primitives from scratch. why it matters designed to be resistant to dataset memorization — new test tasks are always held out highlights the gap between statistical pattern matching and core knowledge reasoning used as a benchmark in looped reasoning models: [[fixed-point reasoners stable and adaptive deep looped transformers|fprm]], hrm, trm claim progress here arc-agi-2 (2025) raised the bar further; top models still far below human level current state (2025-2026) best results come from hybrid approaches: search-augmented programs + llm scoring. pure llms (even gpt-4o, claude 3.7) plateau in the 50–60% range on arc-agi-1; arc-agi-2 is harder still. see also [[fixed-point reasoners stable and adaptive deep looped transformers]] · [[test-time compute scaling]] · [[chain-of-thought prompting]] · [[adaptive computation time]]",
+    "backlinks": [
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers"
+    ]
+  },
+  {
     "id": "ASIC",
     "title": "ASIC (Application-Specific Integrated Circuit)",
     "authors": "",
@@ -229,6 +298,48 @@
     "search_text": "stub this is a concept stub. see the notes that reference this page for context. small trainable bottleneck modules inserted between frozen pretrained layers — down-project, nonlinearity, up-project; only adapters are trained during fine-tuning.",
     "backlinks": [
       "LoRA-Low-Rank-Adaptation-of-Large-Language-Models"
+    ]
+  },
+  {
+    "id": "Adaptive-Computation-Time",
+    "title": "Adaptive Computation Time",
+    "authors": "",
+    "tags": [
+      "recurrent",
+      "adaptive-computation",
+      "inference",
+      "halting",
+      "test-time-compute",
+      "stub"
+    ],
+    "year": "2016",
+    "tldr": "Trains a recurrent network to decide how many computation steps to spend on each input, halting early on easy inputs and running longer on hard ones — but the discrete halt is approximated by a soft geometric distribution, making it differentiable.",
+    "aliases": [
+      "ACT",
+      "adaptive halting"
+    ],
+    "links": [
+      "Universal-Transformer",
+      "PonderNet",
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Deep-Equilibrium-Models",
+      "Test-Time-Compute-Scaling",
+      "Looped-World-Models"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Standard RNNs apply a fixed number of steps regardless of input complexity. ACT adds a <em>halting unit</em> — a scalar output from the cell that accumulates probability over steps. The network stops when the cumulative halt probability exceeds 1, with fractional credit given to the last partial step. A differentiable ponder cost (sum of halting probabilities) penalizes unnecessary compute.</p>\n<h2>Intuition</h2>\n<p>Think of it as the network learning to raise its hand and say \"I'm done thinking about this one.\" Easy inputs raise their hand after a couple steps; hard inputs keep going. The clever trick is making the discrete \"stop\" signal differentiable by spreading it over a soft probability distribution — the model emits a fraction of its \"I'm done\" budget at each step, and training can backprop through the total ponder time.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>First trainable mechanism for variable-depth computation in sequence models</li>\n<li>Inspired a line of work on adaptive inference: [[Universal Transformer]], [[PonderNet]], looped Transformers</li>\n<li>Foundational comparison point for [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers|FPRM]] (which replaces ACT with convergence detection)</li>\n</ul>\n<h2>Limitations</h2>\n<ul>\n<li>Ponder cost is a heuristic — tuning the regularization coefficient is finicky</li>\n<li>In practice, ACT often fails to allocate meaningfully more steps to harder inputs</li>\n<li>Discrete halting is still approximate; the soft weighting introduces a small approximation error</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Universal Transformer]] · [[Deep Equilibrium Models]] · [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers]] · [[Test-Time Compute Scaling]] · [[Looped World Models]]</p>",
+    "search_text": "tl;dr standard rnns apply a fixed number of steps regardless of input complexity. act adds a halting unit — a scalar output from the cell that accumulates probability over steps. the network stops when the cumulative halt probability exceeds 1, with fractional credit given to the last partial step. a differentiable ponder cost (sum of halting probabilities) penalizes unnecessary compute. intuition think of it as the network learning to raise its hand and say \"i'm done thinking about this one.\" easy inputs raise their hand after a couple steps; hard inputs keep going. the clever trick is making the discrete \"stop\" signal differentiable by spreading it over a soft probability distribution — the model emits a fraction of its \"i'm done\" budget at each step, and training can backprop through the total ponder time. why it matters first trainable mechanism for variable-depth computation in sequence models inspired a line of work on adaptive inference: [[universal transformer]], [[pondernet]], looped transformers foundational comparison point for [[fixed-point reasoners stable and adaptive deep looped transformers|fprm]] (which replaces act with convergence detection) limitations ponder cost is a heuristic — tuning the regularization coefficient is finicky in practice, act often fails to allocate meaningfully more steps to harder inputs discrete halting is still approximate; the soft weighting introduces a small approximation error see also [[universal transformer]] · [[deep equilibrium models]] · [[fixed-point reasoners stable and adaptive deep looped transformers]] · [[test-time compute scaling]] · [[looped world models]]",
+    "backlinks": [
+      "ALBERT",
+      "ARC-AGI-Benchmark",
+      "Deep-Equilibrium-Models",
+      "DreamerV3",
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Looped-World-Models",
+      "Neural-ODE",
+      "PonderNet"
     ]
   },
   {
@@ -984,6 +1095,40 @@
     ]
   },
   {
+    "id": "DIAMOND",
+    "title": "DIAMOND",
+    "authors": "",
+    "tags": [
+      "world-models",
+      "diffusion",
+      "reinforcement-learning",
+      "video-prediction",
+      "stub"
+    ],
+    "year": "2024",
+    "tldr": "A world model that uses a diffusion process to generate the next observation frame — treating environment simulation as conditional image generation, which produces significantly sharper and more temporally consistent predictions than autoregressive token-based world models.",
+    "aliases": [
+      "DIAMOND world model",
+      "Diffusion as a World Model"
+    ],
+    "links": [
+      "Looped-World-Models",
+      "DreamerV3",
+      "IRIS",
+      "Recurrent-State-Space-Model"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Instead of predicting the next frame as a sequence of discrete tokens (IRIS-style) or a compact latent vector (Dreamer-style), DIAMOND generates the full next observation frame via score-based diffusion, conditioned on the action and recent history. This gives high-fidelity visual predictions at the cost of more inference steps per rollout.</p>\n<h2>Intuition</h2>\n<p>Diffusion models are the best image generators we have. If you want to \"imagine\" what the next game frame looks like, why not use the best visual prior available? DIAMOND plugs diffusion into the world model slot: the model's \"dream\" is literally a sequence of generated images, which a policy can then train on.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Demonstrates that diffusion can replace the predictive head in world models</li>\n<li>Achieves state-of-the-art visual fidelity in imagined rollouts</li>\n<li>Shows the modular nature of world model architectures: the generative backbone is swappable</li>\n<li>Comparison baseline for [[Looped World Models|LoopWM]]'s parameter efficiency claims</li>\n</ul>\n<h2>See Also</h2>\n<p>[[DreamerV3]] · [[IRIS]] · [[Looped World Models]] · [[Recurrent State Space Model]]</p>",
+    "search_text": "tl;dr instead of predicting the next frame as a sequence of discrete tokens (iris-style) or a compact latent vector (dreamer-style), diamond generates the full next observation frame via score-based diffusion, conditioned on the action and recent history. this gives high-fidelity visual predictions at the cost of more inference steps per rollout. intuition diffusion models are the best image generators we have. if you want to \"imagine\" what the next game frame looks like, why not use the best visual prior available? diamond plugs diffusion into the world model slot: the model's \"dream\" is literally a sequence of generated images, which a policy can then train on. why it matters demonstrates that diffusion can replace the predictive head in world models achieves state-of-the-art visual fidelity in imagined rollouts shows the modular nature of world model architectures: the generative backbone is swappable comparison baseline for [[looped world models|loopwm]]'s parameter efficiency claims see also [[dreamerv3]] · [[iris]] · [[looped world models]] · [[recurrent state space model]]",
+    "backlinks": [
+      "DreamerV3",
+      "IRIS",
+      "Looped-World-Models"
+    ]
+  },
+  {
     "id": "Data-Quality-Standards",
     "title": "Data Quality Standards",
     "authors": "",
@@ -1042,6 +1187,45 @@
       "000-Index",
       "KV-Cache-Optimization",
       "Prefill"
+    ]
+  },
+  {
+    "id": "Deep-Equilibrium-Models",
+    "title": "Deep Equilibrium Models",
+    "authors": "",
+    "tags": [
+      "implicit-depth",
+      "fixed-point",
+      "equilibrium",
+      "transformer",
+      "inference",
+      "stub"
+    ],
+    "year": "2019",
+    "tldr": "Replace explicit layer stacking with a single layer solved to its fixed point — the forward pass finds z* = f(z*; x) via a root-finding solver (e.g. Broyden's method), and the backward pass differentiates through the fixed-point equation without storing intermediate activations.",
+    "aliases": [
+      "DEQ",
+      "deep equilibrium"
+    ],
+    "links": [
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Adaptive-Computation-Time",
+      "Universal-Transformer",
+      "Neural-ODE",
+      "Looped-World-Models"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Instead of 48 distinct transformer blocks each mapping <code>z_i → z_{i+1}</code>, DEQ uses <em>one</em> block <code>f_θ</code> and finds <code>z*</code> such that <code>f_θ(z*; x) = z*</code>. This is solved iteratively (Newton/Broyden/Anderson acceleration), and because the fixed-point equation is available analytically, the gradient with respect to θ is a one-step solve — O(1) memory regardless of \"effective depth.\"</p>\n<h2>Intuition</h2>\n<p>Deep networks are expensive both in parameters (one set per layer) and in memory (activations stored for backprop). DEQ asks: what if we threw away the layer index entirely and just looked for the steady state? Once <code>z</code> stops changing, it has \"solved\" the network's forward pass. The backward pass is cheap because the implicit function theorem gives the gradient without unrolling the solver.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>O(1) memory for backprop vs. O(depth) for explicit deep networks</li>\n<li>Motivates the \"fixed-point as convergence criterion\" idea in [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers|FPRM]]</li>\n<li>Connects recurrent/looped architectures to the implicit-layer literature</li>\n<li>Extended to multiscale DEQ, DEQ-based MoE, and sequence models</li>\n</ul>\n<h2>Limitations</h2>\n<ul>\n<li>Convergence of the root-finding solver is not guaranteed for arbitrary learned functions</li>\n<li>Wall-clock training can be slow when the solver requires many iterations</li>\n<li>Less suitable for tasks where the \"correct\" answer is path-dependent (order matters)</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Adaptive Computation Time]] · [[Universal Transformer]] · [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers]] · [[Neural ODE]] · [[Looped World Models]]</p>",
+    "search_text": "tl;dr instead of 48 distinct transformer blocks each mapping z_i → z_{i+1} , deq uses one block f_θ and finds z* such that f_θ(z*; x) = z* . this is solved iteratively (newton/broyden/anderson acceleration), and because the fixed-point equation is available analytically, the gradient with respect to θ is a one-step solve — o(1) memory regardless of \"effective depth.\" intuition deep networks are expensive both in parameters (one set per layer) and in memory (activations stored for backprop). deq asks: what if we threw away the layer index entirely and just looked for the steady state? once z stops changing, it has \"solved\" the network's forward pass. the backward pass is cheap because the implicit function theorem gives the gradient without unrolling the solver. why it matters o(1) memory for backprop vs. o(depth) for explicit deep networks motivates the \"fixed-point as convergence criterion\" idea in [[fixed-point reasoners stable and adaptive deep looped transformers|fprm]] connects recurrent/looped architectures to the implicit-layer literature extended to multiscale deq, deq-based moe, and sequence models limitations convergence of the root-finding solver is not guaranteed for arbitrary learned functions wall-clock training can be slow when the solver requires many iterations less suitable for tasks where the \"correct\" answer is path-dependent (order matters) see also [[adaptive computation time]] · [[universal transformer]] · [[fixed-point reasoners stable and adaptive deep looped transformers]] · [[neural ode]] · [[looped world models]]",
+    "backlinks": [
+      "ALBERT",
+      "Adaptive-Computation-Time",
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Looped-World-Models",
+      "Neural-ODE",
+      "PonderNet"
     ]
   },
   {
@@ -1439,6 +1623,41 @@
     "search_text": "tl;dr the acceptance rate in speculative decoding is bottlenecked by distribution mismatch between draft and target. draftalign trains the draft model with a kl-divergence loss against the target, pushing acceptance rate toward 90%+ on benchmarks. see also [[speculative decoding]] · [[multi-token prediction]] · [[kl divergence]] · [[medusa]]",
     "backlinks": [
       "Citation-Map"
+    ]
+  },
+  {
+    "id": "DreamerV3",
+    "title": "DreamerV3",
+    "authors": "",
+    "tags": [
+      "world-models",
+      "reinforcement-learning",
+      "model-based-rl",
+      "latent-space",
+      "stub"
+    ],
+    "year": "2023",
+    "tldr": "A single world model that learns purely from pixels/observations, imagines millions of virtual rollouts in a compact latent space, and trains an actor-critic entirely inside that imagination — mastering Atari, continuous control, and Minecraft without any task-specific tuning.",
+    "aliases": [
+      "Dreamer",
+      "DreamerV3"
+    ],
+    "links": [
+      "Looped-World-Models",
+      "IRIS",
+      "DIAMOND",
+      "Recurrent-State-Space-Model",
+      "Adaptive-Computation-Time"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>DreamerV3 encodes environment observations into a compact latent state using a recurrent state-space model (RSSM), predicts how that latent state evolves under actions, and trains a policy entirely on <em>imagined</em> trajectories inside the latent world model. No environment interaction is needed during policy improvement — the agent learns from dreams.</p>\n<h2>Intuition</h2>\n<p>Instead of running thousands of real game episodes, train a \"mental model\" of the world, then let the agent practice inside that model at 1000× the speed of reality. The world model is a learned simulator; the policy is optimized inside the simulator. Return to the real environment only to collect a little more data to keep the mental model accurate.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>First model-based method to achieve strong results across diverse domains (Atari, DMC, Minecraft) with a single architecture and hyperparameter set</li>\n<li>Demonstrated that latent-space imagination can replace environment interaction for large parts of training</li>\n<li>Baseline / competitor for [[Looped World Models]] and IRIS</li>\n<li>Inspires parameter-efficient successors like [[Looped World Models|LoopWM]]</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Looped World Models]] · [[IRIS]] · [[DIAMOND]] · [[Recurrent State Space Model]] · [[Adaptive Computation Time]]</p>",
+    "search_text": "tl;dr dreamerv3 encodes environment observations into a compact latent state using a recurrent state-space model (rssm), predicts how that latent state evolves under actions, and trains a policy entirely on imagined trajectories inside the latent world model. no environment interaction is needed during policy improvement — the agent learns from dreams. intuition instead of running thousands of real game episodes, train a \"mental model\" of the world, then let the agent practice inside that model at 1000× the speed of reality. the world model is a learned simulator; the policy is optimized inside the simulator. return to the real environment only to collect a little more data to keep the mental model accurate. why it matters first model-based method to achieve strong results across diverse domains (atari, dmc, minecraft) with a single architecture and hyperparameter set demonstrated that latent-space imagination can replace environment interaction for large parts of training baseline / competitor for [[looped world models]] and iris inspires parameter-efficient successors like [[looped world models|loopwm]] see also [[looped world models]] · [[iris]] · [[diamond]] · [[recurrent state space model]] · [[adaptive computation time]]",
+    "backlinks": [
+      "DIAMOND",
+      "IRIS",
+      "Looped-World-Models"
     ]
   },
   {
@@ -1880,7 +2099,13 @@
     "cited_by_details": null,
     "html": "<h2>The Problem</h2>\n<p>Reasoning tasks feel intuitively iterative: you try something, check if it works, refine. Looped Transformers capture this nicely — instead of stacking many different layers, you run <em>the same</em> layer repeatedly, building up depth at inference time without adding parameters. Models like HRM and TRM showed you can beat much bigger LLMs on puzzles like Sudoku, Maze, and ARC-AGI this way.</p>\n<p>But two problems lurk under the surface. First, <strong>when do you stop looping?</strong> Most approaches either fix the number of iterations in advance (losing adaptivity to hard vs. easy inputs) or train an auxiliary Adaptive Computation Time (ACT) network to decide when to halt. ACT is famously hard to optimize because the halting decision is discrete, and empirically it often fails to allocate <em>more</em> compute to <em>harder</em> inputs — the whole point of adaptive inference.</p>\n<p>Second, <strong>deep looping creates deep networks</strong>, and deep networks have signal propagation problems. Looped models have traditionally used post-norm layers specifically because post-norm keeps activation magnitudes bounded across iterations. But post-norm is known to cause unstable training in very deep non-looped architectures. As the number of loops grows to handle harder tasks, this tension becomes critical: you want depth for expressivity, but depth kills training stability.</p>\n<h2>The Idea</h2>\n<p>Stop treating the halting decision as a learned module bolted on top — instead, let the loop itself tell you when it's done: <strong>halt when the hidden state stops changing</strong>, i.e., when it converges to a fixed-point.</p>\n<p>If <code>z_{i+1} = f_θ(z_i; x)</code> and eventually <code>‖z_{i+1} − z_i‖ ≤ ε</code>, then the model has reached <code>z* = f_θ(z*; x)</code> — a genuine fixed-point of the recurrence. No extra module, no discrete halting probability to differentiate through: the geometry of the dynamics provides the stopping criterion for free.</p>\n<h2>How It Works</h2>\n<p><strong>Fixed-point halting.</strong> At each iteration, compute <code>‖z_{i+1} − z_i‖</code>. Once this falls below a threshold <code>ε</code>, stop. Hard inputs naturally require more iterations to converge; easy inputs converge fast. This gives adaptivity without any learned halting network. A theoretically motivated modification (dampening/anti-oscillation term) is added to prevent the iterates from perpetually bouncing around a fixed-point without converging.</p>\n<p><strong>Pre-norm + residual scaling.</strong> The key insight is: <em>a looped Transformer unrolled for N iterations is effectively an N-layer-deep Transformer</em>. Deep non-looped Transformers universally prefer pre-norm (LayerNorm before the sublayer, not after) for stable gradient flow. But post-norm has served a purpose in looped models — it keeps activation norms bounded across iterations. The fix: keep pre-norm for gradient stability, and add <strong>learnable residual scaling parameters</strong> (small scalars multiplying each residual branch). These damp the activation growth that pre-norm would otherwise allow, replacing the bounding role of post-norm without its training instability.</p>\n<p>Concretely, the update looks like:</p>\n<pre><code>z_{i+1} = z_i + α · Attn(Norm(z_i)) + β · FFN(Norm(z_i + α · Attn(Norm(z_i))))\n</code></pre>\n<p>where α, β are learned scalars initialized small, giving the model control over how much each residual branch contributes — crucial at large effective depths.</p>\n<p><strong>Architecture (FPRM).</strong> A single Transformer block containing: ShortConv (for local context mixing, following URM), multi-head attention with NoPE (no positional encoding, avoiding RoPE artifacts in recurrence), SwiGLU FFN, all wrapped in pre-norm with residual scaling. The same block is looped until fixed-point convergence.</p>\n<p><strong>No hierarchy needed.</strong> Unlike HRM and TRM which split computation into fast-looping and slow-looping components, FPRM uses a single flat loop. The stability improvements make the single loop expressive enough.</p>\n<h2>Key Results</h2>\n<ul>\n<li><strong>Sudoku-Extreme:</strong> FPRM achieves <strong>+10 accuracy points</strong> over TRM while using approximately <strong>27% fewer effective layers</strong> of compute (∼1,000 fewer layers).</li>\n<li><strong>Maze-Hard, ARC-AGI-1, state-tracking (A5 and S5):</strong> FPRM outperforms HRM and TRM among all models at the 7M parameter scale.</li>\n<li><strong>Adaptivity:</strong> FPRM is claimed to be the first Transformer-based reasoning model that demonstrably scales inference compute with actual input difficulty — easy Sudoku puzzles converge faster than hard ones, correctly detecting accuracy plateaus.</li>\n<li><strong>Trainability:</strong> Switching from post-norm to pre-norm + residual scaling allows the model to train stably with context lengths and iteration counts where post-norm models fail to utilize signal and pre-norm alone diverges in activation norm.</li>\n</ul>\n<h2>Limitations</h2>\n<ul>\n<li><strong>Fixed-point convergence is not guaranteed</strong> for arbitrary learned functions. The oscillation dampening helps, but some inputs may never converge cleanly, requiring a fallback maximum iteration count.</li>\n<li><strong>Single-level loop</strong> may still be less expressive per parameter than hierarchical approaches (HRM, TRM) on tasks requiring genuinely multi-scale reasoning, even if FPRM currently wins empirically at 7M params.</li>\n<li>The threshold <code>ε</code> for halting is a hyperparameter that likely needs tuning per task or difficulty distribution — unclear how to set it robustly across domains.</li>\n<li>Results are primarily on structured puzzle tasks (Sudoku, Maze, ARC-AGI, group theory state-tracking). Generalization to open-ended language reasoning tasks has not been demonstrated.</li>\n<li>Comparisons are within the 7M parameter regime; behavior at scale is unknown.</li>\n</ul>\n<h2>Why It Matters</h2>\n<p>This paper cleanly separates two orthogonal problems in looped reasoning models — <em>stability</em> and <em>adaptivity</em> — and gives a principled solution to each. The fixed-point halting idea is elegant because it costs nothing at inference: you're already computing <code>z_{i+1}</code>, so checking <code>‖z_{i+1} − z_i‖</code> is free. The pre-norm + residual scaling insight bridges the literature on deep Transformer training with the looped architecture literature, which had been oddly disconnected.</p>\n<p>More broadly, FPRM is part of a wave of work exploring test-time compute scaling <em>without</em> Chain-of-Thought verbalization — important because CoT requires curated reasoning traces, special training, and burns through context length. Looped models with principled halting offer a complementary path: latent iterative reasoning that is end-to-end trainable from task supervision alone. If this approach scales, it could sit alongside CoT-based systems as a second paradigm for adaptive inference-time reasoning.</p>\n<h2>See Also</h2>\n<p>[[Universal Transformer]] · [[Adaptive Computation Time]] · [[Chain-of-Thought Prompting]] · [[Deep Equilibrium Models]] · [[Attention Is All You Need]] · [[Test-Time Compute Scaling]] · [[ARC-AGI Benchmark]]</p>",
     "search_text": "the problem reasoning tasks feel intuitively iterative: you try something, check if it works, refine. looped transformers capture this nicely — instead of stacking many different layers, you run the same layer repeatedly, building up depth at inference time without adding parameters. models like hrm and trm showed you can beat much bigger llms on puzzles like sudoku, maze, and arc-agi this way. but two problems lurk under the surface. first, when do you stop looping? most approaches either fix the number of iterations in advance (losing adaptivity to hard vs. easy inputs) or train an auxiliary adaptive computation time (act) network to decide when to halt. act is famously hard to optimize because the halting decision is discrete, and empirically it often fails to allocate more compute to harder inputs — the whole point of adaptive inference. second, deep looping creates deep networks , and deep networks have signal propagation problems. looped models have traditionally used post-norm layers specifically because post-norm keeps activation magnitudes bounded across iterations. but post-norm is known to cause unstable training in very deep non-looped architectures. as the number of loops grows to handle harder tasks, this tension becomes critical: you want depth for expressivity, but depth kills training stability. the idea stop treating the halting decision as a learned module bolted on top — instead, let the loop itself tell you when it's done: halt when the hidden state stops changing , i.e., when it converges to a fixed-point. if z_{i+1} = f_θ(z_i; x) and eventually ‖z_{i+1} − z_i‖ ≤ ε , then the model has reached z* = f_θ(z*; x) — a genuine fixed-point of the recurrence. no extra module, no discrete halting probability to differentiate through: the geometry of the dynamics provides the stopping criterion for free. how it works fixed-point halting. at each iteration, compute ‖z_{i+1} − z_i‖ . once this falls below a threshold ε , stop. hard inputs naturally require more iterations to converge; easy inputs converge fast. this gives adaptivity without any learned halting network. a theoretically motivated modification (dampening/anti-oscillation term) is added to prevent the iterates from perpetually bouncing around a fixed-point without converging. pre-norm + residual scaling. the key insight is: a looped transformer unrolled for n iterations is effectively an n-layer-deep transformer . deep non-looped transformers universally prefer pre-norm (layernorm before the sublayer, not after) for stable gradient flow. but post-norm has served a purpose in looped models — it keeps activation norms bounded across iterations. the fix: keep pre-norm for gradient stability, and add learnable residual scaling parameters (small scalars multiplying each residual branch). these damp the activation growth that pre-norm would otherwise allow, replacing the bounding role of post-norm without its training instability. concretely, the update looks like: z_{i+1} = z_i + α · attn(norm(z_i)) + β · ffn(norm(z_i + α · attn(norm(z_i)))) where α, β are learned scalars initialized small, giving the model control over how much each residual branch contributes — crucial at large effective depths. architecture (fprm). a single transformer block containing: shortconv (for local context mixing, following urm), multi-head attention with nope (no positional encoding, avoiding rope artifacts in recurrence), swiglu ffn, all wrapped in pre-norm with residual scaling. the same block is looped until fixed-point convergence. no hierarchy needed. unlike hrm and trm which split computation into fast-looping and slow-looping components, fprm uses a single flat loop. the stability improvements make the single loop expressive enough. key results sudoku-extreme: fprm achieves +10 accuracy points over trm while using approximately 27% fewer effective layers of compute (∼1,000 fewer layers). maze-hard, arc-agi-1, state-tracking (a5 and s5): fprm outperforms hrm and trm among all models at the 7m parameter scale. adaptivity: fprm is claimed to be the first transformer-based reasoning model that demonstrably scales inference compute with actual input difficulty — easy sudoku puzzles converge faster than hard ones, correctly detecting accuracy plateaus. trainability: switching from post-norm to pre-norm + residual scaling allows the model to train stably with context lengths and iteration counts where post-norm models fail to utilize signal and pre-norm alone diverges in activation norm. limitations fixed-point convergence is not guaranteed for arbitrary learned functions. the oscillation dampening helps, but some inputs may never converge cleanly, requiring a fallback maximum iteration count. single-level loop may still be less expressive per parameter than hierarchical approaches (hrm, trm) on tasks requiring genuinely multi-scale reasoning, even if fprm currently wins empirically at 7m params. the threshold ε for halting is a hyperparameter that likely needs tuning per task or difficulty distribution — unclear how to set it robustly across domains. results are primarily on structured puzzle tasks (sudoku, maze, arc-agi, group theory state-tracking). generalization to open-ended language reasoning tasks has not been demonstrated. comparisons are within the 7m parameter regime; behavior at scale is unknown. why it matters this paper cleanly separates two orthogonal problems in looped reasoning models — stability and adaptivity — and gives a principled solution to each. the fixed-point halting idea is elegant because it costs nothing at inference: you're already computing z_{i+1} , so checking ‖z_{i+1} − z_i‖ is free. the pre-norm + residual scaling insight bridges the literature on deep transformer training with the looped architecture literature, which had been oddly disconnected. more broadly, fprm is part of a wave of work exploring test-time compute scaling without chain-of-thought verbalization — important because cot requires curated reasoning traces, special training, and burns through context length. looped models with principled halting offer a complementary path: latent iterative reasoning that is end-to-end trainable from task supervision alone. if this approach scales, it could sit alongside cot-based systems as a second paradigm for adaptive inference-time reasoning. see also [[universal transformer]] · [[adaptive computation time]] · [[chain-of-thought prompting]] · [[deep equilibrium models]] · [[attention is all you need]] · [[test-time compute scaling]] · [[arc-agi benchmark]]",
-    "backlinks": []
+    "backlinks": [
+      "ALBERT",
+      "ARC-AGI-Benchmark",
+      "Adaptive-Computation-Time",
+      "Deep-Equilibrium-Models",
+      "PonderNet"
+    ]
   },
   {
     "id": "Flash-Attention",
@@ -3210,6 +3435,40 @@
     ]
   },
   {
+    "id": "IRIS",
+    "title": "IRIS",
+    "authors": "",
+    "tags": [
+      "world-models",
+      "reinforcement-learning",
+      "transformer",
+      "discrete-tokens",
+      "stub"
+    ],
+    "year": "2022",
+    "tldr": "A world model that tokenizes observations into discrete visual tokens (via a VQ-VAE), then uses a GPT-style autoregressive Transformer to predict the next token sequence — turning RL environment simulation into a language-modeling problem.",
+    "aliases": [
+      "IRIS world model",
+      "Imagination with auto-Regression over an Inner Speech"
+    ],
+    "links": [
+      "DIAMOND",
+      "Looped-World-Models",
+      "DreamerV3",
+      "Recurrent-State-Space-Model"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>IRIS encodes each game frame as a sequence of discrete latent tokens (like codebook indices from a VQ-VAE), then trains a causal Transformer to predict the next frame's tokens given the current frame's tokens and action. The policy sees these predicted token sequences as its world model rollouts. Result: Atari performance using only 2 hours of real gameplay.</p>\n<h2>Intuition</h2>\n<p>If you can compress a game frame into ~16 discrete tokens, then \"predicting the next frame\" becomes \"predicting 16 tokens given 16 + action\" — exactly the language modeling setup where Transformers excel. You get sample efficiency from the world model (practice in imagination) and model quality from the autoregressive prior over tokens.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Showed that the GPT/LLM training recipe transfers almost directly to world modeling</li>\n<li>Achieves superhuman Atari scores with very limited real-environment interaction</li>\n<li>Influential baseline for follow-up world models including [[DIAMOND]] and [[Looped World Models|LoopWM]]</li>\n</ul>\n<h2>See Also</h2>\n<p>[[DreamerV3]] · [[DIAMOND]] · [[Looped World Models]] · [[Recurrent State Space Model]]</p>",
+    "search_text": "tl;dr iris encodes each game frame as a sequence of discrete latent tokens (like codebook indices from a vq-vae), then trains a causal transformer to predict the next frame's tokens given the current frame's tokens and action. the policy sees these predicted token sequences as its world model rollouts. result: atari performance using only 2 hours of real gameplay. intuition if you can compress a game frame into ~16 discrete tokens, then \"predicting the next frame\" becomes \"predicting 16 tokens given 16 + action\" — exactly the language modeling setup where transformers excel. you get sample efficiency from the world model (practice in imagination) and model quality from the autoregressive prior over tokens. why it matters showed that the gpt/llm training recipe transfers almost directly to world modeling achieves superhuman atari scores with very limited real-environment interaction influential baseline for follow-up world models including [[diamond]] and [[looped world models|loopwm]] see also [[dreamerv3]] · [[diamond]] · [[looped world models]] · [[recurrent state space model]]",
+    "backlinks": [
+      "DIAMOND",
+      "DreamerV3",
+      "Looped-World-Models"
+    ]
+  },
+  {
     "id": "In-Context-Learning",
     "title": "In-Context Learning",
     "authors": "",
@@ -4461,7 +4720,15 @@
     "cited_by_details": null,
     "html": "<h2>The Problem</h2>\n<p>World models need to simulate how an environment evolves over long horizons — hundreds or thousands of steps — to be useful for planning and reinforcement learning. The trouble is that doing this faithfully requires deep, expressive computation. Physical dynamics aren't a one-shot lookup; they unfold through repeated application of the same governing laws, and getting them right demands iterative refinement.</p>\n<p>Conventional fixed-depth architectures handle this badly in two ways. First, prediction errors compound across rollout steps: a small mistake at step 10 becomes a catastrophic drift by step 100. Second, the standard fix — make the model deeper — proportionally inflates parameter count and inference cost. Running a big model thousands of times in sequence (which rollouts require) is ruinously expensive, especially on resource-constrained or real-time systems.</p>\n<p>These two failure modes create a cruel tradeoff: you either get a cheap model that drifts, or an accurate model you can't afford to run. Looped architectures had already shown promise in language modelling (2–3× parameter efficiency, scalable test-time compute), but nobody had applied them to world modelling at all.</p>\n<h2>The Idea</h2>\n<p>Instead of stacking N separate transformer blocks with N×P parameters, use <em>one</em> transformer block with P parameters and run it N times — each pass refines the same latent state a little further.</p>\n<p>The core insight is structural: environment dynamics are themselves an iterative process. A physical state <code>s_t</code> evolves to <code>s_{t+1}</code> by repeated application of approximately stationary laws (gravity still works the same way on frame 500 as on frame 1). A looped transformer's computation graph — one shared function <code>f_θ</code> applied recurrently to a latent state — is <em>directly isomorphic</em> to this structure. Rather than forcing a fixed-depth network to do everything in one pass, you let the model \"think harder\" by running more iterations when the transition is complex (a collision) and fewer when it's simple (free flight).</p>\n<h2>How It Works</h2>\n<p><strong>Parameter-shared recurrent block.</strong> A single transformer block is applied repeatedly to a latent state <code>h</code>. At each inner-loop step <code>k</code>, the update follows:</p>\n<pre><code>h_{k+1} = Ā·h_k + B̄·e + R̄(h_k, e)\n</code></pre>\n<p>where <code>e</code> is the encoded environment observation/action input, <code>Ā</code> governs how much of the previous latent state is retained, <code>B̄</code> controls how much new input is injected, and <code>R̄</code> captures all the nonlinear transformer operations (attention, MLP, etc.). This mirrors a recurrent state-space model but with a shared block doing the heavy lifting.</p>\n<p><strong>Spectral stability constraint.</strong> The dangerous part of iterating any recurrent system is that errors can blow up exponentially. LoopWM prevents this by parameterizing the continuous-time retention matrix as <code>A := diag(−exp(a))</code> with learnable scalar vector <code>a</code>, then discretizing via zero-order hold:</p>\n<pre><code>Ā = exp(ΔA)\n</code></pre>\n<p>Because <code>a</code> is exponentiated and negated before exponentiation again, all eigenvalues of <code>Ā</code> are guaranteed to land in <code>(0, 1)</code>. This makes the linear retention component contractive — the residual dynamics are bounded no matter how many inner-loop iterations you run or how long the rollout is. Stability is baked into the parameterization, not enforced as a soft penalty.</p>\n<p><strong>Adaptive depth.</strong> The number of inner-loop iterations isn't fixed. Simple transitions (smooth free-flight dynamics) can exit early; complex ones (contact events, collisions) run more iterations. This maps naturally onto the non-uniform difficulty of physical simulation and means the <em>average</em> inference cost is much lower than the worst-case depth.</p>\n<p><strong>Residual connections.</strong> Standard residual skip connections are added on top of the looped structure to improve gradient flow and empirical performance during training.</p>\n<p>The overall effect: a model that behaves like a very deep network (many effective layers of computation) but stores parameters for only one block.</p>\n<h2>Key Results</h2>\n<ul>\n<li>Up to <strong>100× parameter efficiency</strong> over conventional fixed-depth world model architectures — the looped model matches or exceeds predictive accuracy with a tiny fraction of the parameters.</li>\n<li><strong>Competitive or superior predictive accuracy</strong> to existing world model architectures (DreamerV3, IRIS, DIAMOND, EMERALD) across standard benchmarks.</li>\n<li><strong>Stable rollouts over substantially longer horizons</strong> than fixed-depth baselines, enabled by the spectral stability constraint.</li>\n<li>Test-time compute can be scaled by simply increasing the number of loop iterations at inference, without any retraining — analogous to what recurrent-depth language models demonstrated (2–3× parameter efficiency in that domain).</li>\n<li>Establishes <strong>iterative latent depth</strong> as a new, orthogonal scaling axis for world models, separate from model size and training data volume.</li>\n</ul>\n<h2>Limitations</h2>\n<ul>\n<li>The inner-loop iteration count and the adaptive halting mechanism add inference-time complexity that isn't free — the overhead of the exit mechanism and minimum useful loop depth determine how much the adaptive savings actually materialize in practice.</li>\n<li>The savings are most dramatic when the distribution of transition difficulties is highly non-uniform. For environments with uniformly complex dynamics, the adaptive depth advantage shrinks.</li>\n<li>The correspondence between inner-loop iterations and \"physical time steps\" is conceptual, not exact — the loop is performing latent refinement, not literally simulating sub-steps of physics. This limits interpretability.</li>\n<li>The paper is from a single research group (FaceMind Research Asia) and, at the time of writing, extensive independent reproduction and ablation is not yet available.</li>\n<li>Evaluation appears focused on existing world modelling benchmarks; performance on very large-scale video generation settings (Sora-style) remains untested.</li>\n</ul>\n<h2>Why It Matters</h2>\n<p>World models are the engine behind sample-efficient RL, embodied AI, and autonomous driving simulators. The bottleneck has always been the same: you need a model expressive enough to simulate physics faithfully over long horizons, but cheap enough to run thousands of times per planning episode. LoopWM breaks that tradeoff by decoupling <em>representational capacity</em> (number of effective compute passes) from <em>parameter count</em>.</p>\n<p>More broadly, this paper introduces looped/universal transformer architectures — a technique already well-validated in language modelling — into the world modelling space for the first time. If the parameter efficiency results hold up across diverse environments, this could make high-quality world models viable on edge hardware and enable much longer planning horizons in embodied agents. The \"iterative latent depth\" framing also gives the community a new knob to turn alongside the usual model size and data scaling axes.</p>\n<h2>See Also</h2>\n<p>[[Transformer]] · [[Attention Is All You Need]] · [[Universal Transformer]] · [[DreamerV3]] · [[IRIS]] · [[DIAMOND]] · [[Deep Equilibrium Models]] · [[Neural ODE]] · [[Recurrent State Space Model]] · [[Adaptive Computation Time]] · [[ALBERT]] · [[Test-Time Compute Scaling]]</p>",
     "search_text": "the problem world models need to simulate how an environment evolves over long horizons — hundreds or thousands of steps — to be useful for planning and reinforcement learning. the trouble is that doing this faithfully requires deep, expressive computation. physical dynamics aren't a one-shot lookup; they unfold through repeated application of the same governing laws, and getting them right demands iterative refinement. conventional fixed-depth architectures handle this badly in two ways. first, prediction errors compound across rollout steps: a small mistake at step 10 becomes a catastrophic drift by step 100. second, the standard fix — make the model deeper — proportionally inflates parameter count and inference cost. running a big model thousands of times in sequence (which rollouts require) is ruinously expensive, especially on resource-constrained or real-time systems. these two failure modes create a cruel tradeoff: you either get a cheap model that drifts, or an accurate model you can't afford to run. looped architectures had already shown promise in language modelling (2–3× parameter efficiency, scalable test-time compute), but nobody had applied them to world modelling at all. the idea instead of stacking n separate transformer blocks with n×p parameters, use one transformer block with p parameters and run it n times — each pass refines the same latent state a little further. the core insight is structural: environment dynamics are themselves an iterative process. a physical state s_t evolves to s_{t+1} by repeated application of approximately stationary laws (gravity still works the same way on frame 500 as on frame 1). a looped transformer's computation graph — one shared function f_θ applied recurrently to a latent state — is directly isomorphic to this structure. rather than forcing a fixed-depth network to do everything in one pass, you let the model \"think harder\" by running more iterations when the transition is complex (a collision) and fewer when it's simple (free flight). how it works parameter-shared recurrent block. a single transformer block is applied repeatedly to a latent state h . at each inner-loop step k , the update follows: h_{k+1} = ā·h_k + b̄·e + r̄(h_k, e) where e is the encoded environment observation/action input, ā governs how much of the previous latent state is retained, b̄ controls how much new input is injected, and r̄ captures all the nonlinear transformer operations (attention, mlp, etc.). this mirrors a recurrent state-space model but with a shared block doing the heavy lifting. spectral stability constraint. the dangerous part of iterating any recurrent system is that errors can blow up exponentially. loopwm prevents this by parameterizing the continuous-time retention matrix as a := diag(−exp(a)) with learnable scalar vector a , then discretizing via zero-order hold: ā = exp(δa) because a is exponentiated and negated before exponentiation again, all eigenvalues of ā are guaranteed to land in (0, 1) . this makes the linear retention component contractive — the residual dynamics are bounded no matter how many inner-loop iterations you run or how long the rollout is. stability is baked into the parameterization, not enforced as a soft penalty. adaptive depth. the number of inner-loop iterations isn't fixed. simple transitions (smooth free-flight dynamics) can exit early; complex ones (contact events, collisions) run more iterations. this maps naturally onto the non-uniform difficulty of physical simulation and means the average inference cost is much lower than the worst-case depth. residual connections. standard residual skip connections are added on top of the looped structure to improve gradient flow and empirical performance during training. the overall effect: a model that behaves like a very deep network (many effective layers of computation) but stores parameters for only one block. key results up to 100× parameter efficiency over conventional fixed-depth world model architectures — the looped model matches or exceeds predictive accuracy with a tiny fraction of the parameters. competitive or superior predictive accuracy to existing world model architectures (dreamerv3, iris, diamond, emerald) across standard benchmarks. stable rollouts over substantially longer horizons than fixed-depth baselines, enabled by the spectral stability constraint. test-time compute can be scaled by simply increasing the number of loop iterations at inference, without any retraining — analogous to what recurrent-depth language models demonstrated (2–3× parameter efficiency in that domain). establishes iterative latent depth as a new, orthogonal scaling axis for world models, separate from model size and training data volume. limitations the inner-loop iteration count and the adaptive halting mechanism add inference-time complexity that isn't free — the overhead of the exit mechanism and minimum useful loop depth determine how much the adaptive savings actually materialize in practice. the savings are most dramatic when the distribution of transition difficulties is highly non-uniform. for environments with uniformly complex dynamics, the adaptive depth advantage shrinks. the correspondence between inner-loop iterations and \"physical time steps\" is conceptual, not exact — the loop is performing latent refinement, not literally simulating sub-steps of physics. this limits interpretability. the paper is from a single research group (facemind research asia) and, at the time of writing, extensive independent reproduction and ablation is not yet available. evaluation appears focused on existing world modelling benchmarks; performance on very large-scale video generation settings (sora-style) remains untested. why it matters world models are the engine behind sample-efficient rl, embodied ai, and autonomous driving simulators. the bottleneck has always been the same: you need a model expressive enough to simulate physics faithfully over long horizons, but cheap enough to run thousands of times per planning episode. loopwm breaks that tradeoff by decoupling representational capacity (number of effective compute passes) from parameter count . more broadly, this paper introduces looped/universal transformer architectures — a technique already well-validated in language modelling — into the world modelling space for the first time. if the parameter efficiency results hold up across diverse environments, this could make high-quality world models viable on edge hardware and enable much longer planning horizons in embodied agents. the \"iterative latent depth\" framing also gives the community a new knob to turn alongside the usual model size and data scaling axes. see also [[transformer]] · [[attention is all you need]] · [[universal transformer]] · [[dreamerv3]] · [[iris]] · [[diamond]] · [[deep equilibrium models]] · [[neural ode]] · [[recurrent state space model]] · [[adaptive computation time]] · [[albert]] · [[test-time compute scaling]]",
-    "backlinks": []
+    "backlinks": [
+      "ALBERT",
+      "Adaptive-Computation-Time",
+      "DIAMOND",
+      "Deep-Equilibrium-Models",
+      "DreamerV3",
+      "IRIS",
+      "Neural-ODE"
+    ]
   },
   {
     "id": "Lossless-speedup",
@@ -5770,6 +6037,41 @@
     ]
   },
   {
+    "id": "Neural-ODE",
+    "title": "Neural ODE",
+    "authors": "",
+    "tags": [
+      "continuous-depth",
+      "differential-equations",
+      "implicit-depth",
+      "residual-networks",
+      "stub"
+    ],
+    "year": "2018",
+    "tldr": "Replace the discrete layer index in a residual network with a continuous time variable and parameterize the derivative dz/dt = f_θ(z, t) — the forward pass becomes an ODE solve, giving continuous-depth networks with O(1) memory backprop via the adjoint method.",
+    "aliases": [
+      "Neural ODE",
+      "Neural Ordinary Differential Equation",
+      "NeuralODE"
+    ],
+    "links": [
+      "Looped-World-Models",
+      "Deep-Equilibrium-Models",
+      "Adaptive-Computation-Time",
+      "Recurrent-State-Space-Model",
+      "S4"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>Residual networks compute <code>z_{l+1} = z_l + f_θ(z_l)</code> — a discrete Euler step. Neural ODEs generalize this to a continuous ODE <code>dz/dt = f_θ(z, t)</code> and solve it with an adaptive ODE solver (e.g. Dormand-Prince). The \"depth\" is now a continuous variable controlled by the solver's step size. Gradients flow via the adjoint method (solving a second ODE backward in time), so memory is constant regardless of how many solver steps are taken.</p>\n<h2>Intuition</h2>\n<p>A residual network is just a discrete approximation of a continuous dynamical system. Neural ODEs say: why approximate? Just model the dynamics directly as an ODE and use a real numerical solver. You get adaptive depth for free (solvers take smaller steps near stiff regions) and O(1) memory for backprop as a bonus.</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>Foundational connection between deep learning and dynamical systems theory</li>\n<li>Motivates the spectral stability constraints in [[Looped World Models|LoopWM]]</li>\n<li>Predecessor to [[Deep Equilibrium Models|DEQ]] (the fixed-point formulation)</li>\n<li>Latent ODEs extend this to time-series modeling with irregular observation times</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Deep Equilibrium Models]] · [[Looped World Models]] · [[Adaptive Computation Time]] · [[Recurrent State Space Model]] · [[S4]]</p>",
+    "search_text": "tl;dr residual networks compute z_{l+1} = z_l + f_θ(z_l) — a discrete euler step. neural odes generalize this to a continuous ode dz/dt = f_θ(z, t) and solve it with an adaptive ode solver (e.g. dormand-prince). the \"depth\" is now a continuous variable controlled by the solver's step size. gradients flow via the adjoint method (solving a second ode backward in time), so memory is constant regardless of how many solver steps are taken. intuition a residual network is just a discrete approximation of a continuous dynamical system. neural odes say: why approximate? just model the dynamics directly as an ode and use a real numerical solver. you get adaptive depth for free (solvers take smaller steps near stiff regions) and o(1) memory for backprop as a bonus. why it matters foundational connection between deep learning and dynamical systems theory motivates the spectral stability constraints in [[looped world models|loopwm]] predecessor to [[deep equilibrium models|deq]] (the fixed-point formulation) latent odes extend this to time-series modeling with irregular observation times see also [[deep equilibrium models]] · [[looped world models]] · [[adaptive computation time]] · [[recurrent state space model]] · [[s4]]",
+    "backlinks": [
+      "Deep-Equilibrium-Models",
+      "Looped-World-Models"
+    ]
+  },
+  {
     "id": "NeuralKV",
     "title": "NeuralKV",
     "authors": "",
@@ -6311,6 +6613,37 @@
     "search_text": "stub this is a concept stub. see the notes that reference this page for context. splits model layers across multiple devices and pipelines mini-batches through them to enable training of models larger than a single device's memory.",
     "backlinks": [
       "DeepSeek-V3-Technical-Report"
+    ]
+  },
+  {
+    "id": "PonderNet",
+    "title": "PonderNet",
+    "authors": "",
+    "tags": [
+      "adaptive-computation",
+      "halting",
+      "bayesian",
+      "inference",
+      "stub"
+    ],
+    "year": "2021",
+    "tldr": "Replaces the geometric halting approximation of Adaptive Computation Time with a proper probabilistic framework: the network emits a per-step 'halt' probability, the output is a mixture weighted by the probability of halting at each step, and the halting distribution is trained with a KL regularizer toward a geometric prior.",
+    "aliases": [
+      "PonderNet"
+    ],
+    "links": [
+      "Adaptive-Computation-Time",
+      "Fixed-Point-Reasoners-Stable-and-Adaptive-Deep-Looped-Transformers",
+      "Universal-Transformer",
+      "Deep-Equilibrium-Models"
+    ],
+    "citation_count": null,
+    "arxiv": "",
+    "cited_by_details": null,
+    "html": "<h2>TL;DR</h2>\n<p>ACT approximates a discrete halting decision with a soft geometric sum — PonderNet makes this exact by treating it as a proper probabilistic model. At each step <code>n</code>, the network outputs a candidate answer <code>ŷ_n</code> and a halting probability <code>λ_n</code>. The final prediction is <code>Σ p(N=n) · ŷ_n</code>, where <code>p(N=n)</code> is the probability of halting at step <code>n</code>. A KL regularizer penalizes divergence from a geometric(β) prior, replacing ACT's ad-hoc ponder cost.</p>\n<h2>Intuition</h2>\n<p>ACT says \"stop when you've accumulated enough halting probability.\" PonderNet says \"the true answer is the expected output over all possible stopping points.\" This is cleaner theoretically and avoids the threshold-as-hyperparameter problem, replacing it with the geometric prior's β (a cleaner single knob controlling average depth).</p>\n<h2>Why It Matters</h2>\n<ul>\n<li>More principled probabilistic treatment of adaptive halting than [[Adaptive Computation Time|ACT]]</li>\n<li>Outperforms ACT on parity tasks and other structured reasoning benchmarks</li>\n<li>Part of the lineage leading to [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers|FPRM]]'s convergence-based halting</li>\n</ul>\n<h2>See Also</h2>\n<p>[[Adaptive Computation Time]] · [[Universal Transformer]] · [[Deep Equilibrium Models]] · [[Fixed-Point Reasoners Stable and Adaptive Deep Looped Transformers]]</p>",
+    "search_text": "tl;dr act approximates a discrete halting decision with a soft geometric sum — pondernet makes this exact by treating it as a proper probabilistic model. at each step n , the network outputs a candidate answer ŷ_n and a halting probability λ_n . the final prediction is σ p(n=n) · ŷ_n , where p(n=n) is the probability of halting at step n . a kl regularizer penalizes divergence from a geometric(β) prior, replacing act's ad-hoc ponder cost. intuition act says \"stop when you've accumulated enough halting probability.\" pondernet says \"the true answer is the expected output over all possible stopping points.\" this is cleaner theoretically and avoids the threshold-as-hyperparameter problem, replacing it with the geometric prior's β (a cleaner single knob controlling average depth). why it matters more principled probabilistic treatment of adaptive halting than [[adaptive computation time|act]] outperforms act on parity tasks and other structured reasoning benchmarks part of the lineage leading to [[fixed-point reasoners stable and adaptive deep looped transformers|fprm]]'s convergence-based halting see also [[adaptive computation time]] · [[universal transformer]] · [[deep equilibrium models]] · [[fixed-point reasoners stable and adaptive deep looped transformers]]",
+    "backlinks": [
+      "Adaptive-Computation-Time"
     ]
   },
   {
@@ -7290,6 +7623,7 @@
       "Home",
       "Long-Range-Arena",
       "Low-rank-correction",
+      "Neural-ODE",
       "Transformers-Are-SSMs"
     ]
   },
