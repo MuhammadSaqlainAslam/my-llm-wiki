@@ -494,6 +494,14 @@
     }
     .arxiv-badge:hover { background: var(--accent-dim); border-color: var(--accent); }
 
+    /* Technical report links — visually distinct from arXiv (blue vs amber) */
+    .tech-report-link { color: #60a5fa; border-color: rgba(96,165,250,.3); }
+    .tech-report-link:hover { background: rgba(96,165,250,.08); border-color: #60a5fa; }
+    .tech-report-badge { color: #60a5fa; border-color: rgba(96,165,250,.3); }
+    .tech-report-badge:hover { background: rgba(96,165,250,.08); border-color: #60a5fa; }
+    .ce-tech-report-link { color: #60a5fa; border-color: rgba(96,165,250,.3); }
+    .ce-tech-report-link:hover { background: rgba(96,165,250,.08); }
+
     /* ── TAGS ────────────────────────────────────────────────────────── */
     .tags { display: flex; flex-wrap: wrap; gap: 5px; }
 
@@ -2531,7 +2539,9 @@ function makeCard(n) {
 
   const arxivHtml = n.arxiv
     ? `<a href="https://arxiv.org/abs/${escAttr(n.arxiv)}" target="_blank" rel="noopener" class="arxiv-link" onclick="event.stopPropagation()">📄 arXiv:${escHtml(n.arxiv)}</a>`
-    : '';
+    : (n.technical_report
+        ? `<a href="${escAttr(n.technical_report)}" target="_blank" rel="noopener" class="arxiv-link tech-report-link" onclick="event.stopPropagation()">📄 Technical Report</a>`
+        : '');
 
   card.innerHTML = `
     <div class="card-top">
@@ -2899,7 +2909,11 @@ function renderCeDetail(n) {
     ? `<a href="https://arxiv.org/abs/${escAttr(n.arxiv)}" target="_blank" rel="noopener" class="ce-arxiv-link">
          arXiv: ${escHtml(n.arxiv)} ↗
        </a>`
-    : '';
+    : (n.technical_report
+        ? `<a href="${escAttr(n.technical_report)}" target="_blank" rel="noopener" class="ce-arxiv-link ce-tech-report-link">
+             Technical Report ↗
+           </a>`
+        : '');
 
   // Citing papers table
   let citeSection = '';
@@ -3253,6 +3267,13 @@ function openNote(id) {
 
   if (n.arxiv) {
     panelArxiv.href = `https://arxiv.org/abs/${n.arxiv}`;
+    panelArxiv.textContent = '📄 Read on arXiv →';
+    panelArxiv.className = 'arxiv-badge';
+    panelArxiv.style.display = 'inline-flex';
+  } else if (n.technical_report) {
+    panelArxiv.href = n.technical_report;
+    panelArxiv.textContent = '📄 Technical Report →';
+    panelArxiv.className = 'arxiv-badge tech-report-badge';
     panelArxiv.style.display = 'inline-flex';
   } else {
     panelArxiv.style.display = 'none';
