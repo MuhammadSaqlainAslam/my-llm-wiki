@@ -5,7 +5,7 @@ year: "2024"
 arxiv: "2403.19887"
 tags: [llm, architecture, mamba, ssm, transformer, mixture-of-experts, hybrid, long-context, inference-efficiency]
 tldr: "Jamba combines Transformer attention layers with Mamba SSM layers and MoE in a 1:7 attention-to-Mamba ratio, achieving 52B total / 12B active parameters that fit on a single 80GB GPU with a 4GB KV cache at 256K context, matching Mixtral-8x7B quality at 3x throughput."
-citation_count: 437
+citation_count: 441
 aliases: ["Jamba", "Jamba-v0.1"]
 ---
 

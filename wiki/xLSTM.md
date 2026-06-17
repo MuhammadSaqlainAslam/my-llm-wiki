@@ -6,7 +6,7 @@ tags: [lstm, recurrence, efficiency, gating, language-model, ssm-alternative]
 tldr: "Modernize the 1997 LSTM with two changes: replace sigmoid gates with exponential gating (so the cell can erase old memory aggressively) and replace the scalar memory cell with either a richer scalar state (sLSTM) or a fully parallel matrix memory with covariance updates (mLSTM). Stacked into residual blocks at 1B+ parameters, xLSTM matches Transformer and Mamba quality while keeping linear-time inference."
 aliases: [xLSTM, sLSTM, mLSTM]
 theme: efficiency
-citation_count: 1100
+citation_count: 610
 arxiv: "2405.04517"
 cited_by_top: ["xLSTM-UNet", "xLSTM-Mixer", "Vision-LSTM", "XLSTM-TS", "xLSTM-7B", "mLSTM Chatbot", "Hawk", "xLSTM vs Mamba", "XLSTM-VMUNet", "BiXLSTM"]
 cited_by_details:

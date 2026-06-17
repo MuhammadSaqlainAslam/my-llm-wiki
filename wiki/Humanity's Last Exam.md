@@ -5,7 +5,7 @@ year: "2025"
 arxiv: "2501.14249"
 tags: [benchmarks, reasoning, evaluation, knowledge, expert-level, multi-domain]
 tldr: "A 3,000-question benchmark crowdsourced from domain experts across 100+ subjects where frontier models score below 10%"
-citation_count: 450
+citation_count: 340
 ---
 
 ## TL;DR

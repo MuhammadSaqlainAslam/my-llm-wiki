@@ -179,5 +179,51 @@
       "Transformer.md (+1)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-06-16T20:20:54.670253",
+    "mode": "--help",
+    "topic": null,
+    "added": [
+      "Variable-Width_Transformers.pdf (arXiv:2606.18246) \u2014 ><former nonuniform-width transformer architecture with 22% FLOP and 15% KV cache savings"
+    ],
+    "skipped": [
+      "karpathy/nanoGPT \u2014 already in wiki (noted: README now mentions nanochat successor, Nov 2025)",
+      "karpathy/micrograd \u2014 already in wiki",
+      "karpathy/minbpe \u2014 already in wiki",
+      "karpathy/llm.c \u2014 already in wiki",
+      "Future Dynamic 3D Reconstruction (2606.18250) \u2014 off-topic (3D world models / autonomous driving)",
+      "Unified Multimodal Autoregressive Modeling / UniAR (2606.18249) \u2014 off-topic (multimodal image gen, relevance ~5)",
+      "Looped World Models (2606.18208) \u2014 off-topic (world simulation, not LLM-focused, relevance ~4)",
+      "EventDrive (2606.18242) \u2014 off-topic (event cameras / autonomous driving)",
+      "ReproRepo (2606.18237) \u2014 off-topic (reproducibility benchmarking)",
+      "All astrophysics/physics/biology/robotics papers \u2014 off-topic",
+      "arXiv searches for transformer, SSM/Mamba, LSTM, speculative decoding \u2014 timed out, no on-topic results returned"
+    ]
+  },
+  {
+    "timestamp": "2026-06-16T20:22:07.810543",
+    "mode": "update-citations",
+    "topic": null,
+    "added": [
+      "Hardware Acceleration for Neural Networks.md (+1)",
+      "Humanity's Last Exam.md (-110)",
+      "InstructGPT.md (+12,628)",
+      "Jamba.md (+4)",
+      "Kaplan_Scaling_Laws.md (+3,726)",
+      "LLaMA 2.md (+178)",
+      "LoRA Low-Rank Adaptation of Large Language Models.md (+1,922)",
+      "Mamba.md (+245)",
+      "Mamba3.md (+4)",
+      "Medusa.md (+23)",
+      "Mixtral.md (-2,054)",
+      "Mixture-of-Experts.md (-703)",
+      "Nemotron-3.md (+1)",
+      "OSWorld.md (-4)",
+      "Qwen3 Technical Report.md (+5,261)",
+      "RWKV.md (+15)",
+      "xLSTM.md (-490)"
+    ],
+    "skipped": []
   }
 ]

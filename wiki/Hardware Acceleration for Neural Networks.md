@@ -7,7 +7,7 @@ tags: [hardware, gpu, tpu, npu, fpga, asic, lpu, in-memory, kv-cache, inference,
 tldr: "A survey of every chip family running neural networks today — GPUs with tensor cores, TPUs/NPUs, FPGAs, ASICs, LLM-serving LPUs, and in-/near-memory computing — through one consistent taxonomy: workload × execution setting × optimization lever. The recurring theme is that peak FLOPS doesn't matter — memory movement and KV-cache bandwidth dominate end-to-end performance for modern LLMs."
 aliases: [Hardware Acceleration Survey, NN Accelerators]
 theme: hardware
-citation_count: 3
+citation_count: 4
 arxiv: "2512.23914"
 cited_by_top: ["FlashAttention-3", "FlexAttention", "SpecMamba", "FLAT", "INT-FlashAttention", "LLM-PQ", "NeuralKV", "TensorSSM", "FPGA-LLM", "EdgeMamba"]
 cited_by_details:
