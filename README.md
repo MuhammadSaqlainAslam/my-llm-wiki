@@ -388,7 +388,7 @@ https://MuhammadSaqlainAslam.github.io/my-llm-wiki
 
 The wiki has an autonomous research agent (`agent.py`) that automatically finds, evaluates, and adds new content from multiple sources using Claude as the decision-making brain.
 
-### Four Modes
+### Five Modes
 
 **1. Topic search — add content about a specific topic:**
 ```bash
@@ -415,11 +415,18 @@ python3 agent.py update-citations
 ```
 Queries the Semantic Scholar batch API for every note that has an arXiv ID in its frontmatter, updates `citation_count` in the YAML, rebuilds the web demo, and commits + pushes automatically. This is a deterministic API call (no LLM), so it's fast and cheap. Run monthly to keep counts current.
 
+**5. Audit citation data integrity:**
+```bash
+python3 agent.py audit-citations
+```
+Scans every `cited_by_details` block across the wiki and verifies each arXiv ID actually resolves to the claimed paper title using the live arXiv API. Report-only — flags issues for manual review, never auto-edits. Catches corrupted citation data from the Semantic Scholar pipeline (wrong or fabricated IDs) that may have slipped through before the write-time `verify_arxiv_paper()` guard was added. Note: informal wiki nicknames (e.g. "StreamingLLM", "T5", "Hawk") will show as flagged even when the underlying ID is correct — the human reviewer determines which flags are real. Run monthly alongside `update-citations`.
+
 ### Suggested Schedule
 
 | Command | Frequency | Purpose |
 |---------|-----------|---------|
 | `python3 agent.py update-citations` | Monthly | Keep citation counts current |
+| `python3 agent.py audit-citations` | Monthly | Verify citation data integrity |
 | `python3 agent.py citations` | Monthly | Find new high-impact citing papers |
 | `python3 agent.py daily` | Weekly | Broad new-paper sweep |
 | `python3 agent.py topic "..."` | On demand | Add specific topic papers |

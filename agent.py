@@ -676,6 +676,106 @@ def update_citations_in_wiki(citation_data: dict) -> dict:
     return {"updated": updated, "unchanged": unchanged, "total": len(citation_data)}
 
 
+def audit_cited_by_details() -> dict:
+    """Scan every wiki note's cited_by_details block and verify each entry's arXiv ID
+    actually resolves to a title matching the entry's claimed name.
+
+    Report-only — never modifies files. Designed to run monthly alongside
+    update-citations to catch corrupted citation data from the Semantic Scholar
+    pipeline (wrong/fabricated IDs) that slipped through before the write-time
+    verify_arxiv_paper() guard existed.
+
+    Returns {total_checked, clean, flagged: [...], all_results: [...]}.
+    """
+    import time as _time
+
+    STOPWORDS = {"the", "a", "an", "of", "for", "and", "in", "on",
+                 "with", "to", "via", "its", "is", "are", "using",
+                 "by", "from", "into", "as"}
+
+    def _norm(s):
+        return set(re.sub(r"[^\w\s]", "", str(s).lower()).split()) - STOPWORDS
+
+    def _check_id(arxiv_id, claimed_title):
+        url = (f"http://export.arxiv.org/api/query"
+               f"?id_list={arxiv_id}&max_results=1")
+        try:
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "WikiCitationAudit/1.0"})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                xml = r.read().decode("utf-8", errors="ignore")
+            if "<title>Error</title>" in xml:
+                return ("NOT_FOUND", None)
+            m = re.search(r"<entry>.*?<title[^>]*>(.+?)</title>", xml, re.DOTALL)
+            if not m:
+                return ("NO_TITLE", None)
+            real_title = re.sub(r"\s+", " ", m.group(1)).strip()
+            cw, rw = _norm(claimed_title), _norm(real_title)
+            if not cw or not rw:
+                return ("EMPTY", real_title)
+            sim = len(cw & rw) / min(len(cw), len(rw))
+            return ("MATCH" if sim >= 0.6 else "MISMATCH", real_title)
+        except Exception as e:
+            return (f"ERROR:{e}", None)
+
+    # Collect every cited_by_details entry that carries an arxiv field.
+    # Only scan inside the YAML frontmatter to avoid false matches in body prose.
+    all_entries = []
+    for fpath in sorted(WIKI.glob("*.md")):
+        try:
+            content = fpath.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        if not content.startswith("---"):
+            continue
+        fm_end = content.find("\n---", 3)
+        if fm_end == -1:
+            continue
+        frontmatter = content[3:fm_end]
+
+        block_m = re.search(
+            r"^cited_by_details:\s*\n((?:[ \t].*\n?)*)",
+            frontmatter, re.MULTILINE)
+        if not block_m:
+            continue
+        block = block_m.group(1)
+
+        # Split on entry boundaries; each entry starts with "  - title:"
+        for chunk in re.split(r"\n(?=  - )", block):
+            title_m = re.search(
+                r"-\s+title:\s*[\"']?(.+?)[\"']?\s*$", chunk, re.MULTILINE)
+            arxiv_m = re.search(
+                r"arxiv:\s*[\"']?(\d{4}\.\d{4,5})[\"']?", chunk)
+            if title_m and arxiv_m:
+                all_entries.append({
+                    "source_note":  fpath.name,
+                    "citing_title": title_m.group(1).strip(),
+                    "citing_arxiv": arxiv_m.group(1).strip(),
+                })
+
+    notes_with_data = len(set(e["source_note"] for e in all_entries))
+    print(f"Auditing {len(all_entries)} citing-paper entries "
+          f"across {notes_with_data} notes (3 s delay between API calls)...")
+
+    results = []
+    for e in all_entries:
+        status, real_title = _check_id(e["citing_arxiv"], e["citing_title"])
+        results.append({**e, "status": status, "real_title": real_title})
+        if status in ("MISMATCH", "NOT_FOUND"):
+            suffix = f" — {real_title}" if real_title else ""
+            print(f"  ⚠️  [{e['citing_arxiv']}] in {e['source_note']}: "
+                  f'"{e["citing_title"]}" → {status}{suffix}')
+        _time.sleep(3)
+
+    flagged = [r for r in results if r["status"] in ("MISMATCH", "NOT_FOUND")]
+    return {
+        "total_checked": len(results),
+        "clean":         len(results) - len(flagged),
+        "flagged":       flagged,
+        "all_results":   results,
+    }
+
+
 # ── Main agent loop ────────────────────────────────────────────────────────
 
 def run_agent(mode: str = "daily", topic: str = None, min_citations: int = 100) -> dict:
@@ -696,6 +796,35 @@ def run_agent(mode: str = "daily", topic: str = None, min_citations: int = 100) 
             print(f"  {c['title'][:35]:35} {c['old']:>8,} → {c['new']:>8,} ({c['diff']})")
         added = [f"{c['file']} ({c['diff']})" for c in changes["updated"]]
         return {"mode": mode, "topic": None, "added": added, "skipped": [],
+                "timestamp": datetime.now().isoformat()}
+
+    # Deterministic (non-LLM) mode: retroactive arXiv ID integrity check.
+    if mode == "audit-citations":
+        print("Scanning all cited_by_details blocks for incorrect arXiv IDs...")
+        audit = audit_cited_by_details()
+        lines = [
+            f"Citation audit — {audit['total_checked']} entries checked, "
+            f"{audit['clean']} clean, {len(audit['flagged'])} flagged for review"
+        ]
+        if audit["flagged"]:
+            lines.append("\n⚠️  FLAGGED — needs human review:")
+            for f in audit["flagged"]:
+                suffix = f" — {f['real_title']}" if f.get("real_title") else ""
+                lines.append(
+                    f"  {f['source_note']}: [{f['citing_arxiv']}] "
+                    f"\"{f['citing_title']}\" → {f['status']}{suffix}"
+                )
+            lines.append(
+                "\nNo files were modified. Review each flagged entry individually "
+                "before editing — some flags are false positives (informal wiki "
+                "nicknames vs formal arXiv titles)."
+            )
+        else:
+            print("✅ No issues found")
+        message = "\n".join(lines)
+        print(f"\n{message}")
+        return {"mode": mode, "topic": None, "added": [], "skipped": [],
+                "message": message, "flagged_count": len(audit["flagged"]),
                 "timestamp": datetime.now().isoformat()}
 
     if mode == "topic" and topic:
