@@ -225,5 +225,29 @@
       "xLSTM.md (-490)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-06-16T20:22:30.382629",
+    "mode": "--help",
+    "topic": null,
+    "added": [
+      "Variable-Width_Transformers.pdf (arXiv 2606.18246) \u2192 raw/"
+    ],
+    "skipped": [
+      "karpathy/nanoGPT \u2014 already in wiki (noted: now deprecated, nanochat successor flagged for future ingestion)",
+      "karpathy/micrograd \u2014 already in wiki",
+      "karpathy/minbpe \u2014 already in wiki",
+      "karpathy/llm.c \u2014 already in wiki",
+      "UniAR (2606.18249) \u2014 relevance 4/10, multimodal vision focus",
+      "Zone of Proximal Policy Optimization / ZPPO (2606.18216) \u2014 relevance 5/10, RL distillation for VLMs, not core arch/infra",
+      "VERITAS (2606.18247) \u2014 relevance 3/10, robotics inference steering",
+      "FR3D (2606.18250) \u2014 relevance 2/10, 3D world model",
+      "ReproRepo (2606.18237) \u2014 relevance 3/10, reproducibility auditing",
+      "EventDrive (2606.18242) \u2014 relevance 2/10, autonomous driving VLM",
+      "EBench (2606.18239) \u2014 relevance 2/10, robotics manipulation",
+      "EvolveNav (2606.18235) \u2014 relevance 2/10, embodied navigation",
+      "AdaVoMP (2606.18231) \u2014 relevance 1/10, 3D mechanical properties",
+      "Multiple astrophysics/physics/biology papers \u2014 off-theme"
+    ]
   }
 ]
