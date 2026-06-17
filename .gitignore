@@ -31,3 +31,7 @@ docs/assets/foxconn-logo*.png
 docs/assets/foxconn-logo*.svg
 docs/assets/hhri-logo*.png
 docs/assets/hhri-logo*.svg
+
+# Quarantined unverified papers — pending manual fact-check
+# Files stay on server disk for restoration if verified; never commit
+quarantine/
