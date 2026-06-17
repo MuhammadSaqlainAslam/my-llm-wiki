@@ -8560,8 +8560,7 @@
         "title": "GPT-2",
         "year": 2019,
         "citations": 25000,
-        "theme": "foundations",
-        "arxiv": "2005.14165"
+        "theme": "foundations"
       },
       {
         "title": "RoBERTa",

@@ -19,7 +19,6 @@ cited_by_details:
     year: 2019
     citations: 25000
     theme: "foundations"
-    arxiv: "2005.14165"
   - title: "RoBERTa"
     year: 2019
     citations: 22000
