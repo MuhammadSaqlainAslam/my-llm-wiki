@@ -419,7 +419,9 @@ Queries the Semantic Scholar batch API for every note that has an arXiv ID in it
 ```bash
 python3 agent.py audit-citations
 ```
-Scans every `cited_by_details` block across the wiki and verifies each arXiv ID actually resolves to the claimed paper title using the live arXiv API. Report-only — flags issues for manual review, never auto-edits. Catches corrupted citation data from the Semantic Scholar pipeline (wrong or fabricated IDs) that may have slipped through before the write-time `verify_arxiv_paper()` guard was added. Note: informal wiki nicknames (e.g. "StreamingLLM", "T5", "Hawk") will show as flagged even when the underlying ID is correct — the human reviewer determines which flags are real. Run monthly alongside `update-citations`.
+Scans every `cited_by_details` block across the wiki and verifies each arXiv ID actually resolves to the claimed paper title using the live arXiv API. Report-only — flags issues for manual review, never auto-edits. Catches corrupted citation data from the Semantic Scholar pipeline (wrong or fabricated IDs) that may have slipped through before the write-time `verify_arxiv_paper()` guard was added. Run monthly alongside `update-citations`.
+
+> Known informal-name false positives are allowlisted in `agent.py` (`CONFIRMED_CITING_PAPERS`) after manual verification. New flags each month are genuinely worth reviewing — the allowlist only covers entries already checked by hand.
 
 ### Suggested Schedule
 

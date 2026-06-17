@@ -676,6 +676,26 @@ def update_citations_in_wiki(citation_data: dict) -> dict:
     return {"updated": updated, "unchanged": unchanged, "total": len(citation_data)}
 
 
+# Manually verified arxiv_id → informal wiki title pairs. These fail the
+# automated word-overlap similarity check because the wiki intentionally uses
+# a short informal name instead of the paper's long formal title — that's a
+# readability choice, not an error. Confirmed correct by reading the actual
+# paper, not just comparing titles. Add to this list only after manually
+# verifying a flagged entry is a genuine false positive, not a real error.
+CONFIRMED_CITING_PAPERS = {
+    "2309.17453": "streamingllm",        # "Efficient Streaming LMs with Attention Sinks"
+    "2306.14048": "h2o",                 # "H2O: Heavy-Hitter Oracle for Efficient LLM Inference"
+    "2405.12981": "cla",                 # "Reducing Transformer KV Cache Size with Cross-Layer Attention"
+    "2602.07223": "specattn",            # "SpecAttn: Co-Designing Sparse Attention with Self-Speculative Decoding"
+    "1910.10683": "t5",                  # "Exploring the Limits of Transfer Learning (T5)"
+    "2010.11929": "vitvisiontransformer", # "An Image is Worth 16x16 Words: Transformers for Image Recognition"
+    "2005.14165": "gpt3",               # "Language Models are Few-Shot Learners (GPT-3)"
+    "2407.10240": "xlstmts",            # "xLSTMTime: Long-term Time Series Forecasting With xLSTM"
+    "2402.19427": "hawk",               # "Griffin: Mixing Gated Linear Recurrences... (introduces Hawk)"
+    "2412.05496": "flexattention",       # "Flex Attention: A Programming Model for Optimized Attention Kernels"
+}
+
+
 def audit_cited_by_details() -> dict:
     """Scan every wiki note's cited_by_details block and verify each entry's arXiv ID
     actually resolves to a title matching the entry's claimed name.
@@ -760,6 +780,15 @@ def audit_cited_by_details() -> dict:
     results = []
     for e in all_entries:
         status, real_title = _check_id(e["citing_arxiv"], e["citing_title"])
+        # Suppress known false positives: informal wiki nicknames that are
+        # correct but don't match the paper's formal arXiv title.
+        if status == "MISMATCH":
+            canon_id    = e["citing_arxiv"]
+            canon_title = re.sub(r"[^\w]", "", e["citing_title"].lower())
+            if (canon_id in CONFIRMED_CITING_PAPERS
+                    and CONFIRMED_CITING_PAPERS[canon_id] == canon_title):
+                status = "MATCH"
+                real_title = (real_title or "") + " [allowlisted: informal wiki nickname, verified correct]"
         results.append({**e, "status": status, "real_title": real_title})
         if status in ("MISMATCH", "NOT_FOUND"):
             suffix = f" — {real_title}" if real_title else ""
