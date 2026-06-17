@@ -277,5 +277,21 @@
       "PAHSPECS (out of scope - astrophysics)",
       "One-Step Token-to-Waveform / MeanFlow TTS (low relevance - audio synthesis)"
     ]
+  },
+  {
+    "timestamp": "2026-06-16T20:27:18.042435",
+    "mode": "citations",
+    "topic": null,
+    "added": [],
+    "skipped": [
+      "Mamba (2312.00752) \u2014 0 qualifying citations",
+      "Mamba-2/Transformers are SSMs (2405.21060) \u2014 0 qualifying citations",
+      "xLSTM (2405.04517) \u2014 0 qualifying citations",
+      "FlashAttention (2205.14135) \u2014 0 qualifying citations",
+      "FlashAttention-2 (2307.08691) \u2014 0 qualifying citations",
+      "S4 (2111.00396) \u2014 0 qualifying citations",
+      "RWKV (2305.13048) \u2014 0 qualifying citations",
+      "RetNet (2307.08621) \u2014 0 qualifying citations"
+    ]
   }
 ]
