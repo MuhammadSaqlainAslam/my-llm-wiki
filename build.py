@@ -322,6 +322,8 @@ def build():
             "links": links,
             "citation_count": int(citation_count) if citation_count else None,
             "arxiv": str(meta.get("arxiv", "")) if meta.get("arxiv") else "",
+            "technical_report": str(meta.get("technical_report", "")) if meta.get("technical_report") else "",
+            "source_type": str(meta.get("source_type", "")) if meta.get("source_type") else "",
             "cited_by_details": cited_by_details if isinstance(cited_by_details, list) else None,
             "html": html,
             "search_text": search_text,

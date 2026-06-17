@@ -6,11 +6,15 @@ citation_count: 8
 tags: [moe, long-context, attention, compression, sparse-attention, muon, post-training, rl]
 tldr: "Crack the quadratic attention bottleneck for 1M-token contexts by replacing standard attention with two new compressed variants (CSA + HCA), upgrading residual connections with manifold-constrained hyper-connections, and using the Muon optimizer. Result: at 1M tokens, DeepSeek-V4-Pro uses only 27% of DeepSeek-V3's FLOPs and 10% of its KV cache."
 theme: efficiency
+technical_report: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf"
+source_type: "technical_report"
 ---
 
 # DeepSeek-V4
 
 > DeepSeek-AI, "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence", 2026
+
+> 📄 Official technical report: [DeepSeek_V4.pdf](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf) via HuggingFace (deepseek-ai/DeepSeek-V4-Pro) — no arXiv submission exists for this model.
 
 ## The Problem: Attention Doesn't Scale to 1M Tokens
 
