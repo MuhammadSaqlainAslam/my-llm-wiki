@@ -100,7 +100,7 @@ Four sequential stages:
 
 ```
 SFT (7M samples, 800B tokens)
- → RLVR (21 environments, simultaneous, async GRPO)
+ → [[Multi-Environment RLVR Training|RLVR]] (21 environments, simultaneous, async GRPO)
  → SWE-RL (software engineering, OpenHands scaffold)
  → RLHF (reward model, helpfulness/harmlessness)
  → MTP Healing (re-align speculative heads to post-trained distribution)
@@ -146,4 +146,4 @@ Reasoning efficiency (MTP SPEED-Bench — accuracy per output token): Super scor
 
 *Architecture: [[Mamba]] · [[Mixture-of-Experts]] · [[LatentMoE]] · [[Multi-Token Prediction]] · [[GQA]] · [[NVFP4]]*
 
-*Training: [[RLVR]] · [[GRPO]] · [[Hardware-Aware Scan]]*
+*Training: [[RLVR]] · [[Multi-Environment RLVR Training]] · [[GRPO]] · [[Hardware-Aware Scan]]*

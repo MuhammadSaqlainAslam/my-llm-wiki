@@ -1,48 +1,78 @@
 ---
 title: "LatentMoE"
-tags: [moe, routing, efficiency, nemotron, communication]
-tldr: "Project tokens from d to a smaller latent dimension ℓ before MoE routing. All-to-all communication drops by d/ℓ; reinvest the savings into more experts. Same hardware cost, 4+ point quality improvement."
-theme: scaling
+authors: "NVIDIA"
+year: "2025"
+arxiv: ""
+technical_report: "https://arxiv.org/pdf/2512.20856"
+source_type: "technical_report"
+tags: [moe, architecture, routing, efficiency, nvidia]
+tldr: "Expert-routing architecture that compresses tokens into a latent space before routing, activating 4x more experts at the same computational cost"
+citation_count: 0
 ---
 
 # LatentMoE
 
-Standard [[Mixture-of-Experts]] routing operates in the full hidden dimension $d$. Two hardware bottlenecks trace directly back to this choice:
+## TL;DR
 
-**Multi-GPU communication (throughput setting):** When tokens are dispatched to experts on different GPUs, the all-to-all communication volume is proportional to $K \times d$ — the number of active experts times the hidden dimension. More GPUs = more experts = more communication. $d$ is the fixed multiplier you can't escape.
+LatentMoE compresses tokens into a smaller latent dimension before routing them to experts, rather than routing directly from the model's full hidden dimension. This lets a model call on roughly 4× as many expert specialists for the same inference cost. Introduced in NVIDIA's [[Nemotron-3]] (Super and Ultra models) as the core FFN design across all MoE layers.
 
-**Memory bandwidth (latency setting):** Reading a single expert's weight matrix from GPU HBM costs bandwidth proportional to $d \times m$, where $m$ is the expert's intermediate dimension. With $K$ active experts per token, total bandwidth is $K \times d \times m$. Again, $d$ is the multiplier.
+---
 
-**The fix:** project tokens into a smaller latent space before routing.
+## The Problem
 
-$$x_{\ell} = W_{\text{down}} \cdot x \quad (d \rightarrow \ell, \text{ where } \ell < d)$$
+Standard [[Mixture-of-Experts]] routing operates in the full hidden dimension $d$. Two hardware bottlenecks trace directly back to this:
+
+**Throughput (large batch) — all-to-all communication:** When tokens are dispatched to experts on different GPUs, the all-to-all communication volume is proportional to $K \times d$ — active experts × hidden dimension. More GPUs → more experts → more communication. $d$ is the fixed multiplier.
+
+**Latency (small batch) — memory bandwidth:** Reading a single expert's weight matrix from HBM costs bandwidth proportional to $d \times m$ (hidden dim × expert intermediate dim). With $K$ active experts per token, total bandwidth is $K \times d \times m$. Again, $d$ is the multiplier.
+
+As models grow, this routing becomes the bottleneck in both regimes.
+
+---
+
+## The Idea
+
+Project tokens into a smaller latent space first, then route and compute within that compressed representation:
+
+$$x_\ell = W_{\text{down}} \cdot x \quad (d \rightarrow \ell, \text{ where } \ell \ll d)$$
 
 Route and compute expert FFNs in $\ell$-dimensional space. Project back:
 
-$$y = W_{\text{up}} \cdot y_{\ell} \quad (\ell \rightarrow d)$$
+$$y = W_{\text{up}} \cdot y_\ell \quad (\ell \rightarrow d)$$
 
-Communication is now $K \times \ell$ instead of $K \times d$. Expert weight bandwidth is $\ell \times m$ instead of $d \times m$. If $d/\ell = 4$, both bottlenecks shrink by 4×. Reinvest the savings: scale total experts from $N$ to $N \cdot (d/\ell)$ and active experts from $K$ to $K \cdot (d/\ell)$. The FFN expressivity (proportional to $K \times m$) grows by $d/\ell$ at the same hardware cost. The projection matrices $W_{\text{down}}$ and $W_{\text{up}}$ are shared across all experts, so they add minimal parameter overhead.
+All-to-all communication drops from $K \times d$ to $K \times \ell$. Expert weight bandwidth drops from $d \times m$ to $\ell \times m$.
 
-**Nemotron-3 Super numbers:** $d = 4096$, $\ell = 1024$, $d/\ell = 4$. A baseline of 128 experts / 6 active in standard MoE becomes 512 experts / 22 active in LatentMoE with identical all-to-all communication volume.
+**The reinvestment:** With the saved budget, scale total experts from $N$ to $N' = N \cdot d/\ell$ and active experts from $K$ to $K' = K \cdot d/\ell$. FFN expressivity (proportional to $K \times m$) now grows by $d/\ell$ at the same hardware cost. The projection matrices $W_{\text{down}}$ and $W_{\text{up}}$ are shared across all experts — minimal parameter overhead.
 
-**Ablation (8B active / ~73B total, 1T tokens):**
+In [[Nemotron_3_Super|Nemotron 3 Super]]: $d = 4096$, $\ell = 1024$, $d/\ell = 4$. A standard MoE with 128 experts / 6 active becomes **512 experts / 22 active** at the same all-to-all communication volume.
+
+---
+
+## Why It Matters
+
+**Ablation on an 8B active MoE (1T tokens):**
 
 | Model | Experts (total / active) | MMLU-Pro | MMLU | Math | Code |
 |---|---|---|---|---|---|
 | Standard MoE | 128 / 6 | 48.30 | 70.10 | 78.32 | 51.95 |
 | **LatentMoE** | **512 / 22** | **52.87** | **72.11** | **80.19** | **55.14** |
 
-## Where it appears
+Consistent 4+ point quality improvement across all benchmarks at identical hardware cost.
 
-- **[[Nemotron-3]]** — the core FFN design in both Nano and Super; every MoE layer in the network is a LatentMoE layer
-- **[[Mixture-of-Experts]]** — mentioned briefly as the solution to MoE's communication bottleneck at scale
+**It reframes the MoE scaling question.** The standard MoE tradeoff is: more experts → better quality but higher communication cost. LatentMoE breaks that tradeoff — more experts at *lower* communication cost. The new limiting factor is the $W_{\text{down}}$/$W_{\text{up}}$ projections, not the expert GEMMs.
 
-## Why it matters
+**It fixes MoE's low-latency problem.** Standard MoE is penalized at small batch sizes because memory bandwidth for reading expert weights dominates. Reducing expert matrix size by $d/\ell$ directly reduces this penalty and makes MoE viable in latency-sensitive settings.
 
-- **It reframes the MoE scaling question.** The usual MoE tradeoff is: more experts → better quality but higher communication cost. LatentMoE breaks that tradeoff — more experts at *lower* communication cost. The limiting factor becomes the $W_{\text{down}}$/$W_{\text{up}}$ projections, not the expert GEMMs.
-- **It's a practical answer to the "MoE doesn't work at low latency" critique.** Standard MoE is penalized at small batch sizes because memory bandwidth for reading expert weights dominates. Reducing expert matrix size by $d/\ell$ directly reduces this penalty and makes MoE viable in lower-throughput settings.
-- **The projection matrices serve double duty.** $W_{\text{down}}$ can be interpreted as learning a "routing-friendly" representation of the token — the latent space that makes expert specialization maximally informative. This may explain part of the quality gain over standard MoE beyond the pure count increase.
+**The projection matrices serve double duty.** $W_{\text{down}}$ learns a "routing-friendly" representation of the token — a latent space where expert specialization is maximally informative. This may explain part of the quality gain beyond the pure count increase.
+
+**Scales with model size.** At [[Nemotron_3_Ultra|Nemotron 3 Ultra]] scale (550B total / 55B active), the all-to-all savings are proportionally larger — making LatentMoE more valuable the bigger the model gets.
 
 ---
 
-*Related: [[Mixture-of-Experts]] · [[Load Balancing Loss]] · [[Nemotron-3]]*
+## Related Concepts
+
+*MoE: [[Mixture-of-Experts]] · [[Load Balancing Loss]]*
+
+*Nemotron 3 family: [[Nemotron-3]] (whitepaper, arXiv 2512.20856) · [[Nemotron_3_Super|Nemotron 3 Super]] · [[Nemotron_3_Ultra|Nemotron 3 Ultra]]*
+
+*Co-introduced with: [[NVFP4]] · [[Multi-Token Prediction]] · [[Hardware-Aware Scan]]*

@@ -46,7 +46,7 @@ The layer pattern mirrors Super but at greater depth and hidden dimension. [[Lat
 
 ## Post-Training: Multi-Teacher On-Policy Distillation (MOPD)
 
-The key innovation distinguishing Ultra from a simple scale-up of Super.
+The key innovation distinguishing Ultra from a simple scale-up of Super. Ultra builds on the same [[Multi-Environment RLVR Training]] foundation as Super (RLVR across 21 environments → SWE-RL → RLHF), then adds MOPD as a fourth post-training stage on top.
 
 ### The problem with multi-task RL
 
@@ -107,4 +107,4 @@ All three use the same architectural backbone described in the [[Nemotron-3]] wh
 
 *Architecture: [[Mamba]] · [[Mixture-of-Experts]] · [[LatentMoE]] · [[Multi-Token Prediction]] · [[GQA]] · [[NVFP4]]*
 
-*Training: [[RLVR]] · [[On-Policy Distillation]] · [[GRPO]]*
+*Training: [[RLVR]] · [[Multi-Environment RLVR Training]] · [[On-Policy Distillation]] · [[GRPO]]*

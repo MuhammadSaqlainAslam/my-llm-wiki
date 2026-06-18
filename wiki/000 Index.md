@@ -48,6 +48,7 @@ Parameters and compute don't have to scale together. These papers decouple them.
 | Note | Paper | Year | TL;DR |
 |---|---|---|---|
 | [[Mixture-of-Experts]] | Switch Transformers / Mixtral of Experts | 2022 | Route each token to a sparse subset of expert FFNs; parameters scale cheaply while per-token compute stays constant. More parameters, same FLOPs. |
+| [[LatentMoE]] | Nemotron 3 Technical Report | 2025 | Project tokens $d \rightarrow \ell$ before routing; cuts all-to-all communication by $d/\ell$ and enables 4× more experts at the same inference cost. |
 
 **Tags:** `scaling` `moe` `routing` `efficiency` `sparse`
 
@@ -344,6 +345,7 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[ReAct Synergizing Reasoning and Acting in Language Models\|ReAct]] | 2022 | ~3,500 | [2210.03629](https://arxiv.org/abs/2210.03629) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
+| [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
 
 **Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought`
 
