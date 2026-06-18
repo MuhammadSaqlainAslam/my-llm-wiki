@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Covariance Update Rule"
 tags: [xlstm, memory, associative, kernel]
 tldr: "$C_t = f_t C_{t-1} + i_t v_t k_t^\top$ — the outer-product update that turns a matrix memory into a learned key-value store. The same update that drives Hopfield networks and kernelized attention."

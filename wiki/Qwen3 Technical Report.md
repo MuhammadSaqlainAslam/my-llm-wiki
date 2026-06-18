@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: Qwen3 Technical Report
 authors: Qwen Team
 year: 2025

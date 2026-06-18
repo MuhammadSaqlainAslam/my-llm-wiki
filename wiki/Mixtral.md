@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Mixtral"
 authors: "Jiang et al."
 arxiv: "2401.04088"

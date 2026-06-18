@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Retentive Network: A Successor to Transformer for Large Language Models"
 authors: "Yutao Sun, Li Dong, Shaohan Huang, Shuming Ma, Yuqing Xia, Jilong Xue, Jianyong Wang, Furu Wei"
 year: 2023

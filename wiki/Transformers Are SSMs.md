@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality"
 authors: "Tri Dao, Albert Gu"
 year: "2024"

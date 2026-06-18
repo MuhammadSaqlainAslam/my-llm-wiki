@@ -1,4 +1,5 @@
 ---
+created: "2026-05-22"
 title: nanoGPT
 tags: [transformer, language model, GPT-2, training, deep learning, neural network, educational]
 year: 2022

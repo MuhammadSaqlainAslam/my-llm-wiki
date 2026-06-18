@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Exponential Gating"
 tags: [lstm, xlstm, gating, normalization]
 tldr: "Replace the LSTM's sigmoid gates with $\\exp(\\cdot)$, paired with a running max-stabilizer and a normalizer. Lets a single token effectively reset the cell state — the missing ingredient that turns LSTM into a competitive language-model backbone."

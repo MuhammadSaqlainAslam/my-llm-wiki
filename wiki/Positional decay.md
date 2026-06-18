@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Positional Decay"
 tags: [glossary, retnet, rwkv, linear-attention, recurrence, position]
 tldr: "The mechanism in RetNet and RWKV where attention weight between two positions decays exponentially with their distance — γ^(n-m) or e^{-dw} — regardless of content. Older tokens receive exponentially less influence, enabling O(1) recurrent inference."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "H2O Eviction (Heavy Hitter Oracle)"
 aliases: ["H2O", "Heavy Hitter Oracle"]
 tags: [kv-cache, eviction, attention-score]

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Gated DeltaNet"
 tags: [glossary, ssm, linear-attention, memory, recurrent-models]
 tldr: "A recurrent sequence model that combines DeltaNet's associative memory updates with a forget gate, enabling selective memory erasure and achieving competitive performance with Transformers on recall-intensive tasks."

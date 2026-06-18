@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Softmax"
 tags: [glossary, activation-functions]
 tldr: "Converts a vector of raw logits into a probability distribution that sums to 1.0"

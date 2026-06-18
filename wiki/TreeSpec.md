@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "TreeSpec"
 aliases: ["TreeSpec"]
 year: 2025

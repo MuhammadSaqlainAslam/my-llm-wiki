@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Opus 4.8 Benchmarks"
 authors: "Anthropic"
 year: "2026"

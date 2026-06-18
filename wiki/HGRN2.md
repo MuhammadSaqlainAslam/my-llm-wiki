@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "HGRN2"
 tags: [glossary, recurrent-models]
 tldr: "An improved linear recurrent architecture that adds outer-product state expansion to HGRN, achieving competitive performance with Transformers while maintaining O(1) memory at inference."

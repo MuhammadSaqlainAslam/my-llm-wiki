@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
 authors: "Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, Karthik Narasimhan"
 year: "2024"

@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "Heavily Compressed Attention (HCA)"
 tags: [attention, compression, long-context, efficiency, deepseek]
 aliases: [HCA, Heavily Compressed Attention]

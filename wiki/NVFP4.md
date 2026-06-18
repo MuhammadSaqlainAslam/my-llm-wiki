@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "NVFP4"
 tags: [quantization, training, hardware, nvidia, precision]
 tldr: "NVIDIA's 4-bit floating point training format. E2M1 elements with 16-element micro-block scaling. 3× peak throughput vs BF16 on GB300/B200 hardware. Requires a per-layer mixed-precision recipe to stay within 1% of BF16 quality."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models"
 authors: "Soham De, Samuel L. Smith, Anushan Fernando et al. (Google DeepMind)"
 year: 2024

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "QuantSpec"
 aliases: ["QuantSpec"]
 year: 2025

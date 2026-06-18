@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "BPE Tokenization"
 tags: [glossary, tokenization, nlp, preprocessing]
 tldr: "A bottom-up subword tokenization algorithm that iteratively merges the most frequent byte/character pairs until a target vocabulary size is reached."

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Structured State Space Duality (SSD)"
 tags: [glossary, ssm, mamba, linear-attention, efficient-transformers]
 tldr: "The mathematical equivalence between SSMs and linear attention, proved in Mamba-2: any N-semiseparable matrix can be computed either as a masked matrix product (attention-style) or as a recurrence (SSM-style)."

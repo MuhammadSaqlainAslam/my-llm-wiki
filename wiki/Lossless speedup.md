@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Lossless Speedup"
 tags: [glossary, speculative-decoding, inference, medusa, eagle, quality]
 tldr: "A speedup method is 'lossless' if the accelerated decoding produces tokens from exactly the same distribution as standard autoregressive decoding. Achieved via speculative decoding's rejection sampling; EAGLE is lossless by this definition at 3–3.5×."

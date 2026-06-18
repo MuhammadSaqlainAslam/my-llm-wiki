@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Supervised Fine-Tuning"
 year: "2022"
 tags: [fine-tuning, sft, alignment, instruction-tuning]

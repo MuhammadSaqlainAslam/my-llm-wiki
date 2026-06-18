@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Combination Strategies"
 tags: [kv-cache, production, stacking]
 tldr: "The fifth family of [[KV Cache Optimization|KV-cache optimization]]: stack two or more techniques (e.g., GQA + INT4 + paged + sliding window with sinks). What real production stacks actually use."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Paged Attention"
 tags: [kv-cache, paging, vllm, fragmentation]
 tldr: "Store the KV cache in fixed-size blocks (typically 16 tokens per page), like an OS virtual-memory page table. Eliminates HBM fragmentation, enables prefix sharing across requests, and is the foundation of vLLM's serving architecture."

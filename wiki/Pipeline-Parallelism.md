@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Pipeline Parallelism"
 year: "2019"
 tags: [distributed-training, parallelism, hardware]

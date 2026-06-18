@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "DeepSeek-V2"
 year: "2024"
 tags: [moe, deepseek, mla, mixture-of-experts]

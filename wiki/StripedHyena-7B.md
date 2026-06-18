@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "StripedHyena-7B"
 tags: [glossary, ssm, hybrid, architecture]
 tldr: "A 7B hybrid model alternating convolutional (Hyena) and attention layers — achieved GPT-NeoX competitive performance with faster inference, released by Together AI in 2023."

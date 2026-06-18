@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "Group Relative Policy Optimization (GRPO)"
 tags: [rl, post-training, optimization, policy-gradient, deepseek]
 aliases: [GRPO, Group Relative Policy Optimization]

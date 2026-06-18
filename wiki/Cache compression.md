@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Cache Compression"
 tags: [kv-cache, inference, quantization, low-rank]
 tldr: "Keep all KV-cache entries but shrink each one — typically via INT8/INT4 quantization, [[NVFP4]] storage, or low-rank projection. Saves memory without losing recoverability; the second family of [[KV Cache Optimization|KV-cache optimizations]]."

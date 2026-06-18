@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "RLVR — Reinforcement Learning with Verifiable Rewards"
 tags: [post-training, rl, reasoning, nemotron, reward]
 tldr: "Restrict RL rewards to ground-truth verifiable signals (correct answer, passing test suite) rather than a learned reward model. No reward hacking possible. Nemotron-3 runs 21 environments simultaneously with async GRPO."

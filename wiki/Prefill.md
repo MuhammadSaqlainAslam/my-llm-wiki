@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Prefill (LLM Inference)"
 tags: [inference, kv-cache, throughput]
 tldr: "The first inference pass: process the entire input prompt at once and populate the [[KV Cache]]. Compute-bound and parallelizable; complementary to the [[Decode phase]] which is memory-bandwidth-bound and sequential."

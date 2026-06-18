@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "Hymba"
 aliases: ["Hymba"]
 year: 2024

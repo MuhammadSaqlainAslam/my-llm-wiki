@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Pallas Kernel"
 tags: [glossary, hardware, tpu, jax, google, kernel-programming]
 tldr: "Google's JAX-based language for writing custom GPU/TPU kernels, analogous to Triton for NVIDIA GPUs. Used by Griffin to implement an IO-aware RG-LRU scan kernel that keeps intermediate states in fast on-chip memory — enabling the hardware efficiency of FlashAttention's approach on TPU."

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "MMLU"
 tags: [glossary, benchmarks, evaluation, knowledge]
 tldr: "Massive Multitask Language Understanding — 57-subject multiple-choice test covering STEM, humanities, and social sciences; a standard knowledge breadth benchmark since 2021."

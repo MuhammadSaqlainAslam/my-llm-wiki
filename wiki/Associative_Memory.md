@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Associative Memory"
 tags: [glossary, memory, attention]
 tldr: "A content-addressable storage mechanism where patterns are retrieved by similarity to a query, not by index — transformers implement this with ~64-dim keys matching against stored key-value pairs."

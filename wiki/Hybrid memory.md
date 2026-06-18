@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Hybrid Memory (KV-Cache Tiering)"
 tags: [kv-cache, paging, hbm, dram, nvme]
 tldr: "Tier the KV cache across [[HBM]] / host DRAM / SSD, paging hot blocks into HBM and offloading cold blocks. The third family of KV-cache optimization — exemplified by PagedAttention, vAttention, and NVMe offloading."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Sliding Window Attention"
 tags: [kv-cache, attention, eviction, locality]
 tldr: "Keep only the last $W$ tokens in the KV cache; older tokens fall off the window. The simplest [[Eviction policy]] — destroys long-range recall but bounds memory at $W$."

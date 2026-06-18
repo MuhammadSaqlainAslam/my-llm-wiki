@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Receptance (RWKV)"
 tags: [glossary, rwkv, gating, rnn, architecture]
 tldr: "RWKV's output gating vector r_t = sigmoid(W_r x̂_t) that controls how much of the WKV computation reaches the output. Analogous to LSTM's output gate — determines when the model 'speaks' vs. suppresses the context accumulation."

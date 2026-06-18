@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Citation Map"
 tags: [citations, impact, tracking, meta]
 tldr: "Citation scores and downstream impact of core papers — total citations plus the top 10 most-cited papers that build on each work."

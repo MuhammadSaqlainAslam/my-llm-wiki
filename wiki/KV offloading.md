@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "KV Offloading"
 tags: [kv-cache, paging, dram, nvme, long-context]
 tldr: "Move cold KV-cache pages out of [[HBM]] to host DRAM (or NVMe SSD), page them back in when the model needs them. Required when the cache is fundamentally larger than HBM — e.g., 1M-token RAG."

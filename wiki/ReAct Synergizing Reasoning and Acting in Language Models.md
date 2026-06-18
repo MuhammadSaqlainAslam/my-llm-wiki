@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "ReAct: Synergizing Reasoning and Acting in Language Models"
 aliases: ["ReAct"]
 authors: Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao

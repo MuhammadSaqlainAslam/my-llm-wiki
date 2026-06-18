@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Dashboard"
 tags: [meta, dashboard]
 ---

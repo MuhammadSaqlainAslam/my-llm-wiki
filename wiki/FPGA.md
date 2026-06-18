@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "FPGA (Field-Programmable Gate Array)"
 aliases: ["FPGA-LLM"]
 tags: [hardware, fpga, reconfigurable]

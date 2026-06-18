@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Llama 2: Open Foundation and Fine-Tuned Chat Models"
 authors: "Hugo Touvron, Louis Martin, Kevin Stone et al. (Meta GenAI)"
 year: 2023

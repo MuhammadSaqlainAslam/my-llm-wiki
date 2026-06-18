@@ -3077,11 +3077,11 @@ function renderAgent() {
     n.tags && n.tags.some(t => ['arxiv','github','agent','youtube'].includes(t))
   );
 
-  // Sort notes by title for recent-additions list (newest year first, then title)
+  // Sort notes by created date for recent-additions list (newest first)
   const recent = [...notes]
-    .filter(n => n.year)
-    .sort((a, b) => (b.year || '').localeCompare(a.year || '') || a.title.localeCompare(b.title))
-    .slice(0, 5);
+    .filter(n => n.created)
+    .sort((a, b) => new Date(b.created) - new Date(a.created) || a.title.localeCompare(b.title))
+    .slice(0, 6);
 
   const SOURCES = [
     { name: 'arXiv',           desc: 'cs.LG, cs.CL, cs.AI — new papers by keyword/topic',  badge: 'Free API',   color: '#7c3aed' },
@@ -3205,7 +3205,7 @@ function renderAgent() {
       ${recent.map(n => `
         <div class="agent-recent-item" data-id="${escAttr(n.id)}">
           <span class="agent-recent-title">${escHtml(n.title)}</span>
-          <span class="agent-recent-year">${n.year || '—'}</span>
+          <span class="agent-recent-year">${n.created || n.year || '—'}</span>
         </div>`).join('')}
     </div>
   `;

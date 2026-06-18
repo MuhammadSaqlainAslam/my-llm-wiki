@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Inference-Time Scaling"
 year: "2024"
 tags: [inference, reasoning, compute, scaling]

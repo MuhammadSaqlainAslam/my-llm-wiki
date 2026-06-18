@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Hardware-Aware Scan"
 tags: [mamba, gpu, efficiency, kernel-fusion, sram]
 tldr: "Kernel fusion that keeps the Mamba SSM recurrence entirely in fast SRAM, never materializing the expanded state in HBM. 40× faster than naive PyTorch, faster than FlashAttention-2 at sequence lengths > 2K."

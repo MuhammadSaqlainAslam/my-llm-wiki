@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Positional Encoding"
 tags: [glossary, transformers]
 tldr: "Injects token order information into embeddings since self-attention is inherently permutation-invariant."

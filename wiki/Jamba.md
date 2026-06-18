@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Jamba: A Hybrid Transformer-Mamba Language Model"
 authors: "Opher Lieber, Barak Lenz, Hofit Bata, Gal Cohen, Jhonathan Osin, Itay Dalmedigos, et al."
 year: "2024"

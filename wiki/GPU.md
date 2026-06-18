@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "GPU (Graphics Processing Unit)"
 tags: [hardware, gpu, parallelism, tensor-cores]
 tldr: "Massively parallel processor originally for graphics, now the dominant accelerator for deep learning. Modern variants (NVIDIA H100/B200, AMD MI300) add [[Tensor Cores]] for low-precision matmul and [[HBM]] for bandwidth."

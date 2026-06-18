@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Chunkwise Recurrent"
 tags: [glossary, retnet, rwkv, efficiency, long-sequences, parallelism]
 tldr: "A hybrid computation mode that processes sequences in fixed-size chunks — within each chunk using parallel attention-like computation, between chunks using an O(1) recurrent state update. Achieves linear complexity in sequence length while being GPU-friendly."

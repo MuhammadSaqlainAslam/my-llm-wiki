@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Gated Linear Attention (GLA)"
 tags: [glossary, attention, linear-attention, ssm, efficient-transformers]
 tldr: "A linear attention variant that adds a learnable, data-dependent decay gate to the hidden state, giving SSM-like selective memory while keeping O(1) recurrent inference and a hardware-efficient chunkwise-parallel training form."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Token Budget"
 tags: [kv-cache, eviction, memory, deployment]
 tldr: "A hard cap on the number of KV-cache entries the serving system will retain. The eviction-family knob you actually tune in production — set the budget, the policy decides which entries get dropped to fit it."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Eviction Policy"
 tags: [kv-cache, eviction, lru, attention-score]
 tldr: "The rule that decides *which* KV-cache entries to drop when evicting. Common choices: LRU (drop oldest), attention-score-based ([[H2O eviction]]), attention-sink-aware (StreamingLLM)."

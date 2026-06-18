@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "HotpotQA"
 year: "2018"
 tags: [benchmark, question-answering, multi-hop, reasoning]

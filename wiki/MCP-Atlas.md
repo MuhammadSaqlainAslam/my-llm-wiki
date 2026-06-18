@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "MCP-Atlas: A Large-Scale Benchmark for Tool-Use Competency with Real MCP Servers"
 authors: "Chaithanya Bandi, Razvan-Gabriel Dumitru, Ben Hertzberg, Divyansh Agarwal, et al."
 year: "2026"

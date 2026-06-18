@@ -1,4 +1,5 @@
 ---
+created: "2026-06-17"
 title: "Nemotron 3 Super"
 authors: "NVIDIA"
 year: 2026

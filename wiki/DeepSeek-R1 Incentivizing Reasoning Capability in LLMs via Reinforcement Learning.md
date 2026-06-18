@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"
 authors: DeepSeek-AI
 year: 2025

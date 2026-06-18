@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "RLHF (Reinforcement Learning from Human Feedback)"
 authors: "Ouyang et al."
 tags: [glossary, training, alignment, fine-tuning, llama2, reward-model]

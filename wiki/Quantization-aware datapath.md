@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Quantization-Aware Datapath"
 tags: [hardware, quantization, int8, fp8, nvfp4]
 tldr: "Silicon paths that natively execute INT8, FP8, [[NVFP4]] etc. without padding back up to FP16/BF16. The hardware support that makes low-precision inference and training actually fast."

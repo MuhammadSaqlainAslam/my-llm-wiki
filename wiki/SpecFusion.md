@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "SpecFusion"
 aliases: ["SpecFusion"]
 year: 2025

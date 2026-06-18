@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Tensor Parallelism"
 tags: [parallelism, training, gpu, transformer, mamba-2]
 tldr: "Split each layer's weight matrices across GPUs on the same node so each GPU does a fraction of the matmul. The standard model-parallelism technique for training large Transformers; [[Transformers Are SSMs|Mamba-2]] is explicitly designed to be TP-friendly with half the synchronization points per block."

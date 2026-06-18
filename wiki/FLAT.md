@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "FLAT"
 aliases: ["FLAT", "Fast Linear Attention Hardware"]
 year: 2025

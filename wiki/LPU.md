@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "LPU (Language Processing Unit)"
 tags: [hardware, llm, inference, low-latency]
 tldr: "A new class of [[ASIC]] engineered specifically for LLM inference (Groq, SambaNova). Optimizes for low per-token latency by reducing dispatch overhead and providing predictable execution; often loses its advantage at large batch sizes where GPU GEMM utilization saturates."

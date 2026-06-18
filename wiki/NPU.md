@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "NPU (Neural Processing Unit)"
 tags: [hardware, npu, edge, mobile, inference]
 tldr: "Umbrella term for inference-focused accelerators in mobile and edge devices (Apple Neural Engine, Qualcomm Hexagon, Intel/AMD CPU NPUs). Optimized for INT8/FP16 throughput and energy efficiency."

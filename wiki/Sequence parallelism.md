@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Sequence Parallelism"
 tags: [parallelism, training, long-context, attention, ssm]
 tldr: "Split the sequence dimension across GPUs so each device holds only a slice of the activations. Originally designed for attention training at long context; the SSD paper shows how to apply it to SSMs by passing the recurrent state across devices."

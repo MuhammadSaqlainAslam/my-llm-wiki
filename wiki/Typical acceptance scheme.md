@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Typical Acceptance Scheme"
 tags: [glossary, medusa, speculative-decoding, inference, quality]
 tldr: "Medusa's approach to token acceptance: instead of full speculative decoding rejection sampling, accept a Medusa-drafted token if the head's predicted probability exceeds a threshold — boosting acceptance rate while maintaining generation quality (bounded distribution shift)."

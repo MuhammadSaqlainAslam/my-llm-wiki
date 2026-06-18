@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Hardware-Aware Algorithms"
 tags: [hardware, gpu, kernel-fusion, sram]
 tldr: "Algorithms designed around the physical [[Memory hierarchy]] and parallelism of the target accelerator — keep operands in [[SRAM]], minimize [[HBM]] traffic, fuse ops. Examples: FlashAttention, Mamba's [[Hardware-Aware Scan]], paged KV cache."

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Tree of Thoughts"
 year: "2023"
 tags: [reasoning, search, planning, chain-of-thought]

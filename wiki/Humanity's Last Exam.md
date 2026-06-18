@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Humanity's Last Exam: A Comprehensive Evaluation of Expert-Level AI Reasoning"
 authors: "Long Phan, Alice Gatti, Ziwen Han, Nathaniel Li, et al. (Center for AI Safety, Scale AI)"
 year: "2025"

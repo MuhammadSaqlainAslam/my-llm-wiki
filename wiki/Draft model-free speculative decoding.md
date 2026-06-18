@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Draft-Model-Free Speculative Decoding"
 tags: [glossary, speculative-decoding, medusa, inference, efficiency]
 tldr: "Speculative decoding methods that generate draft tokens without a separate smaller model — using extra heads (Medusa), Jacobi iteration (Lookahead), or other self-contained mechanisms. Eliminates the deployment complexity of managing a draft model."

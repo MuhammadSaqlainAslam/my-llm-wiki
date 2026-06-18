@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Feature Uncertainty"
 tags: [glossary, eagle, speculative-decoding, inference, hidden-state]
 tldr: "The problem EAGLE identifies: the LLM's second-to-last hidden state at step t+1 is uncertain because it depends on which token t+1 was sampled — creating a distribution over possible features rather than a single point. EAGLE resolves this by conditioning on the actual next token."

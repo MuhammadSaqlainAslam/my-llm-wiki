@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "RMSNorm"
 tags: [glossary, normalization, training-stability]
 tldr: "A simplified layer normalization that skips mean subtraction and just scales by RMS, saving ~10-15% compute over LayerNorm."

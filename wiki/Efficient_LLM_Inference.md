@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Efficient LLM Inference"
 tags: [glossary, inference, systems, optimization]
 tldr: "The set of techniques that reduce the time, memory, and compute cost of running a trained LLM at serving time without retraining."

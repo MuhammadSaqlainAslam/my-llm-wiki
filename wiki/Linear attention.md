@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Linear Attention"
 tags: [attention, efficiency, kernel, ssm]
 tldr: "Replace the softmax in attention with a kernel feature map so the computation reduces to outer products plus a running sum. $O(n)$ per token at the cost of expressive power — equivalent to a rank-1 SSM in the SSD framework."

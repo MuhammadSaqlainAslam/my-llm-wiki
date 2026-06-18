@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "RWKV: Reinventing RNNs for the Transformer Era"
 authors: "Bo Peng et al. (EleutherAI community)"
 year: 2023

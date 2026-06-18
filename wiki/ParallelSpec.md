@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "ParallelSpec"
 aliases: ["ParallelSpec"]
 year: 2025

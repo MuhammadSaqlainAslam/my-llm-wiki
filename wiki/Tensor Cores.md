@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Tensor Cores"
 tags: [hardware, gpu, nvidia, matmul, low-precision]
 tldr: "Specialized matrix-multiply units inside modern NVIDIA GPUs (and the equivalent AMD Matrix Cores). Each tensor core executes a small dense matmul (e.g., $4 \times 4 \times 4$ FP16) per clock per core. The unit responsible for the 5–10× throughput jump from V100 to H100 to B200."

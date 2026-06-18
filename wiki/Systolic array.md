@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Systolic Array"
 tags: [hardware, tpu, dataflow, matrix]
 tldr: "A 2D grid of MAC units that pipelines operands across the grid — operand A flows left-to-right, operand B flows top-to-bottom, partial sums accumulate inside each cell. The dataflow primitive at the heart of [[TPU]]s and many ASIC matmul engines."

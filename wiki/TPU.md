@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "TPU (Tensor Processing Unit)"
 tags: [hardware, tpu, google, asic, systolic-array]
 aliases: ["Tensor-Processing-Unit"]

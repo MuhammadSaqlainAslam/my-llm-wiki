@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Load Balancing Loss"
 tags: [moe, training, routing, regularization]
 tldr: "Auxiliary loss that penalizes unequal token distribution across experts, preventing router collapse. Gradients flow through the differentiable softmax probability P_i even though the routing decision f_i is a hard argmax."

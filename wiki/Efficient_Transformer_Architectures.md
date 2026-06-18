@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Efficient Transformer Architectures"
 tags: [glossary, transformers, efficiency, architecture]
 tldr: "Variants of the standard Transformer that reduce the O(n²) attention bottleneck in time, memory, or compute."

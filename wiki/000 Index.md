@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "LLM Wiki Index"
 tags: [index, meta]
 tldr: "All papers, grouped by theme, with a concept glossary and a paragraph on how everything connects."

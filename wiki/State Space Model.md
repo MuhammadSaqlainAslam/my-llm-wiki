@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "State Space Model (SSM)"
 tags: [ssm, recurrence, math, linear-systems, mamba]
 tldr: "A continuous-time linear dynamical system discretized for sequences. The dual recurrent/convolutional representation lets you train in parallel and infer in constant memory — the mathematical foundation of Mamba."

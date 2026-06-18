@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Attention Is All You Need"
 aliases: ["Attention-Is-All-You-Need"]
 authors: "Vaswani et al."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Cache Eviction"
 tags: [kv-cache, inference, eviction, memory]
 tldr: "Remove KV-cache entries during generation to keep memory bounded — the simplest family of [[KV Cache Optimization|KV-cache optimization]]. Trade-off: lower peak memory at the cost of recoverability (evicted tokens can't be re-attended)."

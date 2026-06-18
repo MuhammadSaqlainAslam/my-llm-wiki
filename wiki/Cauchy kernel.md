@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Cauchy Kernel"
 tags: [glossary, ssm, s4, mathematics, efficiency, structured-matrices]
 tldr: "A structured matrix computation of the form K_{ij} = 1/(ω_i - ζ_j) that arises when diagonalizing the HiPPO state space model. Computable in O((N+L) log²(N+L)) via fast divide-and-conquer algorithms, reducing S4's computation from O(N²L) to near-linear."

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "DeltaNet"
 tags: [glossary, linear-attention]
 tldr: "A linear recurrent model using delta rule updates to write associative memories, achieving ~O(1) inference cost while closing the quality gap with softmax attention."

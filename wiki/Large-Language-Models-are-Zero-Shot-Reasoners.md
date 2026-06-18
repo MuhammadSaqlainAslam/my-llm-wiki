@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Large Language Models are Zero-Shot Reasoners"
 year: "2022"
 tags: [chain-of-thought, zero-shot, reasoning, prompt-engineering]

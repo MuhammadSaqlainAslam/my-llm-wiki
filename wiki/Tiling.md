@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Tiling"
 tags: [glossary, hardware, attention, memory, kernel-fusion]
 tldr: "Partitioning a large matrix computation into smaller blocks that fit in on-chip SRAM, so the GPU can process each block without touching HBM. The core technique behind FlashAttention, cuBLAS GEMM, and all efficient matrix kernels."

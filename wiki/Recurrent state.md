@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Recurrent State"
 tags: [glossary, rnn, retnet, rwkv, ssm, inference, memory]
 tldr: "The fixed-size hidden state h_t maintained by RNN-style models (including RetNet, RWKV, Griffin, Mamba) that summarizes all past inputs. Unlike the KV cache (which grows with T), the recurrent state has constant size O(d²) or O(Nd) per layer regardless of sequence length."

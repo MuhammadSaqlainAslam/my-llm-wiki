@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Lookahead Decoding"
 tags: [glossary, speculative-decoding, inference, jacobi, parallel-decoding]
 tldr: "An inference acceleration method that uses Jacobi iteration to simultaneously draft multiple tokens without any separate model. Runs the LLM with multiple 'lookahead' windows in parallel, accepting tokens that are self-consistent. No draft model or fine-tuning required."

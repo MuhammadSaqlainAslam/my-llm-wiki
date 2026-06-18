@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Near-Memory Computing"
 tags: [hardware, pim, dram, exotic]
 tldr: "Place compute logic *next to* memory rather than inside it (e.g., processing-in-memory DRAM stacks). A more practical compromise than in-memory analog computing — keeps digital precision while reducing the distance data has to travel."

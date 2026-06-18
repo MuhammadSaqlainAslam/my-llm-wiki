@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
 aliases: ["DPO", "Direct-Preference-Optimization"]
 authors: Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn

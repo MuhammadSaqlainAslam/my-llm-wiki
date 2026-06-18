@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "On-Policy Distillation (OPD)"
 tags: [post-training, distillation, rl, knowledge-distillation, deepseek]
 aliases: [OPD, On-Policy Distillation, on-policy distillation]

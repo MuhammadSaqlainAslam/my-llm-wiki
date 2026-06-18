@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Self-Consistency Improves Chain-of-Thought Reasoning"
 year: "2022"
 tags: [chain-of-thought, self-consistency, reasoning, sampling]

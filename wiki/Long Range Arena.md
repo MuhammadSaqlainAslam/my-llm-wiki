@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Long Range Arena (LRA)"
 tags: [glossary, benchmark, ssm, s4, evaluation, long-range]
 tldr: "A benchmark suite of 6 tasks designed to stress-test sequence models on long-range dependencies (sequences up to 16,384 tokens). S4 was the first model to solve all 6 tasks, including Path-X where every prior model scored at chance level."

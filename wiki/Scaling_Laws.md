@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Scaling Laws"
 tags: [glossary, training, foundations]
 tldr: "Loss decreases predictably as a power law with compute, data, and parameters — Chinchilla shows optimal training uses ~20 tokens per parameter."

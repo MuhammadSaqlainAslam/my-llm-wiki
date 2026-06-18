@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "LLM Evaluation"
 tags: [glossary, benchmarks, evaluation, metrics]
 tldr: "The practice of measuring LLM capability, safety, and efficiency across standardized benchmarks. Covers knowledge (MMLU, GPQA), reasoning (MATH, GSM8K), coding (HumanEval), long-context (RULER), and agentic tasks — each measuring a different axis of model capability."

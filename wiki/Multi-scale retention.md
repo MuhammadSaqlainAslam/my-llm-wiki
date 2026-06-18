@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Multi-Scale Retention (MSR)"
 tags: [glossary, retnet, attention, multi-head, efficiency]
 tldr: "RetNet's multi-head retention layer: h parallel retention heads each with a different fixed decay γ_h, giving the model multiple time scales to reason over simultaneously. Directly analogous to multi-head attention but with decayed linear attention."

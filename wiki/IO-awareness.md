@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "IO-Awareness"
 tags: [glossary, hardware, attention, efficiency, memory]
 tldr: "Algorithm design principle: optimize for data movement between memory tiers (HBM↔SRAM), not just raw arithmetic — because on modern GPUs, bandwidth is the binding constraint, not compute."

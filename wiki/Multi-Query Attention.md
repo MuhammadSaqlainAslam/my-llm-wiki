@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Multi-Query Attention (MQA)"
 tags: [attention, kv-cache, gqa, efficiency]
 tldr: "All query heads share a single K/V projection — $H$× reduction in KV-cache size. The extreme of [[GQA]]; standard in deployment of PaLM and several other production models."

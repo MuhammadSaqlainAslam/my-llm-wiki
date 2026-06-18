@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
 aliases: ["Chain-of-Thought-Prompting"]
 authors: Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, Denny Zhou

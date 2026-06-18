@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Thread Block (GPU)"
 tags: [glossary, hardware, gpu, parallelism, scheduling]
 tldr: "A group of warps (up to 1024 threads) that share on-chip SRAM and can synchronize with each other. Thread blocks are the unit of work dispatched to a GPU streaming multiprocessor. FlashAttention-2 parallelizes attention across thread blocks for higher throughput."

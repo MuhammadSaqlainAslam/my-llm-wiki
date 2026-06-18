@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "HiPPO Matrix"
 tags: [glossary, ssm, s4, long-range, initialization, mathematics]
 tldr: "A specific matrix A used to initialize state space models, derived from the theory of optimal polynomial projection of input history. The magic sauce that lets S4 remember information over 16,000+ steps without vanishing gradients."

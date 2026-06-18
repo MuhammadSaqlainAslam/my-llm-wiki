@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "FlashAttention"
 tags: [glossary, attention, efficiency, hardware-aware]
 tldr: "IO-aware exact attention algorithm that tiles computation to avoid materializing the full N×N attention matrix in HBM, achieving 2-4x speedup with identical outputs."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Constant Error Carousel"
 tags: [lstm, gradient, vanishing-gradient, history]
 tldr: "The identity path through the LSTM cell state — when the forget gate is open, gradients pass through $c_t = c_{t-1}$ unchanged, avoiding the vanishing-gradient problem of vanilla RNNs. The 1997 idea that made deep recurrent learning possible."

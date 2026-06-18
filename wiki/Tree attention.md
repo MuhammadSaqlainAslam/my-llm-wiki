@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Tree Attention"
 tags: [glossary, medusa, speculative-decoding, inference, tree, verification]
 tldr: "A modified attention mask that represents a tree of candidate token continuations as a flat batch, allowing the LLM to verify all candidate paths in a single forward pass. Used by Medusa and EAGLE to verify speculative token trees efficiently."

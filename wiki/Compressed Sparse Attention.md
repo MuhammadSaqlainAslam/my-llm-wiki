@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "Compressed Sparse Attention (CSA)"
 tags: [attention, compression, long-context, efficiency, deepseek]
 aliases: [CSA, Compressed Sparse Attention]

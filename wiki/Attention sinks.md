@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Attention Sinks"
 aliases: ["StreamingLLM"]
 tags: [attention, kv-cache, streamingllm]

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "LoRA: Low-Rank Adaptation of Large Language Models"
 authors: Edward Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen
 year: 2021

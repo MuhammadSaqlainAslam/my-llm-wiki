@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Decode Phase (LLM Inference)"
 tags: [inference, kv-cache, autoregressive, bandwidth]
 tldr: "The autoregressive token-by-token generation phase that follows [[Prefill]]. Memory-bandwidth-bound: each step reads the full [[KV Cache]] from [[HBM]], the matmuls are tiny. Where speculative decoding and KV-cache optimizations pay off most."

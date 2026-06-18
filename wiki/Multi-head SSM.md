@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Multi-Head SSM"
 tags: [ssm, mamba-2, attention, multi-head]
 tldr: "Multiple parallel SSM heads operating on different projections of the input, by analogy with multi-head attention. The SSD framework shows that heads in attention map directly onto heads in SSMs once both are viewed as structured matrix mixers."

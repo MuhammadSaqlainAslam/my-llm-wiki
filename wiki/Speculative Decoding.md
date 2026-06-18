@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Speculative Decoding"
 tags: [inference, throughput, efficiency, draft-model]
 year: 2025

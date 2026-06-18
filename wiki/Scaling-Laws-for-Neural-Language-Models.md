@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Scaling Laws for Neural Language Models"
 year: "2020"
 tags: [scaling, chinchilla, compute-optimal, language-models]

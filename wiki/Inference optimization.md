@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Inference Optimization"
 tags: [glossary, inference, throughput, latency, efficiency]
 tldr: "The family of techniques that reduce the wall-clock time, memory, and cost of running a trained LLM — including speculative decoding, KV cache compression, quantization, batching strategies, and hardware-software co-design."

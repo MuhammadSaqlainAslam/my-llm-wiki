@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Bradley-Terry Model"
 year: "1952"
 tags: [reward-model, rlhf, preference-learning]

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Medusa Heads"
 tags: [glossary, medusa, speculative-decoding, inference, decoding-heads]
 tldr: "K extra 2-layer MLP heads attached to the top of a frozen LLM's hidden state, each trained to predict a different future token (head k predicts token t+k). The multiple heads run in parallel during inference with zero added latency."

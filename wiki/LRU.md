@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "LRU (Linear Recurrent Unit)"
 tags: [glossary, rnn, recurrence, efficiency, complex-valued]
 tldr: "A complex-valued diagonal linear recurrence (Orvieto et al. 2023) that uses eigenvalues on the unit disk for stability. The direct predecessor of Griffin's RG-LRU; proved that simple linear recurrences can match LSTM on language tasks when properly initialized."

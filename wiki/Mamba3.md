@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Mamba-3: Improved Sequence Modeling using State Space Principles"
 authors: "Aakash Lahoti, Kevin Y. Li, Berlin Chen, Caitlin Wang, Aviv Bick, J. Zico Kolter, Tri Dao, Albert Gu"
 year: "2026"

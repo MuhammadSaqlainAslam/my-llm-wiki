@@ -1,4 +1,5 @@
 ---
+created: "2026-05-22"
 title: llm.c
 tags: [LLM inference, training, CUDA, C, hardware acceleration, GPT-2, deep learning, neural network, flash attention]
 year: 2024

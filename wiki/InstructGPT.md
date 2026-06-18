@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "InstructGPT"
 authors: "Ouyang et al."
 year: "2022"

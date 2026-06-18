@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "vLLM: PagedAttention for Efficient LLM Serving"
 year: "2023"
 tags: [inference, kv-cache, serving, paged-attention]

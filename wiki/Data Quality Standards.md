@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Data Quality Standards"
 tags: [meta, quality, standards, benchmarks]
 tldr: "Standards for data accuracy in this wiki — source hierarchy, verification requirements, known discrepancies, and update procedures for benchmark scores."

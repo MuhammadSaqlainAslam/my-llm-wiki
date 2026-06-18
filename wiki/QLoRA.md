@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "QLoRA: Efficient Finetuning of Quantized LLMs"
 year: "2023"
 tags: [fine-tuning, quantization, lora, peft]

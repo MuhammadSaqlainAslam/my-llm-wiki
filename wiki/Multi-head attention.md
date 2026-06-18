@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Multi-Head Attention (MHA)"
 tags: [glossary, attention, transformer, architecture, foundational]
 tldr: "The core operation in Transformers: run h independent attention heads in parallel, each with its own Q/K/V projections, then concatenate and linearly project. Each head can learn a different type of relationship (local syntax, long-range coreference, etc.)."

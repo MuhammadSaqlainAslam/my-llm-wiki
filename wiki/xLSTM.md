@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "xLSTM: Extended Long Short-Term Memory"
 authors: "Beck, Pöppel, Spanring, Auer, Prudnikova, Kopp, Klambauer, Brandstetter, Hochreiter"
 year: 2024

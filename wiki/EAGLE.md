@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty"
 authors: "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang"
 year: 2024

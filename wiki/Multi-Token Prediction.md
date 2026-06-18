@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Multi-Token Prediction (MTP)"
 tags: [training, speculative-decoding, inference, nemotron, efficiency]
 tldr: "Auxiliary heads predict 2, 3… tokens ahead simultaneously during training. Richer gradient signal improves quality ~2.4% on average; at inference the heads become draft tokens for speculative decoding at ~97% acceptance rate."

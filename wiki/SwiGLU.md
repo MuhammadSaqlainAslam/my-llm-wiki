@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "SwiGLU"
 tags: [glossary, activation-functions]
 tldr: "A gated activation function (Swish × linear gate) used in the FFN layers of most modern LLMs, empirically outperforming ReLU/GeLU by ~1% perplexity."

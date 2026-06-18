@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Selective State Spaces"
 tags: [ssm, mamba, selectivity]
 tldr: "Synonym for [[Selective State Space Model]] — see that note for the full explanation. The phrase \"selective state spaces\" appears in Mamba's title."

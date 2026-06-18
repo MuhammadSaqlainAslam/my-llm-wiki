@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "KV Cache"
 tags: [inference, attention, memory, bottleneck]
 tldr: "Cached key-value tensors from past attention steps; eliminates redundant recomputation but grows linearly with sequence length — the root cause of most long-context engineering work."

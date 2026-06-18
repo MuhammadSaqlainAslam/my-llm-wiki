@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "XPOS (Extrapolatable Position Embedding)"
 tags: [glossary, attention, position-encoding, retnet, length-extrapolation]
 tldr: "A relative position embedding used in RetNet that multiplies the query and key by an exponentially decaying scalar per dimension, giving the model better length extrapolation than standard RoPE when combined with the retention mechanism."

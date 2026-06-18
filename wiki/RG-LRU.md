@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "RG-LRU (Real-Gated Linear Recurrent Unit)"
 tags: [glossary, griffin, rnn, recurrence, gating, efficiency]
 tldr: "Griffin's core recurrent layer: a diagonal linear recurrence with input-dependent decay, an output gate, and a norm-preserving update rule. Simpler than Mamba's selective SSM, more expressive than RWKV's fixed decay — the sweet spot for hardware-efficient gated recurrence."

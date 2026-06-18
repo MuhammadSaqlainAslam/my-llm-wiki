@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "PaLM: Scaling Language Modeling with Pathways"
 year: "2022"
 tags: [scaling, language-model, google, pathways]

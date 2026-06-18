@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Long Short-Term Memory (LSTM)"
 tags: [rnn, recurrence, gating, history, language-model]
 tldr: "The 1997 Hochreiter–Schmidhuber recurrent network with a constant-error-carousel cell state and three sigmoid gates (input, forget, output). The dominant sequence model for two decades; replaced by [[Transformer]] but rehabilitated by [[xLSTM]]."

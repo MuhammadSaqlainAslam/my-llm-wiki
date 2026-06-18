@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Retention Mechanism"
 tags: [glossary, retnet, linear-attention, recurrence, efficiency]
 tldr: "RetNet's core sequence mixing layer: a decayed causal attention substitute that supports three equivalent computation forms — parallel (train), recurrent (O(1) inference), and chunkwise (linear-complexity long sequences). The retention score between positions n and m is γ^(n-m) · q_n k_m^T."

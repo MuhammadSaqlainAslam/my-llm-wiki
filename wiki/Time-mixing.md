@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Time-Mixing (RWKV)"
 tags: [glossary, rwkv, rnn, attention, efficiency, recurrence]
 tldr: "The RWKV sublayer responsible for cross-time interactions. Implements the WKV (Weighted Key Value) mechanism: an exponentially decaying weighted sum of past key-value pairs, computable as a Transformer in parallel training or as an O(1) RNN at inference."

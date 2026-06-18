@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "FP8 Training"
 year: "2024"
 tags: [quantization, training, hardware, precision]

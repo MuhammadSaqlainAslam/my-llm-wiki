@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Kaplan Scaling Laws"
 authors: "Kaplan et al."
 tags: [glossary, scaling, training]

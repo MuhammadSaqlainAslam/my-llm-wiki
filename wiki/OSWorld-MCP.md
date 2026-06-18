@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "OSWorld-MCP: Evaluating Agents with MCP Tool Invocation in Computer Environments"
 authors: "Hongrui Jia, Jitong Liao, Xi Zhang, Haiyang Xu, Tianbao Xie, Chaoya Jiang, Ming Yan, Si Liu, Wei Ye, Fei Huang"
 year: "2025"

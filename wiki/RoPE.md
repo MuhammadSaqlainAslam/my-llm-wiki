@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "RoPE (Rotary Position Embedding)"
 authors: "Su et al."
 tags: [glossary, attention, position-encoding, llama2, transformer, efficiency]

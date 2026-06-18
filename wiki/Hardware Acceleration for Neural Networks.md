@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Hardware Acceleration for Neural Networks: A Comprehensive Survey"
 authors: "Bin Xu, Ayan Banerjee, Sandeep Gupta"
 year: 2025

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs"
 authors: "Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill Qian, Sihan Zhao, Lauren Hong, Runchu Tian, Ruobing Xie, Jie Zhou, Mark Gerstein, Dahai Li, Zhiyuan Liu, Maosong Sun"
 year: "2023"

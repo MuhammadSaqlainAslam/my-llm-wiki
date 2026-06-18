@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Roofline Model"
 year: "2009"
 tags: [hardware, performance-analysis, arithmetic-intensity]

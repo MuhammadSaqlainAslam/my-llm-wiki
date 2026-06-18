@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "Samba"
 aliases: ["Samba"]
 year: 2024

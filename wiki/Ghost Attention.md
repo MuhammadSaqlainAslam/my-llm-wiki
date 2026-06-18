@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Ghost Attention"
 tags: [glossary, llama2, training, multi-turn, instruction-following, rlhf]
 tldr: "A training trick in LLaMA 2-Chat for persistent multi-turn instruction following: the system message is appended to every turn during training but masked from the loss, teaching the model to behave as if the instruction is always present without needing to see it at every step."

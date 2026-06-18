@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "ASIC (Application-Specific Integrated Circuit)"
 tags: [hardware, asic, inference, fixed-function]
 tldr: "Fixed-function silicon designed for one workload. Best perf-per-watt of any approach but inflexible and expensive to design (millions to tens of millions of dollars per tape-out). The class includes inference engines like AWS Inferentia, Google's TPU, and dedicated LLM-serving chips."

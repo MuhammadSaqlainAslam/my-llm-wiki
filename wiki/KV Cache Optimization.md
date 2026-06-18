@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "KV Cache Optimization Strategies for Scalable and Efficient LLM Inference"
 authors: "Yichun Xu, Navjot K. Khaira, Tejinder Singh"
 year: 2026

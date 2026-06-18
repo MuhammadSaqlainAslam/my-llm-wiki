@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "MQA (Multi-Query Attention)"
 tags: [glossary, attention, efficiency, kv-cache, inference]
 tldr: "An extreme KV cache reduction: all query heads share a single key-value head. Reduces KV cache size by the number of heads (e.g., 32×) with some quality degradation — the precursor to GQA's more balanced approach."

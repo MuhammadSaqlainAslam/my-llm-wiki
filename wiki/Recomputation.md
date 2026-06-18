@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Recomputation (Gradient Checkpointing)"
 tags: [glossary, training, memory, efficiency, backprop]
 tldr: "Trading extra FLOPs for less memory in the backward pass by recomputing intermediate activations on the fly rather than storing them. FlashAttention uses this to avoid saving the T×T attention matrix for backprop."

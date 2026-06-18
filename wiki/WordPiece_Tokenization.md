@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "WordPiece Tokenization"
 tags: [glossary, tokenization]
 tldr: "A subword tokenization algorithm that greedily merges character pairs to maximize likelihood of the training corpus, producing vocabularies typically of 30k tokens."

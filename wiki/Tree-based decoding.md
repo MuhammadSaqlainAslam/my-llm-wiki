@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Tree-Based Decoding"
 tags: [glossary, speculative-decoding, inference, eagle, medusa, tree]
 tldr: "A speculative decoding strategy where candidate continuations are organized as a tree (rather than a flat list), allowing the LLM to verify multiple branching hypotheses simultaneously via a tree attention mask. Enables exponentially more candidates per verification pass."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "state-spaces/mamba – Official Mamba / Mamba-2 / Mamba-3 Repository"
 authors:
   - Albert Gu

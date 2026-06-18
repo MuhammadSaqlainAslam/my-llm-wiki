@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Matrix Memory"
 tags: [xlstm, memory, associative, hopfield]
 tldr: "Replace the LSTM's scalar cell state with a $d \times d$ matrix $C_t$ updated by an outer product $C_t = f_t C_{t-1} + i_t v_t k_t^\top$. Turns the cell into a learned key-value associative store, recovering attention-like content-based recall in a fully recurrent model."

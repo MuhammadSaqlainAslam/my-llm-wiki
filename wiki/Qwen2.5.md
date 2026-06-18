@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Qwen2.5"
 year: "2024"
 tags: [qwen, frontier-models, alibaba, language-model]

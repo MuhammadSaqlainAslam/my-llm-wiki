@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "State Space Duality (Mamba-2) Part I – The Model"
 authors:
   - Tri Dao

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "SentencePiece"
 tags: [glossary, tokenization]
 tldr: "A language-agnostic subword tokenizer that trains directly on raw text, producing a fixed vocabulary of ~32k tokens."

@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Mamba: Linear-Time Sequence Modeling with Selective State Spaces"
 authors: "Gu & Dao"
 year: 2024

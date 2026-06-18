@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "WebGPT"
 year: "2021"
 tags: [web-search, agents, rlhf, question-answering]

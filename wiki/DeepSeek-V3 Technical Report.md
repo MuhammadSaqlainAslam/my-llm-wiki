@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: DeepSeek-V3 Technical Report
 aliases: ["DeepSeek-V3"]
 authors: DeepSeek-AI

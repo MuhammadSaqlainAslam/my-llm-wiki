@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "MagicPIG"
 aliases: ["MagicPIG"]
 year: 2024

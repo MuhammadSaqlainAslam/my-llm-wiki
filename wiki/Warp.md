@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Warp (GPU)"
 tags: [glossary, hardware, gpu, parallelism, scheduling]
 tldr: "A group of 32 threads that execute the same instruction in lockstep on a GPU. Inter-warp communication requires shared memory (SRAM); suboptimal warp scheduling was FlashAttention v1's bottleneck, fixed in v2."

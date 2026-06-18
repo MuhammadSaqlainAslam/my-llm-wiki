@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Kernel Fusion"
 tags: [hardware, optimization, gpu, sram]
 tldr: "Combine multiple consecutive operations into a single GPU/TPU kernel so intermediate tensors stay in [[SRAM]] and never touch [[HBM]]. The pattern behind FlashAttention, Mamba's [[Hardware-Aware Scan]], and most modern high-performance ML kernels."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Memory Hierarchy"
 tags: [hardware, memory, performance, gpu]
 tldr: "The progression registers → SRAM → HBM → host RAM → SSD, each tier ~10× slower and ~10× larger than the previous. End-to-end performance is usually decided by which tier your hot data lives in, not by raw arithmetic throughput."

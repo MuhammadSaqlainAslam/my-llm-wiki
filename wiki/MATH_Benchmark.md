@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "MATH Benchmark"
 tags: [glossary, benchmarks, evaluation, math, reasoning]
 tldr: "Competition mathematics benchmark — 12,500 problems from AMC, AIME, and Olympiad levels; GPT-4 scored ~52% at launch, frontier models now exceed 85%."

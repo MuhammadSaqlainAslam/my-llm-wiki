@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Discretization (SSMs)"
 tags: [glossary, ssm, s4, mathematics, recurrence]
 tldr: "Converting a continuous-time state space model (ODE x' = Ax + Bu) into a discrete recurrence (x_k = Ā x_{k-1} + B̄ u_k) suitable for processing tokenized sequences. The step size Δ is a learnable parameter that controls effective memory timescale."

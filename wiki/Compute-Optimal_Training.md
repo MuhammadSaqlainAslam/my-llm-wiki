@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Compute-Optimal Training"
 tags: [glossary, training, scaling]
 tldr: "Train the model size and dataset size in a fixed ratio that minimizes loss for a given compute budget — Chinchilla says ~20 tokens per parameter."

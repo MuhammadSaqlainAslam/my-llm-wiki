@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Time Shift (RWKV)"
 tags: [glossary, rwkv, rnn, local-context, architecture]
 tldr: "RWKV's simple trick of blending each token's embedding with the previous token's embedding via a learned interpolation weight, giving every layer a one-step local context window at negligible cost."

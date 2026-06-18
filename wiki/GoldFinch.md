@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "GoldFinch"
 aliases: ["GoldFinch"]
 year: 2024

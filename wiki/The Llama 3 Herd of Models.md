@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: The Llama 3 Herd of Models
 authors: Llama Team, AI @ Meta
 year: 2024

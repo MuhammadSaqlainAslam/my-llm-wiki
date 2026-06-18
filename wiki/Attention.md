@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Attention"
 tags: [glossary, transformers, architecture]
 tldr: "A mechanism that lets every token in a sequence dynamically weight how much it 'looks at' every other token when computing its output representation."

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Test-Time Compute"
 year: "2024"
 tags: [inference, reasoning, scaling, compute]

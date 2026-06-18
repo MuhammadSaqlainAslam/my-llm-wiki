@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Operator Fusion"
 tags: [hardware, compiler, optimization]
 tldr: "The compiler-level version of [[Kernel fusion]]: a deep-learning compiler (XLA, Inductor, TVM) automatically merges adjacent operators into a single fused kernel. Saves you from writing the fused kernel by hand."

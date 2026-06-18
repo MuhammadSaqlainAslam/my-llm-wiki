@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "GPQA"
 tags: [glossary, benchmarks, evaluation, reasoning, expert-knowledge]
 tldr: "Graduate-Level Google-Proof Q&A — 448 expert-written questions in biology, chemistry, and physics that PhD holders answer at only ~65%; GPT-4 scored ~39% at launch."

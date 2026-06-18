@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Few-Shot Learners (GPT-3)"
 year: "2020"
 tags: [gpt3, few-shot, in-context-learning, language-modeling]

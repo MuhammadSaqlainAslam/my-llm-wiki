@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "MEDUSA: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads"
 authors: "Tianle Cai, Yuhong Li, Zhengyang Geng, Hongwu Peng, Jason D. Lee, Deming Chen, Tri Dao"
 year: 2024

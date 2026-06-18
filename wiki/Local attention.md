@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Local Attention (Sliding Window Attention)"
 tags: [glossary, attention, efficiency, hybrid, griffin, long-context]
 tldr: "Attention restricted to a sliding window of the last W tokens. O(W·T) cost instead of O(T²). Used in Griffin, Mistral, LongFormer as the complement to a global recurrence: exact short-range lookup at fixed cost."

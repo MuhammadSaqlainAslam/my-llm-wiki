@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "LongSpec"
 aliases: ["LongSpec"]
 year: 2025

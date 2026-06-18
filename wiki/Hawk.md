@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Hawk"
 tags: [glossary, architecture, recurrent-models]
 tldr: "A linear recurrent architecture from DeepMind's Griffin paper that matches Transformer quality while using O(1) memory per token at inference time."

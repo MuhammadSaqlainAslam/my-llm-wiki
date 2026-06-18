@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "WebArena"
 tags: [glossary, agents, benchmarks, evaluation]
 tldr: "A realistic web-based benchmark for autonomous agents, featuring 812 tasks across 5 fully functional websites to test end-to-end task completion."

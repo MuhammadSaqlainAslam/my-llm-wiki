@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "SWE-Bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks?"
 authors: "Xiang Deng, Jeff Da, Edwin Pan, Yannis Yiming He, Charles Ide, Kanak Garg, Niklas Lauffer, et al."
 year: "2025"

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Low-Rank Correction"
 tags: [glossary, ssm, s4, linear-algebra, mathematics]
 tldr: "The algebraic decomposition A = diagonal + rank-1 matrix applied to the HiPPO matrix in S4. This structure makes the HiPPO matrix stably diagonalizable and enables the Cauchy kernel computation — turning O(N²L) into near-linear."

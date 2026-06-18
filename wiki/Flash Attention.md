@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
 authors: "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré"
 year: 2022

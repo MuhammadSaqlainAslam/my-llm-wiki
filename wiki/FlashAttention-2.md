@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
 authors: "Tri Dao"
 year: 2023

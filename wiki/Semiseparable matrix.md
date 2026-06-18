@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Semiseparable Matrix"
 tags: [math, ssm, ssd, attention]
 tldr: "A matrix whose every off-diagonal block has rank at most $N$. The class of matrices computable by a state-space model with state size $N$ is exactly the class of $N$-semiseparable causal matrices — the central object of the SSD framework."

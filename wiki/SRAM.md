@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "SRAM (Static Random-Access Memory)"
 tags: [hardware, memory, on-chip, cache]
 tldr: "On-chip cache memory built from flip-flops. Tiny by capacity (KB–MB) but 10–100× faster and lower-energy per byte than [[HBM]]. The tier you want your hot data to live in — every modern accelerator kernel design is about keeping operands in SRAM as long as possible."

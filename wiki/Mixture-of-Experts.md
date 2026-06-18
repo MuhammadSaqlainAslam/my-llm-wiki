@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Switch Transformers / Mixtral of Experts"
 arxiv: "2101.03961"
 authors: "Fedus, Zoph & Shazeer / Jiang et al."

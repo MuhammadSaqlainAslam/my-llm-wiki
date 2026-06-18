@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "GPU Occupancy"
 tags: [glossary, hardware, gpu, performance, scheduling]
 tldr: "The fraction of a GPU's available warps that are actively executing at any moment. Low occupancy means threads are idle waiting for memory or synchronization. FlashAttention-2's key fix was raising occupancy from ~35% to ~65% in the backward pass."

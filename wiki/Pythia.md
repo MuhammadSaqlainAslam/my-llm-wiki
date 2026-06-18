@@ -1,4 +1,5 @@
 ---
+created: "2026-06-03"
 title: "Pythia"
 tags: [glossary, scaling, interpretability, open-source]
 tldr: "A suite of 16 LLMs (70M–12B params) trained on The Pile in identical conditions to enable controlled scaling and mechanistic interpretability research."

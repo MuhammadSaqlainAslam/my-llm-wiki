@@ -1,4 +1,5 @@
 ---
+created: "2026-05-28"
 title: "Chinchilla Scaling Laws"
 authors: "Hoffmann et al."
 tags: [glossary, scaling, training, llms]

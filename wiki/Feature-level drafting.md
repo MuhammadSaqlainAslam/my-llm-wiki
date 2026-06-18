@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Feature-Level Drafting"
 tags: [glossary, eagle, speculative-decoding, inference, hidden-state]
 tldr: "Speculative decoding where the draft model predicts the LLM's internal hidden state (second-to-last layer output) rather than the next token distribution. Feature space is smoother and more predictable than token space — enabling EAGLE's 3–3.5× speedup."

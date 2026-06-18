@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Medusa-2"
 tags: [glossary, medusa, speculative-decoding, inference, fine-tuning]
 tldr: "The variant of Medusa where both the extra decoding heads and the backbone LLM are jointly fine-tuned, improving head prediction accuracy and boosting speedup to 2.3–2.8×. Introduces a small change to the output distribution relative to the original model."

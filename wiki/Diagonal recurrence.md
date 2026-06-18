@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Diagonal Recurrence"
 tags: [glossary, griffin, rnn, linear-rnn, efficiency, hardware]
 tldr: "A linear recurrence where the state transition matrix is diagonal: h_t = a_t ⊙ h_{t-1} + b_t, so each dimension of the state evolves independently. Enables full parallelization within the state dimension and efficient parallel scan computation."

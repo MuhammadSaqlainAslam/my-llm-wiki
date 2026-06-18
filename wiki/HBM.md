@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "HBM (High Bandwidth Memory)"
 tags: [hardware, memory, gpu, bandwidth]
 aliases: ["High-Bandwidth-Memory"]

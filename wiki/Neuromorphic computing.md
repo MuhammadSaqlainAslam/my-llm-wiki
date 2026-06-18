@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Neuromorphic Computing"
 tags: [hardware, spiking, exotic, energy]
 tldr: "Chips designed around spiking-neuron-style computation rather than dense matmul (Loihi, TrueNorth, SpiNNaker). Promising energy efficiency on event-driven workloads; niche for current LLM-style dense models."

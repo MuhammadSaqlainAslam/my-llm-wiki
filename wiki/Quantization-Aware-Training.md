@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Quantization-Aware Training"
 year: "2018"
 tags: [quantization, training, efficiency, hardware]

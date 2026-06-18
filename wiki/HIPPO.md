@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "HiPPO (High-order Polynomial Projection Operators)"
 tags: [glossary, ssm, s4, mathematics, long-range, theory]
 tldr: "The mathematical framework that derives optimal state matrices A for SSMs by framing the problem as projecting input history onto a polynomial basis. HiPPO gives the theoretical justification for why certain A matrices enable long-range memory — and is what makes S4 work."

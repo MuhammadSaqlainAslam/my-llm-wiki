@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "Vision-LSTM"
 aliases: ["Vision-LSTM", "xLSTM Vision"]
 year: 2024

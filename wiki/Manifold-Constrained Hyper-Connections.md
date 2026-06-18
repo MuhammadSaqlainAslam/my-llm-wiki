@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "Manifold-Constrained Hyper-Connections (mHC)"
 tags: [residual, architecture, training-stability, deepseek, optimization]
 aliases: [mHC, Manifold-Constrained Hyper-Connections, Hyper-Connections]

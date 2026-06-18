@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Convolutional View of SSMs"
 tags: [glossary, ssm, s4, convolution, training, parallelism]
 tldr: "State space models can be equivalently computed as a global convolution y = K̄ * u, where the convolutional kernel K̄ is derived from the SSM parameters. This view enables fully parallel training via FFT convolution — unlike the sequential recurrence view used at inference."

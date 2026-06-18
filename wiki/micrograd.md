@@ -1,4 +1,5 @@
 ---
+created: "2026-05-22"
 title: micrograd
 tags: [autograd, backpropagation, deep learning, neural network, educational, scalar]
 year: 2020

@@ -1,4 +1,5 @@
 ---
+created: "2026-06-11"
 title: "CLA"
 aliases: ["CLA", "Cross-Layer Attention"]
 year: 2024

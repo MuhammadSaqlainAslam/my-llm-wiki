@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Medusa-1"
 tags: [glossary, medusa, speculative-decoding, inference, fine-tuning]
 tldr: "The variant of Medusa where only the extra decoding heads are fine-tuned, while the backbone LLM is frozen. Guarantees lossless inference — identical output distribution to the original model — at 2.2× speedup."

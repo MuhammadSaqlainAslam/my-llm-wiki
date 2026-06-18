@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Constitutional AI"
 year: "2022"
 tags: [alignment, rlhf, anthropic, self-critique]

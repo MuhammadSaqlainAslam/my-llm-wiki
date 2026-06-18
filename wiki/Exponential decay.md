@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Exponential Decay (in Linear RNNs)"
 tags: [glossary, rnn, rwkv, retnet, linear-attention, recurrence]
 tldr: "The mechanism by which linear RNNs (RWKV, RetNet, Griffin) discount older tokens: weight at distance d is γ^d or e^{-dw}. Older tokens contribute exponentially less. The decay rate is a key architectural hyperparameter controlling memory horizon."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "mLSTM (matrix xLSTM cell)"
 tags: [xlstm, lstm, matrix-memory, parallelizable]
 tldr: "The xLSTM matrix-memory variant: a $d \times d$ matrix cell state updated by an outer-product covariance rule. Drops hidden-to-hidden recurrence to enable fully parallel training, like a linear attention with selective gates."

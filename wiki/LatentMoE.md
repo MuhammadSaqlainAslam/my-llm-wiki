@@ -1,4 +1,5 @@
 ---
+created: "2026-06-17"
 title: "LatentMoE"
 authors: "NVIDIA"
 year: "2025"

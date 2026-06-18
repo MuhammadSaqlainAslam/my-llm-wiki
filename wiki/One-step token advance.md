@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "One-Step Token Advance"
 tags: [glossary, eagle, speculative-decoding, inference]
 tldr: "EAGLE's key trick: the draft model receives the actual next token embedding (shifted one step forward) as input, resolving the uncertainty in feature-level prediction. Predicting f_{t+1} given both f_t and x_{t+1} is vastly more accurate than predicting from f_t alone."

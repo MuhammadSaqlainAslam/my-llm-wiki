@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Grouped Query Attention (GQA)"
 tags: [attention, memory, inference, kv-cache, efficiency]
 aliases: ["Grouped-Query-Attention"]

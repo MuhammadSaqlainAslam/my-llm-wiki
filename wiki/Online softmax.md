@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Online Softmax"
 tags: [glossary, attention, numerical-stability, algorithm]
 tldr: "A numerically stable formulation of softmax that accumulates the result incrementally over blocks, updating a running maximum and normalizer — enabling tiled attention computation without ever materializing the full attention matrix."

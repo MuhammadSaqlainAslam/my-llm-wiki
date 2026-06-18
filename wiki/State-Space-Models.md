@@ -1,4 +1,5 @@
 ---
+created: "2026-06-17"
 title: "State-Space Models"
 authors: ""
 year: ""

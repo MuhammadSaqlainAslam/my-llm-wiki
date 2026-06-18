@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "In-Memory Computing"
 tags: [hardware, analog, crossbar, exotic]
 tldr: "Perform multiply-accumulate inside the memory cells themselves, typically using analog crossbar arrays. Eliminates data movement for matmul-heavy layers; ADC/DAC and device-noise overheads currently erase 50–80% of the energy gain at the system level."

@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "Novel Attention Mechanisms"
 tags: [kv-cache, attention, gqa, mqa, csa]
 tldr: "The fourth family of [[KV Cache Optimization|KV-cache optimization]]: change the attention formulation itself so the cache is structurally smaller. Includes [[GQA]], [[Multi-Query Attention]], [[Compressed Sparse Attention]], [[Heavily Compressed Attention]]."

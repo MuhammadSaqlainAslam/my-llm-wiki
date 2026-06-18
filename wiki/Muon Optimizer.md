@@ -1,4 +1,5 @@
 ---
+created: "2026-04-29"
 title: "Muon Optimizer"
 tags: [optimization, training, deepseek, gradient, convergence]
 aliases: [Muon, Muon optimizer]

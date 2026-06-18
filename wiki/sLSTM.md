@@ -1,4 +1,5 @@
 ---
+created: "2026-05-12"
 title: "sLSTM (scalar xLSTM cell)"
 tags: [xlstm, lstm, scalar-memory, gating]
 tldr: "The xLSTM scalar-memory variant: keeps the LSTM's scalar cell but adds [[Exponential gating]] and \"memory mixing across cells within a head\". Not parallelizable across time, but cheap per step."

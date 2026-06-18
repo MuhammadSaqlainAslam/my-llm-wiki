@@ -1,4 +1,5 @@
 ---
+created: "2026-04-28"
 title: "Nemotron 3: Efficient and Open Intelligence"
 authors: "NVIDIA"
 year: 2025

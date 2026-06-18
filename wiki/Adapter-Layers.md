@@ -1,4 +1,5 @@
 ---
+created: "2026-06-10"
 title: "Adapter Layers"
 year: "2019"
 tags: [fine-tuning, peft, parameter-efficient, transfer-learning]

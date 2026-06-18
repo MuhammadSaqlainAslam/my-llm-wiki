@@ -1,4 +1,5 @@
 ---
+created: "2026-05-20"
 title: "Channel-Mixing (RWKV)"
 tags: [glossary, rwkv, ffn, architecture]
 tldr: "The RWKV sublayer that handles within-position (channel-wise) transformation, analogous to a Transformer's FFN layer. Uses a gated activation with a time-shift for lightweight local context."

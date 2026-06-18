@@ -1,4 +1,5 @@
 ---
+created: "2026-05-22"
 title: minbpe
 tags: [tokenization, BPE, byte-pair encoding, language model, GPT-2, GPT-4, educational]
 year: 2024
