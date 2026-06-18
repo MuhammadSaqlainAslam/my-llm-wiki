@@ -373,6 +373,9 @@ Technical reports of major model families (2024–2025).
 | [[DeepSeek-V3 Technical Report\|DeepSeek-V3]] | 2024 | ~3,000 | [2412.19437](https://arxiv.org/abs/2412.19437) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Qwen3 Technical Report\|Qwen3]] | 2025 | ~500 | [2505.09388](https://arxiv.org/abs/2505.09388) |
+| [[Nemotron-3]] | 2025 | 14 | [2512.20856](https://arxiv.org/abs/2512.20856) |
+| [[Nemotron_3_Super]] | 2026 | — | Technical report (no arXiv) |
+| [[Nemotron_3_Ultra]] | 2026 | — | Technical report (no arXiv) |
 
 **Tags:** `llm` `foundational` `scaling` `open-source`
 
