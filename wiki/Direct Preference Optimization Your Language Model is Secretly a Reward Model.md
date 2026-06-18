@@ -79,4 +79,4 @@ It directly enabled a wave of open-source aligned models (Zephyr, OpenHermes, ma
 
 ## See Also
 
-[[Reinforcement Learning from Human Feedback]] · [[Proximal Policy Optimization]] · [[InstructGPT]] · [[Bradley-Terry Model]] · [[KL Divergence]] · [[Supervised Fine-Tuning]] · [[Constitutional AI]] · [[Attention Is All You Need]]
+[[RLHF|Reinforcement Learning from Human Feedback]] · [[Proximal Policy Optimization]] · [[InstructGPT]] · [[Bradley-Terry Model]] · [[KL Divergence]] · [[Supervised Fine-Tuning]] · [[Constitutional AI]] · [[Transformer|Attention Is All You Need]]

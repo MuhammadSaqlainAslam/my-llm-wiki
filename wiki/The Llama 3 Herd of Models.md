@@ -75,4 +75,4 @@ The decision to release Llama Guard 3 alongside the base models sets a template 
 
 ## See Also
 
-[[Attention Is All You Need]] · [[Llama 2]] · [[Direct Preference Optimization]] · [[Scaling Laws for Neural Language Models]] · [[Mixtral of Experts]] · [[GPT-4 Technical Report]] · [[Transformer]]
+[[Transformer|Attention Is All You Need]] · [[Llama 2]] · [[Direct Preference Optimization Your Language Model is Secretly a Reward Model|Direct Preference Optimization]] · [[Scaling Laws for Neural Language Models]] · [[Mixture-of-Experts|Mixtral of Experts]] · [[GPT-4 Technical Report]] · [[Transformer]]

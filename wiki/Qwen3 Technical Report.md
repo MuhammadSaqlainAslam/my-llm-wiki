@@ -60,4 +60,4 @@ Second, the thinking budget mechanism is an early concrete implementation of inf
 
 ## See Also
 
-[[Qwen2.5]] · [[DeepSeek-R1]] · [[Mixture of Experts]] · [[Chain-of-Thought Prompting]] · [[Grouped Query Attention]] · [[Rotary Position Embedding]] · [[Reinforcement Learning from Human Feedback]] · [[Inference-Time Scaling]]
+[[Qwen2.5]] · [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning|DeepSeek-R1]] · [[Mixture of Experts]] · [[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain-of-Thought Prompting]] · [[GQA|Grouped Query Attention]] · [[RoPE|Rotary Position Embedding]] · [[RLHF|Reinforcement Learning from Human Feedback]] · [[Inference-Time Scaling]]

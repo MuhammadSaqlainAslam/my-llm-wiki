@@ -49,6 +49,7 @@ Parameters and compute don't have to scale together. These papers decouple them.
 |---|---|---|---|
 | [[Mixture-of-Experts]] | Switch Transformers / Mixtral of Experts | 2022 | Route each token to a sparse subset of expert FFNs; parameters scale cheaply while per-token compute stays constant. More parameters, same FLOPs. |
 | [[LatentMoE]] | Nemotron 3 Technical Report | 2025 | Project tokens $d \rightarrow \ell$ before routing; cuts all-to-all communication by $d/\ell$ and enables 4× more experts at the same inference cost. |
+| [[State-Space-Models\|State-Space Models]] | (Concept note) | — | Linear recurrence over a fixed-size hidden state; linear-time in sequence length, O(1) inference memory. Foundation for S4, Mamba, and all hybrid SSM architectures. |
 
 **Tags:** `scaling` `moe` `routing` `efficiency` `sparse`
 
@@ -91,6 +92,7 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[EAGLE]] | EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty | 2024 | Draft at the hidden-state (feature) level, not token level. One lightweight autoregressive head predicts features given the actual next token. 3–3.5× lossless speedup on LLaMA-2-Chat 70B. |
 | [[Speculative Decoding]] | (Concept note) | — | Fast draft model proposes K tokens; large model verifies all K in one parallel pass. Expected accepted tokens per call = K × acceptance-rate. With MTP heads as drafts, ~2× throughput. |
 | [[KV Cache Optimization]] | Xu, Khaira & Singh — KV Cache Optimization Strategies for Scalable and Efficient LLM Inference | 2026 | Five families of KV-cache optimization (eviction, compression, hybrid memory, novel attention, combination), mapped to seven production scenarios. No single technique dominates — choose by workload. |
+| [[Quantization]] | (Concept note) | — | Reduce weight/activation precision (FP8, NVFP4) to shrink memory and increase throughput; requires component-specific handling for SSM states and attention layers. |
 
 **Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model`
 

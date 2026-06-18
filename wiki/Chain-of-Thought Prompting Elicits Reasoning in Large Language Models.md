@@ -64,4 +64,4 @@ In practical terms, chain-of-thought prompting is now the default approach whene
 
 ## See Also
 
-[[Transformer]] · [[Attention Is All You Need]] · [[Few-Shot Learners]] · [[Self-Consistency Improves Chain of Thought Reasoning]] · [[Large Language Models are Zero-Shot Reasoners]] · [[Tree of Thoughts]] · [[GPT-3]] · [[PaLM]]
+[[Transformer]] · [[Transformer|Attention Is All You Need]] · [[Few-Shot Learners]] · [[Self-Consistency Improves Chain of Thought Reasoning]] · [[Large Language Models are Zero-Shot Reasoners]] · [[Tree of Thoughts]] · [[GPT-3]] · [[PaLM]]

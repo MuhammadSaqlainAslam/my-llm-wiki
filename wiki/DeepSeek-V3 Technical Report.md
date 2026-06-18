@@ -81,4 +81,4 @@ Perhaps most importantly, it demonstrates that careful co-design of algorithms +
 
 ## See Also
 
-[[DeepSeek-V2]] · [[Mixture of Experts]] · [[Multi-Head Latent Attention]] · [[Speculative Decoding]] · [[Group Relative Policy Optimization]] · [[Transformer]] · [[FP8 Training]] · [[Pipeline Parallelism]]
+[[DeepSeek-V2]] · [[Mixture of Experts]] · [[Multi-Head Latent Attention]] · [[Speculative Decoding]] · [[GRPO|Group Relative Policy Optimization]] · [[Transformer]] · [[FP8 Training]] · [[Pipeline Parallelism]]

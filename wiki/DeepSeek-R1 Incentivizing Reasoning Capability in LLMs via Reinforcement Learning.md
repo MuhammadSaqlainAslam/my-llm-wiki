@@ -67,4 +67,4 @@ The paper also helps explain *why* longer chain-of-thought works: it's not just 
 
 ## See Also
 
-[[Chain-of-Thought Prompting]] · [[Proximal Policy Optimization]] · [[RLHF]] · [[DeepSeek-V3]] · [[Reinforcement Learning from Human Feedback]] · [[Scaling Laws]] · [[Test-Time Compute]]
+[[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain-of-Thought Prompting]] · [[Proximal Policy Optimization]] · [[RLHF]] · [[DeepSeek-V3 Technical Report|DeepSeek-V3]] · [[RLHF|Reinforcement Learning from Human Feedback]] · [[Scaling Laws]] · [[Test-Time Compute]]

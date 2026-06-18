@@ -80,4 +80,4 @@ Conceptually, ReAct reframed the LLM-as-agent problem: instead of asking "how do
 
 ## See Also
 
-[[Chain-of-Thought Prompting]] · [[Transformer]] · [[Attention Is All You Need]] · [[Toolformer]] · [[WebGPT]] · [[Self-Consistency]] · [[HotpotQA]] · [[In-Context Learning]]
+[[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain-of-Thought Prompting]] · [[Transformer]] · [[Transformer|Attention Is All You Need]] · [[Toolformer]] · [[WebGPT]] · [[Self-Consistency]] · [[HotpotQA]] · [[In-Context Learning]]
