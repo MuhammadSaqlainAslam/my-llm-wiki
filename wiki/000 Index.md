@@ -386,6 +386,19 @@ Technical reports of major model families (2024–2025).
 
 ---
 
+## 👁️ Vision-Language Models
+
+Models and techniques connecting vision encoders to large language models.
+
+| Paper | Year | Citations | arXiv |
+|-------|------|-----------|-------|
+| [[MiniGPT-4]] | 2023 | — | [2304.10592](https://arxiv.org/abs/2304.10592) |
+| [[LLaVA-1.5]] | 2023 | — | [2310.03744](https://arxiv.org/abs/2310.03744) |
+
+**Tags:** `vision-language` `multimodal` `instruction-tuning`
+
+---
+
 ## Reading Order
 
 **If you're new:** [[Transformer]] → [[LLaMA 2]] → [[Mixture-of-Experts]] → [[Mamba]] → [[Nemotron-3]]
