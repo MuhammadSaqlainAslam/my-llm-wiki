@@ -6,7 +6,7 @@ year: "2026"
 arxiv: ""
 technical_report: "https://microsoft.ai/pdf/mai-thinking-1.pdf"
 source_type: "technical_report"
-tags: [model-family, moe, reasoning, reinforcement-learning, microsoft, scaling]
+tags: [model-family, moe, reasoning, reinforcement-learning, microsoft, scaling, safety, infrastructure]
 tldr: "Microsoft AI's first from-scratch reasoning model — 35B active / 1T total parameter MoE trained on 30T tokens of exclusively licensed/public data with no distillation, achieving 52.8% SWE-Bench Pro and 97.0% AIME 2025, competitive with Sonnet 4.6"
 citation_count: 0
 ---
@@ -29,6 +29,31 @@ MAI-Thinking-1 is Microsoft AI's first reasoning model trained entirely from scr
 
 ---
 
+## Training Cluster
+
+Microsoft frames **goodput** — the ratio of ideal training duration to actual wall-clock duration — as the primary production KPI, rather than peak MFU alone. Overhead is tracked in two layers:
+
+- **Visible failures:** crashloops, node failures, InfiniBand/NVLink link flaps, OOM errors, pod terminations, checkpoint stalls, manual requeues
+- **Silent efficiency losses:** MFU degradation, recomputation, long startup paths, slow process scheduling, checkpoint-induced stalls, degraded network or memory behavior, fabric conditions that reduce throughput without crashing
+
+Determinism is treated as a first-class infrastructure property: the cluster must eliminate silent data corruption, keep communication topology stable, and preserve floating-point reduction order across checkpoint/restart boundaries — not just for reproducibility, but because silent correctness failures can degrade model quality in ways that only surface in downstream evaluations.
+
+**MAI-Base-1 pre-training run results (8K GB200 GPUs):**
+
+| Overhead category | Hours | Share of overhead |
+|---|---|---|
+| MFU drop | 18 h | 35% (largest remaining) |
+| Non-stepping time | 14 h | 27% |
+| Recomputation | 6.5 h | 15% |
+| Total overhead | 51 h | — |
+| **Goodput** | **90.0%** | — |
+
+The RL climb (MAI-Thinking-1) ran on 4.6K GB300s — a homogeneous accelerator generation chosen to reduce experimental variance. Inference runs on MAIA-200 hardware, which delivers **40%+ higher token generation throughput per watt** vs a GB200-based deployment under the same rack power budget.
+
+*(Full hardware and cluster specifications are in Appendix L of the technical report, not covered here.)*
+
+---
+
 ## Training Recipe
 
 **Pre-training:** 30T tokens, no synthetic or LM-generated data anywhere in the corpus. Explicit exclusion of huggingface.co and similar ML-repository domains to avoid benchmark contamination.
@@ -42,6 +67,49 @@ MAI-Thinking-1 is Microsoft AI's first reasoning model trained entirely from scr
 3. **Helpfulness / safety** — instruction following and alignment
 
 The three specialists are then consolidated into a single model via SFT, followed by a final lightweight RL stage to restore generality.
+
+---
+
+## Safety
+
+Red-teaming ran in parallel with model development across 15 engagements (early, mid, and late stages), covering 2,170+ goal-based adversarial scenarios across 25 policy categories. Each scenario ran 5–10 conversational turns to allow escalation past first-turn refusals.
+
+**Six attack patterns identified as the durable adversarial surface** (these recurred independently across red teamers and model checkpoints — the patterns, not the individual prompts, are treated as what needs covering):
+
+1. Multi-turn escalation under a benign pretext
+2. Fictional or novelistic framing
+3. Credentialed-persona pretexts (claiming researcher, medical, or authority status)
+4. Gradual recursion / formatting drift — repeated requests to expand, reformat, or operationalize a previously hedged answer
+5. In-context age-indicator bypass
+6. Authoritative-document fabrication
+
+**Mitigation effectiveness** (pre- vs. post-mitigation in the final candidate):
+
+| Attack class | ASR reduction |
+|---|---|
+| Jailbreaks (overall) | −44% |
+| Hate & fairness | −43% |
+| Child safety | −30% |
+| Mental health attacks | −20% |
+| **Aggregate** | **−22%** |
+
+**Jailbreak ASR comparison** (Figure 21; lower = stronger safety; third-party results include provider-side filtering):
+
+| Technique type | MAI-Thinking-1 | GPT-5.4 | Claude Opus 4.6 | Claude Sonnet 4.6 |
+|---|---|---|---|---|
+| Foundational | 4.4% | 7.0% | 3.0% | 5.7% |
+| Compositional | 17.6% | 13.9% | 17.4% | 15.0% |
+| Adaptive | 26.8% | 32.3% | 25.1% | 26.4% |
+
+*Foundational* = single-step transforms (wrappers, templates). *Compositional* = multi-transform rewrites, PyRIT, PAP-style, non-English variants. *Adaptive* = multi-turn / search-based (TAP, multi-turn attacks).
+
+**Two named vulnerabilities from independent red-teaming (AIRT + third-party vendors):**
+
+- **TAP (Tree of Attacks with Pruning)** — surfaced as a robustness gap. Fixed via a closed-loop adversarial data pipeline: broad generation of realistic harmful scenarios → diverse attack-transformation templates → TAP-style adaptive refinement against the current model → output fed back as targeted remediation data. Resulted in a "large reduction" in TAP susceptibility, bringing MAI-Thinking-1 to parity with SOTA models on the same attack vectors.
+
+- **Low-resource language framing** — content reliably refused in English was elicited in Yoruba, Telugu, Amharic, Burmese, Khmer, and Malay. Fixed by expanding safety training data with multilingual adversarial seeds and re-targeting high-yield English attack patterns into the affected languages. Closed a "significant portion" of the English/non-English gap; multilingual robustness in the long tail remains an ongoing investment area.
+
+*These are documented applications of standard red-teaming methodology (TAP and multilingual safety gaps are known issues in the literature), not novel techniques. This section is included for the unusual transparency of publishing concrete ASR numbers and specific vulnerability names — most vendor reports omit both.*
 
 ---
 
