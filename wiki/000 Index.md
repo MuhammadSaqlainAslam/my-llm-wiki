@@ -366,8 +366,9 @@ Parameter-efficient fine-tuning and alignment techniques.
 | [[LoRA Low-Rank Adaptation of Large Language Models\|LoRA]] | 2021 | ~12,000 | [2106.09685](https://arxiv.org/abs/2106.09685) |
 | [[RLHF\|InstructGPT / RLHF]] | 2022 | ~8,500 | [2203.02155](https://arxiv.org/abs/2203.02155) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
+| [[Ministral 3]] | 2026 | — | [2601.08584](https://arxiv.org/abs/2601.08584) |
 
-**Tags:** `fine-tuning` `alignment` `parameter-efficient` `rlhf`
+**Tags:** `fine-tuning` `alignment` `parameter-efficient` `rlhf` `distillation`
 
 ---
 
