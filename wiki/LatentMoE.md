@@ -76,4 +76,6 @@ Consistent 4+ point quality improvement across all benchmarks at identical hardw
 
 *Nemotron 3 family: [[Nemotron-3]] (whitepaper, arXiv 2512.20856) · [[Nemotron_3_Super|Nemotron 3 Super]] · [[Nemotron_3_Ultra|Nemotron 3 Ultra]]*
 
+*Also adopted by: [[MAI-Thinking-1]] (Microsoft AI, cites LatentMoE directly)*
+
 *Co-introduced with: [[NVFP4]] · [[Multi-Token Prediction]] · [[Hardware-Aware Scan]]*

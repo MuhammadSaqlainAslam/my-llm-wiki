@@ -381,6 +381,7 @@ Technical reports of major model families (2024–2025).
 | [[Nemotron-3]] | 2025 | 14 | [2512.20856](https://arxiv.org/abs/2512.20856) |
 | [[Nemotron_3_Super]] | 2026 | — | Technical report (no arXiv) |
 | [[Nemotron_3_Ultra]] | 2026 | — | Technical report (no arXiv) |
+| [[MAI-Thinking-1]] | 2026 | Microsoft | Technical report (no arXiv) |
 
 **Tags:** `llm` `foundational` `scaling` `open-source`
 

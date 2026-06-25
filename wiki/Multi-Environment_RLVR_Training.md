@@ -92,4 +92,6 @@ This is more expensive than a standard RM but produces better-calibrated rewards
 
 *Nemotron 3 family: [[Nemotron-3]] (whitepaper) · [[Nemotron_3_Super|Nemotron 3 Super]] · [[Nemotron_3_Ultra|Nemotron 3 Ultra]]*
 
+*Similar RL climb: [[MAI-Thinking-1]] (parallel specialist training → consolidation)*
+
 *Co-used with: [[Multi-Token Prediction]] · [[LatentMoE]]*
