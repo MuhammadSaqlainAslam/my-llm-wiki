@@ -37,6 +37,8 @@ The O(n²) attention cost is fine for short sequences. For long ones it breaks. 
 | [[Transformers Are SSMs]] | Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality | 2024 | Attention and selective SSMs are two faces of the same structured semiseparable matrix. The SSD framework unlocks Mamba-2: 2–8× faster than Mamba, matmul-friendly, TP-friendly. |
 | [[xLSTM]] | xLSTM: Extended Long Short-Term Memory | 2024 | Modernize the 1997 LSTM with exponential gating + matrix memory + no hidden-to-hidden recurrence. Matches Transformer/Mamba quality at 1B+ scale, keeps O(1)-per-step inference. |
 | [[Griffin]] | Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models | 2024 | Google DeepMind's RG-LRU + local attention hybrid. Griffin-14B matches LLaMA-2 on 7× fewer training tokens. Hawk (pure recurrence) beats Mamba at 3B. |
+| [[Mamba3\|Mamba-3]] | Mamba-3: Improved Sequence Modeling using State Space Principles | 2026 | Three principled SSM improvements — exponential-trapezoidal discretization, complex-valued states, MIMO formulation — +1.9pp over Mamba-2 at 1.5B params; matches Mamba-2 perplexity at half the state size. |
+| [[Gated-DeltaNet-2\|Gated DeltaNet-2]] | Gated DeltaNet-2: Decoupling Erase and Write in Linear Attention | 2026 | Separate channel-wise erase and write gates replace the tied scalar gate in Gated DeltaNet/KDA; strongest among Mamba-2/3 and DeltaNet-family variants, especially on long-context retrieval. |
 
 **Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention`
 
@@ -140,6 +142,7 @@ Grouped by theme. Each entry links to its own wiki note with full explanation.
 - [[Local attention]] — Attend only to the last W tokens; O(W·T) cost, bounded memory for very long sequences.
 - [[Sliding window attention]] — Keep the last W tokens in the KV cache; oldest fall off the window.
 - [[Attention sinks]] — First tokens accumulate disproportionate attention weight and cannot safely be evicted.
+- [[Spike-Sparse-Sink]] — Massive activations and attention sinks co-occur due to pre-norm architecture, not functional necessity; removing pre-norm decouples them (Sun, Canziani, LeCun, Zhu 2026).
 - [[Compressed Sparse Attention]] — Compress m tokens → 1 KV entry via learned weighted sum, then sparse top-k block selection.
 - [[Heavily Compressed Attention]] — Compress m' >> m tokens → 1 KV entry; coarser than CSA, cheaper, for very distant context.
 - [[RoPE]] — Encodes position by rotating Q and K vectors in 2D planes by an angle proportional to position.
@@ -379,7 +382,7 @@ Technical reports of major model families (2024–2025).
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Qwen3 Technical Report\|Qwen3]] | 2025 | ~500 | [2505.09388](https://arxiv.org/abs/2505.09388) |
 | [[Nemotron-3]] | 2025 | 14 | [2512.20856](https://arxiv.org/abs/2512.20856) |
-| [[Nemotron_3_Super]] | 2026 | — | Technical report (no arXiv) |
+| [[Nemotron_3_Super]] | 2026 | — | [2604.12374](https://arxiv.org/abs/2604.12374) |
 | [[Nemotron_3_Ultra]] | 2026 | — | Technical report (no arXiv) |
 | [[MAI-Thinking-1]] | 2026 | Microsoft | Technical report (no arXiv) |
 

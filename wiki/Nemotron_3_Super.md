@@ -3,18 +3,18 @@ created: "2026-06-17"
 title: "Nemotron 3 Super"
 authors: "NVIDIA"
 year: 2026
-arxiv: ""
+arxiv: "2604.12374"
 technical_report: "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf"
 source_type: "technical_report"
 tags: [model-family, moe, mamba, hybrid-architecture, agentic, nvidia]
-tldr: "120B total / 12.7B active hybrid Mamba-2 + sparse attention + LatentMoE model from NVIDIA. 7.5× throughput over Qwen3.5-122B at 1M context. 60.47% on SWE-bench (OpenHands) and 89.0% AIME 2025. No arXiv submission — technical report published by NVIDIA Research."
+tldr: "120B total / 12.7B active hybrid Mamba-2 + sparse attention + LatentMoE model from NVIDIA. 7.5× throughput over Qwen3.5-122B at 1M context. 60.47% on SWE-bench (OpenHands) and 89.0% AIME 2025. Formal arXiv paper: 2604.12374; NVIDIA-hosted technical report also available."
 citation_count: 0
 ---
 
 # Nemotron 3 Super
 
-> NVIDIA, "Nemotron 3 Super Technical Report", 2026
-> Official technical report: [NVIDIA-Nemotron-3-Super-Technical-Report.pdf](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf) via NVIDIA Research — no arXiv submission exists for this model.
+> NVIDIA, "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning", arXiv:2604.12374, April 2026
+> Two sources for this model: the formal arXiv paper ([2604.12374](https://arxiv.org/abs/2604.12374)) and the NVIDIA-hosted technical report ([PDF](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf)) — both cover the same model. The Nemotron 3 family overview paper (Nano + Super + Ultra) is a separate document: see [[Nemotron-3]] (arXiv:2512.20856).
 
 Nemotron 3 Super is the mid-tier model in the [[Nemotron-3]] family, positioned at the best accuracy-per-throughput tradeoff of the three variants (Nano, Super, Ultra). The full family architecture is described in the [[Nemotron-3]] whitepaper (arXiv 2512.20856); this note focuses on Super-specific numbers and the dedicated technical report details.
 
