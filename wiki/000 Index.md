@@ -352,8 +352,9 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
+| [[VinePPO]] | 2024 | — | [2410.01679](https://arxiv.org/abs/2410.01679) |
 
-**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought`
+**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment`
 
 ---
 
