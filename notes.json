@@ -2739,7 +2739,7 @@
       "State-Space-Models",
       "Flash-Attention"
     ],
-    "citation_count": 5,
+    "citation_count": null,
     "created": "2026-06-24",
     "arxiv": "2605.22791",
     "technical_report": "",
@@ -4051,7 +4051,7 @@
       "Transformer",
       "Nemotron-3"
     ],
-    "citation_count": 1,
+    "citation_count": null,
     "created": "2026-05-12",
     "arxiv": "2603.20397",
     "technical_report": "",
@@ -5252,7 +5252,7 @@
       "RLHF",
       "Transformer"
     ],
-    "citation_count": 21,
+    "citation_count": null,
     "created": "2026-06-03",
     "arxiv": "2602.00933",
     "technical_report": "",
@@ -5696,7 +5696,7 @@
       "Gated-Linear-Attention",
       "Jamba"
     ],
-    "citation_count": 57,
+    "citation_count": null,
     "created": "2026-05-28",
     "arxiv": "2603.15569",
     "technical_report": "",
@@ -6064,7 +6064,7 @@
       "Scaling_Laws",
       "LoRA-Low-Rank-Adaptation-of-Large-Language-Models"
     ],
-    "citation_count": 39,
+    "citation_count": null,
     "created": "2026-06-24",
     "arxiv": "2601.08584",
     "technical_report": "",
@@ -6672,7 +6672,7 @@
       "GRPO",
       "Hardware-Aware-Scan"
     ],
-    "citation_count": 12,
+    "citation_count": null,
     "created": "2026-06-17",
     "arxiv": "2604.12374",
     "technical_report": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf",
@@ -9249,7 +9249,7 @@
       "Transformer",
       "Speculative-Decoding"
     ],
-    "citation_count": 12,
+    "citation_count": null,
     "created": "2026-06-24",
     "arxiv": "2603.05498",
     "technical_report": "",
