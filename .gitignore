@@ -21,6 +21,13 @@ __pycache__/
 *.log
 cron.log
 
+# Ephemeral citation/audit tool output — regenerated on demand, server only
+arxiv_audit.json
+arxiv_audit_results.json
+arxiv_corrections.json
+citing_audit_input.json
+citing_audit_results.json
+
 # PDF papers — server only, copyright compliance
 # Files stay on server disk but must not be committed to public GitHub
 raw/*.pdf

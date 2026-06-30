@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2601.08584"
 tags: [model-family, distillation, efficiency, fine-tuning-alignment, mistral]
 tldr: "A family of 3B/8B/14B dense models derived from Mistral Small 3.1 via Cascade Distillation — iterative prune-distill-repeat — each released in base, instruct, and reasoning variants, all with vision support"
-citation_count: 39
+citation_count: 0
 ---
 
 ## TL;DR
