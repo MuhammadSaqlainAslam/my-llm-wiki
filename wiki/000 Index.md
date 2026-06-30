@@ -365,6 +365,10 @@ Models that learn a predictive representation of an environment, used either to 
 | Paper | Year | Citations | arXiv |
 |-------|------|-----------|-------|
 | [[World Models]] | 2018 | — | [1803.10122](https://arxiv.org/abs/1803.10122) |
+| [[IRIS]] | 2022 | — | [2209.00588](https://arxiv.org/abs/2209.00588) |
+| [[DreamerV3]] | 2023 | — | [2301.04104](https://arxiv.org/abs/2301.04104) |
+| [[GAIA-1]] | 2023 | — | [2309.17080](https://arxiv.org/abs/2309.17080) |
+| [[DIAMOND]] | 2024 | — | [2405.12399](https://arxiv.org/abs/2405.12399) |
 | [[World-Model-Landscape\|The World Model Landscape (2019-2026)]] | 2026 | — | Industry report (BVP) |
 
 *(More entries to be added as DreamerV3, IRIS, DIAMOND, and Loop-OWM are verified and added.)*
