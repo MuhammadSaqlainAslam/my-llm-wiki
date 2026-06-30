@@ -44,15 +44,15 @@ A timeline of frontier world models released between 2019 and 2026, compiled by 
 | [[DreamerV3]] | Google DeepMind | — | Robotics | — |
 | UniSim | Google DeepMind | — | Robotics | — |
 | RT-2 | Google DeepMind | — | Robotics | — |
-| GAIA-1 | Wayve | 6.5B | Autonomous Driving | — |
+| [[GAIA-1]] | Wayve | 6.5B | Autonomous Driving | — |
 
 ### 2024
 | Model | Org | Size | Category | Open Source |
 |-------|-----|------|----------|-------------|
-| V-JEPA 1 | Meta | 632M | Robotics | — |
+| [[V-JEPA 1]] | Meta | 632M | Robotics | — |
 | [[DIAMOND]] | INRIA | 381M | Gaming/Interactive | — |
 | Genie 1 | Google DeepMind | — | Robotics | — |
-| GameNGen | Google | ~860M | Gaming/Interactive | ✅ |
+| [[GameNGen]] | Google | ~860M | Gaming/Interactive | ✅ |
 | Cosmos | NVIDIA | 14B | Robotics | ✅ |
 | Oasis | Decart | 500M | Gaming/Interactive | — |
 | Genie 2 | Google DeepMind | — | Robotics | — |
@@ -61,9 +61,9 @@ A timeline of frontier world models released between 2019 and 2026, compiled by 
 ### 2025
 | Model | Org | Size | Category | Open Source |
 |-------|-----|------|----------|-------------|
-| V-JEPA 2 | Meta | ~1-2B | Robotics | — |
-| GAIA-2 | Wayve | 8.4B | Autonomous Driving | — |
-| Dreamer 4 | Google DeepMind | — | Robotics | — |
+| [[V-JEPA 2]] | Meta | ~1-2B | Robotics | — |
+| [[GAIA-2]] | Wayve | 8.4B | Autonomous Driving | — |
+| [[Dreamer 4]] | Google DeepMind | — | Robotics | — |
 | MUSE | Microsoft | 1.6B | Gaming/Interactive | — |
 | Odyssey-2 | Odyssey | — | Gaming/Interactive | — |
 | Marble | World Labs | — | Robotics | — |
