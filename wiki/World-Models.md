@@ -52,4 +52,6 @@ Critically, the Memory model can be run without ever rendering a real observatio
 
 *Training in imagination connects to: [[Multi-Environment RLVR Training]]*
 
+*Landscape: see [[World-Model-Landscape|The World Model Landscape (2019-2026)]] for a timeline of frontier world models following this paper's lineage.*
+
 *Note: DreamerV3, IRIS, and DIAMOND notes do not yet exist — these forward references will resolve once those notes are added, following the same verification process used for this one.*

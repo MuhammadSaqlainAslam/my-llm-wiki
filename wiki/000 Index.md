@@ -365,6 +365,7 @@ Models that learn a predictive representation of an environment, used either to 
 | Paper | Year | Citations | arXiv |
 |-------|------|-----------|-------|
 | [[World Models]] | 2018 | — | [1803.10122](https://arxiv.org/abs/1803.10122) |
+| [[World-Model-Landscape\|The World Model Landscape (2019-2026)]] | 2026 | — | Industry report (BVP) |
 
 *(More entries to be added as DreamerV3, IRIS, DIAMOND, and Loop-OWM are verified and added.)*
 
