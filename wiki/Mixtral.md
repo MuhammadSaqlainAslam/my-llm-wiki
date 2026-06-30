@@ -3,7 +3,7 @@ created: "2026-05-20"
 title: "Mixtral"
 authors: "Jiang et al."
 arxiv: "2401.04088"
-citation_count: 1946
+citation_count: 1968
 tags: [glossary, moe, architecture, open-source, mistral]
 tldr: "Mistral AI's mixture-of-experts language model: 8 expert FFN layers per transformer block, top-2 routing per token. Mixtral 8x7B matches LLaMA-2-70B quality at 5× fewer active FLOPs, and is fully open-weight."
 aliases: [Mixtral, Mixtral 8x7B, Mistral MoE, "Mixtral-of-Experts"]

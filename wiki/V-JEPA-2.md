@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2506.09985"
 tags: [world-models, jepa, robotics, self-supervised-learning, meta]
 tldr: "Scales V-JEPA to 1M+ hours of internet video and 1B parameters, then adds action-conditioned planning (V-JEPA 2-AC) using under 62 hours of unlabeled robot video — enabling zero-shot pick-and-place on real robot arms in new environments"
-citation_count: 0
+citation_count: 457
 ---
 
 ## TL;DR

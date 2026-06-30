@@ -1,0 +1,118 @@
+[
+  {
+    "file": "Chinchilla_Scaling_Laws.md",
+    "wrong_id": "2203.15556",
+    "title": "Chinchilla Scaling Laws",
+    "real_title_at_wrong_id": "Training Compute-Optimal Large Language Models",
+    "candidates": [
+      {
+        "arxiv_id": "2412.07942",
+        "title": "Neural Scaling Laws Rooted in the Data Distribution"
+      },
+      {
+        "arxiv_id": "2408.11029",
+        "title": "Scaling Law with Learning Rate Annealing"
+      },
+      {
+        "arxiv_id": "2402.04177",
+        "title": "Scaling Laws for Downstream Task Performance of Large Language Models"
+      }
+    ]
+  },
+  {
+    "file": "DeepSeek_V4.md",
+    "wrong_id": "2504.05411",
+    "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+    "real_title_at_wrong_id": "Less but Better: Parameter-Efficient Fine-Tuning of Large Language Models for Personality Detection",
+    "candidates": [
+      {
+        "arxiv_id": "cmp-lg/9701001",
+        "title": "Exploiting Context to Identify Lexical Atoms -- A Statistical View of Linguistic Context"
+      },
+      {
+        "arxiv_id": "2204.10358",
+        "title": "Creative Problem Solving in Artificially Intelligent Agents: A Survey and Framework"
+      },
+      {
+        "arxiv_id": "0712.3825",
+        "title": "Tests of Machine Intelligence"
+      }
+    ]
+  },
+  {
+    "file": "InstructGPT.md",
+    "wrong_id": "2203.02155",
+    "title": "InstructGPT",
+    "real_title_at_wrong_id": "Training language models to follow instructions with human feedback",
+    "candidates": [
+      {
+        "arxiv_id": "2210.04186",
+        "title": "Analogy Generation by Prompting Large Language Models: A Case Study of InstructGPT"
+      },
+      {
+        "arxiv_id": "2304.12298",
+        "title": "BadGPT: Exploring Security Vulnerabilities of ChatGPT via Backdoor Attacks to InstructGPT"
+      }
+    ]
+  },
+  {
+    "file": "Mixture-of-Experts.md",
+    "wrong_id": "2101.03961",
+    "title": "Switch Transformers / Mixtral of Experts",
+    "real_title_at_wrong_id": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+    "candidates": [
+      {
+        "arxiv_id": "2401.04088",
+        "title": "Mixtral of Experts"
+      },
+      {
+        "arxiv_id": "2603.11114",
+        "title": "Task-Conditioned Routing Signatures in Sparse Mixture-of-Experts Transformers"
+      },
+      {
+        "arxiv_id": "2410.17954",
+        "title": "ExpertFlow: Efficient Mixture-of-Experts Inference via Predictive Expert Caching and Token Scheduling"
+      }
+    ]
+  },
+  {
+    "file": "Nemotron-3.md",
+    "wrong_id": "2305.09301",
+    "title": "Nemotron 3: Efficient and Open Intelligence",
+    "real_title_at_wrong_id": "Long-lived exciton coherence in mixed-halide perovskite crystals",
+    "candidates": [
+      {
+        "arxiv_id": "2204.10358",
+        "title": "Creative Problem Solving in Artificially Intelligent Agents: A Survey and Framework"
+      },
+      {
+        "arxiv_id": "1505.06366",
+        "title": "Open Ended Intelligence: The individuation of Intelligent Agents"
+      },
+      {
+        "arxiv_id": "0712.3825",
+        "title": "Tests of Machine Intelligence"
+      }
+    ]
+  },
+  {
+    "file": "RLHF.md",
+    "wrong_id": "2203.02155",
+    "title": "RLHF (Reinforcement Learning from Human Feedback)",
+    "real_title_at_wrong_id": "Training language models to follow instructions with human feedback",
+    "candidates": [
+      {
+        "arxiv_id": "2308.04332",
+        "title": "RLHF-Blender: A Configurable Interactive Interface for Learning from Diverse Human Feedback"
+      },
+      {
+        "arxiv_id": "2407.17482",
+        "title": "Reinforcement Learning from Human Feedback: Whose Culture, Whose Values, Whose Perspectives?"
+      },
+      {
+        "arxiv_id": "2602.12375",
+        "title": "Value Bonuses using Ensemble Errors for Exploration in Reinforcement Learning"
+      }
+    ]
+  }
+]

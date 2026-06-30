@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2410.01679"
 tags: [reinforcement-learning, reasoning, credit-assignment, fine-tuning-alignment]
 tldr: "Shows PPO's learned value networks barely beat random at ranking reasoning steps, then replaces them with unbiased Monte Carlo estimates — reaching PPO's performance in up to 9× fewer gradient steps and 3× less wall-clock time"
-citation_count: 0
+citation_count: 92
 ---
 
 ## TL;DR

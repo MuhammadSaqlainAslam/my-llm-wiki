@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2603.05498"
 tags: [interpretability, attention, mechanistic-analysis, transformers]
 tldr: "Massive activations and attention sinks frequently co-occur in Transformer LLMs but serve distinct purposes; their coupling is caused by the pre-norm architecture, not by any functional necessity"
-citation_count: 0
+citation_count: 12
 ---
 
 ## TL;DR

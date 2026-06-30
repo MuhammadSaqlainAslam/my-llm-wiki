@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2404.07972"
 tags: [benchmarks, computer-use, agentic, multimodal, evaluation]
 tldr: "OSWorld is a real-computer-environment benchmark of 369 tasks across arbitrary OS apps where humans score 72.36% but the best model (GPT-4V) scores only 12.24%"
-citation_count: 796
+citation_count: 844
 ---
 
 ## TL;DR

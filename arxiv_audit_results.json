@@ -1,0 +1,389 @@
+[
+  {
+    "file": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models.md",
+    "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    "arxiv_id": "2201.11903",
+    "status": "MATCH",
+    "real_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Chinchilla_Scaling_Laws.md",
+    "title": "Chinchilla Scaling Laws",
+    "arxiv_id": "2203.15556",
+    "status": "MISMATCH",
+    "real_title": "Training Compute-Optimal Large Language Models",
+    "sim": 0.0,
+    "dup": false
+  },
+  {
+    "file": "DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.md",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "arxiv_id": "2501.12948",
+    "status": "MATCH",
+    "real_title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "DeepSeek-V3 Technical Report.md",
+    "title": "DeepSeek-V3 Technical Report",
+    "arxiv_id": "2412.19437",
+    "status": "MATCH",
+    "real_title": "DeepSeek-V3 Technical Report",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "DeepSeek_V4.md",
+    "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+    "arxiv_id": "2504.05411",
+    "status": "MISMATCH",
+    "real_title": "Less but Better: Parameter-Efficient Fine-Tuning of Large Language Models for Personality Detection",
+    "sim": 0.0,
+    "dup": false
+  },
+  {
+    "file": "Direct Preference Optimization Your Language Model is Secretly a Reward Model.md",
+    "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    "arxiv_id": "2305.18290",
+    "status": "MATCH",
+    "real_title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "EAGLE.md",
+    "title": "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty",
+    "arxiv_id": "2401.15077",
+    "status": "MATCH",
+    "real_title": "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Flash Attention.md",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "arxiv_id": "2205.14135",
+    "status": "MATCH",
+    "real_title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "FlashAttention-2.md",
+    "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+    "arxiv_id": "2307.08691",
+    "status": "MATCH",
+    "real_title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Griffin.md",
+    "title": "Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models",
+    "arxiv_id": "2402.19427",
+    "status": "MATCH",
+    "real_title": "Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Hardware Acceleration for Neural Networks A Comprehensive Survey.md",
+    "title": "Hardware Acceleration for Neural Networks: A Comprehensive Survey",
+    "arxiv_id": "2512.23914",
+    "status": "MATCH",
+    "real_title": "Hardware Acceleration for Neural Networks: A Comprehensive Survey",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Hardware Acceleration for Neural Networks.md",
+    "title": "Hardware Acceleration for Neural Networks: A Comprehensive Survey",
+    "arxiv_id": "2512.23914",
+    "status": "MATCH",
+    "real_title": "Hardware Acceleration for Neural Networks: A Comprehensive Survey",
+    "sim": 1.0,
+    "dup": true
+  },
+  {
+    "file": "Humanity's Last Exam.md",
+    "title": "Humanity's Last Exam: A Comprehensive Evaluation of Expert-Level AI Reasoning",
+    "arxiv_id": "2501.14249",
+    "status": "MATCH",
+    "real_title": "Humanity's Last Exam",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "InstructGPT.md",
+    "title": "InstructGPT",
+    "arxiv_id": "2203.02155",
+    "status": "MISMATCH",
+    "real_title": "Training language models to follow instructions with human feedback",
+    "sim": 0.0,
+    "dup": false
+  },
+  {
+    "file": "Jamba.md",
+    "title": "Jamba: A Hybrid Transformer-Mamba Language Model",
+    "arxiv_id": "2403.19887",
+    "status": "MATCH",
+    "real_title": "Jamba: A Hybrid Transformer-Mamba Language Model",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "KV Cache Optimization.md",
+    "title": "KV Cache Optimization Strategies for Scalable and Efficient LLM Inference",
+    "arxiv_id": "2603.20397",
+    "status": "MATCH",
+    "real_title": "KV Cache Optimization Strategies for Scalable and Efficient LLM Inference",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Kaplan_Scaling_Laws.md",
+    "title": "Kaplan Scaling Laws",
+    "arxiv_id": "2001.08361",
+    "status": "MATCH",
+    "real_title": "Scaling Laws for Neural Language Models",
+    "sim": 0.67,
+    "dup": false
+  },
+  {
+    "file": "LLaMA 2.md",
+    "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+    "arxiv_id": "2307.09288",
+    "status": "MATCH",
+    "real_title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "LoRA Low-Rank Adaptation of Large Language Models.md",
+    "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "arxiv_id": "2106.09685",
+    "status": "MATCH",
+    "real_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "MCP-Atlas.md",
+    "title": "MCP-Atlas: A Large-Scale Benchmark for Tool-Use Competency with Real MCP Servers",
+    "arxiv_id": "2602.00933",
+    "status": "MATCH",
+    "real_title": "MCP-Atlas: A Large-Scale Benchmark for Tool-Use Competency with Real MCP Servers",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Mamba.md",
+    "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "arxiv_id": "2312.00752",
+    "status": "MATCH",
+    "real_title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Mamba3.md",
+    "title": "Mamba-3: Improved Sequence Modeling using State Space Principles",
+    "arxiv_id": "2603.15569",
+    "status": "MATCH",
+    "real_title": "Mamba-3: Improved Sequence Modeling using State Space Principles",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Medusa.md",
+    "title": "MEDUSA: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
+    "arxiv_id": "2401.10774",
+    "status": "MATCH",
+    "real_title": "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Mixtral.md",
+    "title": "Mixtral",
+    "arxiv_id": "2401.04088",
+    "status": "MATCH",
+    "real_title": "Mixtral of Experts",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Mixture-of-Experts.md",
+    "title": "Switch Transformers / Mixtral of Experts",
+    "arxiv_id": "2101.03961",
+    "status": "MISMATCH",
+    "real_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+    "sim": 0.5,
+    "dup": false
+  },
+  {
+    "file": "Nemotron-3.md",
+    "title": "Nemotron 3: Efficient and Open Intelligence",
+    "arxiv_id": "2305.09301",
+    "status": "MISMATCH",
+    "real_title": "Long-lived exciton coherence in mixed-halide perovskite crystals",
+    "sim": 0.0,
+    "dup": false
+  },
+  {
+    "file": "OSWorld-MCP.md",
+    "title": "OSWorld-MCP: Evaluating Agents with MCP Tool Invocation in Computer Environments",
+    "arxiv_id": "2510.24563",
+    "status": "MATCH",
+    "real_title": "OSWorld-MCP: Benchmarking MCP Tool Invocation In Computer-Use Agents",
+    "sim": 0.71,
+    "dup": false
+  },
+  {
+    "file": "OSWorld.md",
+    "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+    "arxiv_id": "2404.07972",
+    "status": "MATCH",
+    "real_title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Qwen3 Technical Report.md",
+    "title": "Qwen3 Technical Report",
+    "arxiv_id": "2505.09388",
+    "status": "MATCH",
+    "real_title": "Qwen3 Technical Report",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "RLHF.md",
+    "title": "RLHF (Reinforcement Learning from Human Feedback)",
+    "arxiv_id": "2203.02155",
+    "status": "MISMATCH",
+    "real_title": "Training language models to follow instructions with human feedback",
+    "sim": 0.33,
+    "dup": true
+  },
+  {
+    "file": "RWKV.md",
+    "title": "RWKV: Reinventing RNNs for the Transformer Era",
+    "arxiv_id": "2305.13048",
+    "status": "MATCH",
+    "real_title": "RWKV: Reinventing RNNs for the Transformer Era",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "ReAct Synergizing Reasoning and Acting in Language Models.md",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "arxiv_id": "2210.03629",
+    "status": "MATCH",
+    "real_title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "RetNet.md",
+    "title": "Retentive Network: A Successor to Transformer for Large Language Models",
+    "arxiv_id": "2307.08621",
+    "status": "MATCH",
+    "real_title": "Retentive Network: A Successor to Transformer for Large Language Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "RoPE.md",
+    "title": "RoPE (Rotary Position Embedding)",
+    "arxiv_id": "2104.09864",
+    "status": "MATCH",
+    "real_title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+    "sim": 0.75,
+    "dup": false
+  },
+  {
+    "file": "S4.md",
+    "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+    "arxiv_id": "2111.00396",
+    "status": "MATCH",
+    "real_title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "SWE-bench Pro.md",
+    "title": "SWE-Bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks?",
+    "arxiv_id": "2509.16941",
+    "status": "MATCH",
+    "real_title": "SWE-Bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks?",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "SWE-bench.md",
+    "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+    "arxiv_id": "2310.06770",
+    "status": "MATCH",
+    "real_title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Speculative Decoding.md",
+    "title": "Speculative Decoding",
+    "arxiv_id": "2601.11580",
+    "status": "MATCH",
+    "real_title": "Speculative Decoding: Performance or Illusion?",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "The Llama 3 Herd of Models.md",
+    "title": "The Llama 3 Herd of Models",
+    "arxiv_id": "2407.21783",
+    "status": "MATCH",
+    "real_title": "The Llama 3 Herd of Models",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "ToolLLM.md",
+    "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+    "arxiv_id": "2307.16789",
+    "status": "MATCH",
+    "real_title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Transformer.md",
+    "title": "Attention Is All You Need",
+    "arxiv_id": "1706.03762",
+    "status": "MATCH",
+    "real_title": "Attention Is All You Need",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "Transformers Are SSMs.md",
+    "title": "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+    "arxiv_id": "2405.21060",
+    "status": "MATCH",
+    "real_title": "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+    "sim": 1.0,
+    "dup": false
+  },
+  {
+    "file": "xLSTM.md",
+    "title": "xLSTM: Extended Long Short-Term Memory",
+    "arxiv_id": "2405.04517",
+    "status": "MATCH",
+    "real_title": "xLSTM: Extended Long Short-Term Memory",
+    "sim": 1.0,
+    "dup": false
+  }
+]

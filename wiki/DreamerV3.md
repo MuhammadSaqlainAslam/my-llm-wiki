@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2301.04104"
 tags: [world-models, reinforcement-learning, foundations]
 tldr: "A single algorithm and configuration that outperforms specialized RL methods across 150+ diverse tasks by learning a world model and imagining future scenarios; first to collect diamonds in Minecraft from scratch without human data"
-citation_count: 0
+citation_count: 1206
 ---
 
 ## TL;DR

@@ -6,7 +6,7 @@ year: 2024
 tags: [ssm, efficiency, linear-time, recurrence, selectivity]
 tldr: "Make SSM parameters (B, C, Δ) functions of the input so the model selectively compresses context rather than blindly forgetting it. Hardware-aware kernel fusion makes this practical. Matches Transformer quality at 5× inference throughput."
 theme: efficiency
-citation_count: 7513
+citation_count: 7731
 arxiv: "2312.00752"
 cited_by_top: ["VMamba", "Vision Mamba", "Mamba-2", "Jamba", "MoE-Mamba", "BlackMamba", "MambaByte", "Griffin", "Zamba", "MedMamba"]
 cited_by_details:

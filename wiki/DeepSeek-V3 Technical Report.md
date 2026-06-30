@@ -6,7 +6,7 @@ authors: DeepSeek-AI
 year: 2024
 arxiv: 2412.19437
 tags: [moe, attention, inference, hardware, foundational, training]
-citation_count: 3500
+citation_count: 0
 tldr: DeepSeek-V3 is a 671B MoE model (37B active per token) that matches GPT-4o and Claude-3.5-Sonnet on major benchmarks while costing only $5.576M (~2.788M H800 GPU hours) to train fully.
 ---
 

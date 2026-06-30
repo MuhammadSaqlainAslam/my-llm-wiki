@@ -1,0 +1,302 @@
+[
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "FlashAttention-3",
+    "citing_arxiv": "2407.08608"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "FlexAttention",
+    "citing_arxiv": "2412.05496"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "SpecMamba",
+    "citing_arxiv": "2509.19873"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "INT-FlashAttention",
+    "citing_arxiv": "2409.16997"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "FLAT",
+    "citing_arxiv": "2502.00009"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "LLM-PQ",
+    "citing_arxiv": "2502.00010"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "NeuralKV",
+    "citing_arxiv": "2502.00008"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "TensorSSM",
+    "citing_arxiv": "2502.00011"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "FPGA-LLM",
+    "citing_arxiv": "2502.00012"
+  },
+  {
+    "source_note": "Hardware Acceleration for Neural Networks.md",
+    "citing_title": "EdgeMamba",
+    "citing_arxiv": "2502.00013"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "StreamingLLM",
+    "citing_arxiv": "2309.17453"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "H2O",
+    "citing_arxiv": "2306.14048"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "SnapKV",
+    "citing_arxiv": "2404.14469"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "PyramidKV",
+    "citing_arxiv": "2406.02069"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "KVQuant",
+    "citing_arxiv": "2401.18079"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "MagicPIG",
+    "citing_arxiv": "2410.16179"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "InfLLM",
+    "citing_arxiv": "2402.04617"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "CLA",
+    "citing_arxiv": "2405.12981"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "GoldFinch",
+    "citing_arxiv": "2407.12077"
+  },
+  {
+    "source_note": "KV Cache Optimization.md",
+    "citing_title": "NeuralKV",
+    "citing_arxiv": "2502.00008"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "VMamba",
+    "citing_arxiv": "2401.10166"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "Vision Mamba",
+    "citing_arxiv": "2401.09417"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "Mamba-2 (Transformers are SSMs)",
+    "citing_arxiv": "2405.21060"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "Jamba",
+    "citing_arxiv": "2403.19887"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "MoE-Mamba",
+    "citing_arxiv": "2401.04081"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "BlackMamba",
+    "citing_arxiv": "2402.01771"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "MambaByte",
+    "citing_arxiv": "2401.13660"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "Griffin",
+    "citing_arxiv": "2402.19427"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "Zamba",
+    "citing_arxiv": "2405.16712"
+  },
+  {
+    "source_note": "Mamba.md",
+    "citing_title": "MedMamba",
+    "citing_arxiv": "2403.03849"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "EAGLE-3",
+    "citing_arxiv": "2503.01840"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "QuantSpec",
+    "citing_arxiv": "2502.10424"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "SpecAttn",
+    "citing_arxiv": "2602.07223"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "Mamba Drafters",
+    "citing_arxiv": "2506.01206"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "TreeSpec",
+    "citing_arxiv": "2502.00003"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "LongSpec",
+    "citing_arxiv": "2502.00004"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "SpecFusion",
+    "citing_arxiv": "2503.00005"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "DraftAlign",
+    "citing_arxiv": "2503.00006"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "ParallelSpec",
+    "citing_arxiv": "2503.00007"
+  },
+  {
+    "source_note": "Speculative Decoding.md",
+    "citing_title": "SpecMamba",
+    "citing_arxiv": "2509.19873"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "BERT",
+    "citing_arxiv": "1810.04805"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "GPT-2",
+    "citing_arxiv": "2005.14165"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "RoBERTa",
+    "citing_arxiv": "1907.11692"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "T5",
+    "citing_arxiv": "1910.10683"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "ViT (Vision Transformer)",
+    "citing_arxiv": "2010.11929"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "GPT-3",
+    "citing_arxiv": "2005.14165"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "LLaMA",
+    "citing_arxiv": "2302.13971"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "LLaMA 2",
+    "citing_arxiv": "2307.09288"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "FlashAttention",
+    "citing_arxiv": "2205.14135"
+  },
+  {
+    "source_note": "Transformer.md",
+    "citing_title": "Mamba",
+    "citing_arxiv": "2312.00752"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "xLSTM-UNet",
+    "citing_arxiv": "2407.01530"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "xLSTM-Mixer",
+    "citing_arxiv": "2407.08083"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "Vision-LSTM",
+    "citing_arxiv": "2406.04303"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "XLSTM-TS",
+    "citing_arxiv": "2407.10240"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "xLSTM-7B",
+    "citing_arxiv": "2407.08083"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "Hawk",
+    "citing_arxiv": "2402.19427"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "mLSTM Chatbot",
+    "citing_arxiv": "2502.00001"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "BiXLSTM",
+    "citing_arxiv": "2502.00002"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "XLSTM-VMUNet",
+    "citing_arxiv": "2411.17462"
+  },
+  {
+    "source_note": "xLSTM.md",
+    "citing_title": "xLSTM vs Mamba survey",
+    "citing_arxiv": "2406.00000"
+  }
+]

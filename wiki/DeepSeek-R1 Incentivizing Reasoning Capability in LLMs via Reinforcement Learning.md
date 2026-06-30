@@ -6,7 +6,7 @@ year: 2025
 arxiv: 2501.12948
 tags: [reinforcement-learning, reasoning, chain-of-thought, foundational, inference, fine-tuning]
 aliases: ["DeepSeek-R1"]
-citation_count: 10500
+citation_count: 5377
 tldr: DeepSeek-R1 trains LLMs to reason using pure RL (GRPO) without human-annotated reasoning traces, achieving performance surpassing supervised baselines on AIME and other STEM benchmarks with emergent self-reflection behaviors.
 ---
 

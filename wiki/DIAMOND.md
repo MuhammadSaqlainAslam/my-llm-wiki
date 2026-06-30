@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2405.12399"
 tags: [world-models, diffusion, reinforcement-learning]
 tldr: "DIAMOND (DIffusion As a Model Of eNvironment Dreams) trains an RL agent entirely inside a diffusion-based world model, achieving a new best 1.46 human-normalized score on Atari 100k for agents trained purely in imagination, and scales to a playable Counter-Strike: Global Offensive world model"
-citation_count: 0
+citation_count: 266
 ---
 
 ## TL;DR

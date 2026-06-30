@@ -4,7 +4,7 @@ title: "RWKV: Reinventing RNNs for the Transformer Era"
 authors: "Bo Peng et al. (EleutherAI community)"
 year: 2023
 arxiv: "2305.13048"
-citation_count: 1078
+citation_count: 1101
 tags: [rnn, linear-attention, efficiency, inference, language-model, recurrence, parallelism]
 tldr: "RWKV replaces dot-product attention with a linear attention variant that can be computed either as a parallelizable Transformer (training) or as an O(1)-per-step RNN (inference). Scales to 14B parameters — the largest dense RNN ever trained — while matching GPT-NeoX-20B quality at a fraction of inference cost."
 aliases: [RWKV, "RWKV-7", "Receptance Weighted Key Value"]

@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2307.16789"
 tags: [benchmarks, tool-use, evaluation, api, instruction-tuning, llm-agents]
 tldr: "ToolBench covers 16,464 real-world REST APIs across 49 categories; fine-tuned ToolLLaMA reaches near-ChatGPT tool-use performance on the accompanying ToolEval benchmark."
-citation_count: 1800
+citation_count: 1779
 ---
 
 ## TL;DR

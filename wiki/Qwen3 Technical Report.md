@@ -5,7 +5,7 @@ authors: Qwen Team
 year: 2025
 arxiv: 2505.09388
 tags: [foundational, moe, inference, attention, benchmarks]
-citation_count: 5861
+citation_count: 6152
 tldr: Qwen3 unifies thinking and non-thinking reasoning modes into a single model family (0.6B–235B parameters) trained on 36 trillion tokens, with the flagship 235B-A22B MoE model scoring 85.7 on AIME'24 and 70.7 on LiveCodeBench v5.
 ---
 
