@@ -358,6 +358,20 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 
 ---
 
+## 🌍 World Models & World-Action Models
+
+Models that learn a predictive representation of an environment, used either to plan or to train a policy "in imagination":
+
+| Paper | Year | Citations | arXiv |
+|-------|------|-----------|-------|
+| [[World Models]] | 2018 | — | [1803.10122](https://arxiv.org/abs/1803.10122) |
+
+*(More entries to be added as DreamerV3, IRIS, DIAMOND, and Loop-OWM are verified and added.)*
+
+**Tags:** `world-models` `reinforcement-learning` `generative-models` `planning`
+
+---
+
 ## 🔧 Fine-tuning & Alignment
 
 Parameter-efficient fine-tuning and alignment techniques.
