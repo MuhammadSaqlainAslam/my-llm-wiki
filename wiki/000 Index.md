@@ -369,6 +369,11 @@ Models that learn a predictive representation of an environment, used either to 
 | [[DreamerV3]] | 2023 | — | [2301.04104](https://arxiv.org/abs/2301.04104) |
 | [[GAIA-1]] | 2023 | — | [2309.17080](https://arxiv.org/abs/2309.17080) |
 | [[DIAMOND]] | 2024 | — | [2405.12399](https://arxiv.org/abs/2405.12399) |
+| [[V-JEPA 1]] | 2024 | — | [2404.08471](https://arxiv.org/abs/2404.08471) |
+| [[GameNGen]] | 2024 | — | [2408.14837](https://arxiv.org/abs/2408.14837) |
+| [[GAIA-2]] | 2025 | — | [2503.20523](https://arxiv.org/abs/2503.20523) |
+| [[V-JEPA 2]] | 2025 | — | [2506.09985](https://arxiv.org/abs/2506.09985) |
+| [[Dreamer 4]] | 2025 | — | [2509.24527](https://arxiv.org/abs/2509.24527) |
 | [[World-Model-Landscape\|The World Model Landscape (2019-2026)]] | 2026 | — | Industry report (BVP) |
 
 *(More entries to be added as DreamerV3, IRIS, DIAMOND, and Loop-OWM are verified and added.)*

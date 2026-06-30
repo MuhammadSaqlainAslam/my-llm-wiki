@@ -39,8 +39,6 @@ Following the same next-token-prediction philosophy as [[IRIS]] (discrete tokens
 
 ## Related Concepts
 
-*Lineage: [[World Models]] · [[IRIS]]*
+*Lineage: [[World Models]] · [[IRIS]] · [[GAIA-2]]*
 
 *Landscape: [[World-Model-Landscape|The World Model Landscape (2019-2026)]]*
-
-*(GAIA-2 link to be added once that note is verified and created in a future session.)*
