@@ -823,6 +823,8 @@
       margin-bottom: 10px; line-height: 1.4;
     }
 
+    .ce-search-wrap { position: relative; }
+
     .ce-search {
       width: 100%;
       background: var(--surface2);
@@ -835,6 +837,7 @@
     }
     .ce-search:focus { border-color: var(--accent); }
     .ce-search::placeholder { color: var(--muted); }
+    .ce-search.has-value { padding-right: 34px; }
 
     .ce-list {
       flex: 1;
@@ -2769,18 +2772,50 @@ function renderCeLeft() {
     <div class="ce-hd">
       <div class="ce-hd-title">Citation Explorer</div>
       <div class="ce-hd-sub">Click any paper to see what it influenced</div>
-      <input class="ce-search" id="ce-search-input"
-             placeholder="Filter papers…"
-             value="${escAttr(ceQuery)}"
-             autocomplete="off" spellcheck="false">
+      <div class="ce-search-wrap">
+        <input class="ce-search${ceQuery ? ' has-value' : ''}" id="ce-search-input"
+               placeholder="Filter papers…"
+               value="${escAttr(ceQuery)}"
+               autocomplete="off" spellcheck="false">
+        <button class="search-clear-btn" id="ce-search-clear-btn"
+                aria-label="Clear citation search" title="Clear search"
+                style="display:${ceQuery ? 'flex' : 'none'}">✕</button>
+      </div>
     </div>
     <div class="ce-list" id="ce-list"></div>
   `;
 
-  document.getElementById('ce-search-input').addEventListener('input', e => {
+  const ceSearchInput = document.getElementById('ce-search-input');
+  const ceSearchClearBtn = document.getElementById('ce-search-clear-btn');
+
+  function updateCeClearBtn() {
+    const hasVal = ceSearchInput.value.length > 0;
+    ceSearchClearBtn.style.display = hasVal ? 'flex' : 'none';
+    ceSearchInput.classList.toggle('has-value', hasVal);
+  }
+
+  function clearCeSearch() {
+    ceSearchInput.value = '';
+    ceQuery = '';
+    buildCeList(allCited);
+    updateCeClearBtn();
+    ceSearchInput.focus();
+  }
+
+  ceSearchInput.addEventListener('input', e => {
     ceQuery = e.target.value.trim();
     buildCeList(allCited);
+    updateCeClearBtn();
   });
+
+  ceSearchInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      clearCeSearch();
+    }
+  });
+
+  ceSearchClearBtn.addEventListener('click', clearCeSearch);
 
   buildCeList(allCited);
 }
