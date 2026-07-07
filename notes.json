@@ -2261,7 +2261,7 @@
       "Kernel-fusion",
       "Tensor-Cores"
     ],
-    "citation_count": 2886,
+    "citation_count": 2920,
     "created": "2026-05-20",
     "arxiv": "2307.08691",
     "technical_report": "",
@@ -2357,7 +2357,7 @@
       "GAIA-2",
       "World-Model-Landscape"
     ],
-    "citation_count": 588,
+    "citation_count": 597,
     "created": "2026-06-29",
     "arxiv": "2309.17080",
     "technical_report": "",
@@ -2389,7 +2389,7 @@
       "World-Models",
       "World-Model-Landscape"
     ],
-    "citation_count": 149,
+    "citation_count": 150,
     "created": "2026-06-29",
     "arxiv": "2503.20523",
     "technical_report": "",
@@ -2425,7 +2425,7 @@
       "DeepSeek-V3-Technical-Report",
       "Qwen3-Technical-Report"
     ],
-    "citation_count": null,
+    "citation_count": 220,
     "created": "2026-07-06",
     "arxiv": "2602.15763",
     "technical_report": "",
@@ -2707,7 +2707,7 @@
       "World-Model-Landscape",
       "World-Models"
     ],
-    "citation_count": 238,
+    "citation_count": 244,
     "created": "2026-06-29",
     "arxiv": "2408.14837",
     "technical_report": "",
@@ -2782,7 +2782,7 @@
       "State-Space-Models",
       "Flash-Attention"
     ],
-    "citation_count": null,
+    "citation_count": 6,
     "created": "2026-06-24",
     "arxiv": "2605.22791",
     "technical_report": "",
@@ -2936,7 +2936,7 @@
       "KV-Cache",
       "Nemotron-3"
     ],
-    "citation_count": 254,
+    "citation_count": 256,
     "created": "2026-05-20",
     "arxiv": "2402.19427",
     "technical_report": "",
@@ -3592,7 +3592,7 @@
       "Transformer",
       "Speculative-Decoding"
     ],
-    "citation_count": 343,
+    "citation_count": 346,
     "created": "2026-06-03",
     "arxiv": "2501.14249",
     "technical_report": "",
@@ -3746,7 +3746,7 @@
       "DIAMOND",
       "World-Model-Landscape"
     ],
-    "citation_count": 333,
+    "citation_count": 336,
     "created": "2026-06-29",
     "arxiv": "2209.00588",
     "technical_report": "",
@@ -3947,7 +3947,7 @@
     "links": [
       "RLHF"
     ],
-    "citation_count": 21972,
+    "citation_count": 22197,
     "created": "2026-06-10",
     "arxiv": "2203.02155",
     "technical_report": "",
@@ -4000,7 +4000,7 @@
       "LSTM",
       "BPE-Tokenization"
     ],
-    "citation_count": 451,
+    "citation_count": 456,
     "created": "2026-05-28",
     "arxiv": "2403.19887",
     "technical_report": "",
@@ -4094,7 +4094,7 @@
       "Transformer",
       "Nemotron-3"
     ],
-    "citation_count": null,
+    "citation_count": 1,
     "created": "2026-05-12",
     "arxiv": "2603.20397",
     "technical_report": "",
@@ -4372,7 +4372,7 @@
       "Attention",
       "Speculative-Decoding"
     ],
-    "citation_count": 8349,
+    "citation_count": 8416,
     "created": "2026-06-03",
     "arxiv": "2001.08361",
     "technical_report": "",
@@ -4448,7 +4448,7 @@
       "The-Llama-3-Herd-of-Models",
       "Mixtral"
     ],
-    "citation_count": null,
+    "citation_count": 316,
     "created": "2026-07-06",
     "arxiv": "2507.20534",
     "technical_report": "",
@@ -4638,7 +4638,7 @@
       "KV-Cache",
       "Mixture-of-Experts"
     ],
-    "citation_count": 17380,
+    "citation_count": 17458,
     "created": "2026-05-20",
     "arxiv": "2307.09288",
     "technical_report": "",
@@ -4685,7 +4685,7 @@
       "LLaMA-2",
       "Transformer"
     ],
-    "citation_count": 5351,
+    "citation_count": 5410,
     "created": "2026-06-21",
     "arxiv": "2310.03744",
     "technical_report": "",
@@ -4957,7 +4957,7 @@
       "QLoRA",
       "Parameter-Efficient-Fine-Tuning"
     ],
-    "citation_count": 20330,
+    "citation_count": 20561,
     "created": "2026-06-10",
     "arxiv": "2106.09685",
     "technical_report": "",
@@ -5339,7 +5339,7 @@
       "RLHF",
       "Transformer"
     ],
-    "citation_count": null,
+    "citation_count": 22,
     "created": "2026-06-03",
     "arxiv": "2602.00933",
     "technical_report": "",
@@ -5478,7 +5478,7 @@
       "Transformer",
       "Mixture-of-Experts"
     ],
-    "citation_count": 7731,
+    "citation_count": 7853,
     "created": "2026-04-28",
     "arxiv": "2312.00752",
     "technical_report": "",
@@ -7849,7 +7849,7 @@
       "RLHF",
       "Inference-Time-Scaling"
     ],
-    "citation_count": 6152,
+    "citation_count": 6311,
     "created": "2026-06-10",
     "arxiv": "2505.09388",
     "technical_report": "",
@@ -8086,7 +8086,7 @@
       "RetNet",
       "State-Space-Model"
     ],
-    "citation_count": 1101,
+    "citation_count": 1113,
     "created": "2026-05-20",
     "arxiv": "2305.13048",
     "technical_report": "",
@@ -8148,7 +8148,7 @@
       "HotpotQA",
       "In-Context-Learning"
     ],
-    "citation_count": 7358,
+    "citation_count": 7645,
     "created": "2026-06-10",
     "arxiv": "2210.03629",
     "technical_report": "",
@@ -8320,7 +8320,7 @@
       "Linear-attention",
       "State-Space-Model"
     ],
-    "citation_count": 698,
+    "citation_count": 704,
     "created": "2026-05-20",
     "arxiv": "2307.08621",
     "technical_report": "",
@@ -8422,7 +8422,7 @@
       "Flash-Attention",
       "XPOS"
     ],
-    "citation_count": 5657,
+    "citation_count": 5727,
     "created": "2026-05-20",
     "arxiv": "2104.09864",
     "technical_report": "",
@@ -8505,7 +8505,7 @@
       "Transformers-Are-SSMs",
       "Hardware-Aware-Scan"
     ],
-    "citation_count": 3802,
+    "citation_count": 3846,
     "created": "2026-05-20",
     "arxiv": "2111.00396",
     "technical_report": "",
@@ -8638,7 +8638,7 @@
       "RLVR",
       "RLHF"
     ],
-    "citation_count": 130,
+    "citation_count": 139,
     "created": "2026-06-03",
     "arxiv": "2509.16941",
     "technical_report": "",
@@ -8671,7 +8671,7 @@
       "RLHF",
       "RLVR"
     ],
-    "citation_count": 2726,
+    "citation_count": 2804,
     "created": "2026-06-03",
     "arxiv": "2310.06770",
     "technical_report": "",
@@ -9339,7 +9339,7 @@
       "Transformer",
       "Speculative-Decoding"
     ],
-    "citation_count": null,
+    "citation_count": 13,
     "created": "2026-06-24",
     "arxiv": "2603.05498",
     "technical_report": "",
@@ -9777,7 +9777,7 @@
       "Mixture-of-Experts",
       "GPT-4-Technical-Report"
     ],
-    "citation_count": 16423,
+    "citation_count": 16629,
     "created": "2026-06-10",
     "arxiv": "2407.21783",
     "technical_report": "",
@@ -10012,7 +10012,7 @@
       "RLHF",
       "Transformer"
     ],
-    "citation_count": 1779,
+    "citation_count": 1813,
     "created": "2026-06-03",
     "arxiv": "2307.16789",
     "technical_report": "",
@@ -10073,7 +10073,7 @@
       "Mixture-of-Experts",
       "Nemotron-3"
     ],
-    "citation_count": 182070,
+    "citation_count": 183095,
     "created": "2026-04-28",
     "arxiv": "1706.03762",
     "technical_report": "",
@@ -10285,7 +10285,7 @@
       "Multi-Head-Attention",
       "FlashAttention"
     ],
-    "citation_count": 1627,
+    "citation_count": 1643,
     "created": "2026-05-12",
     "arxiv": "2405.21060",
     "technical_report": "",
@@ -10521,7 +10521,7 @@
       "V-JEPA-2",
       "World-Model-Landscape"
     ],
-    "citation_count": 350,
+    "citation_count": 365,
     "created": "2026-06-29",
     "arxiv": "2404.08471",
     "technical_report": "",
@@ -10555,7 +10555,7 @@
       "World-Models",
       "Dreamer-4"
     ],
-    "citation_count": 457,
+    "citation_count": 475,
     "created": "2026-06-29",
     "arxiv": "2506.09985",
     "technical_report": "",
@@ -10622,7 +10622,7 @@
       "Ministral-3",
       "Multi-Environment-RLVR-Training"
     ],
-    "citation_count": 92,
+    "citation_count": 96,
     "created": "2026-06-28",
     "arxiv": "2410.01679",
     "technical_report": "",
@@ -10867,7 +10867,7 @@
       "Multi-Environment-RLVR-Training",
       "World-Model-Landscape"
     ],
-    "citation_count": 1830,
+    "citation_count": 1858,
     "created": "2026-06-29",
     "arxiv": "1803.10122",
     "technical_report": "",
@@ -11305,7 +11305,7 @@
       "Nemotron-3",
       "State-Space-Model"
     ],
-    "citation_count": 629,
+    "citation_count": 635,
     "created": "2026-05-12",
     "arxiv": "2405.04517",
     "technical_report": "",
