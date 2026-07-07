@@ -407,12 +407,14 @@ Technical reports of major model families (2024–2025).
 | [[DeepSeek-V3 Technical Report\|DeepSeek-V3]] | 2024 | ~3,000 | [2412.19437](https://arxiv.org/abs/2412.19437) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Qwen3 Technical Report\|Qwen3]] | 2025 | ~500 | [2505.09388](https://arxiv.org/abs/2505.09388) |
+| [[Kimi K2]] | 2025 | — | [2507.20534](https://arxiv.org/abs/2507.20534) |
 | [[Nemotron-3]] | 2025 | 14 | [2512.20856](https://arxiv.org/abs/2512.20856) |
 | [[Nemotron_3_Super]] | 2026 | — | [2604.12374](https://arxiv.org/abs/2604.12374) |
 | [[Nemotron_3_Ultra]] | 2026 | — | Technical report (no arXiv) |
 | [[MAI-Thinking-1]] | 2026 | Microsoft | Technical report (no arXiv) |
+| [[GLM-5]] | 2026 | — | [2602.15763](https://arxiv.org/abs/2602.15763) |
 
-**Tags:** `llm` `foundational` `scaling` `open-source`
+**Tags:** `llm` `foundational` `scaling` `open-source` `agentic` `moe`
 
 ---
 
