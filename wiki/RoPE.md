@@ -4,7 +4,7 @@ title: "RoPE (Rotary Position Embedding)"
 authors: "Su et al."
 tags: [glossary, attention, position-encoding, llama2, transformer, efficiency]
 arxiv: "2104.09864"
-citation_count: 5657
+citation_count: 5727
 tldr: "Encodes position information by rotating query and key vectors in 2D planes by an angle proportional to position. Relative position appears naturally in the dot product — the model sees how far apart two tokens are without explicit position tokens. Enables length extrapolation and is the standard for modern LLMs."
 aliases: [RoPE, Rotary Position Embedding, rotary embeddings, rotary position]
 ---

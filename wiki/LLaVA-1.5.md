@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2310.03744"
 tags: [vision-language, multimodal, foundations, instruction-tuning]
 tldr: "LLaVA-1.5 — simple modifications (MLP connector + academic VQA training data) to the original LLaVA recipe establish state-of-the-art open vision-language baselines across 11 benchmarks, trained in ~1 day on a single 8-A100 node"
-citation_count: 5351
+citation_count: 5410
 ---
 
 ## TL;DR

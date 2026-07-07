@@ -4,7 +4,7 @@ title: "Kaplan Scaling Laws"
 authors: "Kaplan et al."
 tags: [glossary, scaling, training]
 arxiv: "2001.08361"
-citation_count: 8349
+citation_count: 8416
 tldr: "Loss decreases as a smooth power law with model size (N), data (D), and compute (C), with exponents ~0.07, 0.095, and 0.05 respectively."
 ---
 

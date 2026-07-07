@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2507.20534"
 tags: [model-family, moe, agentic, reasoning, moonshot]
 tldr: "Moonshot AI's open MoE model specializing in agentic tasks — 1T total parameters, frontier performance on coding/math/tool-use, competitive with DeepSeek-V3 and Qwen3-235B on key benchmarks, released under a commercial-friendly license"
-citation_count: 0
+citation_count: 316
 ---
 
 ## TL;DR

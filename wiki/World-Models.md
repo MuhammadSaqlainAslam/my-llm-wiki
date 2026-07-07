@@ -6,7 +6,7 @@ year: "2018"
 arxiv: "1803.10122"
 tags: [world-models, reinforcement-learning, foundations, generative-models]
 tldr: "Foundational V-M-C architecture — a Vision model compresses observations to a latent vector, a Memory model (RNN) predicts the future of that latent, and a small Controller acts on it. First demonstrated training an agent entirely inside its own hallucinated 'dream' environment and transferring the policy back to reality."
-citation_count: 1830
+citation_count: 1858
 ---
 
 ## TL;DR

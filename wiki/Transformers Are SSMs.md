@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2405.21060"
 tags: [ssm, mamba, attention, transformers, state-space-models, linear-attention, structured-matrices, mamba-2, sequence-modeling, language-modeling]
 tldr: "Proves SSMs and attention are dual forms of the same structured semiseparable matrix computation, yielding Mamba-2: 2-8x faster than Mamba-1 while matching or beating Transformers at language modeling."
-citation_count: 1627
+citation_count: 1643
 aliases: ["SSD", "Mamba-2", "State Space Duality"]
 ---
 

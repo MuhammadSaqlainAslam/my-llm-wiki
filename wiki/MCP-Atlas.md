@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2602.00933"
 tags: [benchmarks, tool-use, mcp, agentic, evaluation, multi-step-reasoning, function-calling]
 tldr: "1,000-task benchmark across 36 real MCP servers where the best model (Muse Spark) scores 82.2% pass rate; 63.3% of failures are cognitive rather than tool-call errors"
-citation_count: 0
+citation_count: 22
 ---
 
 ## TL;DR
