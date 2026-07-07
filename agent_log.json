@@ -419,5 +419,14 @@
       "xLSTM.md (+6)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-07-06T20:46:08.105431",
+    "mode": "audit-citations",
+    "topic": null,
+    "added": [],
+    "skipped": [],
+    "message": "Citation audit \u2014 41 entries checked, 41 clean, 0 flagged for review",
+    "flagged_count": 0
   }
 ]
