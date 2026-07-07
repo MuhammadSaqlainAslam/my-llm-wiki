@@ -97,8 +97,8 @@ Source: internal comparison image shared by HHRI-AI Research team.
 |---|---|---|
 | DS-V4-Pro | DeepSeek-V4-Pro Max | DeepSeek-AI |
 | DS-V4-Flash | DeepSeek-V4-Flash Max | DeepSeek-AI |
-| K2.6 | K2.6 Thinking | Unknown / Kimi |
-| GLM-5.1 | GLM-5.1 Thinking | Zhipu AI |
+| K2.6 | [[Kimi K2|K2.6 Thinking]] | Unknown / Kimi |
+| GLM-5.1 | [[GLM-5|GLM-5.1 Thinking]] | Zhipu AI |
 | Opus-4.6 | Claude Opus 4.6 Max | Anthropic |
 | GPT-5.4 | GPT-5.4 xHigh | OpenAI |
 | Gem-3.1-Pro | Gemini-3.1-Pro High | Google DeepMind |
@@ -150,7 +150,7 @@ Source: internal comparison image shared by HHRI-AI Research team.
 
 ## TL;DR
 
-No single model wins everywhere. Gemini-3.1-Pro High dominates Knowledge & Reasoning. Opus-4.6 Max leads long-context (76% MRCR v2 8-needle per official system card). Agentic tasks are fragmented: GPT-5.4 leads GDPval-AA and Terminal Bench; K2.6 leads SWE Pro and HLE-with-tools; Opus-4.6 leads SWE Verified, SWE Multilingual, and MCPAtlas. DS-V4-Pro is the strongest open model. Opus 4.8 (May 2026) leads on SWE-bench Pro (69.2%), OSWorld (83.4%), GDPval-AA (1890 Elo), and HLE (57.9% with tools).
+No single model wins everywhere. Gemini-3.1-Pro High dominates Knowledge & Reasoning. Opus-4.6 Max leads long-context (76% MRCR v2 8-needle per official system card). Agentic tasks are fragmented: GPT-5.4 leads GDPval-AA and Terminal Bench; [[Kimi K2|K2.6]] leads SWE Pro and HLE-with-tools; Opus-4.6 leads SWE Verified, SWE Multilingual, and MCPAtlas. DS-V4-Pro is the strongest open model. Opus 4.8 (May 2026) leads on SWE-bench Pro (69.2%), OSWorld (83.4%), GDPval-AA (1890 Elo), and HLE (57.9% with tools).
 
 ---
 

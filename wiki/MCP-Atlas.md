@@ -53,14 +53,14 @@ The "unknown-tools" challenge is also underaddressed: most prior benchmarks give
 | Claude Opus 4.7 | 79.1% | 83.8% | Top |
 | Gemini 3.1 Pro Preview | 78.2% | 83.9% | Top |
 | Claude Opus 4.6 | 76.8% | 82.7% | Mid |
-| GLM-5.1 (open-source) | 75.6% | 81.8% | Mid |
+| [[GLM-5|GLM-5.1]] (open-source) | 75.6% | 81.8% | Mid |
 | GPT-5.5 | 75.3% | 82.1% | Mid |
 | GPT-5.4 | 70.6% | 78.5% | Mid |
 | Gemini 3 Pro Preview | 70.3% | 79.0% | Mid |
 | Claude Opus 4.5 | 69.8% | 76.9% | Mid |
 | Claude Sonnet 4.6 | 69.5% | 78.0% | Mid |
 | GPT-5.2 | 67.6% | 75.5% | Mid |
-| Kimi K2.5 | 64.4% | 72.5% | Tail |
+| [[Kimi K2|Kimi K2.5]] | 64.4% | 72.5% | Tail |
 | Gemini 3 Flash Preview | 62.0% | 72.0% | Tail |
 | Claude Sonnet 4.5 | 59.5% | 69.7% | Tail |
 | GLM-4.7 | 58.1% | 68.5% | Tail |
@@ -72,7 +72,7 @@ The "unknown-tools" challenge is also underaddressed: most prior benchmarks give
 
 **Key anomaly**: o3 Pro (44.5%) — a top performer on math/coding benchmarks — produces *no tool calls* on 40% of its failed tasks. Strong reasoning ability does not transfer to tool-use compliance.
 
-**Open-source highlight**: GLM-5.1 (75.6%) enters the top empirical band, previously exclusive to proprietary models.
+**Open-source highlight**: [[GLM-5|GLM-5.1]] (75.6%) enters the top empirical band, previously exclusive to proprietary models.
 
 ## Why It Matters for LLM Evaluation
 

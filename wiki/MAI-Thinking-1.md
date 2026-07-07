@@ -118,7 +118,7 @@ Red-teaming ran in parallel with model development across 15 engagements (early,
 - A rare, unusually transparent technical report — documents a failure mode ("data-mixture rank non-invariance": a data mixture that wins at small scale can lose at large scale) that most vendor reports omit
 - Explicit, deliberate choice to train without any distillation data, positioned as a design principle ("capabilities should be learned, not inherited") rather than a limitation
 - Direct architectural lineage from papers already in this wiki: Gemma 3's local/global attention interleaving and NVIDIA's [[LatentMoE]]
-- Reports BPB comparisons against [[DeepSeek-V3 Technical Report|DeepSeek-V3]], Kimi-K2, and Gemma 4 31B base models — useful cross-reference for benchmark comparisons elsewhere in the wiki
+- Reports BPB comparisons against [[DeepSeek-V3 Technical Report|DeepSeek-V3]], [[Kimi K2]], and Gemma 4 31B base models — useful cross-reference for benchmark comparisons elsewhere in the wiki
 - First major reasoning model to publicly report SWE-Bench Pro (52.8%) alongside AIME 2025 (97.0%), offering a joint math+coding capability snapshot
 
 ---

@@ -171,7 +171,7 @@ This is cheaper than keeping multiple deployed models and avoids the quality deg
 | SWE-Verified | 80.6 | 80.8 | 80.6 |
 | Codeforces Rating | 3206 | 3168 | 3052 |
 
-Long-context: V4-Pro-Max surpasses Gemini-3.1-Pro on academic 1M-token benchmarks. Agent tasks: on par with leading open-source models (Kimi-K2.6, GLM-5.1) but slightly below frontier closed models.
+Long-context: V4-Pro-Max surpasses Gemini-3.1-Pro on academic 1M-token benchmarks. Agent tasks: on par with leading open-source models ([[Kimi K2|Kimi-K2.6]], [[GLM-5|GLM-5.1]]) but slightly below frontier closed models.
 
 **V4-Flash vs. V4-Pro:** Flash closes the gap on reasoning tasks when given a larger thinking budget but falls short on knowledge-heavy benchmarks due to fewer parameters. For cost-sensitive deployments it's a strong choice.
 
