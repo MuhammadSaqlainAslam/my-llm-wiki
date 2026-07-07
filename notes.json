@@ -1288,7 +1288,7 @@
       "FP8-Training",
       "Pipeline-Parallelism"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-10",
     "arxiv": "2412.19437",
     "technical_report": "",
@@ -4496,7 +4496,7 @@
       "RLVR",
       "LLM-evaluation"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-05-05",
     "arxiv": "",
     "technical_report": "",
@@ -4868,7 +4868,7 @@
       "Multi-Token-Prediction",
       "Hardware-Aware-Scan"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "",
     "technical_report": "https://arxiv.org/pdf/2512.20856",
@@ -5269,7 +5269,7 @@
       "Multi-Environment-RLVR-Training",
       "Chinchilla_Scaling_Laws"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-24",
     "arxiv": "",
     "technical_report": "https://microsoft.ai/pdf/mai-thinking-1.pdf",
@@ -5783,7 +5783,7 @@
       "Gated-Linear-Attention",
       "Jamba"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-05-28",
     "arxiv": "2603.15569",
     "technical_report": "",
@@ -6151,7 +6151,7 @@
       "Scaling_Laws",
       "LoRA-Low-Rank-Adaptation-of-Large-Language-Models"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-24",
     "arxiv": "2601.08584",
     "technical_report": "",
@@ -6287,7 +6287,7 @@
       "MAI-Thinking-1",
       "LatentMoE"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "",
     "technical_report": "https://arxiv.org/pdf/2512.20856",
@@ -6760,7 +6760,7 @@
       "GRPO",
       "Hardware-Aware-Scan"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "2604.12374",
     "technical_report": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf",
@@ -6807,7 +6807,7 @@
       "On-Policy-Distillation",
       "GRPO"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "",
     "technical_report": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf",
@@ -7213,7 +7213,7 @@
       "RLHF",
       "RLVR"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-03",
     "arxiv": "",
     "technical_report": "",
@@ -7782,7 +7782,7 @@
       "KV-Cache-Optimization",
       "Flash-Attention"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "",
     "technical_report": "",
@@ -9438,7 +9438,7 @@
       "Griffin",
       "Nemotron-3"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-17",
     "arxiv": "",
     "technical_report": "",
@@ -10825,7 +10825,7 @@
       "Dreamer-4",
       "World-Models"
     ],
-    "citation_count": null,
+    "citation_count": 0,
     "created": "2026-06-29",
     "arxiv": "",
     "technical_report": "https://www.bvp.com/atlas/can-world-models-unlock-general-purpose-robotics",
