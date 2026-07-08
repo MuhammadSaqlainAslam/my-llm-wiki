@@ -388,7 +388,7 @@ https://MuhammadSaqlainAslam.github.io/my-llm-wiki
 
 The wiki has an autonomous research agent (`agent.py`) that automatically finds, evaluates, and adds new content from multiple sources using Claude as the decision-making brain.
 
-### Five Modes
+### Six Modes
 
 **1. Topic search — add content about a specific topic:**
 ```bash
@@ -415,7 +415,13 @@ python3 agent.py update-citations
 ```
 Queries the Semantic Scholar batch API for every note that has an arXiv ID in its frontmatter, updates `citation_count` in the YAML, rebuilds the web demo, and commits + pushes automatically. This is a deterministic API call (no LLM), so it's fast and cheap. Run monthly to keep counts current.
 
-**5. Audit citation data integrity:**
+**5. Conference papers sweep:**
+```bash
+python3 agent.py conference
+```
+Sweeps recent arXiv submissions for papers accepted at top conferences (NeurIPS, ICLR, ICML, ACL, EMNLP, COLING) matching existing wiki themes, using each paper's arXiv comment field to detect a conference-acceptance marker. Report-only — generates `conference_candidates.txt` for manual review, verified via `verify_arxiv_paper()` before any candidate is listed. Never auto-adds, never auto-commits. Run weekly alongside the daily sweep.
+
+**6. Audit citation data integrity:**
 ```bash
 python3 agent.py audit-citations
 ```
@@ -431,6 +437,7 @@ Scans every `cited_by_details` block across the wiki and verifies each arXiv ID 
 | `python3 agent.py audit-citations` | Monthly | Verify citation data integrity |
 | `python3 agent.py citations` | Monthly | Find new high-impact citing papers |
 | `python3 agent.py daily` | Weekly | Broad new-paper sweep |
+| `python3 agent.py conference` | Weekly | Find top conference papers for review |
 | `python3 agent.py topic "..."` | On demand | Add specific topic papers |
 
 ### Sources the Agent Monitors
