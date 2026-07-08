@@ -395,6 +395,8 @@ Parameter-efficient fine-tuning and alignment techniques.
 | [[LoRA-X]] | 2025 | — | [2501.16559](https://arxiv.org/abs/2501.16559) |
 | [[Cross-LoRA]] | 2025 | — | [2508.05232](https://arxiv.org/abs/2508.05232) |
 | [[OLoRA]] | 2024 | — | [2406.01775](https://arxiv.org/abs/2406.01775) |
+| [[Adapters Selector]] | 2025 | — | [COLING 2025](https://aclanthology.org/2025.coling-main.40) |
+| [[Time-Varying LoRA]] | 2024 | — | [NeurIPS 2024](https://openreview.net/forum?id=SgODU2mx9T) |
 
 **Tags:** `fine-tuning` `alignment` `parameter-efficient` `rlhf` `distillation`
 
