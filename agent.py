@@ -7,6 +7,7 @@ Usage:
     python3 agent.py daily              # check arXiv + GitHub last 24 h
     python3 agent.py topic <query>      # add content about a topic
     python3 agent.py citations          # track high-impact citing papers
+    python3 agent.py conference         # surface conference-accepted papers for review
 """
 
 import anthropic
@@ -100,7 +101,8 @@ def search_arxiv(query: str, days_back: int = 1, max_results: int = 10) -> list:
             req = urllib.request.Request(url, headers={"User-Agent": "LLMWikiAgent/1.0"})
             with urllib.request.urlopen(req, timeout=15) as r:
                 tree = ET.parse(r)
-            ns = {"atom": "http://www.w3.org/2005/Atom"}
+            ns = {"atom": "http://www.w3.org/2005/Atom",
+                  "arxiv": "http://arxiv.org/schemas/atom"}
             cutoff = datetime.now() - timedelta(days=days_back)
             papers = []
             for entry in tree.findall("atom:entry", ns):
@@ -109,10 +111,12 @@ def search_arxiv(query: str, days_back: int = 1, max_results: int = 10) -> list:
                 if pub_date < cutoff and days_back <= 7:
                     continue
                 arxiv_id = entry.find("atom:id", ns).text.split("/abs/")[-1]
+                comment_el = entry.find("arxiv:comment", ns)
                 papers.append({
                     "id":        arxiv_id,
                     "title":     entry.find("atom:title",   ns).text.strip(),
                     "abstract":  entry.find("atom:summary", ns).text.strip(),
+                    "comment":   comment_el.text.strip() if comment_el is not None and comment_el.text else "",
                     "published": published,
                     "url":       f"https://arxiv.org/abs/{arxiv_id}",
                     "pdf_url":   f"https://arxiv.org/pdf/{arxiv_id}",
@@ -224,6 +228,49 @@ def download_pdf(arxiv_id: str, filename: str) -> dict:
         return {"status": "downloaded", "path": str(out_path), "filename": filename}
     except Exception as e:
         return {"status": "error", "error": str(e)}
+
+
+_conference_candidates: list[dict] = []
+
+
+def propose_candidate(arxiv_id: str, title: str, venue: str,
+                       relevance_score: int, reason: str) -> dict:
+    """Verify a claimed paper via arXiv, then queue it as a conference-review
+    candidate. Does NOT touch wiki/ — only accumulates in-memory for the
+    end-of-run candidates file (see write_conference_candidates_file).
+    """
+    is_valid, real_title = verify_arxiv_paper(arxiv_id, title)
+    if not is_valid:
+        return {"status": "skipped_unverified", "arxiv_id": arxiv_id,
+                "claimed_title": title, "real_title": real_title}
+    _conference_candidates.append({
+        "arxiv_id": arxiv_id, "title": real_title, "venue": venue,
+        "relevance_score": relevance_score, "reason": reason,
+        "url": f"https://arxiv.org/abs/{arxiv_id}",
+    })
+    return {"status": "proposed", "arxiv_id": arxiv_id, "title": real_title}
+
+
+def write_conference_candidates_file() -> Path:
+    """Overwrite conference_candidates.txt from _conference_candidates, ranked by
+    relevance. Always overwrites (never appends) so stale picks from a prior
+    week never linger silently.
+    """
+    path = VAULT / "conference_candidates.txt"
+    lines = [f"# Conference candidates — generated {datetime.now().strftime('%Y-%m-%d %H:%M')}", ""]
+    if not _conference_candidates:
+        lines.append("No candidates found this run.")
+    else:
+        ranked = sorted(_conference_candidates, key=lambda c: c["relevance_score"], reverse=True)
+        for i, c in enumerate(ranked, 1):
+            lines.append(f"{i}. [{c['venue']}] {c['title']} (arXiv:{c['arxiv_id']}) — relevance {c['relevance_score']}/10")
+            lines.append(f"   {c['url']}")
+            lines.append(f"   Reason: {c['reason']}")
+            lines.append("")
+    lines.append("---")
+    lines.append('To add a pick: python3 agent.py topic "paper title"')
+    path.write_text("\n".join(lines), encoding="utf-8")
+    return path
 
 
 def verify_arxiv_paper(arxiv_id: str, claimed_title: str) -> tuple:
@@ -459,6 +506,25 @@ TOOLS = [
         },
     },
     {
+        "name": "propose_candidate",
+        "description": (
+            "Propose a paper as a candidate for the weekly conference-quality review "
+            "list. Does NOT add it to the wiki — only appends it to "
+            "conference_candidates.txt for human review."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "arxiv_id": {"type": "string", "description": "arXiv ID, e.g. 2501.12345"},
+                "title": {"type": "string", "description": "Claimed title (verified against arXiv)"},
+                "venue": {"type": "string", "description": "e.g. 'ACL 2025', 'NeurIPS 2024 poster' — extracted from the comment field"},
+                "relevance_score": {"type": "integer", "description": "1-10 relevance to wiki themes"},
+                "reason": {"type": "string", "description": "1-2 sentence justification"},
+            },
+            "required": ["arxiv_id", "title", "venue", "relevance_score", "reason"],
+        },
+    },
+    {
         "name": "done",
         "description": "Signal the agent is finished. Provide a summary plus lists of added and skipped items.",
         "input_schema": {
@@ -508,6 +574,8 @@ def execute_tool(name: str, inputs: dict) -> str:
             }
         else:
             result = download_pdf(arxiv_id, filename)
+    elif name == "propose_candidate":
+        result = propose_candidate(**inputs)
     elif name == "check_wiki":
         result = {"exists": check_already_in_wiki(inputs["title"])}
     elif name == "write_note":
@@ -536,13 +604,36 @@ def _base_context(existing: list[str]) -> str:
     )
 
 
+def _conference_context(existing: list[str]) -> str:
+    return (
+        f"Wiki themes: {', '.join(WIKI_THEMES)}.\n"
+        f"Already in wiki (skip duplicates): {', '.join(existing[:30])}.\n\n"
+        "This is a REVIEW-ONLY pass — nothing gets added to the wiki automatically.\n"
+        "For each candidate:\n"
+        "1. call search_arxiv with days_back=10 or more (conference-acceptance "
+        "comments lag daily submission) across the wiki themes\n"
+        "2. inspect each result's `comment` field for a marker naming one of: "
+        "ACL, EMNLP, NAACL, COLING, TACL, NeurIPS, ICML, ICLR, AAAI, UAI — skip "
+        "papers with no such marker, this mode is about conference-accepted "
+        "quality, not just novelty\n"
+        "3. for matches relevant to the wiki themes, call check_wiki first to skip "
+        "duplicates\n"
+        "4. call propose_candidate with the arxiv_id, title, the venue string "
+        "extracted from the comment field, a relevance_score (1-10), and a short "
+        "reason — never call download_pdf or write_note in this mode\n"
+        "5. call done when finished with a summary (leave added and skipped empty "
+        "— the real candidate list lives in conference_candidates.txt)"
+    )
+
+
 def _make_system(mode: str, extra: str, existing: list[str]) -> list[dict]:
+    context = _conference_context(existing) if mode == "conference" else _base_context(existing)
     text = (
         f"You are a research ingestion agent for an AI/ML knowledge wiki. "
         f"Mode: {mode}.\n\n"
         + extra
         + "\n\n"
-        + _base_context(existing)
+        + context
     )
     # Cache the (large, stable) system prompt
     return [{"type": "text", "text": text, "cache_control": {"type": "ephemeral"}}]
@@ -856,7 +947,16 @@ def run_agent(mode: str = "daily", topic: str = None, min_citations: int = 100) 
                 "message": message, "flagged_count": len(audit["flagged"]),
                 "timestamp": datetime.now().isoformat()}
 
-    if mode == "topic" and topic:
+    if mode == "conference":
+        _conference_candidates.clear()
+        extra = (
+            "Find recent papers accepted at major NLP/ML conferences "
+            "(ACL, EMNLP, NAACL, COLING, TACL, NeurIPS, ICML, ICLR, AAAI, UAI) "
+            f"relevant to: {', '.join(WIKI_THEMES[:8])}."
+        )
+        messages = [{"role": "user", "content": "Run conference-quality review sweep."}]
+
+    elif mode == "topic" and topic:
         extra = f'The user wants to add content about: "{topic}". Search for the most relevant and high-quality papers, repos, or blog posts on this topic.'
         messages = [{"role": "user", "content": f"Add content about: {topic}"}]
 
@@ -938,6 +1038,15 @@ def run_agent(mode: str = "daily", topic: str = None, min_citations: int = 100) 
 
         messages.append({"role": "user", "content": tool_results})
 
+    if mode == "conference":
+        path = write_conference_candidates_file()
+        result = {"mode": mode, "topic": None, "added": [], "skipped": [],
+                  "candidates_count": len(_conference_candidates),
+                  "candidates_file": str(path),
+                  "timestamp": datetime.now().isoformat()}
+        _conference_candidates.clear()
+        return result
+
     return {
         "mode":    mode,
         "topic":   topic,
@@ -970,6 +1079,10 @@ if __name__ == "__main__":
 
     results = run_agent(mode=mode, topic=topic, min_citations=min_citations)
     log_agent_run(results)
+
+    if mode == "conference":
+        print(f"\nCandidates found: {results.get('candidates_count', 0)}")
+        print(f"Review list written to: {results.get('candidates_file')}")
 
     print(f"\nAdded  : {len(results['added'])} item(s)")
     for item in results["added"]:

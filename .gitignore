@@ -27,6 +27,7 @@ arxiv_audit_results.json
 arxiv_corrections.json
 citing_audit_input.json
 citing_audit_results.json
+conference_candidates.txt
 
 # PDF papers — server only, copyright compliance
 # Files stay on server disk but must not be committed to public GitHub
