@@ -69,4 +69,4 @@ The design's elegance — no new architecture, no inference overhead, composable
 
 ## See Also
 
-[[Transformer|Attention Is All You Need]] · [[Transformer]] · [[GPT-3]] · [[Prefix Tuning]] · [[Adapter Layers]] · [[QLoRA]] · [[Parameter-Efficient Fine-Tuning]]
+[[Transformer|Attention Is All You Need]] · [[Transformer]] · [[GPT-3]] · [[Prefix Tuning]] · [[Adapter Layers]] · [[QLoRA]] · [[Parameter-Efficient Fine-Tuning]] · [[Cross-LoRA]]
