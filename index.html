@@ -3133,6 +3133,7 @@ function renderAgent() {
   const svgRadar  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="2"/><path d="M6 12a6 6 0 0 1 6-6M6 12a6 6 0 0 0 6 6M18 12a6 6 0 0 0-6-6M18 12a6 6 0 0 1-6 6"/><circle cx="12" cy="12" r="10"/></svg>`;
   const svgSync   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`;
   const svgShield = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`;
+  const svgGrad   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>`;
   const svgCopy   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
   const svgCheck  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
 
@@ -3194,6 +3195,11 @@ function renderAgent() {
           'python3 agent.py audit-citations',
           '',
           'Report-only &middot; flags wrong or fabricated IDs for manual review &middot; never auto-edits &middot; run monthly')}
+      ${cmdCard(svgGrad, '#2563eb', 'Conference papers',
+          'Find peer-reviewed papers from top AI conferences relevant to wiki themes',
+          'python3 agent.py conference',
+          '',
+          'NeurIPS &middot; ICLR &middot; ICML &middot; ACL &middot; EMNLP &middot; COLING &middot; Report-only &middot; Run weekly')}
     </div>
 
     <div class="agent-section-title">Sources monitored</div>
