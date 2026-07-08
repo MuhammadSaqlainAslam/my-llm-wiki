@@ -17,6 +17,8 @@ Cross-LoRA solves a fundamental limitation of [[LoRA Low-Rank Adaptation of Larg
 
 [[LoRA Low-Rank Adaptation of Large Language Models|LoRA]] is tightly coupled to the base model it was trained on. If you fine-tune a LoRA adapter on one model and then want to switch to a different base model — because of cost, licensing, or performance reasons — you cannot reuse that adapter without starting the fine-tuning process from scratch. This is wasteful: the adapter encodes task-specific knowledge that should in principle be transferable regardless of the underlying architecture.
 
+[[LoRA-X]] (ICLR 2025) first demonstrated training-free, data-free LoRA transfer across base models, but only for text-to-image diffusion models (Stable Diffusion v1.5, SDXL), using a subspace-constrained adapter applied selectively per layer. Cross-LoRA extends the same underlying idea — data-free subspace alignment — to LLMs, using a different alignment mechanism (rank-truncated SVD + Frobenius-optimal projection instead of per-layer subspace-similarity filtering).
+
 ## The Idea
 
 Two sequential, data-free components:
@@ -46,4 +48,4 @@ Both steps are closed-form or near-closed-form computations — no gradient desc
 
 ## Related Concepts
 
-[[LoRA Low-Rank Adaptation of Large Language Models|LoRA]] · [[Direct Preference Optimization Your Language Model is Secretly a Reward Model|DPO]] · [[RLHF|InstructGPT / RLHF]] · [[Ministral 3]] · [[Qwen3 Technical Report|Qwen3]] · [[GLM-5]]
+[[LoRA Low-Rank Adaptation of Large Language Models|LoRA]] · [[LoRA-X]] · [[Direct Preference Optimization Your Language Model is Secretly a Reward Model|DPO]] · [[RLHF|InstructGPT / RLHF]] · [[Ministral 3]] · [[Qwen3 Technical Report|Qwen3]] · [[GLM-5]]
