@@ -5,8 +5,8 @@ tags: [inference, throughput, efficiency, draft-model]
 year: 2025
 tldr: "A fast draft model proposes K tokens; the large model verifies all K in one parallel pass. Expected accepted tokens per verifier call = K × acceptance_rate. With MTP heads as drafts, Nemotron-3 achieves ~97% acceptance and ~2× throughput on long generations."
 theme: efficiency
-citation_count: 8
-arxiv: "2601.11580"
+citation_count: 1735
+arxiv: "2211.17192"
 cited_by_top: ["EAGLE-3", "QuantSpec", "SpecAttn", "Mamba Drafters", "TreeSpec", "ParallelSpec", "SpecFusion", "DraftAlign", "LongSpec", "SpecMamba"]
 cited_by_details:
   - title: "EAGLE-3"
@@ -60,6 +60,10 @@ cited_by_details:
 
 Autoregressive LLM generation is **memory-bandwidth-bound**: at each step the full model is loaded from GPU HBM to produce exactly one token, then loaded again for the next. You're paying the full memory read cost regardless of batch size. Speculative decoding amortizes this cost across multiple tokens. A fast **draft model** generates $K$ candidate tokens sequentially — fast because it's small, or because it shares weights with the main model (as in [[Multi-Token Prediction]]). The large **verifier model** then processes all $K$ candidates in a **single parallel forward pass**: because all $K$ tokens are known in advance, attention can run in parallel over them (just like training mode). The verifier accepts or rejects each position: it accepts candidate $k$ if its probability distribution agrees with the draft's choice, rejects the first position where it doesn't, replaces it with its own sample, and restarts. Expected tokens per verifier call = $K / (1 + r)$ where $r$ is the rejection rate. With $K = 2$ and 97% acceptance rate (as in [[Nemotron-3]]): $2 / (1 + 0.03) \approx 1.94$ tokens per verifier pass vs. 1.0 without speculative decoding — roughly 2× throughput on long sequences. The critical requirement: the draft model must be fast enough that generating $K$ drafts plus the verifier pass costs less wall-clock time than $K$ verifier passes. In Nemotron-3 the [[Multi-Token Prediction]] auxiliary heads are the draft model — zero extra memory cost, no separate deployment artifact, the heads exist for free as a training byproduct.
 
+## Origins
+
+The technique was independently named and formalized in two concurrent papers: [[Speculative-Decoding-Leviathan|Speculative Decoding (Leviathan 2023)]] (Google, ICML 2023 Oral) and [[Speculative-Sampling-Chen|Speculative Sampling (Chen 2023)]] (DeepMind, arXiv 2023). Both prove that the accept/reject sampling scheme preserves the target model's exact output distribution; Leviathan et al. is the more commonly cited canonical reference, while Chen et al. demonstrated the technique at larger scale (Chinchilla 70B).
+
 ## Where it appears
 
 - **[[Nemotron-3]]** — MTP heads serve as the draft model; used both during [[RLVR]] rollout generation (critical for sampling 64K-token traces efficiently) and at final inference deployment
@@ -73,4 +77,4 @@ Autoregressive LLM generation is **memory-bandwidth-bound**: at each step the fu
 
 ---
 
-*Related: [[Multi-Token Prediction]] · [[Nemotron-3]] · [[RLVR]] · [[KV Cache]]*
+*Related: [[Speculative-Decoding-Leviathan|Speculative Decoding (Leviathan 2023)]] · [[Speculative-Sampling-Chen|Speculative Sampling (Chen 2023)]] · [[Medusa]] · [[EAGLE]] · [[Multi-Token Prediction]] · [[Nemotron-3]] · [[RLVR]] · [[KV Cache]]*

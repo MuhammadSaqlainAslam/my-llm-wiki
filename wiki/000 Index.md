@@ -91,6 +91,8 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 
 | Note | Paper | Year | TL;DR |
 |---|---|---|---|
+| [[Speculative-Decoding-Leviathan\|Speculative Decoding (Leviathan 2023)]] | Fast Inference from Transformers via Speculative Decoding | 2023 | Named and formalized speculative decoding — draft-then-verify with modified rejection sampling, proven identical output distribution to the target model. 2–3× speedup. ICML 2023 Oral. |
+| [[Speculative-Sampling-Chen\|Speculative Sampling (Chen 2023)]] | Accelerating Large Language Model Decoding with Speculative Sampling | 2023 | DeepMind's independent, concurrent discovery of the same technique — demonstrated at Chinchilla 70B scale with a 4B draft model, ~2.6× speedup. |
 | [[Medusa]] | MEDUSA: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads | 2024 | K extra decoding heads on the frozen LLM predict K future tokens in parallel. Tree attention verifies all candidate continuations in one forward pass. No separate draft model needed. 2.2–2.8× speedup. |
 | [[EAGLE]] | EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty | 2024 | Draft at the hidden-state (feature) level, not token level. One lightweight autoregressive head predicts features given the actual next token. 3–3.5× lossless speedup on LLaMA-2-Chat 70B. |
 | [[Speculative Decoding]] | (Concept note) | — | Fast draft model proposes K tokens; large model verifies all K in one parallel pass. Expected accepted tokens per call = K × acceptance-rate. With MTP heads as drafts, ~2× throughput. |
