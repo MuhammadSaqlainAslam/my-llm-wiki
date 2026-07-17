@@ -39,6 +39,8 @@ The O(n²) attention cost is fine for short sequences. For long ones it breaks. 
 | [[Griffin]] | Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models | 2024 | Google DeepMind's RG-LRU + local attention hybrid. Griffin-14B matches LLaMA-2 on 7× fewer training tokens. Hawk (pure recurrence) beats Mamba at 3B. |
 | [[Mamba3\|Mamba-3]] | Mamba-3: Improved Sequence Modeling using State Space Principles | 2026 | Three principled SSM improvements — exponential-trapezoidal discretization, complex-valued states, MIMO formulation — +1.9pp over Mamba-2 at 1.5B params; matches Mamba-2 perplexity at half the state size. |
 | [[Gated-DeltaNet-2\|Gated DeltaNet-2]] | Gated DeltaNet-2: Decoupling Erase and Write in Linear Attention | 2026 | Separate channel-wise erase and write gates replace the tied scalar gate in Gated DeltaNet/KDA; strongest among Mamba-2/3 and DeltaNet-family variants, especially on long-context retrieval. |
+| [[LinRNN-Negative-Eigenvalues\|Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues]] | Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues | 2024 | Proves linear RNNs (Mamba, DeltaNet, RWKV) with non-negative eigenvalue constraints can't solve parity; allowing negative eigenvalues provably fixes it. ICLR 2025 Oral. |
+| [[LinOSS]] | Oscillatory State-Space Models | 2024 | SSM built on discretized harmonic oscillators with complex eigenvalues by construction; universality theorem proves it approximates any continuous-time dynamical system. ICLR 2025 Oral. |
 
 **Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention`
 
@@ -53,6 +55,7 @@ Parameters and compute don't have to scale together. These papers decouple them.
 | [[Mixture-of-Experts]] | Switch Transformers / Mixtral of Experts | 2022 | Route each token to a sparse subset of expert FFNs; parameters scale cheaply while per-token compute stays constant. More parameters, same FLOPs. |
 | [[LatentMoE]] | Nemotron 3 Technical Report | 2025 | Project tokens $d \rightarrow \ell$ before routing; cuts all-to-all communication by $d/\ell$ and enables 4× more experts at the same inference cost. |
 | [[State-Space-Models\|State-Space Models]] | (Concept note) | — | Linear recurrence over a fixed-size hidden state; linear-time in sequence length, O(1) inference memory. Foundation for S4, Mamba, and all hybrid SSM architectures. |
+| [[TokenFormer]] | TokenFormer: Rethinking Transformer Scaling with Tokenized Model Parameters | 2024 | Replaces linear projections with token-parameter attention; grows a model by adding parameter tokens rather than retraining a larger matrix from scratch. ICLR 2025 Spotlight. |
 
 **Tags:** `scaling` `moe` `routing` `efficiency` `sparse`
 
@@ -98,6 +101,10 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[Speculative Decoding]] | (Concept note) | — | Fast draft model proposes K tokens; large model verifies all K in one parallel pass. Expected accepted tokens per call = K × acceptance-rate. With MTP heads as drafts, ~2× throughput. |
 | [[KV Cache Optimization]] | Xu, Khaira & Singh — KV Cache Optimization Strategies for Scalable and Efficient LLM Inference | 2026 | Five families of KV-cache optimization (eviction, compression, hybrid memory, novel attention, combination), mapped to seven production scenarios. No single technique dominates — choose by workload. |
 | [[Quantization]] | (Concept note) | — | Reduce weight/activation precision (FP8, NVFP4) to shrink memory and increase throughput; requires component-specific handling for SSM states and attention layers. |
+| [[MagicDec]] | MagicDec: Breaking the Latency-Throughput Tradeoff for Long Context Generation with Speculative Decoding | 2024 | Speculative decoding's advantage GROWS with batch size/context length past a critical point, via a compressed-KV draft that avoids the KV-bandwidth bottleneck. ICLR 2025. |
+| [[KVQuant]] | KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization | 2024 | Asymmetric per-channel (keys) / per-token (values) quantization calibrated to heavy-tailed KV activations; under 3-bit KV cache, ~10M token context on one GPU. NeurIPS 2024. |
+| [[QuantSpec]] | QuantSpec: Self-Speculative Decoding with Hierarchical Quantized KV Cache | 2025 | Self-speculative decoding — the draft shares the target's weights but runs a 4-bit quantized KV cache/weights. >90% acceptance rate, ~2.5× speedup, no separate draft model. ICML 2025. |
+| [[SnapKV]] | SnapKV: LLM Knows What You Are Looking for Before Generation | 2024 | Pools cross-head attention over an observation window to vote on globally important KV positions; fixed-size snapshot keeps decoding speed constant as context grows. NeurIPS 2024. |
 
 **Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model`
 
@@ -420,6 +427,7 @@ Technical reports of major model families (2024–2025).
 | [[Nemotron_3_Ultra]] | 2026 | — | Technical report (no arXiv) |
 | [[MAI-Thinking-1]] | 2026 | Microsoft | Technical report (no arXiv) |
 | [[GLM-5]] | 2026 | — | [2602.15763](https://arxiv.org/abs/2602.15763) |
+| [[OLMoE]] | 2024 | — | [2409.02060](https://arxiv.org/abs/2409.02060) |
 
 **Tags:** `llm` `foundational` `scaling` `open-source` `agentic` `moe`
 
