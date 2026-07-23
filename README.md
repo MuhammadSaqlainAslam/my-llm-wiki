@@ -492,6 +492,28 @@ python3 agent.py citations
 
 ---
 
+## 🤖 Claude Code Skill
+
+The `skills/wiki-agent/SKILL.md` file is a
+[Claude Code skill](https://docs.anthropic.com/en/docs/claude-code/skills)
+that gives Claude Code automatic knowledge
+of all 6 `agent.py` maintenance modes,
+their auto-commit behavior, known failure
+modes, and post-run verification steps.
+
+Install to Claude Code on the server:
+```bash
+mkdir -p ~/.claude/skills/wiki-agent
+cp skills/wiki-agent/SKILL.md \
+   ~/.claude/skills/wiki-agent/SKILL.md
+```
+
+Once installed, Claude Code automatically
+reads this skill when you ask about wiki
+maintenance — no re-explaining needed.
+
+---
+
 ## How to Add a New Paper
 
 1. Drop the PDF into `raw/`
