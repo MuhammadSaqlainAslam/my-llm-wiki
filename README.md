@@ -512,6 +512,24 @@ Once installed, Claude Code automatically
 reads this skill when you ask about wiki
 maintenance — no re-explaining needed.
 
+### Slash Commands
+
+`.claude/commands/` also ships a direct slash command for each
+`agent.py` mode, so you can invoke a mode without asking Claude to
+run it by hand:
+
+| Command | Mode |
+|---|---|
+| `/topic` | Search arXiv/GitHub/blogs for papers on a topic |
+| `/citations` | Check foundational papers for new high-impact citing papers |
+| `/daily` | Daily arXiv/GitHub sweep for new papers |
+| `/update-citations` | Refresh citation counts from Semantic Scholar |
+| `/conference` | Report-only sweep for conference-accepted papers |
+| `/audit-citations` | Verify every cited-by arXiv ID against the live API |
+
+Each command inlines the same auto-commit behavior and known-failure-mode
+warnings documented in `skills/wiki-agent/SKILL.md`.
+
 ---
 
 ## How to Add a New Paper
