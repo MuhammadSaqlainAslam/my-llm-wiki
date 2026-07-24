@@ -7,7 +7,7 @@ description: Operational guide for the agent.py modes that maintain the HHRI-AI 
 
 ## Shared Context
 
-**Repo**: `/work/HHRI-AI/Saqlain/my-wiki/` (this server)
+**Repo**: this wiki's root directory (path varies by machine — `cd` to wherever `agent.py` lives)
 **Remote**: `github.com:MuhammadSaqlainAslam/my-llm-wiki.git`
 **Vertex AI**: configured via `ANTHROPIC_VERTEX_PROJECT_ID` / `VERTEX_REGION_CLAUDE_4_6_SONNET`
 in `.env` (region defaults to `europe-west1` in code if unset — see `.env.example`)
