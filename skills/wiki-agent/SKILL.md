@@ -5,6 +5,13 @@ description: Operational guide for the agent.py modes that maintain the HHRI-AI 
 
 # HHRI-AI Research Wiki — Agent Operations Skill
 
+## Slash Commands
+
+Each mode below also has a matching Claude Code slash command in `.claude/commands/` —
+`/topic`, `/citations`, `/daily`, `/update-citations`, `/conference`, `/audit-citations`.
+Prefer those over typing `python3 agent.py <mode>` directly in conversation; they carry
+the same per-mode warnings inline so nothing gets skipped.
+
 ## Shared Context
 
 **Repo**: this wiki's root directory (path varies by machine — `cd` to wherever `agent.py` lives)
