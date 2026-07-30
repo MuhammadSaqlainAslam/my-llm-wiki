@@ -13,6 +13,7 @@ Standard attention is $\text{softmax}(QK^\top)V$. The softmax couples positions 
 
 - [[Transformers Are SSMs]]
 - [[xLSTM]]
+- [[Attention to Mamba]] — used as the intermediate stepping stone when distilling a Transformer teacher into a Mamba student
 
 ---
 

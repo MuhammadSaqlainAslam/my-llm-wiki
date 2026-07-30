@@ -41,8 +41,9 @@ The O(n²) attention cost is fine for short sequences. For long ones it breaks. 
 | [[Gated-DeltaNet-2\|Gated DeltaNet-2]] | Gated DeltaNet-2: Decoupling Erase and Write in Linear Attention | 2026 | Separate channel-wise erase and write gates replace the tied scalar gate in Gated DeltaNet/KDA; strongest among Mamba-2/3 and DeltaNet-family variants, especially on long-context retrieval. |
 | [[LinRNN-Negative-Eigenvalues\|Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues]] | Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues | 2024 | Proves linear RNNs (Mamba, DeltaNet, RWKV) with non-negative eigenvalue constraints can't solve parity; allowing negative eigenvalues provably fixes it. ICLR 2025 Oral. |
 | [[LinOSS]] | Oscillatory State-Space Models | 2024 | SSM built on discretized harmonic oscillators with complex eigenvalues by construction; universality theorem proves it approximates any continuous-time dynamical system. ICLR 2025 Oral. |
+| [[Attention to Mamba]] | Attention to Mamba: A Recipe for Cross-Architecture Distillation | 2026 | Two-stage distillation (Transformer → linearized attention → Mamba) gives Mamba a principled initialization; distilled 1B student nearly matches Pythia-1B teacher (14.11 vs. 13.86 perplexity) with no Attention blocks left. |
 
-**Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention`
+**Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention` `distillation` `cross-architecture`
 
 ---
 

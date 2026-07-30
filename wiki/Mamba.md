@@ -210,6 +210,8 @@ In practice, hybrid architectures solve this: put a few attention layers (for ex
 
 Mamba's key contribution vs. all of these: **selectivity** achieved without sacrificing efficiency via the hardware-aware scan algorithm.
 
+- **[[Attention to Mamba]]:** Rather than designing a new architecture, distills an existing pretrained Transformer *into* Mamba — via a linearized-attention intermediate stage — to reuse Transformer training investment while landing on Mamba's inference profile.
+
 ---
 
 ## Key Numbers
