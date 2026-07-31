@@ -19,8 +19,9 @@ The papers that started everything. Everything else in this wiki is either built
 |---|---|---|---|
 | [[Transformer]] | Attention Is All You Need | 2017 | Self-attention replaces recurrence; any two tokens connect in one step, enabling parallel training and O(1) path length between positions. |
 | [[LLaMA 2]] | Llama 2: Open Foundation and Fine-Tuned Chat Models | 2023 | 7B–70B open models with full RLHF pipeline details. Introduces GQA for efficient KV cache. First open model competitive with ChatGPT on helpfulness; became the base for thousands of community finetunes. |
+| [[Attention Residuals]] | Attention Residuals | 2026 | Replace PreNorm's fixed-weight residual sum with softmax attention over preceding layer outputs; Block AttnRes makes it practical at scale, integrated into a 48B/3B Kimi Linear model pretrained on 1.4T tokens. |
 
-**Tags:** `foundational` `attention` `architecture` `parallelism` `rlhf` `open-source` `gqa`
+**Tags:** `foundational` `attention` `architecture` `parallelism` `rlhf` `open-source` `gqa` `residual-connections`
 
 ---
 
@@ -363,8 +364,9 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
 | [[VinePPO]] | 2024 | — | [2410.01679](https://arxiv.org/abs/2410.01679) |
+| [[EAPO]] | 2026 | — | [2606.30420](https://arxiv.org/abs/2606.30420) |
 
-**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment`
+**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay`
 
 ---
 
@@ -429,8 +431,9 @@ Technical reports of major model families (2024–2025).
 | [[MAI-Thinking-1]] | 2026 | Microsoft | Technical report (no arXiv) |
 | [[GLM-5]] | 2026 | — | [2602.15763](https://arxiv.org/abs/2602.15763) |
 | [[OLMoE]] | 2024 | — | [2409.02060](https://arxiv.org/abs/2409.02060) |
+| [[Step 3.5 Flash]] | 2026 | — | [2602.10604](https://arxiv.org/abs/2602.10604) |
 
-**Tags:** `llm` `foundational` `scaling` `open-source` `agentic` `moe`
+**Tags:** `llm` `foundational` `scaling` `open-source` `agentic` `moe` `sliding-window-attention` `multi-token-prediction`
 
 ---
 

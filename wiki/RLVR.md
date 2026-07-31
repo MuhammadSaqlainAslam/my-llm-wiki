@@ -20,6 +20,8 @@ There is no learned reward model to exploit. The policy must solve the actual pr
 ## Where it appears
 
 - **[[Nemotron-3]]** — Stage 2 of the post-training pipeline; the core capability-building RL stage before SWE-RL and RLHF
+- **[[EAPO]]** — augments RLVR rollouts with action-level experience from a prior policy instead of training on-policy from scratch every run
+- **[[Step 3.5 Flash]]** — combines verifiable RLVR-style signals with preference feedback under large-scale off-policy training
 
 ## Why it matters
 

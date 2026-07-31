@@ -12,6 +12,7 @@ The simplest possible [[Cache eviction]] strategy: at every decode step, drop an
 ## Where it appears
 
 - [[KV Cache Optimization]]
+- [[Step 3.5 Flash]] — interleaves it 3:1 with full attention layers to keep agentic inference fast without losing long-range information entirely
 
 ---
 

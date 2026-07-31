@@ -196,10 +196,10 @@ The "big" model doubles most dimensions: $d_{\text{model}} = 1024$, $d_{ff} = 40
 
 ## What Came After
 
-The Transformer became the universal backbone. GPT uses the decoder stack only (causal LM). BERT uses the encoder stack only (masked LM). T5 keeps the encoder-decoder. The FFN later got replaced by [[Mixture-of-Experts]] layers. The O(n²) attention cost led to [[Mamba]] and other subquadratic alternatives.
+The Transformer became the universal backbone. GPT uses the decoder stack only (causal LM). BERT uses the encoder stack only (masked LM). T5 keeps the encoder-decoder. The FFN later got replaced by [[Mixture-of-Experts]] layers. The O(n²) attention cost led to [[Mamba]] and other subquadratic alternatives. Even the residual connection itself — unchanged since ResNet — has since been revisited: [[Attention Residuals]] replaces its fixed-weight sum with learned, input-dependent attention over prior layers.
 
 Every model you use today is either a Transformer or reacting to one.
 
 ---
 
-*Related: [[Mamba]] · [[Mixture-of-Experts]] · [[Nemotron-3]]*
+*Related: [[Mamba]] · [[Mixture-of-Experts]] · [[Nemotron-3]] · [[Attention Residuals]]*

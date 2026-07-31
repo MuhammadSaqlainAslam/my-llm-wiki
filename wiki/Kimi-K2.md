@@ -54,3 +54,5 @@ Kimi K2 is Moonshot AI's fully open, commercially-licensed MoE model, purpose-bu
 ## Related Concepts
 
 *Lineage: [[DeepSeek-V3 Technical Report|DeepSeek-V3]] · [[Qwen3 Technical Report|Qwen3]] · [[The Llama 3 Herd of Models|LLaMA 3]] · [[Mixtral]]*
+
+Also from Moonshot AI's Kimi Team: **[[Attention Residuals]]**, integrated into the separate Kimi Linear architecture (48B/3B activated), not this model.

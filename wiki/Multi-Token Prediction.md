@@ -13,7 +13,8 @@ Standard language model training gives you one gradient signal per token positio
 ## Where it appears
 
 - **[[Nemotron-3]]** — architectural component (2 shared-weight MTP layers), training signal, and key enabler of throughput during RLVR rollout generation and final inference
-- Not used in [[Transformer]], [[Mamba]], or [[Mixture-of-Experts]] as standalone papers — MTP is a Nemotron-3-introduced element in this wiki
+- **[[Step 3.5 Flash]]** — MTP-3 heads reduce per-turn latency across long multi-round agentic interactions
+- Not used in [[Transformer]], [[Mamba]], or [[Mixture-of-Experts]] as standalone papers
 
 ## Why it matters
 
