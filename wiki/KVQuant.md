@@ -7,7 +7,7 @@ arxiv: "2401.18079"
 aliases: ["KVQuant"]
 tags: [kv-cache, quantization, inference, long-context]
 tldr: "Per-channel and per-token non-uniform quantization of the KV cache, calibrated to its heavy-tailed activation distribution — achieves under 3-bit KV cache with minimal perplexity degradation, enabling million-token-scale context on a single GPU. NeurIPS 2024."
-citation_count: 8647
+citation_count: 600
 ---
 
 ## TL;DR

@@ -4,7 +4,7 @@ title: "RLHF (Reinforcement Learning from Human Feedback)"
 authors: "Ouyang et al."
 tags: [glossary, training, alignment, fine-tuning, llama2, reward-model]
 arxiv: "2203.02155"
-citation_count: 9000
+citation_count: 22920
 tldr: "A fine-tuning pipeline that trains a reward model from human preference comparisons, then uses PPO to optimize the language model's policy toward higher rewards. The standard method for making LLMs helpful, harmless, and honest — used in InstructGPT, Claude, ChatGPT, and LLaMA 2-Chat."
 aliases: [RLHF, reinforcement learning from human feedback, RLHF fine-tuning, "Reinforcement-Learning-from-Human-Feedback"]
 ---

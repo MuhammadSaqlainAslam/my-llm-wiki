@@ -3964,7 +3964,7 @@
       "DIAMOND",
       "World-Model-Landscape"
     ],
-    "citation_count": 22920,
+    "citation_count": 343,
     "created": "2026-06-29",
     "arxiv": "2209.00588",
     "technical_report": "",
@@ -4165,7 +4165,7 @@
     "links": [
       "RLHF"
     ],
-    "citation_count": 476,
+    "citation_count": 22920,
     "created": "2026-06-10",
     "arxiv": "2203.02155",
     "technical_report": "",
@@ -4218,7 +4218,7 @@
       "LSTM",
       "BPE-Tokenization"
     ],
-    "citation_count": 1,
+    "citation_count": 476,
     "created": "2026-05-28",
     "arxiv": "2403.19887",
     "technical_report": "",
@@ -4312,7 +4312,7 @@
       "Transformer",
       "Nemotron-3"
     ],
-    "citation_count": 600,
+    "citation_count": 1,
     "created": "2026-05-12",
     "arxiv": "2603.20397",
     "technical_report": "",
@@ -4563,7 +4563,7 @@
       "GQA",
       "Speculative-Decoding"
     ],
-    "citation_count": 8647,
+    "citation_count": 600,
     "created": "2026-06-11",
     "arxiv": "2401.18079",
     "technical_report": "",
@@ -4598,7 +4598,7 @@
       "Attention",
       "Speculative-Decoding"
     ],
-    "citation_count": 340,
+    "citation_count": 8647,
     "created": "2026-06-03",
     "arxiv": "2001.08361",
     "technical_report": "",
@@ -4676,7 +4676,7 @@
       "Attention-Residuals",
       "Kimi-K3"
     ],
-    "citation_count": 316,
+    "citation_count": 340,
     "created": "2026-07-06",
     "arxiv": "2507.20534",
     "technical_report": "",
@@ -8461,7 +8461,7 @@
       "Ghost-Attention",
       "Transformer"
     ],
-    "citation_count": 9000,
+    "citation_count": 22920,
     "created": "2026-05-20",
     "arxiv": "2203.02155",
     "technical_report": "",
