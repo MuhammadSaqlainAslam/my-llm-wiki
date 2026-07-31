@@ -47,4 +47,6 @@ Residual connections have been essentially unchanged since ResNet — a fixed-we
 
 ## Related Concepts
 
-[[Transformer]] · [[Kimi-K2|Kimi K2]] · [[Linear attention]] · [[Mixture-of-Experts]]
+[[Transformer]] · [[Kimi-K2|Kimi K2]] · [[Kimi-K3|Kimi K3]] · [[Linear attention]] · [[Mixture-of-Experts]]
+
+**Where it appears:** integrated into the 48B/3B Kimi Linear model above; also adopted directly in **[[Kimi-K3|Kimi K3]]** (2.8T/104B activated), alongside Kimi Delta Attention, for depth-wise information flow.

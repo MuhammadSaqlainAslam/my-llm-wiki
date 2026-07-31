@@ -74,6 +74,8 @@ Consistent 4+ point quality improvement across all benchmarks at identical hardw
 
 *MoE: [[Mixture-of-Experts]] · [[Load Balancing Loss]]*
 
+**Where it appears:** [[Nemotron-3]] (introduced) · **[[Kimi-K3|Kimi K3]]** — "Stable LatentMoE" variant activating 16 of 896 routed experts per token at 2.8T total parameters
+
 *Nemotron 3 family: [[Nemotron-3]] (whitepaper, arXiv 2512.20856) · [[Nemotron_3_Super|Nemotron 3 Super]] · [[Nemotron_3_Ultra|Nemotron 3 Ultra]]*
 
 *Also adopted by: [[MAI-Thinking-1]] (Microsoft AI, cites LatentMoE directly)*
