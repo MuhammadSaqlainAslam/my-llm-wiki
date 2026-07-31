@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2509.24527"
 tags: [world-models, reinforcement-learning, transformer, deepmind]
 tldr: "Dreamer 4 is the first agent to obtain diamonds in Minecraft purely from offline data with zero environment interaction, using a block-causal transformer world model trained via a novel 'shortcut forcing' objective, with 100x less data than OpenAI's VPT"
-citation_count: 99
+citation_count: 111
 ---
 
 ## TL;DR

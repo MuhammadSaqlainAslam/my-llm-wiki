@@ -7,7 +7,7 @@ tags: [kv-cache, inference, throughput, long-context, eviction, compression, pag
 tldr: "A systematic survey of KV-cache optimization for production LLM serving, organized into five families: cache eviction, cache compression, hybrid memory, novel attention mechanisms, and combination strategies. Maps each technique to seven concrete deployment scenarios — long-context single-shot, datacenter throughput, edge, multi-turn chat, etc. — and concludes that no single strategy dominates; the right answer is workload-specific."
 aliases: [KV Cache Optimization, KV Cache Survey]
 theme: inference-optimization
-citation_count: 1
+citation_count: 600
 arxiv: "2603.20397"
 cited_by_top: ["StreamingLLM", "H2O", "SnapKV", "PyramidKV", "KVQuant", "MagicPIG", "InfLLM", "CLA", "GoldFinch", "NeuralKV"]
 cited_by_details:

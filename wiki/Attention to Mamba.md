@@ -7,7 +7,7 @@ tags: [ssm, mamba, distillation, linear-attention, cross-architecture, efficienc
 tldr: "Two-stage distillation — Transformer to linearized attention via a kernel trick, then linearized attention to Mamba — lets a pure-Mamba student recover Pythia-1B teacher performance (14.11 vs 13.86 perplexity) without falling back to a hybrid Attention+SSM architecture."
 theme: efficiency
 arxiv: "2604.14191"
-citation_count: 0
+citation_count: 1
 ---
 
 # Attention to Mamba: A Recipe for Cross-Architecture Distillation

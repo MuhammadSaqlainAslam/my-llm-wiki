@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2509.16941"
 tags: [benchmarks, coding, agentic, evaluation, software-engineering, contamination-resistant]
 tldr: "SWE-Bench Pro is a 1,865-problem enterprise-grade software engineering benchmark across 41 repositories where top models score below 45% Pass@1, designed to resist contamination and capture multi-file, long-horizon complexity beyond SWE-Bench Verified."
-citation_count: 139
+citation_count: 168
 ---
 
 ## TL;DR

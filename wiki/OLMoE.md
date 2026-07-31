@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2409.02060"
 tags: [model-family, moe, open-source, scaling, efficiency]
 tldr: "Fully open MoE model family (weights, data, code, training details) with 1B active / 7B total parameters — competitive with much larger dense models, released at a scale where the full training recipe is reproducible by the research community. ICLR 2025."
-citation_count: 0
+citation_count: 272
 ---
 
 ## TL;DR

@@ -8,7 +8,7 @@ aliases: [EAPO, Experience Augmented Policy Optimization, Experience-Augmented P
 tldr: "Inject a prior RL-optimized policy's actions at critical decision points during rollout — rather than replaying fixed trajectories — and correct the bias with importance sampling. Consistently beats state-of-the-art RLVR baselines on Qwen-2.5-Math-7B and Qwen3-8B across five reasoning benchmarks."
 theme: synthesis
 arxiv: "2606.30420"
-citation_count: 0
+citation_count: 1
 ---
 
 # EAPO: Experience Augmented Policy Optimization for LLM Reasoning

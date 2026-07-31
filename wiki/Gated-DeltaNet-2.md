@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2605.22791"
 tags: [linear-attention, ssm, architecture, efficiency]
 tldr: "Generalizes Gated DeltaNet and Kimi Delta Attention by replacing their single scalar gate with separate channel-wise erase and write gates, achieving the strongest results among Mamba-2/3 and DeltaNet-family variants on language modeling and long-context retrieval"
-citation_count: 6
+citation_count: 9
 ---
 
 ## TL;DR

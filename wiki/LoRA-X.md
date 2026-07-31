@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2501.16559"
 tags: [fine-tuning, lora, parameter-efficient, transfer-learning, diffusion-models]
 tldr: "Qualcomm/ANU's ICLR 2025 paper — the first training-free cross-model LoRA transfer method, restricting the adapter to the source model's subspace and applying it only where source/target layers show acceptable subspace similarity; validated on Stable Diffusion v1.5/SDXL"
-citation_count: 0
+citation_count: 7
 ---
 
 ## TL;DR

@@ -4,7 +4,7 @@ title: "Nemotron 3: Efficient and Open Intelligence"
 authors: "NVIDIA"
 year: 2025
 arxiv: "2512.20856"
-citation_count: 25
+citation_count: 29
 tags: [hybrid, moe, mamba, production, inference, quantization, rl, agentic]
 tldr: "Hybrid Mamba-2 + sparse attention + LatentMoE, trained with NVFP4 precision and multi-token prediction. 120B total / 12B active. 7.5× throughput over Qwen3.5-122B at 1M context, with competitive accuracy across math, code, and agentic tasks."
 theme: synthesis

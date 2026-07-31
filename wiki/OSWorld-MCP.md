@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2510.24563"
 tags: [benchmarks, tool-use, mcp, computer-use, evaluation, multimodal-agents, gui]
 tldr: "OSWorld-MCP extends OSWorld with 158 MCP tools across 7 apps, revealing that tool access improves success rates dramatically (8.3%→20.4% for o3) while best models still only invoke tools 36.3% of the time."
-citation_count: 15
+citation_count: 18
 ---
 
 ## TL;DR

@@ -8,7 +8,7 @@ technical_report: "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotr
 source_type: "technical_report"
 tags: [model-family, moe, mamba, hybrid-architecture, agentic, nvidia]
 tldr: "120B total / 12.7B active hybrid Mamba-2 + sparse attention + LatentMoE model from NVIDIA. 7.5× throughput over Qwen3.5-122B at 1M context. 60.47% on SWE-bench (OpenHands) and 89.0% AIME 2025. Formal arXiv paper: 2604.12374; NVIDIA-hosted technical report also available."
-citation_count: 0
+citation_count: 17
 ---
 
 # Nemotron 3 Super

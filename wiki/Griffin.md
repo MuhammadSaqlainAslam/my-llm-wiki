@@ -4,7 +4,7 @@ title: "Griffin: Mixing Gated Linear Recurrences with Local Attention for Effici
 authors: "Soham De, Samuel L. Smith, Anushan Fernando et al. (Google DeepMind)"
 year: 2024
 arxiv: "2402.19427"
-citation_count: 256
+citation_count: 263
 tags: [rnn, recurrence, local-attention, hybrid, efficiency, inference, gated, google-deepmind]
 tldr: "Griffin combines a new gated linear recurrent unit (RG-LRU) with local (sliding-window) attention in a hybrid architecture. At 14B parameters, it matches LLaMA-2 performance while being trained on 7× fewer tokens. Hawk (pure recurrence version) beats Mamba. Inference throughput is 2.5× higher than Transformers at 4K tokens decoded."
 aliases: [Griffin, Hawk, RG-LRU]

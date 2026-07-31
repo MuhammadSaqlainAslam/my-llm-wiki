@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2408.14837"
 tags: [world-models, diffusion, gaming, google]
 tldr: "GameNGen is the first game engine powered entirely by a neural model — a diffusion model trained on recorded RL-agent gameplay simulates DOOM in real time at 20fps, with human raters barely better than chance at distinguishing it from the real game"
-citation_count: 244
+citation_count: 256
 ---
 
 ## TL;DR

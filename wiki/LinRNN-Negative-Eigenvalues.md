@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2411.12537"
 tags: [ssm, linear-rnn, architecture, theory, foundational]
 tldr: "Proves that linear RNNs constrained to non-negative eigenvalues (Mamba, DeltaNet) cannot solve parity — a fundamental state-tracking limitation — and that allowing negative eigenvalues provably fixes it, with empirical validation up to 1.3B parameters. ICLR 2025 Oral."
-citation_count: 0
+citation_count: 91
 ---
 
 ## TL;DR

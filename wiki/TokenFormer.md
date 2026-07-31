@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2410.23168"
 tags: [architecture, scaling, transformer, efficiency]
 tldr: "Replaces all linear projections in a Transformer with a token-parameter attention mechanism — treating model parameters themselves as tokens — enabling models to be incrementally scaled by adding new parameter tokens without retraining from scratch. ICLR 2025 Spotlight."
-citation_count: 0
+citation_count: 15
 ---
 
 ## TL;DR

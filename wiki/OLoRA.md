@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2406.01775"
 tags: [fine-tuning, lora, parameter-efficient, initialization, efficiency]
 tldr: "Enhances LoRA by replacing random initialization of the low-rank matrices A and B with orthonormal initialization via QR decomposition — accelerates convergence while keeping the same parameter count and memory footprint as standard LoRA"
-citation_count: 0
+citation_count: 44
 ---
 
 ## TL;DR

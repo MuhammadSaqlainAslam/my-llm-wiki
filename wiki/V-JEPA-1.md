@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2404.08471"
 tags: [world-models, jepa, self-supervised-learning, video, meta]
 tldr: "V-JEPA — video representations learned purely by predicting masked spatio-temporal regions in latent space, with no pretrained image encoders, text, negative examples, or pixel reconstruction; ViT-H/16 reaches 81.9% on Kinetics-400"
-citation_count: 365
+citation_count: 412
 ---
 
 ## TL;DR

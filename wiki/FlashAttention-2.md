@@ -4,7 +4,7 @@ title: "FlashAttention-2: Faster Attention with Better Parallelism and Work Part
 authors: "Tri Dao"
 year: 2023
 arxiv: "2307.08691"
-citation_count: 2920
+citation_count: 3041
 tags: [attention, hardware, kernel-fusion, gpu, parallelism, efficiency, warp-specialization]
 tldr: "FlashAttention v2: fixes v1's suboptimal warp scheduling to push attention from 25–40% to 50–73% of peak GPU FLOPS — as close to GEMM efficiency as exact softmax gets. Reaches 225 TFLOPS/s per A100 training GPT-style models."
 aliases: [FlashAttention-2, FlashAttention v2, FA2]
