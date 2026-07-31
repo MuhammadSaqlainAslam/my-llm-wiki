@@ -691,7 +691,7 @@ def fetch_citations_bulk() -> dict:
         try:
             payload = json.dumps({"ids": paper_ids}).encode("utf-8")
             url = ("https://api.semanticscholar.org/graph/v1/paper/batch"
-                   "?fields=citationCount,title,year")
+                   "?fields=citationCount,title,year,externalIds")
             req = urllib.request.Request(
                 url, data=payload,
                 headers={"Content-Type": "application/json",
@@ -701,9 +701,23 @@ def fetch_citations_bulk() -> dict:
             with urllib.request.urlopen(req, timeout=20) as r:
                 response = json.loads(r.read())
 
-            for (filename, aid), entry in zip(batch, response):
+            # Match responses back to requested papers by the arXiv ID in
+            # externalIds, not by list position — the batch endpoint has been
+            # observed to return a response list misaligned with the request
+            # order, which silently corrupted citation counts across notes.
+            response_by_arxiv = {}
+            for entry in response:
                 if not entry:
                     continue  # null = paper not found on Semantic Scholar
+                returned_arxiv = (entry.get("externalIds") or {}).get("ArXiv")
+                if returned_arxiv:
+                    response_by_arxiv[returned_arxiv] = entry
+
+            for filename, aid in batch:
+                entry = response_by_arxiv.get(aid)
+                if entry is None:
+                    print(f"  ⚠️  no match returned for {aid} ({filename})")
+                    continue
                 count = entry.get("citationCount")
                 if count is None:
                     continue
