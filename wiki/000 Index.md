@@ -107,8 +107,12 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[KVQuant]] | KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization | 2024 | Asymmetric per-channel (keys) / per-token (values) quantization calibrated to heavy-tailed KV activations; under 3-bit KV cache, ~10M token context on one GPU. NeurIPS 2024. |
 | [[QuantSpec]] | QuantSpec: Self-Speculative Decoding with Hierarchical Quantized KV Cache | 2025 | Self-speculative decoding — the draft shares the target's weights but runs a 4-bit quantized KV cache/weights. >90% acceptance rate, ~2.5× speedup, no separate draft model. ICML 2025. |
 | [[SnapKV]] | SnapKV: LLM Knows What You Are Looking for Before Generation | 2024 | Pools cross-head attention over an observation window to vote on globally important KV positions; fixed-size snapshot keeps decoding speed constant as context grows. NeurIPS 2024. |
+| [[Lookahead Decoding]] | Break the Sequential Dependency of LLM Inference Using Lookahead Decoding | 2024 | Jacobi-iteration decoding: maintain multiple parallel lookahead branches, accept self-consistent n-grams. No draft model or fine-tuning needed. 1.3–1.8× speedup. |
+| [[EAGLE-2]] | EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees | 2024 | Replaces EAGLE's static draft tree with a context-aware dynamic tree, built from the draft model's own well-calibrated confidence scores. 3.05–4.26× speedup, 20–40% faster than EAGLE-1. |
+| [[EAGLE-3]] | EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test | 2025 | Drops feature prediction for direct token prediction + multi-layer feature fusion, fixing the scaling wall in EAGLE-1/2. Up to 6.5× speedup, ~1.4× over EAGLE-2. |
+| [[HYDRA]] | Hydra: Sequentially-Dependent Draft Heads for Medusa Decoding | 2024 | Makes Medusa's draft heads sequentially dependent (condition on earlier speculated tokens) instead of independent. Drop-in replacement; Hydra++ reaches 1.31× over Medusa, 2.70× over autoregressive decoding. |
 
-**Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model`
+**Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding`
 
 ---
 

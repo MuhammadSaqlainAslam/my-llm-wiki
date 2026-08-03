@@ -136,6 +136,11 @@ The acceptance rate of EAGLE is high (80–90%+ on most tasks) because predictin
 
 ---
 
+## Successors
+
+- **[[EAGLE-2]]** — replaces EAGLE's static draft tree with a context-aware dynamic tree, using the draft model's own (well-calibrated) confidence scores. 3.05–4.26x speedup, 20–40% faster than EAGLE-1.
+- **[[EAGLE-3]]** — diagnoses feature prediction itself as a scaling bottleneck; switches to direct token prediction + multi-layer feature fusion so the draft model actually benefits from more training data. Up to 6.5x speedup.
+
 ## Related Notes
 
-[[Speculative Decoding]] · [[Medusa]] · [[KV Cache Optimization]] · [[Transformer]] · [[LLaMA 2]] · [[HBM]] · [[Inference optimization]] · [[Draft model]]
+[[Speculative Decoding]] · [[Medusa]] · [[HYDRA]] · [[KV Cache Optimization]] · [[Transformer]] · [[LLaMA 2]] · [[HBM]] · [[Inference optimization]] · [[Draft model]]

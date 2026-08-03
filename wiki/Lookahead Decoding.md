@@ -1,9 +1,13 @@
 ---
 created: "2026-05-20"
-title: "Lookahead Decoding"
+title: "Break the Sequential Dependency of LLM Inference Using Lookahead Decoding"
+authors: "Yichao Fu, Peter Bailis, Ion Stoica, Hao Zhang"
+year: 2024
+arxiv: "2402.02057"
 tags: [glossary, speculative-decoding, inference, jacobi, parallel-decoding]
 tldr: "An inference acceleration method that uses Jacobi iteration to simultaneously draft multiple tokens without any separate model. Runs the LLM with multiple 'lookahead' windows in parallel, accepting tokens that are self-consistent. No draft model or fine-tuning required."
 aliases: [Lookahead Decoding, Jacobi decoding, lookahead decoding]
+citation_count: 0
 ---
 
 ## TL;DR

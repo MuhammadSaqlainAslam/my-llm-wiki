@@ -115,6 +115,7 @@ The speedup comes almost entirely from accepting ~2–3 tokens per verification 
 
 - vs. **[[Speculative Decoding]]** — standard speculative decoding needs a separate draft model. Medusa eliminates this by using extra heads. Medusa's speedup is similar (2–3×) but with far simpler infrastructure.
 - vs. **[[EAGLE]]** — EAGLE achieves higher speedup (3–3.5×) by predicting at the *feature level* (second-to-last hidden state) rather than token logits. EAGLE is more accurate but requires more complex training. Medusa is simpler to implement and deploy.
+- vs. **[[HYDRA]]** — a direct, drop-in fix to Medusa's own draft heads: makes them sequentially dependent (conditioning on earlier speculated tokens in the same candidate), rather than replacing the head architecture. Hydra++ reaches 1.31× over standard Medusa decoding.
 - vs. **multi-token prediction** (GPT-4 style) — similar idea: predict multiple future tokens. Medusa adds heads to a pretrained model; multi-token prediction trains from scratch with multiple output heads.
 
 ---
