@@ -68,6 +68,7 @@ The technique was independently named and formalized in two concurrent papers: [
 
 - **[[Nemotron-3]]** — MTP heads serve as the draft model; used both during [[RLVR]] rollout generation (critical for sampling 64K-token traces efficiently) and at final inference deployment
 - **[[Multi-Token Prediction]]** — MTP is the specific mechanism that provides the draft tokens
+- **[[Speculative Chain-of-Thought]]** — raises the unit of speculation from tokens to whole reasoning chains: a small model drafts a full chain-of-thought, the target model verifies and corrects only the wrong parts
 
 ## Why it matters
 

@@ -42,4 +42,4 @@ This amortizes RL training cost across runs: rather than throwing away everythin
 
 ## Related Concepts
 
-[[RLVR]] · [[GRPO]] · [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] · [[On-Policy Distillation]]
+[[RLVR]] · [[GRPO]] · [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] · [[On-Policy Distillation]] · [[On the Direction of RLVR Updates]] (same research group)

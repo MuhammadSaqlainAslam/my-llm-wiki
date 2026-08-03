@@ -63,6 +63,7 @@ The compression is *learned* — the model trains the weighting function $Z$ joi
 ## Where It Appears
 
 - **[[DeepSeek_V4]]** — primary architecture; CSA layers are interleaved with [[Heavily Compressed Attention|HCA]] layers throughout the model
+- **[[Sparrow]]** — applies sparse attention to RLVR rollout generation specifically, with a dynamic schedule that keeps a stability statistic constant rather than using a fixed sparsity pattern
 
 ---
 

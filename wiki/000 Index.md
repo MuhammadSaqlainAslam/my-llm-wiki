@@ -365,8 +365,11 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
 | [[VinePPO]] | 2024 | — | [2410.01679](https://arxiv.org/abs/2410.01679) |
 | [[EAPO]] | 2026 | — | [2606.30420](https://arxiv.org/abs/2606.30420) |
+| [[Speculative Chain-of-Thought\|Speculative Chain-of-Thought (SCoT)]] | 2025 | — | [2504.19095](https://arxiv.org/abs/2504.19095) |
+| [[Sparrow]] | 2026 | — | [2606.08446](https://arxiv.org/abs/2606.08446) |
+| [[On the Direction of RLVR Updates]] | 2026 | — | [2603.22117](https://arxiv.org/abs/2603.22117) |
 
-**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay`
+**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention`
 
 ---
 
