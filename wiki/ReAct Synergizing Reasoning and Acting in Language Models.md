@@ -79,6 +79,11 @@ The paper demonstrated that you don't need reinforcement learning or massive amo
 
 Conceptually, ReAct reframed the LLM-as-agent problem: instead of asking "how do we train an LLM to act?", it asked "can we prompt an LLM to reason its way through acting?" — and the answer was a clear yes.
 
+## Successors
+
+- **[[Reflexion]]** — wraps a ReAct-style Actor with an Evaluator + Self-Reflection memory loop, so the same agent can retry and improve across multiple attempts at a task instead of acting once.
+- **[[Generative-Agents|Generative Agents]]** — builds on the act/observe loop with a persistent memory stream, retrieval, and reflection, enabling coherent agent behavior over simulated days rather than a single task episode.
+
 ## See Also
 
-[[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain-of-Thought Prompting]] · [[Transformer]] · [[Transformer|Attention Is All You Need]] · [[Toolformer]] · [[WebGPT]] · [[Self-Consistency]] · [[HotpotQA]] · [[In-Context Learning]]
+[[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain-of-Thought Prompting]] · [[Transformer]] · [[Transformer|Attention Is All You Need]] · [[Toolformer]] · [[WebGPT]] · [[Self-Consistency]] · [[HotpotQA]] · [[In-Context Learning]] · [[Reflexion]] · [[Generative-Agents|Generative Agents]]

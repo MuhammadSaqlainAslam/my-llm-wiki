@@ -96,8 +96,8 @@ DFSDT enables completion of instructions that ReACT fails entirely on, by explor
 - **Saturation ceiling unclear**: GPT-4-DFSDT already achieves ~0.70 pass rate; as stronger models emerge, the headroom in the current test split may compress quickly
 
 ## Related Concepts
-[[LLM Benchmarks]] [[LLM evaluation]] [[RLHF]] [[Transformer]]
+[[LLM Benchmarks]] [[LLM evaluation]] [[RLHF]] [[Transformer]] [[Gorilla]] [[Toolformer]]
 
-**Related benchmarks**: APIBench (Gorilla), API-Bank, ToolAlpaca, HotpotQA (multi-step reasoning analog)
+**Related benchmarks**: APIBench ([[Gorilla]]), API-Bank, ToolAlpaca, HotpotQA (multi-step reasoning analog)
 **Capabilities tested**: Tool use / API calling, multi-step planning, instruction following, retrieval-augmented generation, generalization to unseen APIs
 **Methods**: ReACT prompting, Chain-of-Thought, depth-first search over reasoning trees, neural retrieval, supervised fine-tuning (SFT)

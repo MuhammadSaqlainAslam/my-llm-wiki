@@ -347,6 +347,7 @@ Evaluates LLM ability to use external tools, APIs, and computer interfaces.
 
 | Paper | Year | What it measures |
 |-------|------|-----------------|
+| [[Gorilla]] | 2023 | APIBench — finetuned + retrieval-aware API-call correctness across HuggingFace/TorchHub/TensorHub |
 | [[ToolLLM]] | 2023 | 16,464 real-world APIs — tool planning and chaining |
 | [[OSWorld]] | 2024 | GUI desktop control via mouse/keyboard on real OS |
 | [[SWE-bench Pro]] | 2025 | Enterprise agentic coding across multi-file repos |
@@ -402,6 +403,35 @@ Models that learn a predictive representation of an environment, used either to 
 
 ---
 
+## 📚 Retrieval-Augmented Generation
+
+Grounding LLMs in external, updatable, citable text instead of relying purely on facts baked into weights.
+
+| Note | Paper | Year | TL;DR |
+|---|---|---|---|
+| [[RAG]] | Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks | 2020 | Combines a pretrained generator (parametric memory) with a dense Wikipedia vector index (non-parametric memory) retrieved at inference; set SOTA on open-domain QA and produced more factual text than a parametric-only baseline. |
+| [[RETRO]] | Improving Language Models by Retrieving from Trillions of Tokens | 2021 | Retrieves nearest-neighbor chunks from a frozen 2T-token database via BERT embeddings + ScaNN, integrated through Chunked Cross-Attention; 7.5B RETRO matches GPT-3 (175B) on the Pile with 25x fewer parameters. |
+| [[Lost-in-the-Middle\|Lost in the Middle]] | Lost in the Middle: How Language Models Use Long Contexts | 2023 | U-shaped accuracy curve — LMs use info best at the start/end of context, worst in the middle, even for long-context-specialized models. A key practical constraint on RAG system design. |
+| [[Self-RAG]] | Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection | 2023 | Trains one LM to decide on its own when to retrieve and to critique its own retrieved passages and generated output via learned reflection tokens — outperforms ChatGPT/retrieval-augmented Llama2-chat with only 7B/13B params. |
+| [[RAPTOR]] | RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval | 2024 | Recursively clusters and summarizes text chunks into a multi-level tree, retrieving from all abstraction levels at once; +20pp QuALITY accuracy with GPT-4 retrieval. |
+
+**Tags:** `retrieval` `rag` `long-context` `hierarchical-summarization` `self-reflection` `non-parametric-memory`
+
+---
+
+## 🤖 LLM Agents
+
+Architectures that give an LLM memory, self-critique, or a persistent role across many steps or a simulated environment.
+
+| Note | Paper | Year | TL;DR |
+|---|---|---|---|
+| [[Generative-Agents\|Generative Agents]] | Generative Agents: Interactive Simulacra of Human Behavior | 2023 | 25 LLM agents with a memory stream, retrieval (recency+importance+relevance), reflection, and planning produce emergent believable social behavior (e.g. a spontaneous, word-of-mouth Valentine's Day party). |
+| [[Reflexion]] | Reflexion: Language Agents with Verbal Reinforcement Learning | 2023 | Agent improves within a task via natural-language self-critique stored in memory (no gradient updates) — 91% HumanEval pass@1 vs. 80% GPT-4 baseline, 97% vs. 75% AlfWorld success rate. |
+
+**Tags:** `agents` `memory` `reflection` `simulation` `verbal-reinforcement-learning`
+
+---
+
 ## 🔧 Fine-tuning & Alignment
 
 Parameter-efficient fine-tuning and alignment techniques.
@@ -409,7 +439,9 @@ Parameter-efficient fine-tuning and alignment techniques.
 | Paper | Year | Citations | arXiv |
 |-------|------|-----------|-------|
 | [[LoRA Low-Rank Adaptation of Large Language Models\|LoRA]] | 2021 | ~12,000 | [2106.09685](https://arxiv.org/abs/2106.09685) |
+| [[FLAN]] | 2021 | — | [2109.01652](https://arxiv.org/abs/2109.01652) |
 | [[RLHF\|InstructGPT / RLHF]] | 2022 | ~8,500 | [2203.02155](https://arxiv.org/abs/2203.02155) |
+| [[Self-Instruct]] | 2022 | — | [2212.10560](https://arxiv.org/abs/2212.10560) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[Ministral 3]] | 2026 | — | [2601.08584](https://arxiv.org/abs/2601.08584) |
 | [[LoRA-X]] | 2025 | — | [2501.16559](https://arxiv.org/abs/2501.16559) |
@@ -418,7 +450,7 @@ Parameter-efficient fine-tuning and alignment techniques.
 | [[Adapters Selector]] | 2025 | — | [COLING 2025](https://aclanthology.org/2025.coling-main.40) |
 | [[Time-Varying LoRA]] | 2024 | — | [NeurIPS 2024](https://openreview.net/forum?id=SgODU2mx9T) |
 
-**Tags:** `fine-tuning` `alignment` `parameter-efficient` `rlhf` `distillation`
+**Tags:** `fine-tuning` `alignment` `parameter-efficient` `rlhf` `distillation` `instruction-tuning` `zero-shot` `bootstrapping`
 
 ---
 

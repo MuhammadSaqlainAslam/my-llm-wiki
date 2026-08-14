@@ -35,6 +35,8 @@ Three stages:
 
 - [[LLaMA 2]] — detailed public account of the RLHF pipeline: data collection, dual RM (helpfulness + safety), PPO loop, Ghost Attention
 - [[GRPO]] — DeepSeek's simplification of PPO for language model training
+- [[FLAN]] — the earlier, purely-supervised instruction-tuning stage that RLHF pipelines like InstructGPT build a reward model and PPO on top of
+- [[Self-Instruct]] — shows the supervised instruction-tuning half of the pipeline can be bootstrapped from the model itself instead of human annotators, though it produces no preference/reward signal to replace the RLHF stage
 
 ## Key Formula or Pseudocode
 
