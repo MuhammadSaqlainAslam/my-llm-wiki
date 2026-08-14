@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2209.00588"
 tags: [world-models, transformer, reinforcement-learning]
 tldr: "IRIS (Imagination with auto-Regression over an Inner Speech) models environment dynamics as a sequence-modeling problem over discrete image tokens with an autoregressive Transformer, achieving a 1.046 human-normalized score on Atari 100k from ~2 hours of equivalent gameplay"
-citation_count: 343
+citation_count: 348
 ---
 
 ## TL;DR

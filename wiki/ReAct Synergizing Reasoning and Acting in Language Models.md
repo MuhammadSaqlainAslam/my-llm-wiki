@@ -6,7 +6,7 @@ authors: Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Naras
 year: 2023
 arxiv: 2210.03629
 tags: [foundational, inference, attention, reasoning, agents, prompting]
-citation_count: 9244
+citation_count: 10170
 tldr: ReAct interleaves verbal reasoning traces and external actions (e.g. Wikipedia search) in LLM prompts, beating imitation/RL baselines by 34% on ALFWorld and 10% on WebShop with only 1–2 in-context examples.
 ---
 

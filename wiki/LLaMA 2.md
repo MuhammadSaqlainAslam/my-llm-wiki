@@ -4,7 +4,7 @@ title: "Llama 2: Open Foundation and Fine-Tuned Chat Models"
 authors: "Hugo Touvron, Louis Martin, Kevin Stone et al. (Meta GenAI)"
 year: 2023
 arxiv: "2307.09288"
-citation_count: 17760
+citation_count: 17918
 tags: [language-model, rlhf, instruction-tuning, open-source, chat, safety, gqa, pretraining]
 tldr: "Meta releases 7B–70B pretrained and RLHF-aligned chat models with full details on the alignment pipeline. Llama 2-Chat outperforms all public chat models and is competitive with closed models like ChatGPT on helpfulness. The technical report is one of the most detailed public accounts of the RLHF/RLAIF process."
 aliases: [LLaMA 2, Llama 2, LLaMA-2, Llama-2-Chat]

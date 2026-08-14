@@ -5,7 +5,7 @@ authors: "Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria 
 year: 2023
 arxiv: "2302.04761"
 tags: [tool-use, api-calls, language-models, agents, self-supervised]
-citation_count: 0
+citation_count: 5122
 tldr: "Fine-tunes language models to autonomously decide when and how to call external APIs (calculator, search, calendar, translator, Q&A) mid-generation, using a self-supervised bootstrapping procedure that requires only a handful of demonstrations per tool — no human annotation of when to call."
 aliases: ["Toolformer"]
 ---

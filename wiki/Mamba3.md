@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2603.15569"
 tags: [ssm, state-space-models, mamba, linear-attention, inference-efficiency, language-modeling, recurrent-models, MIMO, complex-valued, discretization]
 tldr: "Mamba-3 introduces three principled SSM improvements — exponential-trapezoidal discretization, complex-valued states, and MIMO formulation — achieving +1.8pp over Gated DeltaNet and matching Mamba-2 perplexity at half the state size."
-citation_count: 66
+citation_count: 69
 aliases: ["Mamba3", "Mamba-3 MIMO", "exponential-trapezoidal SSM"]
 ---
 

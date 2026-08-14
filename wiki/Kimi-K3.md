@@ -8,7 +8,7 @@ aliases: [Kimi K3, K3]
 tldr: "2.8T-parameter MoE (104B activated) built on Kimi Delta Attention and Attention Residuals, with Stable LatentMoE activating 16 of 896 routed experts per token. ~2.5x more scaling-efficient than Kimi K2; open-weight, native vision, 1M-token context, and consistently outperforms other open and proprietary models while still trailing Claude Fable 5 and GPT-5.6 Sol."
 theme: synthesis
 arxiv: "2607.24653"
-citation_count: 0
+citation_count: 3
 ---
 
 # Kimi K3: Open Frontier Intelligence

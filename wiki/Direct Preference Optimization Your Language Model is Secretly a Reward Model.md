@@ -6,7 +6,7 @@ authors: Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christoph
 year: 2023
 arxiv: 2305.18290
 tags: [alignment, rlhf, fine-tuning, preference-learning, foundational, inference]
-citation_count: 9832
+citation_count: 10087
 tldr: DPO replaces the unstable two-stage RLHF pipeline (reward model + PPO) with a single binary cross-entropy loss, matching or beating PPO-based RLHF on sentiment, summarization, and dialogue with models up to 6B parameters.
 ---
 

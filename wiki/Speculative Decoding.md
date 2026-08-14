@@ -5,7 +5,7 @@ tags: [inference, throughput, efficiency, draft-model]
 year: 2025
 tldr: "A fast draft model proposes K tokens; the large model verifies all K in one parallel pass. Expected accepted tokens per verifier call = K × acceptance_rate. With MTP heads as drafts, Nemotron-3 achieves ~97% acceptance and ~2× throughput on long generations."
 theme: efficiency
-citation_count: 1806
+citation_count: 1863
 arxiv: "2211.17192"
 cited_by_top: ["EAGLE-3", "QuantSpec", "SpecAttn", "Mamba Drafters", "TreeSpec", "ParallelSpec", "SpecFusion", "DraftAlign", "LongSpec", "SpecMamba"]
 cited_by_details:

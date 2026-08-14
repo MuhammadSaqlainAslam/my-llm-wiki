@@ -8,7 +8,7 @@ aliases: [SCoT, Speculative Chain-of-Thought]
 tldr: "Apply the draft-and-verify idea from speculative decoding one level up: a small model drafts a full chain-of-thought, the large target model checks and corrects only the wrong parts. Cuts reasoning latency 48-66% (32B target) and 21-49% (70B target) at near-target-model accuracy."
 theme: efficiency
 arxiv: "2504.19095"
-citation_count: 0
+citation_count: 23
 ---
 
 # Efficient Reasoning for LLMs through Speculative Chain-of-Thought

@@ -7,7 +7,7 @@ arxiv: "2404.14469"
 aliases: ["SnapKV"]
 tags: [kv-cache, compression, inference, long-context]
 tldr: "Pools attention weights across all heads on an observation window to vote on which KV positions are globally important, then retains only those — a compact 'snapshot' per layer. Maintains constant decoding speed as context grows and mitigates the long-context slowdown seen in Medusa. NeurIPS 2024."
-citation_count: 792
+citation_count: 841
 ---
 
 ## TL;DR

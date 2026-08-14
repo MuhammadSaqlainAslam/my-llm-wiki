@@ -4,7 +4,7 @@ title: "Retentive Network: A Successor to Transformer for Large Language Models"
 authors: "Yutao Sun, Li Dong, Shaohan Huang, Shuming Ma, Yuqing Xia, Jilong Xue, Jianyong Wang, Furu Wei"
 year: 2023
 arxiv: "2307.08621"
-citation_count: 729
+citation_count: 745
 tags: [rnn, linear-attention, retention, efficiency, inference, parallelism, language-model]
 tldr: "RetNet introduces a retention mechanism with three equivalent computation forms: parallel (train), recurrent (O(1) inference), and chunkwise (efficient long sequences). Compared to Transformer: 3.4× lower GPU memory, 8.4× lower latency, 15.6× higher throughput — without sacrificing perplexity."
 aliases: [RetNet, Retentive Network, RETNET]

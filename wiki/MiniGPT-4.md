@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2304.10592"
 tags: [vision-language, multimodal, foundations]
 tldr: "Aligns a frozen vision encoder with a frozen LLM (Vicuna) using a single trainable projection layer, demonstrating GPT-4-like multimodal abilities without retraining either component"
-citation_count: 3272
+citation_count: 3292
 ---
 
 ## TL;DR

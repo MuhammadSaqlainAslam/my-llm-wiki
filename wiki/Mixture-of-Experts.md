@@ -4,7 +4,7 @@ title: "Switch Transformers / Mixtral of Experts"
 arxiv: "2101.03961"
 authors: "Fedus, Zoph & Shazeer / Jiang et al."
 year: 2022
-citation_count: 4408
+citation_count: 4540
 tags: [scaling, moe, routing, efficiency, sparse]
 tldr: "Route each token to a sparse subset of expert FFNs; parameters scale cheaply while per-token compute stays constant. Switch uses top-1 routing; Mixtral uses top-2 of 8. More parameters, same FLOPs."
 theme: scaling

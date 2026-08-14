@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2503.20523"
 tags: [world-models, autonomous-driving, generative-models, wayve]
 tldr: "Successor to GAIA-1 — a latent diffusion world model generating high-resolution, multi-camera driving videos across the UK, US, and Germany, with fine-grained structured control over ego-vehicle dynamics, agent behavior, and road semantics"
-citation_count: 162
+citation_count: 170
 ---
 
 ## TL;DR

@@ -5,7 +5,7 @@ authors: Edward Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, S
 year: 2021
 arxiv: 2106.09685
 tags: [foundational, fine-tuning, inference, attention, parameter-efficient]
-citation_count: 21451
+citation_count: 21942
 tldr: LoRA freezes pretrained weights and injects trainable low-rank matrix pairs into Transformer layers, reducing GPT-3 175B trainable parameters by 10,000× and GPU memory by 3× with no added inference latency.
 ---
 

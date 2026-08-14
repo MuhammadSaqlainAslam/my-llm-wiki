@@ -4,7 +4,7 @@ title: "MEDUSA: Simple LLM Inference Acceleration Framework with Multiple Decodi
 authors: "Tianle Cai, Yuhong Li, Zhengyang Geng, Hongwu Peng, Jason D. Lee, Deming Chen, Tri Dao"
 year: 2024
 arxiv: "2401.10774"
-citation_count: 828
+citation_count: 860
 tags: [speculative-decoding, inference, decoding-heads, tree-attention, throughput, draft-model-free]
 tldr: "Medusa adds K extra decoding heads to an LLM that each predict one token further into the future. A tree-based attention mechanism verifies all candidate continuations in a single forward pass. No separate draft model needed. Medusa-1 achieves 2.2× speedup with no quality loss; Medusa-2 reaches 2.3–2.8× with joint fine-tuning."
 aliases: [Medusa, Medusa decoding, MEDUSA]

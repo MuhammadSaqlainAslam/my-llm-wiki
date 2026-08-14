@@ -8,7 +8,7 @@ aliases: [AttnRes, Attention Residuals, Block AttnRes]
 tldr: "Replace fixed-weight residual accumulation (PreNorm's sum of all prior layer outputs) with softmax attention over preceding layers, so each layer learns input-dependent weights for how much of each earlier layer to keep. Block AttnRes makes this affordable at scale; integrated into a 48B/3B-activated Kimi Linear model pretrained on 1.4T tokens with gains on every evaluated task."
 theme: foundational
 arxiv: "2603.15031"
-citation_count: 40
+citation_count: 42
 ---
 
 # Attention Residuals

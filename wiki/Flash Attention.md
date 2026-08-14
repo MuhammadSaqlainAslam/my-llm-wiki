@@ -4,7 +4,7 @@ title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awaren
 authors: "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré"
 year: 2022
 arxiv: "2205.14135"
-citation_count: 4890
+citation_count: 5016
 tags: [attention, hardware, kernel-fusion, sram, gpu, io-awareness, efficiency]
 tldr: "IO-aware exact attention that tiles computation into SRAM, never materializing the T×T attention matrix in HBM. 2–4× wall-clock speedup with zero approximation — the canonical hardware-aware algorithm and the template every serious attention kernel copies."
 aliases: [FlashAttention, Flash Attention, FlashAttention v1]

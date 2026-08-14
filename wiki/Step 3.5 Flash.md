@@ -7,7 +7,7 @@ tags: [model-family, moe, agentic, sliding-window-attention, multi-token-predict
 tldr: "196B-parameter sparse MoE with only 11B active parameters, pairing interleaved 3:1 sliding-window/full attention with Multi-Token Prediction (MTP-3) for fast agentic inference. RL post-training mixes verifiable rewards with preference feedback under large-scale off-policy training, reaching frontier-comparable scores (GPT-5.2 xHigh / Gemini 3.0 Pro range) on agent, coding, and math benchmarks."
 theme: synthesis
 arxiv: "2602.10604"
-citation_count: 23
+citation_count: 27
 ---
 
 # Step 3.5 Flash: Open Frontier-Level Intelligence with 11B Active Parameters
