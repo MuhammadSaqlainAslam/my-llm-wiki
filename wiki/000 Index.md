@@ -364,6 +364,7 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models\|Chain of Thought]] | 2022 | ~9,000 | [2201.11903](https://arxiv.org/abs/2201.11903) |
 | [[RLHF\|InstructGPT / RLHF]] | 2022 | ~8,500 | [2203.02155](https://arxiv.org/abs/2203.02155) |
 | [[ReAct Synergizing Reasoning and Acting in Language Models\|ReAct]] | 2022 | ~3,500 | [2210.03629](https://arxiv.org/abs/2210.03629) |
+| [[Toolformer]] | 2023 | — | [2302.04761](https://arxiv.org/abs/2302.04761) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
@@ -373,7 +374,7 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Sparrow]] | 2026 | — | [2606.08446](https://arxiv.org/abs/2606.08446) |
 | [[On the Direction of RLVR Updates]] | 2026 | — | [2603.22117](https://arxiv.org/abs/2603.22117) |
 
-**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention`
+**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention` `tool-use`
 
 ---
 
