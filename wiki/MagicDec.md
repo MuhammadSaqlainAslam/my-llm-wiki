@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2408.11049"
 tags: [speculative-decoding, inference, efficiency, long-context]
 tldr: "Theoretical analysis showing speculative decoding becomes MORE beneficial at larger batch sizes and longer contexts — the opposite of common intuition — by exploiting that KV cache bandwidth becomes the bottleneck at scale, enabling 2-4x speedups where naive SD was thought not to help. ICLR 2025."
-citation_count: 93
+citation_count: 94
 ---
 
 ## TL;DR

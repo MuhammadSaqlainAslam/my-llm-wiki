@@ -4,7 +4,7 @@ title: "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty"
 authors: "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang"
 year: 2024
 arxiv: "2401.15077"
-citation_count: 574
+citation_count: 598
 tags: [speculative-decoding, inference, draft-model, feature-level, throughput, efficiency]
 tldr: "EAGLE drafts at the second-to-last hidden layer (feature level) rather than token level, resolving the 'feature uncertainty' that makes token-level autoregression hard. A single lightweight autoregressive head predicts the next feature vector; the target model verifies. 3–3.5× speedup on LLaMA-2-Chat 70B — the best lossless speedup in the speculative decoding family."
 aliases: [EAGLE, EAGLE speculative sampling]

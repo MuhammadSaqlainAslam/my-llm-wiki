@@ -5,7 +5,7 @@ authors: "Jason Wei, Maarten Bosma, Vincent Y. Zhao, Kelvin Guu, Adams Wei Yu, B
 year: 2021
 arxiv: "2109.01652"
 tags: [instruction-tuning, zero-shot, generalization, finetuning, multi-task]
-citation_count: 0
+citation_count: 5334
 tldr: "Finetune a large pretrained LM on 60+ NLP datasets rewritten as natural-language instructions, grouped into task clusters. Held-out-cluster evaluation shows the model generalizes to unseen task types, not just unseen datasets — FLAN zero-shot beats 175B GPT-3 zero-shot on 20 of 25 datasets, and even beats GPT-3 few-shot on several."
 aliases: ["FLAN", "Finetuned Language Net"]
 ---

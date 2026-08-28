@@ -8,7 +8,7 @@ aliases: [Sparrow]
 tldr: "RLVR rollout cost is dominated by long-context generation, and sparse attention would speed it up — except sparsity that's too aggressive collapses training. Sparrow finds the stability boundary via a per-token actor-policy mismatch statistic and keeps it pinned at a constant threshold with a dynamic sparsity schedule, yielding 2.0-2.4x rollout speedups on Qwen3 models with no quality loss."
 theme: efficiency
 arxiv: "2606.08446"
-citation_count: 0
+citation_count: 1
 ---
 
 # Sparrow: Sparse Rollout for Stable and Efficient Long-context RL of Large Language Models

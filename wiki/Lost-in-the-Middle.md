@@ -5,7 +5,7 @@ authors: "Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevil
 year: 2023
 arxiv: "2307.03172"
 tags: [long-context, retrieval, positional-bias, evaluation, empirical-analysis]
-citation_count: 0
+citation_count: 4809
 tldr: "Language models don't use long contexts uniformly — accuracy is highest when the relevant information sits at the very start or very end of the input, and drops sharply (sometimes below a no-context baseline) when it's buried in the middle, even for models explicitly built for long context. A purely diagnostic paper that became one of the most-cited practical constraints on RAG system design."
 aliases: ["Lost in the Middle"]
 ---

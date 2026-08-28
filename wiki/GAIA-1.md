@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2309.17080"
 tags: [world-models, autonomous-driving, generative-models]
 tldr: "Wayve's generative world model for driving — tokenizes video, text, and action into a sequence-modeling problem to generate realistic future driving scenarios with fine-grained control, the first world model in this wiki applied to autonomous driving rather than games or robotics"
-citation_count: 637
+citation_count: 653
 ---
 
 ## TL;DR

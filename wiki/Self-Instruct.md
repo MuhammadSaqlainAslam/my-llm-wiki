@@ -5,7 +5,7 @@ authors: "Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, Noah A. Smith,
 year: 2022
 arxiv: "2212.10560"
 tags: [instruction-tuning, alignment, self-supervised, data-generation, bootstrapping]
-citation_count: 0
+citation_count: 3557
 tldr: "Bootstraps an instruction-tuning dataset from a language model's own generations, starting from just 175 human-written seed tasks. Generates ~52K instructions and ~82K instances, filters them with heuristics (ROUGE-L novelty check, validity checks), and fine-tunes on the result — a 33% absolute improvement over vanilla GPT-3 on Super-NaturalInstructions, closing to within 5% of InstructGPT-001 despite using almost no human annotation."
 aliases: ["Self-Instruct"]
 ---

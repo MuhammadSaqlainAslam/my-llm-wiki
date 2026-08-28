@@ -1880,7 +1880,7 @@
       "DIAMOND",
       "VinePPO"
     ],
-    "citation_count": 1313,
+    "citation_count": 1345,
     "created": "2026-06-29",
     "arxiv": "2301.04104",
     "technical_report": "",
@@ -1922,7 +1922,7 @@
       "Medusa",
       "Lookahead-Decoding"
     ],
-    "citation_count": 358,
+    "citation_count": 371,
     "created": "2026-08-02",
     "arxiv": "2406.16858",
     "technical_report": "",
@@ -1961,7 +1961,7 @@
       "Medusa",
       "HYDRA"
     ],
-    "citation_count": 274,
+    "citation_count": 288,
     "created": "2026-08-02",
     "arxiv": "2503.01840",
     "technical_report": "",
@@ -2014,7 +2014,7 @@
       "HBM",
       "Inference-optimization"
     ],
-    "citation_count": 574,
+    "citation_count": 598,
     "created": "2026-05-20",
     "arxiv": "2401.15077",
     "technical_report": "",
@@ -2299,7 +2299,7 @@
       "Self-Instruct",
       "In-Context-Learning"
     ],
-    "citation_count": 0,
+    "citation_count": 5334,
     "created": "2026-08-14",
     "arxiv": "2109.01652",
     "technical_report": "",
@@ -2555,7 +2555,7 @@
       "KV-Cache-Optimization",
       "Speculative-Decoding"
     ],
-    "citation_count": 5016,
+    "citation_count": 5116,
     "created": "2026-05-12",
     "arxiv": "2205.14135",
     "technical_report": "",
@@ -2622,7 +2622,7 @@
       "Kernel-fusion",
       "Tensor-Cores"
     ],
-    "citation_count": 3118,
+    "citation_count": 3168,
     "created": "2026-05-20",
     "arxiv": "2307.08691",
     "technical_report": "",
@@ -2719,7 +2719,7 @@
       "GAIA-2",
       "World-Model-Landscape"
     ],
-    "citation_count": 637,
+    "citation_count": 653,
     "created": "2026-06-29",
     "arxiv": "2309.17080",
     "technical_report": "",
@@ -2751,7 +2751,7 @@
       "World-Models",
       "World-Model-Landscape"
     ],
-    "citation_count": 170,
+    "citation_count": 171,
     "created": "2026-06-29",
     "arxiv": "2503.20523",
     "technical_report": "",
@@ -2787,7 +2787,7 @@
       "DeepSeek-V3-Technical-Report",
       "Qwen3-Technical-Report"
     ],
-    "citation_count": 320,
+    "citation_count": 350,
     "created": "2026-07-06",
     "arxiv": "2602.15763",
     "technical_report": "",
@@ -3074,7 +3074,7 @@
       "World-Model-Landscape",
       "World-Models"
     ],
-    "citation_count": 269,
+    "citation_count": 279,
     "created": "2026-06-29",
     "arxiv": "2408.14837",
     "technical_report": "",
@@ -3149,7 +3149,7 @@
       "State-Space-Models",
       "Flash-Attention"
     ],
-    "citation_count": 13,
+    "citation_count": 16,
     "created": "2026-06-24",
     "arxiv": "2605.22791",
     "technical_report": "",
@@ -3216,7 +3216,7 @@
       "In-Context-Learning",
       "World-Models"
     ],
-    "citation_count": 0,
+    "citation_count": 5297,
     "created": "2026-08-14",
     "arxiv": "2304.03442",
     "technical_report": "",
@@ -3326,7 +3326,7 @@
       "RAG",
       "In-Context-Learning"
     ],
-    "citation_count": 0,
+    "citation_count": 1556,
     "created": "2026-08-14",
     "arxiv": "2305.15334",
     "technical_report": "",
@@ -3378,7 +3378,7 @@
       "KV-Cache",
       "Nemotron-3"
     ],
-    "citation_count": 265,
+    "citation_count": 270,
     "created": "2026-05-20",
     "arxiv": "2402.19427",
     "technical_report": "",
@@ -3595,7 +3595,7 @@
       "EAGLE-3",
       "Speculative-Decoding"
     ],
-    "citation_count": 103,
+    "citation_count": 107,
     "created": "2026-08-02",
     "arxiv": "2402.05109",
     "technical_report": "",
@@ -3663,7 +3663,7 @@
       "Transformer",
       "Nemotron-3"
     ],
-    "citation_count": 5,
+    "citation_count": 8,
     "created": "2026-05-12",
     "arxiv": "2512.23914",
     "technical_report": "",
@@ -4074,7 +4074,7 @@
       "Transformer",
       "Speculative-Decoding"
     ],
-    "citation_count": 362,
+    "citation_count": 376,
     "created": "2026-06-03",
     "arxiv": "2501.14249",
     "technical_report": "",
@@ -4228,7 +4228,7 @@
       "DIAMOND",
       "World-Model-Landscape"
     ],
-    "citation_count": 348,
+    "citation_count": 358,
     "created": "2026-06-29",
     "arxiv": "2209.00588",
     "technical_report": "",
@@ -5502,7 +5502,7 @@
       "LinOSS",
       "Transformers-Are-SSMs"
     ],
-    "citation_count": 93,
+    "citation_count": 95,
     "created": "2026-07-16",
     "arxiv": "2411.12537",
     "technical_report": "",
@@ -5593,7 +5593,7 @@
       "Adapters-Selector",
       "Time-Varying-LoRA"
     ],
-    "citation_count": 21942,
+    "citation_count": 22325,
     "created": "2026-06-10",
     "arxiv": "2106.09685",
     "technical_report": "",
@@ -5633,7 +5633,7 @@
       "QLoRA",
       "Parameter-Efficient-Fine-Tuning"
     ],
-    "citation_count": 7,
+    "citation_count": 9,
     "created": "2026-07-08",
     "arxiv": "2501.16559",
     "technical_report": "",
@@ -5824,7 +5824,7 @@
       "Draft-model",
       "Transformer"
     ],
-    "citation_count": 349,
+    "citation_count": 354,
     "created": "2026-05-20",
     "arxiv": "2402.02057",
     "technical_report": "",
@@ -5903,7 +5903,7 @@
       "KV-Cache-Optimization",
       "In-Context-Learning"
     ],
-    "citation_count": 0,
+    "citation_count": 4809,
     "created": "2026-08-14",
     "arxiv": "2307.03172",
     "technical_report": "",
@@ -6057,7 +6057,7 @@
       "RLHF",
       "Transformer"
     ],
-    "citation_count": 36,
+    "citation_count": 41,
     "created": "2026-06-03",
     "arxiv": "2602.00933",
     "technical_report": "",
@@ -6163,7 +6163,7 @@
       "KV-Cache-Optimization",
       "Speculative-Decoding"
     ],
-    "citation_count": 93,
+    "citation_count": 94,
     "created": "2026-07-16",
     "arxiv": "2408.11049",
     "technical_report": "",
@@ -6231,7 +6231,7 @@
       "Transformer",
       "Mixture-of-Experts"
     ],
-    "citation_count": 8534,
+    "citation_count": 8765,
     "created": "2026-04-28",
     "arxiv": "2312.00752",
     "technical_report": "",
@@ -6539,7 +6539,7 @@
       "Gated-Linear-Attention",
       "Jamba"
     ],
-    "citation_count": 69,
+    "citation_count": 73,
     "created": "2026-05-28",
     "arxiv": "2603.15569",
     "technical_report": "",
@@ -6783,7 +6783,7 @@
       "LLaMA-2",
       "Inference-optimization"
     ],
-    "citation_count": 860,
+    "citation_count": 883,
     "created": "2026-05-20",
     "arxiv": "2401.10774",
     "technical_report": "",
@@ -9494,7 +9494,7 @@
       "Flash-Attention",
       "XPOS"
     ],
-    "citation_count": 6114,
+    "citation_count": 6223,
     "created": "2026-05-20",
     "arxiv": "2104.09864",
     "technical_report": "",
@@ -9577,7 +9577,7 @@
       "Transformers-Are-SSMs",
       "Hardware-Aware-Scan"
     ],
-    "citation_count": 4105,
+    "citation_count": 4192,
     "created": "2026-05-20",
     "arxiv": "2111.00396",
     "technical_report": "",
@@ -9711,7 +9711,7 @@
       "RLVR",
       "RLHF"
     ],
-    "citation_count": 192,
+    "citation_count": 213,
     "created": "2026-06-03",
     "arxiv": "2509.16941",
     "technical_report": "",
@@ -9744,7 +9744,7 @@
       "RLHF",
       "RLVR"
     ],
-    "citation_count": 3348,
+    "citation_count": 3498,
     "created": "2026-06-03",
     "arxiv": "2310.06770",
     "technical_report": "",
@@ -9995,7 +9995,7 @@
       "In-Context-Learning",
       "Toolformer"
     ],
-    "citation_count": 0,
+    "citation_count": 3557,
     "created": "2026-08-14",
     "arxiv": "2212.10560",
     "technical_report": "",
@@ -10034,7 +10034,7 @@
       "Lost-in-the-Middle",
       "Reflexion"
     ],
-    "citation_count": 0,
+    "citation_count": 2464,
     "created": "2026-08-14",
     "arxiv": "2310.11511",
     "technical_report": "",
@@ -10218,7 +10218,7 @@
       "GQA",
       "KVQuant"
     ],
-    "citation_count": 841,
+    "citation_count": 871,
     "created": "2026-06-11",
     "arxiv": "2404.14469",
     "technical_report": "",
@@ -10288,7 +10288,7 @@
       "EAPO",
       "On-the-Direction-of-RLVR-Updates"
     ],
-    "citation_count": 0,
+    "citation_count": 1,
     "created": "2026-08-02",
     "arxiv": "2606.08446",
     "technical_report": "",
@@ -10427,7 +10427,7 @@
       "EAGLE",
       "KV-Cache"
     ],
-    "citation_count": 1863,
+    "citation_count": 1917,
     "created": "2026-04-28",
     "arxiv": "2211.17192",
     "technical_report": "",
@@ -10619,7 +10619,7 @@
       "KV-Cache-Optimization",
       "Speculative-Decoding"
     ],
-    "citation_count": 1021,
+    "citation_count": 1048,
     "created": "2026-07-13",
     "arxiv": "2302.01318",
     "technical_report": "",
@@ -10655,7 +10655,7 @@
       "Transformer",
       "Speculative-Decoding"
     ],
-    "citation_count": 15,
+    "citation_count": 16,
     "created": "2026-06-24",
     "arxiv": "2603.05498",
     "technical_report": "",
@@ -10800,7 +10800,7 @@
       "GLM-5",
       "Kimi-K2"
     ],
-    "citation_count": 27,
+    "citation_count": 28,
     "created": "2026-07-30",
     "arxiv": "2602.10604",
     "technical_report": "",
@@ -11133,7 +11133,7 @@
       "Mixture-of-Experts",
       "GPT-4-Technical-Report"
     ],
-    "citation_count": 17749,
+    "citation_count": 18076,
     "created": "2026-06-10",
     "arxiv": "2407.21783",
     "technical_report": "",
@@ -11433,7 +11433,7 @@
       "Gorilla",
       "Toolformer"
     ],
-    "citation_count": 2041,
+    "citation_count": 2113,
     "created": "2026-06-03",
     "arxiv": "2307.16789",
     "technical_report": "",
@@ -11469,7 +11469,7 @@
       "RLHF",
       "InstructGPT"
     ],
-    "citation_count": 5122,
+    "citation_count": 5309,
     "created": "2026-06-10",
     "arxiv": "2302.04761",
     "technical_report": "",
@@ -11506,7 +11506,7 @@
       "Attention-Residuals",
       "Nemotron-3"
     ],
-    "citation_count": 188724,
+    "citation_count": 190311,
     "created": "2026-04-28",
     "arxiv": "1706.03762",
     "technical_report": "",
@@ -11723,7 +11723,7 @@
       "Multi-Head-Attention",
       "FlashAttention"
     ],
-    "citation_count": 1794,
+    "citation_count": 1841,
     "created": "2026-05-12",
     "arxiv": "2405.21060",
     "technical_report": "",
@@ -11961,7 +11961,7 @@
       "V-JEPA-2",
       "World-Model-Landscape"
     ],
-    "citation_count": 434,
+    "citation_count": 465,
     "created": "2026-06-29",
     "arxiv": "2404.08471",
     "technical_report": "",

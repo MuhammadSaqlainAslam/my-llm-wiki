@@ -8,7 +8,7 @@ tags: [speculative-decoding, inference, draft-model, medusa, throughput, efficie
 aliases: [HYDRA, Hydra heads]
 tldr: "Medusa's draft heads speculate each position independently, ignoring earlier tokens in the same candidate continuation. Hydra heads condition on those earlier tokens instead — a drop-in, sequentially-dependent replacement. Increases average accepted length by up to 0.46 tokens; the tuned Hydra++ variant reaches 1.31x over Medusa and 2.70x over autoregressive decoding."
 theme: inference-optimization
-citation_count: 103
+citation_count: 107
 ---
 
 # Hydra: Sequentially-Dependent Draft Heads for Medusa Decoding

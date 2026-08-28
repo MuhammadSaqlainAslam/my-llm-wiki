@@ -8,7 +8,7 @@ tags: [speculative-decoding, inference, draft-model, throughput, efficiency]
 aliases: [EAGLE-3, EAGLE 3]
 tldr: "EAGLE's feature-prediction objective doesn't improve much with more training data — a scaling wall. EAGLE-3 abandons feature prediction for direct token prediction, and replaces top-layer-only features with multi-layer feature fusion (training-time test), letting the draft model actually benefit from data scale. Up to 6.5x speedup, ~1.4x over EAGLE-2."
 theme: inference-optimization
-citation_count: 274
+citation_count: 288
 ---
 
 # EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test

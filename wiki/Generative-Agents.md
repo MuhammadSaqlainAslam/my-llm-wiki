@@ -5,7 +5,7 @@ authors: "Joon Sung Park, Joseph C. O'Brien, Carrie J. Cai, Meredith Ringel Morr
 year: 2023
 arxiv: "2304.03442"
 tags: [agents, memory, simulation, planning, reflection, multi-agent]
-citation_count: 0
+citation_count: 5297
 tldr: "25 LLM-powered agents live in a simulated town (Smallville), each with a memory stream, a retrieval mechanism, a reflection mechanism, and a planning mechanism. From these four ingredients alone, believable emergent social behavior appears — one agent decides to throw a Valentine's Day party, and the invitation spreads organically through the town's social graph over simulated days."
 aliases: ["Generative Agents", "Smallville"]
 ---

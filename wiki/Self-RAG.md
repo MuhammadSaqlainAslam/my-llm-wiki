@@ -5,7 +5,7 @@ authors: "Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, Hannaneh Hajishirzi"
 year: 2023
 arxiv: "2310.11511"
 tags: [retrieval, rag, self-reflection, critique, adaptive-retrieval]
-citation_count: 0
+citation_count: 2464
 tldr: "Trains a single LM to decide on its own when to retrieve and to critique both the retrieved passages and its own output, by learning to emit special reflection tokens as part of normal generation. Outperforms ChatGPT and retrieval-augmented Llama2-chat on open-domain QA, reasoning, fact verification, and long-form generation — with only a 7B/13B model."
 aliases: ["Self-RAG"]
 ---
