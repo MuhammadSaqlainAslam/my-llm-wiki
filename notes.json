@@ -10100,7 +10100,7 @@
       "RLVR",
       "RLHF"
     ],
-    "citation_count": 213,
+    "citation_count": 214,
     "created": "2026-06-03",
     "arxiv": "2509.16941",
     "technical_report": "",
@@ -10133,7 +10133,7 @@
       "RLHF",
       "RLVR"
     ],
-    "citation_count": 3498,
+    "citation_count": 3528,
     "created": "2026-06-03",
     "arxiv": "2310.06770",
     "technical_report": "",
@@ -10386,7 +10386,7 @@
       "In-Context-Learning",
       "Toolformer"
     ],
-    "citation_count": 3557,
+    "citation_count": 3570,
     "created": "2026-08-14",
     "arxiv": "2212.10560",
     "technical_report": "",
@@ -10425,7 +10425,7 @@
       "Lost-in-the-Middle",
       "Reflexion"
     ],
-    "citation_count": 2464,
+    "citation_count": 2485,
     "created": "2026-08-14",
     "arxiv": "2310.11511",
     "technical_report": "",
@@ -10610,7 +10610,7 @@
       "GQA",
       "KVQuant"
     ],
-    "citation_count": 871,
+    "citation_count": 878,
     "created": "2026-06-11",
     "arxiv": "2404.14469",
     "technical_report": "",
@@ -10721,7 +10721,7 @@
       "Multi-Token-Prediction",
       "Sliding-Window-Attention"
     ],
-    "citation_count": 0,
+    "citation_count": 2,
     "created": "2026-06-11",
     "arxiv": "2602.07223",
     "technical_report": "",
@@ -10826,7 +10826,7 @@
       "EAGLE",
       "KV-Cache"
     ],
-    "citation_count": 1917,
+    "citation_count": 1926,
     "created": "2026-04-28",
     "arxiv": "2211.17192",
     "technical_report": "",
@@ -11019,7 +11019,7 @@
       "KV-Cache-Optimization",
       "Speculative-Decoding"
     ],
-    "citation_count": 1048,
+    "citation_count": 1052,
     "created": "2026-07-13",
     "arxiv": "2302.01318",
     "technical_report": "",
