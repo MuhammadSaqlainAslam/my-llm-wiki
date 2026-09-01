@@ -6,7 +6,7 @@ year: "2023"
 arxiv: "2302.01318"
 tags: [inference, speculative-decoding, efficiency, foundational]
 tldr: "DeepMind's independent parallel discovery of speculative decoding, termed 'speculative sampling' — demonstrated at frontier scale on Chinchilla 70B with a 4B draft model achieving ~2.6x speedup, with its own acceptance-rejection correctness proof"
-citation_count: 1048
+citation_count: 1052
 ---
 
 ## TL;DR

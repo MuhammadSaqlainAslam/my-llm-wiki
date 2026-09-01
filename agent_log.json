@@ -718,5 +718,28 @@
       "xLSTM.md (+4)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-09-01T03:51:57.351540",
+    "mode": "update-citations",
+    "topic": null,
+    "added": [],
+    "skipped": []
+  },
+  {
+    "timestamp": "2026-09-01T03:54:31.753706",
+    "mode": "update-citations",
+    "topic": null,
+    "added": [
+      "SWE-bench Pro.md (+1)",
+      "SWE-bench.md (+30)",
+      "Self-Instruct.md (+13)",
+      "Self-RAG.md (+21)",
+      "SnapKV.md (+7)",
+      "SpecAttn.md (+2)",
+      "Speculative Decoding.md (+9)",
+      "Speculative-Sampling-Chen.md (+4)"
+    ],
+    "skipped": []
   }
 ]

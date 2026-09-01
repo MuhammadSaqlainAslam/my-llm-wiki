@@ -5,7 +5,7 @@ authors: "Yikang Yue, Yuqi Xue, Jian Huang"
 year: 2026
 arxiv: "2602.07223"
 tags: [speculative-decoding, sparse-attention, kv-cache, inference]
-citation_count: 0
+citation_count: 2
 tldr: "Self-speculative decoding where the verification pass's full attention scores double as a free oracle for which KV entries matter next — reusing them to build the sparse-attention mask for the following draft phase, instead of running a separate KV-selection algorithm. 1.25x-2.81x faster than default vLLM."
 aliases: ["Vegas", "SpecAttn"]
 ---
