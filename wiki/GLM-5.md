@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2602.15763"
 tags: [model-family, moe, agentic, coding, zhipu]
 tldr: "Zhipu AI and Tsinghua's next-generation MoE foundation model, introducing Dynamic Sparse Architecture (DSA) for reduced training/inference cost, state-of-the-art agentic coding, and a post-training approach via asynchronous RL that decouples generation from training"
-citation_count: 350
+citation_count: 358
 ---
 
 ## TL;DR

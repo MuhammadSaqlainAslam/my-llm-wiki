@@ -5,7 +5,7 @@ authors: "Aditi Singh, Abul Ehtesham, Saket Kumar, Tala Talaei Khoei, Athanasios
 year: 2025
 arxiv: "2501.09136"
 tags: [retrieval, rag, agents, survey, agentic-workflows, multi-agent]
-citation_count: 0
+citation_count: 405
 tldr: "Classic RAG retrieves once, generates once — a static workflow that can't adapt when the first retrieval misses, or when a task needs multiple reasoning steps. Agentic RAG embeds autonomous agents (reflection, planning, tool use, multi-agent collaboration) directly into the pipeline so retrieval strategy is decided dynamically. Proposes a taxonomy along agent cardinality, control structure, autonomy, and knowledge representation to organize an otherwise fragmented field."
 aliases: ["Agentic RAG", "Agentic RAG Survey"]
 ---

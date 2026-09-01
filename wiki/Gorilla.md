@@ -5,7 +5,7 @@ authors: "Shishir G. Patil, Tianjun Zhang, Xin Wang, Joseph E. Gonzalez"
 year: 2023
 arxiv: "2305.15334"
 tags: [tool-use, api-calls, retrieval-augmented, finetuning, hallucination-reduction]
-citation_count: 1556
+citation_count: 1567
 tldr: "Finetunes LLaMA-7B specifically to write correct calls to real ML-model APIs (HuggingFace, TorchHub, TensorHub), using a Retriever-Aware Training scheme so the model actually uses retrieved API docs at inference instead of ignoring them. Beats GPT-4 and Claude on both accuracy and hallucination rate for API-call generation, and adapts automatically when an API's docs change."
 aliases: ["Gorilla", "Gorilla LLM"]
 ---

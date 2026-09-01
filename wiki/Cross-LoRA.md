@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2508.05232"
 tags: [fine-tuning, lora, parameter-efficient, transfer-learning, efficiency]
 tldr: "Data-free, training-free framework for transferring LoRA adapters between heterogeneous LLMs — LoRA-Align uses rank-truncated SVD to handle dimension mismatches, LoRA-Shift projects aligned updates into the target model's parameter space, runs in ~20 minutes on a commodity GPU"
-citation_count: 8
+citation_count: 11
 ---
 
 ## TL;DR

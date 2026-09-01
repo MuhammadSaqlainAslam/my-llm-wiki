@@ -5,7 +5,7 @@ authors: Llama Team, AI @ Meta
 year: 2024
 arxiv: 2407.21783
 tags: [foundational, inference, attention, benchmarks]
-citation_count: 18076
+citation_count: 18152
 tldr: Meta releases Llama 3, a herd of dense Transformer language models at 8B, 70B, and 405B parameters trained on 15T tokens that matches GPT-4 quality on key benchmarks while being fully open-source.
 ---
 

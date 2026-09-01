@@ -5,7 +5,7 @@ authors: "Pengfei Du"
 year: 2026
 arxiv: "2603.07670"
 tags: [agents, memory, survey, retrieval, reflection, taxonomy]
-citation_count: 0
+citation_count: 55
 tldr: "Formalizes agent memory as a write-manage-read loop coupled to perception and action, with a taxonomy spanning temporal scope, representational substrate, and control policy. Surveys five mechanism families — context-resident compression, retrieval-augmented stores, reflective self-improvement, hierarchical virtual context, and policy-learned management — and the applications where memory is the differentiator: personal assistants, coding agents, open-world games, scientific reasoning, multi-agent teamwork."
 aliases: ["LLM Agent Memory Survey", "Memory for Autonomous LLM Agents"]
 ---

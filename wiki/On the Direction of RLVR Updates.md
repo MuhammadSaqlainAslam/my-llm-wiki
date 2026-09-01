@@ -8,7 +8,7 @@ aliases: [Direction of RLVR Updates]
 tldr: "RLVR-induced weight changes are sparse, but prior work only looked at their magnitude. The signed, token-level log-probability shift Δlog p between base and RLVR model — the direction of change — is a better lens: it pinpoints the reasoning-critical tokens more precisely, enabling training-free test-time extrapolation and a training-time reweighting method that both improve reasoning accuracy."
 theme: synthesis
 arxiv: "2603.22117"
-citation_count: 11
+citation_count: 12
 ---
 
 # On the Direction of RLVR Updates for LLM Reasoning: Identification and Exploitation

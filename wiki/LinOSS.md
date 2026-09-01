@@ -6,7 +6,7 @@ year: "2024"
 arxiv: "2410.03943"
 tags: [ssm, architecture, theory, foundational, oscillatory]
 tldr: "LinOSS — an SSM built on discretized harmonic oscillators, with a universality proof showing it can approximate any continuous-time dynamical system. ICLR 2025 Oral. Competitive with Mamba on long-range benchmarks with provably richer dynamics than standard linear RNNs."
-citation_count: 36
+citation_count: 37
 ---
 
 ## TL;DR

@@ -5,7 +5,7 @@ authors: "Yi Yu, Liuyi Yao, Yuexiang Xie, Q. Tan, Jiaqi Feng, Yaliang Li, Libing
 year: 2026
 arxiv: "2601.01885"
 tags: [agents, memory, reinforcement-learning, grpo, long-term-memory, short-term-memory]
-citation_count: 0
+citation_count: 52
 tldr: "Instead of bolting a heuristic memory controller onto an LLM agent, expose memory operations (store, retrieve, discard) as tool-based actions the agent's own policy chooses to invoke, and train that policy with a three-stage progressive GRPO curriculum designed to handle the sparse, delayed rewards that memory decisions produce."
 aliases: ["AgeMem", "Agentic Memory"]
 ---

@@ -5,7 +5,7 @@ authors: "Feng Zhang, et al."
 year: 2026
 arxiv: "2605.12969"
 tags: [rlvr, grpo, reinforcement-learning, contrastive-learning, reasoning, post-training]
-citation_count: 0
+citation_count: 1
 tldr: "Shows GRPO is secretly a discriminative method — it maximizes the score gap between verified-positive and verified-negative rollouts — then exposes two problems this reveals (misaligned surrogate scores, insensitive credit assignment) and fixes both with ConSPO: length-normalized log-probabilities as scores, contrasted via a group-wise InfoNCE objective with a curriculum-scheduled margin."
 aliases: ["ConSPO", "Contrastive Sequence-level Policy Optimization"]
 ---

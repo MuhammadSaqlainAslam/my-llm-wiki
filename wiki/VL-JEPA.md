@@ -5,7 +5,7 @@ authors: "Delong Chen, Mustafa Shukor, Théo Moutakanni, Willy Chung, Jade Yu, T
 year: 2025
 arxiv: "2512.10942"
 tags: [vision-language, jepa, self-supervised, embeddings, multimodal]
-citation_count: 0
+citation_count: 52
 tldr: "Instead of autoregressively generating text tokens one at a time, VL-JEPA predicts continuous embeddings of the target text directly — learning in an abstract representation space that abstracts away surface-level linguistic variability. Built on a V-JEPA 2 vision encoder plus a Llama-3-initialized predictor, it beats CLIP/SigLIP2/Perception Encoder on video classification and retrieval, and matches classical autoregressive VLMs on VQA at 1.6B parameters."
 aliases: ["VL-JEPA"]
 ---

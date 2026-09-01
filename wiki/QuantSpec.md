@@ -7,7 +7,7 @@ arxiv: "2502.10424"
 aliases: ["QuantSpec"]
 tags: [speculative-decoding, quantization, kv-cache, inference]
 tldr: "Self-speculative decoding where the draft model shares the target model's architecture but uses a hierarchical 4-bit quantized KV cache and weights — no separate draft model to maintain, >90% acceptance rate, ~2.5x end-to-end speedup. ICML 2025."
-citation_count: 23
+citation_count: 25
 ---
 
 ## TL;DR

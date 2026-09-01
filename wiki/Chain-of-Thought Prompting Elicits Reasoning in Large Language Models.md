@@ -6,7 +6,7 @@ authors: Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, F
 year: 2022
 arxiv: 2201.11903
 tags: [foundational, attention, inference, benchmarks]
-citation_count: 21016
+citation_count: 21465
 tldr: Chain-of-thought prompting — adding just 8 step-by-step reasoning exemplars to a prompt — lets PaLM 540B achieve 57% on GSM8K math word problems, surpassing fine-tuned GPT-3 with a verifier at 55%.
 ---
 

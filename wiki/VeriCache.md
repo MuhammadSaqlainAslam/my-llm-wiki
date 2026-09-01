@@ -5,7 +5,7 @@ authors: "Jiayi Yao, Samuel Shen, Kuntai Du, Shaoting Feng, Dongjoo Seo, Rui Zha
 year: 2026
 arxiv: "2605.17613"
 tags: [kv-cache, lossless, speculative-decoding, cache-compression, inference-optimization]
-citation_count: 0
+citation_count: 5
 tldr: "KV-cache compression (token dropping, quantization) is lossy and gets worse the longer you decode — fine for short outputs, catastrophic for code generation and tool calling. VeriCache drafts tokens using the cheap compressed cache, then verifies them against the full cache kept off-GPU, achieving byte-identical output to full-KV decoding at up to 4x the throughput."
 aliases: ["VeriCache"]
 ---

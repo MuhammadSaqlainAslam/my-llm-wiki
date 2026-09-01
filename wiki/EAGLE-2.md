@@ -8,7 +8,7 @@ tags: [speculative-decoding, inference, draft-model, feature-level, throughput, 
 aliases: [EAGLE-2, EAGLE 2]
 tldr: "EAGLE's draft tree is static — it assumes acceptance probability depends only on tree position. EAGLE-2 exploits the fact that the draft model's confidence scores are well-calibrated, and builds a context-aware dynamic draft tree from them instead. 3.05-4.26x speedup, 20-40% faster than EAGLE-1, still lossless."
 theme: inference-optimization
-citation_count: 371
+citation_count: 374
 ---
 
 # EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees

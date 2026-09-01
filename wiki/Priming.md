@@ -5,7 +5,7 @@ authors: "Aditya Chattopadhyay, Elvis Nunez, Prannay Kaul, Benjamin Bowman, Evan
 year: 2026
 arxiv: "2605.08301"
 tags: [hybrid-architecture, state-space-models, distillation, knowledge-transfer, ssm, inference-efficiency]
-citation_count: 0
+citation_count: 4
 tldr: "Turns hybrid Transformer/SSM architecture design from a pretraining problem into a knowledge-transfer problem: initialize a Hybrid model from a pretrained Transformer, then recover downstream quality with under 0.5% of the source model's pretraining token budget. Enables the first controlled, apples-to-apples comparison of SSM layer types at scale."
 aliases: ["Priming", "Priming Hybrid State Space Models"]
 ---
