@@ -196,6 +196,6 @@ The recurring point: **the optimum is workload-specific**. A reasoning model whe
 
 ## Related Notes
 
-[[KV Cache]] · [[GQA]] · [[Compressed Sparse Attention]] · [[Heavily Compressed Attention]] · [[Speculative Decoding]] · [[Hardware Acceleration for Neural Networks]] · [[NVFP4]] · [[Transformer]] · [[Nemotron-3]] · [[Multi-Query Attention]] · [[Lost-in-the-Middle|Lost in the Middle]] · [[RETRO]]
+[[KV Cache]] · [[GQA]] · [[Compressed Sparse Attention]] · [[Heavily Compressed Attention]] · [[Speculative Decoding]] · [[Hardware Acceleration for Neural Networks]] · [[NVFP4]] · [[Transformer]] · [[Nemotron-3]] · [[Multi-Query Attention]] · [[Lost-in-the-Middle|Lost in the Middle]] · [[RETRO]] · [[VeriCache]] · [[SpecAttn|Vegas (Verification-Guided Sparse Attention)]]
 
 [[Lost-in-the-Middle|Lost in the Middle]]'s finding that models use context positions unevenly (best at the start/end, worst in the middle) is a key empirical motivation for cache-compression schemes that don't treat all cached positions as equally important.

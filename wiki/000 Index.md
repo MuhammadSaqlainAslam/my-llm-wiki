@@ -43,8 +43,10 @@ The O(n²) attention cost is fine for short sequences. For long ones it breaks. 
 | [[LinRNN-Negative-Eigenvalues\|Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues]] | Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues | 2024 | Proves linear RNNs (Mamba, DeltaNet, RWKV) with non-negative eigenvalue constraints can't solve parity; allowing negative eigenvalues provably fixes it. ICLR 2025 Oral. |
 | [[LinOSS]] | Oscillatory State-Space Models | 2024 | SSM built on discretized harmonic oscillators with complex eigenvalues by construction; universality theorem proves it approximates any continuous-time dynamical system. ICLR 2025 Oral. |
 | [[Attention to Mamba]] | Attention to Mamba: A Recipe for Cross-Architecture Distillation | 2026 | Two-stage distillation (Transformer → linearized attention → Mamba) gives Mamba a principled initialization; distilled 1B student nearly matches Pythia-1B teacher (14.11 vs. 13.86 perplexity) with no Attention blocks left. |
+| [[Priming]] | Priming: Hybrid State Space Models From Pre-trained Transformers | 2026 | Initializes a hybrid Transformer/SSM model from a pretrained Transformer, recovering quality with <0.5% of the source's pretraining tokens. First controlled comparison of SSM types at scale: GKA > GDN > Mamba-2. Hybrid GKA 32B: +3.8 reasoning points over Qwen3-32B, 2.3× faster decode. |
+| [[Hybrid-Linear-Attention-Analysis\|A Systematic Analysis of Hybrid Linear Attention]] | A Systematic Analysis of Hybrid Linear Attention | 2025 | Trains 72 models (6 linear-attention variants × 5 hybridization ratios) to test whether standalone linear-attention strength predicts hybrid strength. It doesn't — selective gating, hierarchical recurrence, and controlled forgetting do. Recommends HGRN-2 or Gated DeltaNet at a 3:1–6:1 linear-to-full ratio. |
 
-**Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention` `distillation` `cross-architecture`
+**Tags:** `ssm` `efficiency` `linear-time` `recurrence` `selectivity` `lstm` `gating` `mamba-2` `ssd` `rnn` `linear-attention` `retention` `distillation` `cross-architecture` `hybrid-architecture` `knowledge-transfer` `empirical-study`
 
 ---
 
@@ -58,8 +60,10 @@ Parameters and compute don't have to scale together. These papers decouple them.
 | [[LatentMoE]] | Nemotron 3 Technical Report | 2025 | Project tokens $d \rightarrow \ell$ before routing; cuts all-to-all communication by $d/\ell$ and enables 4× more experts at the same inference cost. |
 | [[State-Space-Models\|State-Space Models]] | (Concept note) | — | Linear recurrence over a fixed-size hidden state; linear-time in sequence length, O(1) inference memory. Foundation for S4, Mamba, and all hybrid SSM architectures. |
 | [[TokenFormer]] | TokenFormer: Rethinking Transformer Scaling with Tokenized Model Parameters | 2024 | Replaces linear projections with token-parameter attention; grows a model by adding parameter tokens rather than retraining a larger matrix from scratch. ICLR 2025 Spotlight. |
+| [[MoE-Evolution-Survey\|The Evolution of Mixture-of-Experts Architectures]] | The Evolution of Mixture-of-Experts Architectures in LLMs: Routing, Topology, Load Balancing, and Expert Parallelism | 2026 | Organizes MoE history as a dependency graph of 8 milestones (not a timeline), analyzed via 4 control planes — Expert Topology, Routing, Balance, Expert Parallelism — that jointly optimize capacity, quality, and system efficiency. |
+| [[Routing-Free-MoE\|Routing-Free Mixture-of-Experts]] | Routing-Free Mixture-of-Experts | 2026 | Eliminates the centralized router, Softmax, and Top-K entirely; each expert decides its own activation via a gradient-flow-trained gate. Unifies Expert-Choice/Token-Choice balancing via a configurable interpolation; beats standard MoE, AoE, and ReMoE. |
 
-**Tags:** `scaling` `moe` `routing` `efficiency` `sparse`
+**Tags:** `scaling` `moe` `routing` `efficiency` `sparse` `load-balancing` `expert-parallelism` `survey`
 
 ---
 
@@ -111,8 +115,10 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[EAGLE-2]] | EAGLE-2: Faster Inference of Language Models with Dynamic Draft Trees | 2024 | Replaces EAGLE's static draft tree with a context-aware dynamic tree, built from the draft model's own well-calibrated confidence scores. 3.05–4.26× speedup, 20–40% faster than EAGLE-1. |
 | [[EAGLE-3]] | EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test | 2025 | Drops feature prediction for direct token prediction + multi-layer feature fusion, fixing the scaling wall in EAGLE-1/2. Up to 6.5× speedup, ~1.4× over EAGLE-2. |
 | [[HYDRA]] | Hydra: Sequentially-Dependent Draft Heads for Medusa Decoding | 2024 | Makes Medusa's draft heads sequentially dependent (condition on earlier speculated tokens) instead of independent. Drop-in replacement; Hydra++ reaches 1.31× over Medusa, 2.70× over autoregressive decoding. |
+| [[VeriCache]] | VeriCache: Turning Lossy KV Cache into Lossless LLM Inference | 2026 | Drafts with a cheap compressed KV cache, verifies against the full cache kept off-GPU; the two operations bottleneck on different resources (HBM vs. PCIe) so they run in parallel. Byte-identical output to full-KV decoding at up to 4× the throughput. |
+| [[SpecAttn\|Vegas: Self-Speculative Decoding with Verification-Guided Sparse Attention]] | Vegas (orig. SpecAttn): Self-Speculative Decoding with Verification-Guided Sparse Attention | 2026 | Verification's full-attention pass already computes the exact criticality of every KV entry as a byproduct — reuse those scores to build the next draft phase's sparse-attention mask instead of running a separate KV-selection algorithm. 1.25–2.81× faster than vLLM. |
 
-**Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding`
+**Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding` `lossless` `sparse-attention`
 
 ---
 
@@ -374,8 +380,9 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Speculative Chain-of-Thought\|Speculative Chain-of-Thought (SCoT)]] | 2025 | — | [2504.19095](https://arxiv.org/abs/2504.19095) |
 | [[Sparrow]] | 2026 | — | [2606.08446](https://arxiv.org/abs/2606.08446) |
 | [[On the Direction of RLVR Updates]] | 2026 | — | [2603.22117](https://arxiv.org/abs/2603.22117) |
+| [[ConSPO]] | 2026 | — | [2605.12969](https://arxiv.org/abs/2605.12969) |
 
-**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention` `tool-use`
+**Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention` `tool-use` `contrastive-learning`
 
 ---
 
@@ -414,8 +421,9 @@ Grounding LLMs in external, updatable, citable text instead of relying purely on
 | [[Lost-in-the-Middle\|Lost in the Middle]] | Lost in the Middle: How Language Models Use Long Contexts | 2023 | U-shaped accuracy curve — LMs use info best at the start/end of context, worst in the middle, even for long-context-specialized models. A key practical constraint on RAG system design. |
 | [[Self-RAG]] | Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection | 2023 | Trains one LM to decide on its own when to retrieve and to critique its own retrieved passages and generated output via learned reflection tokens — outperforms ChatGPT/retrieval-augmented Llama2-chat with only 7B/13B params. |
 | [[RAPTOR]] | RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval | 2024 | Recursively clusters and summarizes text chunks into a multi-level tree, retrieving from all abstraction levels at once; +20pp QuALITY accuracy with GPT-4 retrieval. |
+| [[Agentic-RAG-Survey\|Agentic Retrieval-Augmented Generation]] | Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG | 2025 | Classic RAG retrieves once, generates once — a static workflow. Agentic RAG embeds autonomous agents (reflection, planning, tool use, multi-agent collaboration) into the pipeline so retrieval strategy is decided dynamically; proposes a taxonomy along agent cardinality, control structure, autonomy, and knowledge representation. |
 
-**Tags:** `retrieval` `rag` `long-context` `hierarchical-summarization` `self-reflection` `non-parametric-memory`
+**Tags:** `retrieval` `rag` `long-context` `hierarchical-summarization` `self-reflection` `non-parametric-memory` `agents` `agentic-workflows`
 
 ---
 
@@ -427,8 +435,10 @@ Architectures that give an LLM memory, self-critique, or a persistent role acros
 |---|---|---|---|
 | [[Generative-Agents\|Generative Agents]] | Generative Agents: Interactive Simulacra of Human Behavior | 2023 | 25 LLM agents with a memory stream, retrieval (recency+importance+relevance), reflection, and planning produce emergent believable social behavior (e.g. a spontaneous, word-of-mouth Valentine's Day party). |
 | [[Reflexion]] | Reflexion: Language Agents with Verbal Reinforcement Learning | 2023 | Agent improves within a task via natural-language self-critique stored in memory (no gradient updates) — 91% HumanEval pass@1 vs. 80% GPT-4 baseline, 97% vs. 75% AlfWorld success rate. |
+| [[LLM-Agent-Memory-Survey\|Memory for Autonomous LLM Agents]] | Memory for Autonomous LLM Agents: Mechanisms, Evaluation, and Emerging Frontiers | 2026 | Formalizes agent memory as a write-manage-read loop with a taxonomy (temporal scope, representational substrate, control policy) and five mechanism families — context-resident compression, retrieval-augmented stores, reflective self-improvement, hierarchical virtual context, policy-learned management. |
+| [[Agentic-Memory-AgeMem\|Agentic Memory (AgeMem)]] | Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for LLM Agents | 2026 | Exposes memory operations as tool-based actions inside the agent's own action space instead of an external heuristic controller; trains the unified LTM/STM policy with a three-stage progressive GRPO curriculum to handle sparse, delayed memory-action rewards. |
 
-**Tags:** `agents` `memory` `reflection` `simulation` `verbal-reinforcement-learning`
+**Tags:** `agents` `memory` `reflection` `simulation` `verbal-reinforcement-learning` `survey` `reinforcement-learning` `grpo`
 
 ---
 
@@ -486,8 +496,9 @@ Models and techniques connecting vision encoders to large language models.
 |-------|------|-----------|-------|
 | [[MiniGPT-4]] | 2023 | — | [2304.10592](https://arxiv.org/abs/2304.10592) |
 | [[LLaVA-1.5]] | 2023 | — | [2310.03744](https://arxiv.org/abs/2310.03744) |
+| [[VL-JEPA]] | 2025 | — | [2512.10942](https://arxiv.org/abs/2512.10942) |
 
-**Tags:** `vision-language` `multimodal` `instruction-tuning`
+**Tags:** `vision-language` `multimodal` `instruction-tuning` `jepa` `self-supervised` `embeddings`
 
 ---
 

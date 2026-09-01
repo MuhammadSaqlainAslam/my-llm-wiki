@@ -107,4 +107,4 @@ RAG is the paper that named and formalized the retrieve-then-generate pattern th
 
 ## Related Concepts
 
-[[In-Context Learning]] · [[Transformer]] · [[RETRO]] · [[Self-RAG]] · [[RAPTOR]]
+[[In-Context Learning]] · [[Transformer]] · [[RETRO]] · [[Self-RAG]] · [[RAPTOR]] · [[Agentic-RAG-Survey|Agentic Retrieval-Augmented Generation]]

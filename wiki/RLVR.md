@@ -24,6 +24,7 @@ There is no learned reward model to exploit. The policy must solve the actual pr
 - **[[Step 3.5 Flash]]** — combines verifiable RLVR-style signals with preference feedback under large-scale off-policy training
 - **[[Sparrow]]** — speeds up RLVR's dominant cost (long-context rollout generation) with a stability-aware sparse attention schedule
 - **[[On the Direction of RLVR Updates]]** — analyzes RLVR's sparse weight changes by direction, not just magnitude, to identify and exploit reasoning-critical tokens
+- **[[ConSPO]]** — reformulates GRPO-style RLVR discriminatively, fixing likelihood-misaligned scores and score-insensitive credit assignment via a contrastive objective
 
 ## Why it matters
 

@@ -104,4 +104,4 @@ This paper became the reference architecture for giving LLM agents long-term mem
 
 ## Related Concepts
 
-[[Reflexion]] · [[ReAct Synergizing Reasoning and Acting in Language Models|ReAct]] · [[In-Context Learning]] · [[World Models]]
+[[Reflexion]] · [[ReAct Synergizing Reasoning and Acting in Language Models|ReAct]] · [[In-Context Learning]] · [[World Models]] · [[LLM-Agent-Memory-Survey|Memory for Autonomous LLM Agents]] · [[Agentic-Memory-AgeMem|Agentic Memory (AgeMem)]]

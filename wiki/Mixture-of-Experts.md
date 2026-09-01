@@ -173,4 +173,4 @@ You can recover ~30% of the sparse model's quality gain by distilling into a muc
 
 ---
 
-*Related: [[Transformer]] · [[Nemotron-3]] · [[Mamba]]*
+*Related: [[Transformer]] · [[Nemotron-3]] · [[Mamba]] · [[MoE-Evolution-Survey|The Evolution of Mixture-of-Experts Architectures]] · [[Routing-Free-MoE|Routing-Free Mixture-of-Experts]]*

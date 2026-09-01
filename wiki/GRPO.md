@@ -80,3 +80,5 @@ In [[DeepSeek_V4]]'s two-stage post-training:
 - [[On-Policy Distillation]] — stage 2 of DeepSeek-V4 post-training; consolidates GRPO-trained specialists
 - [[Multi-Token Prediction]] — complementary training signal during pre-training
 - [[DeepSeek_V4]] — the model whose post-training pipeline uses GRPO at scale
+- [[ConSPO]] — shows GRPO is secretly discriminative (maximizing the score gap between verified positive/negative rollouts), then fixes two problems that framing exposes
+- [[Agentic-Memory-AgeMem|Agentic Memory (AgeMem)]] — trains an agent's memory-management policy with step-wise GRPO under a three-stage curriculum for sparse, delayed memory rewards
