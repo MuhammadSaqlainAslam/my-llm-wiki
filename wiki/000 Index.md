@@ -386,6 +386,20 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 
 ---
 
+## 🔁 Looped Transformers & Recurrent Depth
+
+Reuse a shared block of layers across multiple iterations instead of stacking more unique layers — depth becomes a dial (turned at training time or, better, at inference time) rather than a fixed architectural choice. An emerging 2025–2026 cluster asking whether "loop the layers" beats "add more of them" for both reasoning quality and compute efficiency.
+
+| Note | Paper | Year | TL;DR |
+|---|---|---|---|
+| [[Recurrent-Depth-Reasoning\|Scaling up Test-Time Compute with Latent Reasoning (Huginn)]] | Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach | 2025 | Loops a recurrent Transformer core to arbitrary depth at *inference time* — a reasoning dial with no CoT training data required. 3.5B model improves reasoning benchmarks up to the compute equivalent of 50B params; gets adaptive compute, self-speculative decoding, and KV-cache sharing for free. NeurIPS 2025. |
+| [[LOTUS]] | Bridging the Gap Between Latent and Explicit Reasoning with Looped Transformers | 2026 | Latent CoT falls further behind explicit CoT past 1B params — LOTUS fixes this by looping Transformer blocks and supervising K parallel latent positions against gold CoT-step tokens. First latent-CoT method to match explicit CoT at 3B scale, with 2.5–6.9× lower thought-phase latency. |
+| [[SMELT]] | SMELT: Scaling Laws for Compute-Matched MoE Looped Transformers | 2026 | Prior looped-Transformer comparisons secretly gave the looped model extra FLOPs. SMELT loops the middle half of an MoE Transformer's layers twice under exact FLOPs/params/KV-cache parity with an unlooped baseline, still saving 6.8–18.0% of training FLOPs on the compute-optimal frontier — by reducing attention-sink waste. |
+
+**Tags:** `looped-transformer` `recurrent-depth` `latent-reasoning` `test-time-compute` `mixture-of-experts` `scaling-laws` `attention-sinks`
+
+---
+
 ## 🌍 World Models & World-Action Models
 
 Models that learn a predictive representation of an environment, used either to plan or to train a policy "in imagination":

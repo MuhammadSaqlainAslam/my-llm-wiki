@@ -53,6 +53,14 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[Nemotron-3]] | Hybrid Mamba-Transformer-MoE. 3x throughput over pure Transformer MoE at same quality. |
 | [[DeepSeek_V4]] | CSA + HCA compressed attention cuts KV cache 10× at 1M tokens. MoE + Muon optimizer. SOTA open model. |
 
+## Looped Transformers & Recurrent Depth
+
+| Article | One Line |
+|---|---|
+| [[Recurrent-Depth-Reasoning\|Huginn]] | Loop a recurrent core to arbitrary depth at inference time — a reasoning dial with no CoT data needed. |
+| [[LOTUS]] | Loop + supervise parallel latents on gold CoT tokens. First latent-CoT to match explicit CoT at 3B scale. |
+| [[SMELT]] | Loop the middle half of an MoE Transformer's layers under strict compute parity. Saves 6.8–18% training FLOPs. |
+
 ---
 
 ## Concept Map
