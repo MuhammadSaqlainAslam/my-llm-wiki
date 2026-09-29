@@ -338,10 +338,12 @@ Quantitative comparisons across frontier models on knowledge, long context, and 
 | [[SWE-bench]] | Real GitHub issue resolution across 300 repos | 2023 | 12.3% resolved by best model at release; now exceeded 80%+ by frontier models. |
 | [[SWE-bench Pro]] | Harder enterprise coding tasks, less contamination | 2025 | More realistic multi-file tasks; Opus 4.8 scores 69.2% Pass@1. |
 | [[OSWorld]] | GUI agent on real desktop OS (Ubuntu/Windows/macOS) | 2024 | 369 computer tasks; frontier models reach 80%+ on verified subset. |
-| [[Humanity's Last Exam]] | 2,500 expert PhD-level questions | 2025 | Designed to resist saturation; GPT-4o scored <10% at launch. |
+| [[Humanity's Last Exam]] | 2,500 expert PhD-level questions | 2025 | Designed to resist saturation; GPT-4o scored <10% at launch. Later published in Nature. |
 | [[MCP-Atlas]] | LLM tool use via real MCP servers | 2026 | Tests actual MCP protocol tool invocations across diverse server types. |
 | [[OSWorld-MCP]] | MCP tools integrated into computer-use agents | 2025 | Extends OSWorld with structured MCP tool access. |
 | [[ToolLLM]] | 16,464 real-world APIs from RapidAPI | 2023 | Evaluates tool planning, selection, and chained API calls. |
+| [[Illusion-of-Thinking\|Illusion of Thinking]] | Reasoning models on controllable puzzles (Hanoi, River Crossing, Blocks World) | 2025 | Apple technical report: LRMs collapse beyond a complexity threshold, and reasoning effort declines on the hardest problems. No arXiv record. |
+| [[TRACE]] | Reference-free trajectory evaluation of tool-augmented agents | 2025 | Scores efficiency, hallucination, and adaptivity of the full trajectory, not just the final answer (arXiv:2510.02837, ICML 2026). |
 
 **Tags:** `benchmarks` `evaluation` `llm-comparison`
 
@@ -381,6 +383,10 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Sparrow]] | 2026 | — | [2606.08446](https://arxiv.org/abs/2606.08446) |
 | [[On the Direction of RLVR Updates]] | 2026 | — | [2603.22117](https://arxiv.org/abs/2603.22117) |
 | [[ConSPO]] | 2026 | — | [2605.12969](https://arxiv.org/abs/2605.12969) |
+| [[s1-Simple-Test-Time-Scaling\|s1]] | 2025 | — | [2501.19393](https://arxiv.org/abs/2501.19393) |
+| [[Kimi-k1.5\|Kimi k1.5]] | 2025 | — | [2501.12599](https://arxiv.org/abs/2501.12599) |
+| [[Absolute-Zero\|Absolute Zero]] | 2025 | — | [2505.03335](https://arxiv.org/abs/2505.03335) |
+| [[Long-Horizon-Tasks\|Long-Horizon Tasks]] | 2026 | — | [2605.02572](https://arxiv.org/abs/2605.02572) |
 
 **Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention` `tool-use` `contrastive-learning`
 
