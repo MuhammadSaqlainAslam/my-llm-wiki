@@ -3,6 +3,7 @@ title: "s1: Simple Test-Time Scaling"
 authors: "Niklas Muennighoff, Zitong Yang, Weijia Shi, Xiang Lisa Li, Li Fei-Fei, Hannaneh Hajishirzi, Luke Zettlemoyer, Percy Liang, Emmanuel Candès, Tatsunori Hashimoto"
 year: "2025"
 arxiv: "2501.19393"
+venue: "EMNLP 2025"
 tags: [reasoning, test-time-scaling, inference, fine-tuning-alignment]
 tldr: "Curates a 1,000-question dataset (s1K) and applies budget forcing — forcefully ending or extending a model's thinking process — so that s1-32B exceeds o1-preview on MATH and AIME24 by up to 27%, using only 26 minutes of fine-tuning on 16 H100s."
 citation_count: 0
@@ -24,6 +25,7 @@ Second, fine-tune a pretrained model (Qwen2.5-32B-Instruct) on s1K in about 26 m
 - Shows that 1,000 carefully curated examples plus a simple inference trick reproduce the core test-time scaling behavior demonstrated by o1, challenging the assumption that it requires massive infrastructure or proprietary methods.
 - Budget forcing is surprisingly effective: forcing the model to continue thinking lets it reconsider and correct errors rather than just padding tokens.
 - Bridges the [[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models|Chain of Thought]] and [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning|DeepSeek-R1]] notes to the [[Test-Time-Compute]] scaling direction, one of the most active research threads of 2025. It scales compute by generating more tokens — the axis that [[Recurrent-Depth-Reasoning|recurrent-depth models]] deliberately avoid by looping in latent space instead.
+- Accepted to the EMNLP 2025 main conference ([ACL Anthology](https://aclanthology.org/2025.emnlp-main.1025/)) — an independent peer-review signal.
 
 ## Limitations
 - Budget extension is conflated with length extension — it is not always clear whether gains come from genuine reconsideration or simply more tokens.

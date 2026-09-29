@@ -72,6 +72,7 @@ Human performance (domain experts on their own questions): effectively ~100% by 
 - **Multimodal subset not uniformly evaluated**: Not all models tested on the image-containing questions, making cross-model comparison on the full set incomplete.
 - **No adversarial robustness testing**: Questions are not probed for sensitivity to rephrasing; a model that memorizes question patterns rather than reasoning could in principle exploit surface features.
 - **Potential expert blind spots**: Questions vetted primarily by the submitting experts themselves; systematic coverage gaps in less-represented academic fields (e.g., non-Western history, minority languages) are likely.
+- **Rolling revisions:** the benchmark team released **HLE-Rolling**, a dynamic fork of the benchmark with public update logs and community-contributed questions, so the question set keeps changing after the original release (see lastexam.ai).
 
 ## Publication and Later Revisions
 
