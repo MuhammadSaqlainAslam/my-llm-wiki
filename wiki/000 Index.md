@@ -117,6 +117,7 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[HYDRA]] | Hydra: Sequentially-Dependent Draft Heads for Medusa Decoding | 2024 | Makes Medusa's draft heads sequentially dependent (condition on earlier speculated tokens) instead of independent. Drop-in replacement; Hydra++ reaches 1.31× over Medusa, 2.70× over autoregressive decoding. |
 | [[VeriCache]] | VeriCache: Turning Lossy KV Cache into Lossless LLM Inference | 2026 | Drafts with a cheap compressed KV cache, verifies against the full cache kept off-GPU; the two operations bottleneck on different resources (HBM vs. PCIe) so they run in parallel. Byte-identical output to full-KV decoding at up to 4× the throughput. |
 | [[SpecAttn\|Vegas: Self-Speculative Decoding with Verification-Guided Sparse Attention]] | Vegas (orig. SpecAttn): Self-Speculative Decoding with Verification-Guided Sparse Attention | 2026 | Verification's full-attention pass already computes the exact criticality of every KV entry as a byproduct — reuse those scores to build the next draft phase's sparse-attention mask instead of running a separate KV-selection algorithm. 1.25–2.81× faster than vLLM. |
+| [[MiniMax-Sparse-Attention\|MiniMax Sparse Attention]] | MiniMax Sparse Attention | 2026 | Blockwise sparse attention on a GQA backbone: a lightweight Index Branch picks Top-k KV blocks independently per GQA group, then exact attention runs over only those. Matches GQA quality on a 109B multimodal MoE while cutting attention compute 28.4× at 1M context; co-designed kernel gives 14.2× prefill / 7.6× decode speedups on H800. |
 
 **Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding` `lossless` `sparse-attention`
 
@@ -344,6 +345,7 @@ Quantitative comparisons across frontier models on knowledge, long context, and 
 | [[ToolLLM]] | 16,464 real-world APIs from RapidAPI | 2023 | Evaluates tool planning, selection, and chained API calls. |
 | [[Illusion-of-Thinking\|Illusion of Thinking]] | Reasoning models on controllable puzzles (Hanoi, River Crossing, Blocks World) | 2025 | Apple technical report: LRMs collapse beyond a complexity threshold, and reasoning effort declines on the hardest problems. No arXiv record. |
 | [[TRACE]] | Reference-free trajectory evaluation of tool-augmented agents | 2025 | Scores efficiency, hallucination, and adaptivity of the full trajectory, not just the final answer (arXiv:2510.02837, ICML 2026). |
+| [[Skill-Entropy\|Skill²-Bench]] | Cross-skill long-horizon reasoning (558 skills, 9 domains) | 2026 | Skill Entropy measures how hard it is to switch between reasoning skills in one chain; accuracy falls as it rises, and using it as an RL reward lifts Qwen3-4B-Instruct 34.4% → 68.4% on the benchmark (arXiv:2608.05139). |
 
 **Tags:** `benchmarks` `evaluation` `llm-comparison`
 
@@ -387,6 +389,9 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Kimi-k1.5\|Kimi k1.5]] | 2025 | — | [2501.12599](https://arxiv.org/abs/2501.12599) |
 | [[Absolute-Zero\|Absolute Zero]] | 2025 | — | [2505.03335](https://arxiv.org/abs/2505.03335) |
 | [[Long-Horizon-Tasks\|Long-Horizon Tasks]] | 2026 | — | [2605.02572](https://arxiv.org/abs/2605.02572) |
+| [[Nabla-Reasoner\|∇-Reasoner]] | 2026 | — | [2603.04948](https://arxiv.org/abs/2603.04948) |
+| [[Deep-Thinking-Tokens\|Think Deep, Not Just Long]] | 2026 | — | [2602.13517](https://arxiv.org/abs/2602.13517) |
+| [[Skill-Entropy\|Skill Entropy / Skill²-Bench]] | 2026 | — | [2608.05139](https://arxiv.org/abs/2608.05139) |
 
 **Tags:** `reasoning` `rlhf` `alignment` `chain-of-thought` `credit-assignment` `rlvr` `experience-replay` `speculative-decoding` `sparse-attention` `tool-use` `contrastive-learning`
 
