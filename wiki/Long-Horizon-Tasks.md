@@ -5,7 +5,7 @@ year: "2026"
 arxiv: "2605.02572"
 tags: [reasoning, reinforcement-learning, agentic, training, long-context]
 tldr: "Systematic empirical study showing that increasing task horizon length alone is a training bottleneck for LLM agents — horizon reduction stabilizes RL training and yields horizon generalization to longer horizons at inference time. ICML 2026."
-citation_count: 0
+citation_count: 4
 created: "2026-09-29"
 ---
 

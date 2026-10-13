@@ -5,7 +5,7 @@ year: "2025"
 arxiv: "2505.03335"
 tags: [reasoning, reinforcement-learning, rlvr, self-play, zero-data]
 tldr: "A new RLVR paradigm where a single model (AZR) simultaneously learns to propose tasks that maximize its own learning progress and improves by solving them — with zero external data, outperforming zero-setting models trained on tens of thousands of human-curated examples."
-citation_count: 0
+citation_count: 369
 created: "2026-09-29"
 ---
 

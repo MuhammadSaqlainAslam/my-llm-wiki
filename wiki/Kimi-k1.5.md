@@ -5,7 +5,7 @@ year: "2025"
 arxiv: "2501.12599"
 tags: [reasoning, reinforcement-learning, rlvr, multimodal, frontier-models]
 tldr: "Multi-modal LLM trained with RL using two key ingredients — long-context scaling (RL context window to 128k) and improved policy optimization — with no MCTS, value functions, or process reward models. Long-CoT matches o1 (77.5 AIME, 96.2 MATH500); long2short distillation gives SOTA short-CoT (60.8 AIME, 94.6 MATH500, 47.3 LiveCodeBench), far ahead of GPT-4o and Claude Sonnet 3.5."
-citation_count: 0
+citation_count: 1108
 created: "2026-09-29"
 ---
 

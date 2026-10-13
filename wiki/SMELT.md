@@ -5,7 +5,7 @@ authors: "Shaowen Wang, Ge Zhang, Kairong Luo, Yuhao Wu, Shaofan Liu, Jiaheng Li
 year: 2026
 arxiv: "2609.01343"
 tags: [looped-transformer, mixture-of-experts, scaling-laws, compute-optimal, attention-sinks]
-citation_count: 0
+citation_count: 17
 tldr: "Most looped-Transformer evaluations compare against an unlooped baseline of the same layer count, quietly giving the looped model extra FLOPs. SMELT loops the middle half of an MoE Transformer's layers twice while matching per-token FLOPs, parameters, and KV cache exactly against the baseline, and still saves 6.8-18.0% of training FLOPs on the compute-optimal frontier — with the largest gains on code tasks and longer contexts."
 aliases: ["SMELT"]
 ---

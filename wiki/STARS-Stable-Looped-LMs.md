@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2605.26733"
 venue: "ICML 2026"
 tags: [looped-transformer, recurrent-depth, latent-reasoning, test-time-compute, stability, regularization]
-citation_count: 0
+citation_count: 21
 tldr: "Looped language models promise test-time scaling by iterating more, but performance often peaks at some loop depth and then collapses. STARS trains the loop toward asymptotically stable fixed points with a cheap Jacobian Spectral Radius Regularization plus random loop sampling, giving reliable scaling on arithmetic and much milder degradation (and a higher peak) on math reasoning. ICML 2026."
 aliases: ["STARS", "STAbility-driven Recurrent Scaling", "JSRR"]
 ---

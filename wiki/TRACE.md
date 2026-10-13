@@ -5,7 +5,7 @@ year: "2025"
 arxiv: "2510.02837"
 tags: [benchmarks-evaluation, agentic, tool-use, reasoning]
 tldr: "TRACE — a reference-free framework for multi-dimensional evaluation of tool-augmented LLM agents that assesses full reasoning trajectories (efficiency, hallucination, adaptivity), not just final-answer accuracy. ICML 2026."
-citation_count: 0
+citation_count: 22
 created: "2026-09-29"
 ---
 

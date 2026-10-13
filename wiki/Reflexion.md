@@ -5,7 +5,7 @@ authors: "Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik 
 year: 2023
 arxiv: "2303.11366"
 tags: [agents, reinforcement-learning, self-reflection, reasoning, code-generation]
-citation_count: 0
+citation_count: 5956
 tldr: "An LLM agent that improves within a task not by updating weights, but by writing itself a natural-language note about what went wrong and rereading that note on the next attempt. On AlfWorld this 'verbal RL' loop lifts success from 75% to 97% over 12 trials; on HumanEval it pushes GPT-4 from 80% to 91% pass@1."
 aliases: ["Reflexion", "verbal reinforcement learning"]
 ---

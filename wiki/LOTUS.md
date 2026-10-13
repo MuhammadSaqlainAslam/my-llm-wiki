@@ -5,7 +5,7 @@ authors: "Ying Fan, Anej Svete, Kangwook Lee"
 year: 2026
 arxiv: "2606.31779"
 tags: [looped-transformer, latent-reasoning, chain-of-thought, recurrent-depth, reasoning]
-citation_count: 0
+citation_count: 10
 tldr: "Latent chain-of-thought reasoning (thinking in hidden states instead of tokens) has historically fallen further behind explicit CoT as models scale past 1B parameters. LOTUS closes that gap by looping Transformer blocks and supervising K parallel latent positions across R loop iterations with gold CoT-step targets — the first latent-CoT method to match explicit CoT at 3B scale, with 2.5–6.9× lower thought-phase latency."
 aliases: ["LOTUS", "Looped Transformers with parallel supervision on latents"]
 ---

@@ -6,7 +6,7 @@ arxiv: "2501.19393"
 venue: "EMNLP 2025"
 tags: [reasoning, test-time-scaling, inference, fine-tuning-alignment]
 tldr: "Curates a 1,000-question dataset (s1K) and applies budget forcing — forcefully ending or extending a model's thinking process — so that s1-32B exceeds o1-preview on MATH and AIME24 by up to 27%, using only 26 minutes of fine-tuning on 16 H100s."
-citation_count: 0
+citation_count: 1530
 created: "2026-09-29"
 ---
 

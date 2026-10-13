@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2602.13517"
 venue: "ICML 2026"
 tags: [reasoning, test-time-compute, interpretability, self-consistency, logit-lens, inference]
-citation_count: 0
+citation_count: 27
 tldr: "Token count is an unreliable proxy for reasoning effort: longer outputs often signal overthinking, not better answers. Instead, count 'deep-thinking tokens' — tokens whose internal prediction keeps being revised in the deepest layers before settling. The deep-thinking ratio correlates with accuracy (avg Pearson 0.687 vs -0.594 for token count), and Think@n uses it to drop unpromising samples early, matching or beating self-consistency at roughly half the tokens. ICML 2026."
 aliases: ["Think@n", "Deep-Thinking Ratio", "DTR"]
 ---

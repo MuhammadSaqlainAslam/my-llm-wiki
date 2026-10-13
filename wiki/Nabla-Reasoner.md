@@ -6,7 +6,7 @@ year: "2026"
 arxiv: "2603.04948"
 venue: "ICLR 2026"
 tags: [reasoning, test-time-compute, inference, gradient-descent, reward-model, kl-regularized-rl]
-citation_count: 0
+citation_count: 5
 tldr: "Replaces discrete test-time search (best-of-N, trial-and-error prompting) with first-order optimization: during decoding, run gradient descent on the token logits against a reward model plus the LLM's own likelihood, then accept or reject the refined token by rejection sampling. Proves this is dual to KL-regularized RL policy alignment, and reports over 20% accuracy improvement on a hard math benchmark with ~10-40% fewer model calls than strong baselines. ICLR 2026."
 aliases: ["Nabla-Reasoner", "DTO", "Differentiable Textual Optimization"]
 ---

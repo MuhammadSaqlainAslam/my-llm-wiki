@@ -5,7 +5,7 @@ authors: "Yilun Liu, Jinru Han, Sikuan Yan, Volker Tresp, Yunpu Ma"
 year: 2026
 arxiv: "2604.00801"
 tags: [moe, routing, gradient-flow, expert-activation, sparse, load-balancing]
-citation_count: 0
+citation_count: 2
 tldr: "Eliminates centralized MoE routing entirely — no external router, no Softmax, no Top-K — by letting each expert decide its own activation via a ReLU-style gate optimized through continuous gradient flow. Pairs this with a unified load-balancing framework that interpolates between expert-choice and token-choice balancing, and outperforms standard MoE, AoE, and ReMoE on language modeling."
 aliases: ["Routing-Free MoE", "RFMoE"]
 ---

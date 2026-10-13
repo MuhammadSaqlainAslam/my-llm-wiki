@@ -5,7 +5,7 @@ authors: "Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
 year: 2020
 arxiv: "2005.11401"
 tags: [retrieval, rag, knowledge-intensive-nlp, open-domain-qa, hybrid-parametric-nonparametric]
-citation_count: 0
+citation_count: 19433
 tldr: "Combines a pretrained seq2seq generator (parametric memory) with a dense vector index of Wikipedia (non-parametric memory) retrieved at inference time. The generator conditions on retrieved passages instead of memorizing facts in its weights — so knowledge can be updated by swapping the index, not retraining the model. Set state-of-the-art on open-domain QA and produced more factual, specific text than a parametric-only baseline."
 aliases: ["RAG", "Retrieval-Augmented Generation"]
 ---

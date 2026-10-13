@@ -5,7 +5,7 @@ authors: "Xunhao Lai, Weiqi Xu, Yufeng Yang, Qiaorui Chen, Yang Xu, Lunbin Zeng,
 year: "2026"
 arxiv: "2606.13392"
 tags: [attention, sparse-attention, gqa, long-context, inference, kernels, gpu]
-citation_count: 0
+citation_count: 34
 tldr: "Blockwise sparse attention built on GQA: a lightweight Index Branch scores key-value blocks and picks a Top-k subset independently for each GQA group, then a Main Branch runs exact attention over only those blocks. On a 109B natively multimodal MoE it matches GQA quality while cutting per-token attention compute 28.4x at 1M context, with a co-designed kernel giving 14.2x prefill and 7.6x decode speedups on H800. Powers the released MiniMax-M3."
 aliases: ["MSA", "MiniMax-M3 attention"]
 ---
