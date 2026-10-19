@@ -1912,69 +1912,47 @@
       /* ── Footer + visitor ────────────────────────────────────────────── */
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
       .footer-right { text-align: center; }
-      #visitor-countries { padding: 8px 10px 10px; }
+      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 16px; }
       .flag-counter-wrap { max-width: 100%; }
       .flag-counter-img { max-width: 100%; }
     }
 
-    /* ── VISITOR COUNTER (bottom of left pane — does not add a page scrollbar) ── */
+    /* ── VISITOR COUNTER ────────────────────────────────────────────── */
     #visitor-countries {
-      flex-shrink: 0;
-      padding: 10px 16px 12px;
+      padding: 24px 32px;
       border-top: 0.5px solid var(--border);
+      margin-top: 24px;
       background: var(--surface);
+      border-radius: 8px;
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-bottom: 16px;
     }
     .visitor-inner {
-      margin: 0 auto;
-      display: flex; justify-content: center; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: center; align-items: flex-start;
     }
     /* ── FLAG COUNTER ────────────────────────────────────────────────── */
     .flag-counter-wrap {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      max-width: 100%;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 380px;
       width: 100%;
       text-align: center;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
     }
     [data-theme="dark"] .flag-counter-wrap { background: #161b22; border-color: #30363d; }
     [data-theme="light"] .flag-counter-wrap { background: #f6f8fa; border-color: #d0d7de; }
-    .visitor-label {
-      margin: 0 0 8px;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .visitor-badge-link {
-      display: inline-block;
-      line-height: 0;
-      margin-bottom: 8px;
-    }
-    .visitor-badge-img {
-      display: inline-block;
-      vertical-align: middle;
-      border-radius: 4px;
-    }
     .flag-counter-img {
-      cursor: default;
-      max-width: min(100%, 340px); height: auto;
-      border-radius: 4px; display: block; margin: 6px auto 0;
+      cursor: default; pointer-events: none;
+      max-width: 100%; height: auto;
+      border-radius: 6px; display: block; margin: 0 auto;
     }
-    .visitor-fallback {
-      margin: 8px 0 0;
-      font-size: .78rem;
-      color: var(--muted);
-    }
-    .flag-counter-wrap.fc-fallback .visitor-label { margin-bottom: 0; }
     @media (max-width: 600px) {
-      #visitor-countries { padding: 8px 10px 10px; }
+      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
     }
 
     /* ── FOOTER ─────────────────────────────────────────────────────── */
@@ -2128,53 +2106,6 @@
 
     <!-- agent (shown when agent tab active) -->
     <div id="agent-wrap"></div>
-
-    <!-- visitor tracking — bottom of left pane -->
-    <div id="visitor-countries" aria-label="Visitor tracking">
-      <div class="visitor-inner">
-        <div class="flag-counter-wrap" id="fc-wrap">
-          <p class="visitor-label">Visitors</p>
-          <!-- Always-on count badge (rarely blocked) -->
-          <a href="https://MuhammadSaqlainAslam.github.io/my-llm-wiki/" class="visitor-badge-link">
-            <img id="fc-badge"
-                 src="https://visitor-badge.laobi.icu/badge?page_id=MuhammadSaqlainAslam.my-llm-wiki"
-                 alt="Visitor count"
-                 class="visitor-badge-img"
-                 width="120"
-                 height="20">
-          </a>
-          <!-- Country map (FlagCounter — often blocked by adblock; hide on error) -->
-          <img id="fc-map"
-               src="https://s01.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
-               alt="Visitors by country"
-               class="flag-counter-img"
-               width="340"
-               height="104"
-               hidden>
-          <p class="visitor-fallback" id="fc-fallback" hidden>Country map blocked by the browser — count badge above is live.</p>
-        </div>
-      </div>
-    </div>
-    <script>
-      (function () {
-        const map = document.getElementById('fc-map');
-        const fb = document.getElementById('fc-fallback');
-        if (!map) return;
-        function ok() { map.hidden = false; }
-        function fail() { map.remove(); if (fb) fb.hidden = false; }
-        map.addEventListener('load', function () {
-          if (map.naturalWidth > 0) ok(); else fail();
-        });
-        map.addEventListener('error', fail, { once: true });
-        // If cached as broken/complete before listeners:
-        if (map.complete) {
-          if (map.naturalWidth > 0) ok(); else fail();
-        } else {
-          // start load now (hidden until success)
-          map.src = map.src;
-        }
-      })();
-    </script>
 
   </div>
 
@@ -4097,6 +4028,18 @@ document.getElementById('compare-panel-close').addEventListener('click', () => {
 setupTheme();
 init();
 </script>
+
+<section id="visitor-countries">
+  <div class="visitor-inner">
+    <div class="flag-counter-wrap">
+      <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
+           alt="Visitors by Country"
+           class="flag-counter-img"
+           border="0"
+           onerror="this.parentElement.style.display='none'">
+    </div>
+  </div>
+</section>
 
 <footer id="site-footer">
   <div class="footer-inner">
