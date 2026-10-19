@@ -4,7 +4,7 @@ title: "MegaByte: Predicting Million-byte Sequences with Multiscale Transformers
 authors: "Lili Yu, Dániel Simig, Colin Flaherty, Armen Aghajanyan, Luke Zettlemoyer, Mike Lewis (Meta AI)"
 year: 2023
 arxiv: "2305.07185"
-citation_count: 0
+citation_count: 204
 tags: [byte-level, tokenization, long-context, architecture, multiscale, efficiency, multimodal]
 tldr: "Global Transformer over fixed-size byte patches + small local Transformer inside each patch. Sub-quadratic attention (optimal P gives O(N^{4/3})), fat per-patch FFNs (up to P× bigger at equal FLOPs), and parallel patch decoding (~P× fewer serial steps). Tokenization-free AR that is competitive with BPE models on long text and SOTA on ImageNet density — million-byte multimodal in one model."
 aliases: [MegaByte, MEGABYTE, Multiscale Transformers]

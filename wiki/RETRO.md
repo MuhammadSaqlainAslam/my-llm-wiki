@@ -5,7 +5,7 @@ authors: "Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann, Trevor Cai, Eliza 
 year: 2021
 arxiv: "2112.04426"
 tags: [retrieval, scaling-laws, non-parametric-memory, chunked-cross-attention, efficiency]
-citation_count: 1967
+citation_count: 1985
 tldr: "RETRO augments a Transformer with a frozen, 2-trillion-token retrieval database: for every 64-token chunk of input, it retrieves the k nearest-neighbor chunks (via frozen BERT embeddings + approximate nearest-neighbor search) and lets the decoder cross-attend to them through dedicated Chunked Cross-Attention layers. A 7.5B RETRO model matches GPT-3/Jurassic-1 on the Pile with 25x fewer parameters, showing retrieval can substitute for a large chunk of parametric memorization."
 aliases: ["RETRO", "Retrieval-Enhanced Transformer"]
 ---

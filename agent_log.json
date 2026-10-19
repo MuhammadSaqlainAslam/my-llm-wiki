@@ -843,5 +843,45 @@
       "xLSTM.md (+46)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-10-19T14:20:30.890643",
+    "mode": "update-citations",
+    "topic": null,
+    "added": [
+      "Mamba.md (+108)",
+      "Mamba3.md (+6)",
+      "Medusa.md (+13)",
+      "MegaByte.md (+204)",
+      "MiniGPT-4.md (+8)",
+      "MiniMax-Sparse-Attention.md (+2)",
+      "Ministral-3.md (+3)",
+      "Mixtral.md (+8)",
+      "Mixture-of-Experts.md (+48)",
+      "Nabla-Reasoner.md (+1)",
+      "Native Sparse Attention.md (+561)",
+      "Nemotron-3.md (+5)",
+      "Nemotron_3_Super.md (+3)",
+      "OLMoE.md (+6)",
+      "OLoRA.md (+1)",
+      "OSWorld-MCP.md (+4)",
+      "OSWorld.md (+46)",
+      "On the Direction of RLVR Updates.md (+1)",
+      "Qwen3 Technical Report.md (+273)",
+      "RAG.md (+231)",
+      "RAPTOR.md (+13)",
+      "RETRO.md (+18)",
+      "RWKV.md (+6)",
+      "ReAct Synergizing Reasoning and Acting in Language Models.md (+274)",
+      "Recurrent-Depth-Reasoning.md (+26)",
+      "Reflexion.md (+170)",
+      "RetNet.md (+7)",
+      "VinePPO.md (+13)",
+      "World-Models.md (+31)",
+      "YOCO.md (+172)",
+      "s1-Simple-Test-Time-Scaling.md (+25)",
+      "xLSTM.md (+9)"
+    ],
+    "skipped": []
   }
 ]

@@ -6,7 +6,7 @@ year: 2025
 arxiv: "2502.05171"
 venue: "NeurIPS 2025"
 tags: [looped-transformer, recurrent-depth, latent-reasoning, test-time-compute, reasoning]
-citation_count: 445
+citation_count: 471
 tldr: "Scales test-time compute by looping a recurrent block of layers at inference time instead of generating more chain-of-thought tokens. A 3.5B-parameter model (nicknamed Huginn) trained on 800B tokens improves reasoning benchmark performance up to the compute equivalent of a 50B-parameter model, purely by iterating longer in latent space, with no specialized CoT training data required."
 aliases: ["Huginn", "Recurrent Depth", "Latent Reasoning Recurrent Depth"]
 ---

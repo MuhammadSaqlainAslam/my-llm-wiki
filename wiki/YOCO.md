@@ -4,7 +4,7 @@ title: "You Only Cache Once: Decoder-Decoder Architectures for Language Models (
 authors: "Yutao Sun, Li Dong, Yi Zhu, Shaohan Huang, Wenhui Wang, Shuming Ma, Quanlu Zhang, Jianyong Wang, Furu Wei (Microsoft Research / Tsinghua)"
 year: 2024
 arxiv: "2405.05254"
-citation_count: 0
+citation_count: 172
 tags: [architecture, kv-cache, long-context, inference, attention, retention, efficiency, memory]
 tldr: "Stack a cross-decoder on a self-decoder: only the self-decoder writes the *global* KV cache once; every cross layer reuses it via cross-attention. KV memory drops ~L× (≈80× on 65B), prefill can early-exit before the heavy layers (512K: 180s → <6s; 1M: 71.8×), and a 3B YOCO matches strong Transformers while hitting near-perfect 1M needle retrieval."
 aliases: [YOCO, You Only Cache Once, decoder-decoder, gRet, gated retention]

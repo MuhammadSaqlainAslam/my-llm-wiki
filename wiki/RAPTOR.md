@@ -5,7 +5,7 @@ authors: "Parth Sarthi, Salman Abdullah, Aditi Tuli, Shubh Khanna, Anna Goldie, 
 year: 2024
 arxiv: "2401.18059"
 tags: [retrieval, rag, hierarchical-summarization, long-document-qa, clustering]
-citation_count: 787
+citation_count: 800
 tldr: "Flat-chunk RAG only ever retrieves local snippets, so it fails on questions that need a whole-document view. RAPTOR recursively clusters and summarizes chunks into a tree of increasingly abstract summaries, then retrieves from every level at once — a narrow question pulls a leaf chunk, a thematic question pulls a root-level summary. Coupled with GPT-4, it improves the best prior QuALITY benchmark accuracy by 20 absolute points. ICLR 2024."
 aliases: ["RAPTOR"]
 ---

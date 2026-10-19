@@ -4,7 +4,7 @@ title: "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse 
 authors: "Jingyang Yuan, Huazuo Gao, Damai Dai, Junyu Luo, Liang Zhao, Zhengyan Zhang, Zhenda Xie, Y. X. Wei, Lean Wang, Zhiping Xiao, Yuqing Wang, Chong Ruan, Ming Zhang, Wenfeng Liang, Wangding Zeng (DeepSeek-AI / PKU / UW)"
 year: 2025
 arxiv: "2502.11089"
-citation_count: 0
+citation_count: 561
 tags: [attention, sparse-attention, long-context, kernels, hardware, training, deepseek, inference, efficiency]
 tldr: "Sparse attention you can actually train and actually speed up: three parallel branches (compressed blocks, top-n selected blocks, sliding window) gated per query, with Triton kernels that load KV by GQA group to keep arithmetic intensity balanced. On a 27B/3B-active MoE, NSA matches or beats full attention on general, long-context, and CoT benchmarks while delivering up to 9.0× forward, 6.0× backward, and 11.6× decode speedups at 64k on A100."
 aliases: [NSA, Native Sparse Attention, Natively Trainable Sparse Attention]
