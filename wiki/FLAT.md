@@ -11,4 +11,4 @@ tldr: "Hardware-aware implementation of linear attention that maps the recurrent
 FLAT (Fast Linear Attention) redesigns the compute schedule for linear attention so the recurrent form runs in SRAM rather than bouncing through HBM, achieving GPU/accelerator bandwidth utilization comparable to FlashAttention.
 
 ## See Also
-[[FlashAttention]] · [[Hardware-Aware Scan]] · [[Linear Attention]] · [[State Space Models]]
+[[FlashAttention]] · [[Hardware-Aware Scan]] · [[Linear attention|Linear Attention]] · [[State Space Models]]

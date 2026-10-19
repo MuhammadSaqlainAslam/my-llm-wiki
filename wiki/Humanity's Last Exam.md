@@ -82,4 +82,4 @@ Human performance (domain experts on their own questions): effectively ~100% by 
 - Reasoning-limit studies such as [[Illusion-of-Thinking|The Illusion of Thinking]] and agent-trajectory evaluation such as [[TRACE]] are complementary views: HLE scores final answers on hard questions, while those papers probe *how* and *where* reasoning breaks.
 
 ## Related Concepts
-[[LLM Benchmarks]] · [[LLM evaluation]] · [[MMLU]] · [[GPQA]] · [[MATH Benchmark]] · [[RLHF]] · [[RLVR]] · [[Transformer]] · [[Speculative Decoding]] · [[Illusion-of-Thinking|Illusion of Thinking]] · [[TRACE]]
+[[LLM Benchmarks]] · [[LLM evaluation]] · [[MMLU]] · [[GPQA]] · [[MATH_Benchmark|MATH Benchmark]] · [[RLHF]] · [[RLVR]] · [[Transformer]] · [[Speculative Decoding]] · [[Illusion-of-Thinking|Illusion of Thinking]] · [[TRACE]]

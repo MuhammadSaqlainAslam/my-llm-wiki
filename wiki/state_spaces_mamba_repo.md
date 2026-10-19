@@ -37,7 +37,7 @@ wikilinks:
   - "[[Memory hierarchy]]"
   - "[[HBM]]"
   - "[[Inference optimization]]"
-  - "[[KV cache]]"
+  - "[[KV Cache|KV cache]]"
   - "[[Attention]]"
 ---
 
@@ -72,7 +72,7 @@ This is the **official implementation** of the Mamba family of models, including
 - **Hardware-Aware Scan** — Fused CUDA kernel that keeps the scan state in SRAM rather than [[HBM]], eliminating the memory-bandwidth bottleneck; inspired by [[FlashAttention]]'s IO-aware design
 - **Chunkwise recurrent computation** — Splits sequences into chunks (e.g., 256 tokens); each chunk is computed with a matmul (parallel, fast) and chunk boundaries are connected by a short recurrent scan
 - **MIMO SSM (Mamba-3)** — Multiple-input multiple-output extension; rank-$r$ input/output projections instead of rank-1, controlled by `mimo_rank` parameter
-- **[[KV cache]] analogy** — Mamba's fixed-size recurrent state (e.g., $B \times D \times N$ floats) replaces the linearly growing [[KV cache]] of [[Transformer]]s; constant memory per token at inference
+- **[[KV Cache|KV cache]] analogy** — Mamba's fixed-size recurrent state (e.g., $B \times D \times N$ floats) replaces the linearly growing [[KV Cache|KV cache]] of [[Transformer]]s; constant memory per token at inference
 - **Recurrent inference** — At generation time, all three Mamba variants run as pure RNNs with **O(1) memory and O(1) compute per step**, vs. [[Attention]]'s O(L) memory and O(L) compute
 - **[[Sequence parallelism]]** — [[Transformers Are SSMs|Mamba-2]]'s chunkwise formulation naturally enables distributed sequence parallelism across devices via the SSD structure
 - **Diagonal recurrence** — Scalar $a_t$ (vs. full matrix $A_t$ in general SSMs) is the key structural constraint that makes [[SSD]] tractable while preserving expressivity
@@ -86,7 +86,7 @@ This is the **official implementation** of the Mamba family of models, including
 - **State size:** $N = 16$ (limited by scan efficiency)
 - **Training:** Scan-based, no tensor cores
 - **Inference speed:** **5× faster** than [[Transformer]] of equal size at sequence length 2K; gap grows with sequence length
-- **Memory:** Constant recurrent state replaces growing [[KV cache]]; e.g., 2.8B model state is ~100MB regardless of context length
+- **Memory:** Constant recurrent state replaces growing [[KV Cache|KV cache]]; e.g., 2.8B model state is ~100MB regardless of context length
 
 ```python
 from mamba_ssm import Mamba
@@ -166,7 +166,7 @@ lm_eval --model mamba_ssm \
 
 ## Why It Matters
 
-- **Inference efficiency at scale:** [[Mamba]] models generate tokens with **O(1) memory per step** (fixed recurrent state) vs. [[Transformer]]'s O(L) [[KV cache]]; at 16K context, a 2.8B Mamba-2 uses ~200MB of state memory vs. ~14GB KV cache for an equivalent [[Transformer]]
+- **Inference efficiency at scale:** [[Mamba]] models generate tokens with **O(1) memory per step** (fixed recurrent state) vs. [[Transformer]]'s O(L) [[KV Cache|KV cache]]; at 16K context, a 2.8B Mamba-2 uses ~200MB of state memory vs. ~14GB KV cache for an equivalent [[Transformer]]
 - **Training throughput breakthrough:** [[Transformers Are SSMs|Mamba-2]]'s [[SSD]] algorithm achieves **2–8× higher training throughput** than Mamba-1 on A100 GPUs by replacing CUDA scan kernels with BLAS-level tensor-core matmuls, enabling larger state sizes ($N=128$ vs $N=16$) at the same cost
 - **Ecosystem and reproducibility:** With 9,000+ GitHub stars, pip-installable kernels, and direct `lm-evaluation-harness` integration, this repo has become the reference benchmark for alternative architectures like [[RWKV]], [[xLSTM]], [[RetNet]], [[Griffin]], and [[Jamba]], enabling fair apples-to-apples comparison at the 130M–2.8B scale
 
@@ -180,13 +180,13 @@ lm_eval --model mamba_ssm \
 - [[SSD]] — Structured State Space Duality; the algorithmic core of Mamba-2
 - [[FlashAttention]] — Direct inspiration for IO-aware kernel design; both avoid materializing full intermediate tensors in [[HBM]]
 - [[Attention]] — The mechanism Mamba's recurrent form replaces at inference; [[Transformers Are SSMs|Mamba-2]] paper formalizes their mathematical duality
-- [[KV cache]] — Transformer inference bottleneck that Mamba eliminates by using fixed-size recurrent state
+- [[KV Cache|KV cache]] — Transformer inference bottleneck that Mamba eliminates by using fixed-size recurrent state
 - [[Jamba]] — Hybrid architecture interleaving Mamba-2 layers with [[Attention]] layers (as in `mamba2attn-2.7b`)
 - [[RWKV]] — Concurrent linear RNN work; different parameterization, similar inference efficiency goals
 - [[RetNet]] — Another linear recurrence model with chunkwise training; predates SSD's tensor-core formulation
 - [[Griffin]] — DeepMind's hybrid RNN; uses real-gated linear recurrences, comparable to Mamba-1 scale
 - [[xLSTM]] — Extended LSTM with matrix memory; competing approach to large-state recurrent models
-- [[speculative decoding]] — Orthogonal inference acceleration technique; Mamba's O(1) step cost makes it attractive as a draft model
+- [[Speculative Decoding|speculative decoding]] — Orthogonal inference acceleration technique; Mamba's O(1) step cost makes it attractive as a draft model
 
 ---
 
@@ -196,7 +196,7 @@ lm_eval --model mamba_ssm \
 
 2. **Hybrid architecture design principles:** The `mamba2attn-2.7b` checkpoint mixes [[Transformers Are SSMs|Mamba-2]] and [[Attention]] layers, and [[Jamba]] explores similar hybrids; there is no principled theory yet for *which* layers should be attention (1 in 8? 1 in 4?) and whether the optimal ratio changes with model scale, context length, or task distribution.
 
-3. **Long-context recall ceiling:** Fixed-size recurrent state fundamentally limits exact retrieval from long contexts (e.g., "needle in a haystack" tasks), unlike [[Attention]] with full [[KV cache]]; whether Mamba-3's MIMO design or future architectural changes (e.g., learned state expansion) can close this gap without sacrificing O(1) inference memory remains an open research direction.
+3. **Long-context recall ceiling:** Fixed-size recurrent state fundamentally limits exact retrieval from long contexts (e.g., "needle in a haystack" tasks), unlike [[Attention]] with full [[KV Cache|KV cache]]; whether Mamba-3's MIMO design or future architectural changes (e.g., learned state expansion) can close this gap without sacrificing O(1) inference memory remains an open research direction.
 
 ---
 
@@ -212,8 +212,8 @@ lm_eval --model mamba_ssm \
 - [[FlashAttention]] — systems inspiration (IO-aware design)
 - [[Sequence parallelism]] — enabled for SSMs by SSD
 - [[Attention]] — mechanism replaced by Mamba's recurrent form
-- [[KV cache]] — Transformer inference bottleneck Mamba avoids
+- [[KV Cache|KV cache]] — Transformer inference bottleneck Mamba avoids
 - [[Jamba]] — production hybrid Mamba-2 + Attention model
 - [[RWKV]], [[xLSTM]], [[RetNet]], [[Griffin]] — concurrent linear recurrence alternatives
-- [[speculative decoding]] — complementary inference optimization
+- [[Speculative Decoding|speculative decoding]] — complementary inference optimization
 - [[HBM]] / [[Memory hierarchy]] — GPU memory design principles

@@ -40,7 +40,7 @@ O_i = O_i / l_i                        # final normalization
 
 ## Related Concepts
 [[Attention|Scaled Dot-Product Attention]]
-[[Online Softmax]]
+[[Online softmax|Online Softmax]]
 [[FlashAttention|Memory-Efficient Attention]]
 [[KV Cache]]
-[[Multi-Head Attention]]
+[[Multi-head attention|Multi-Head Attention]]

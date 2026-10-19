@@ -193,4 +193,4 @@ Not vendor self-reported — comparisons here are more trustworthy.
 
 ## Related Concepts
 
-[[Opus 4.8 Benchmarks]] · [[SWE-bench]] · [[OSWorld]] · [[Humanity's Last Exam]] · [[MCP-Atlas]] · [[DeepSeek_V4]] · [[KV cache]] · [[Speculative Decoding]] · [[GQA]] · [[RLVR]] · [[LLM evaluation]]
+[[Opus 4.8 Benchmarks]] · [[SWE-bench]] · [[OSWorld]] · [[Humanity's Last Exam]] · [[MCP-Atlas]] · [[DeepSeek_V4]] · [[KV Cache|KV cache]] · [[Speculative Decoding]] · [[GQA]] · [[RLVR]] · [[LLM evaluation]]

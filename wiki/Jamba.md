@@ -174,7 +174,7 @@ The 1:7 ratio was selected as the **most compute-efficient variant among best-pe
 ### Enables / Related
 - [[State Space Model|State Space Models]] — Validates SSM viability in production LLMs
 - [[KV Cache Optimization|Long-Context LLMs]] — New benchmark for open models at 256K tokens
-- [[Efficient LLM Inference]] — KV cache compression via architectural design rather than post-hoc compression
+- [[Efficient_LLM_Inference|Efficient LLM Inference]] — KV cache compression via architectural design rather than post-hoc compression
 
 ---
 
@@ -206,10 +206,10 @@ The 1:7 ratio was selected as the **most compute-efficient variant among best-pe
 [[Mixture of Experts]]
 [[KV Cache Optimization]]
 [[KV Cache Optimization|Long-Context Modeling]]
-[[Efficient Transformer Architectures]]
+[[Efficient_Transformer_Architectures|Efficient Transformer Architectures]]
 [[GQA|Grouped Query Attention]]
 [[RMSNorm]]
 [[SwiGLU]]
 [[Sliding window attention|Sparse Attention]]
 [[LSTM|Recurrent Neural Networks]]
-[[BPE Tokenization]]
+[[BPE_Tokenization|BPE Tokenization]]

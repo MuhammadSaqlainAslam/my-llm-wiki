@@ -11,4 +11,4 @@ tldr: "Infinite LLM inference via KV offloading: streams the KV cache to CPU/NVM
 InfLLM extends context to 1M+ tokens by offloading the KV cache to CPU memory (or NVMe) and maintaining a block-level semantic index. For each decoding step it retrieves only the top-K relevant blocks — keeping GPU memory use O(K) regardless of total context length.
 
 ## See Also
-[[KV Cache]] · [[Attention Sinks]] · [[MagicPIG]] · [[GQA]]
+[[KV Cache]] · [[Attention sinks|Attention Sinks]] · [[MagicPIG]] · [[GQA]]

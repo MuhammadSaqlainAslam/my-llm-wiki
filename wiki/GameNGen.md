@@ -24,7 +24,7 @@ Unlike [[DIAMOND]], which trains an RL agent to act inside a diffusion world mod
 ## Why It Matters
 
 - The first demonstration that a complex, established commercial game (DOOM) can be "re-implemented" entirely as a neural network, with no underlying game logic code at all
-- A direct precedent for [[Odyssey-2]]-style and similar "neural game engine" products appearing later in [[World-Model-Landscape|The World Model Landscape (2019-2026)]]'s Gaming/Interactive category
+- A direct precedent for Odyssey-2-style and similar "neural game engine" products appearing later in [[World-Model-Landscape|The World Model Landscape (2019-2026)]]'s Gaming/Interactive category
 - Demonstrates long-horizon stability (multi-minute play sessions without degradation) — a known failure mode (drift, inconsistency) for many video-generation-based world models, explicitly flagged as an open research gap in BVP's broader industry analysis
 
 ---
@@ -40,6 +40,6 @@ Unlike [[DIAMOND]], which trains an RL agent to act inside a diffusion world mod
 
 *Lineage: [[World Models]] · [[DIAMOND]]*
 
-*Forward ref (not yet created): [[Odyssey-2]]*
+*Forward ref (not yet created): Odyssey-2*
 
 *Landscape: [[World-Model-Landscape|The World Model Landscape (2019-2026)]]*

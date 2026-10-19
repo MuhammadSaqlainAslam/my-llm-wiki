@@ -147,4 +147,4 @@ Reasoning efficiency (MTP SPEED-Bench — accuracy per output token): Super scor
 
 *Architecture: [[Mamba]] · [[Mixture-of-Experts]] · [[LatentMoE]] · [[Multi-Token Prediction]] · [[GQA]] · [[NVFP4]]*
 
-*Training: [[RLVR]] · [[Multi-Environment RLVR Training]] · [[GRPO]] · [[Hardware-Aware Scan]]*
+*Training: [[RLVR]] · [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] · [[GRPO]] · [[Hardware-Aware Scan]]*

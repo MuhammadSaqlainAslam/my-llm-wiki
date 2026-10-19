@@ -378,7 +378,7 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Toolformer]] | 2023 | — | [2302.04761](https://arxiv.org/abs/2302.04761) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
-| [[Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
+| [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
 | [[VinePPO]] | 2024 | — | [2410.01679](https://arxiv.org/abs/2410.01679) |
 | [[EAPO]] | 2026 | — | [2606.30420](https://arxiv.org/abs/2606.30420) |
 | [[Speculative Chain-of-Thought\|Speculative Chain-of-Thought (SCoT)]] | 2025 | — | [2504.19095](https://arxiv.org/abs/2504.19095) |

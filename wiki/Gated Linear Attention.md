@@ -41,7 +41,7 @@ Chunkwise-parallel form (chunk size L):
 - **[[Transformers Are SSMs|Mamba-2]]**: converges on a related formulation (state-space duality), validating the design space.
 
 ## Related Concepts
-[[Linear Attention]]
+[[Linear attention|Linear Attention]]
 [[Mamba]]
 [[RetNet]]
 [[RWKV]]

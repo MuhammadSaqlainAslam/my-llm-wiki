@@ -127,7 +127,7 @@ Red-teaming ran in parallel with model development across 15 engagements (early,
 
 - Self-reported; no independent evaluator benchmarks cited in the report
 - "Competitive with Sonnet 4.6" is a vendor characterization — worth verifying against the full report's comparison table before citing specific numbers in other notes
-- No arXiv submission — technical report only, same caveat as [[Nemotron_3_Super|Nemotron 3 Super]], [[Nemotron_3_Ultra|Nemotron 3 Ultra]], and [[DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence|DeepSeek-V4]]
+- No arXiv submission — technical report only, same caveat as [[Nemotron_3_Super|Nemotron 3 Super]], [[Nemotron_3_Ultra|Nemotron 3 Ultra]], and DeepSeek-V4
 
 ---
 
@@ -137,4 +137,4 @@ Red-teaming ran in parallel with model development across 15 engagements (early,
 
 *Comparable models: [[Nemotron_3_Super|Nemotron 3 Super]] · [[Nemotron_3_Ultra|Nemotron 3 Ultra]] · [[DeepSeek-V3 Technical Report|DeepSeek-V3]]*
 
-*Training: [[Multi-Environment RLVR Training]] · [[Chinchilla_Scaling_Laws|Chinchilla]]*
+*Training: [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] · [[Chinchilla_Scaling_Laws|Chinchilla]]*

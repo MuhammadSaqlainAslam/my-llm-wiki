@@ -25,7 +25,7 @@ OLMoE is a fully open [[Mixture-of-Experts]] language model: weights, training d
 - The "fully open" distinction is meaningful: most frontier MoE releases leave some component opaque (weights but not data, or weights with limited training detail). OLMoE releases everything — the constraint on reproducibility is compute, not access
 - Competitive with similarly-sized dense models at roughly the same inference cost (1B active params) but with 7B parameter capacity
 - The fully released training data and experimental logs enable ablations that are impossible with less open releases — directly useful for researchers studying MoE scaling behavior
-- Provides an open MoE data point for the broader [[Scaling Laws]] literature
+- Provides an open MoE data point for the broader [[Scaling_Laws|Scaling Laws]] literature
 
 ## Limitations
 
@@ -34,4 +34,4 @@ OLMoE is a fully open [[Mixture-of-Experts]] language model: weights, training d
 
 ## Related Concepts
 
-[[Mixture-of-Experts]] · [[Mixtral]] · [[Kimi K2]] · [[GLM-5]] · [[Scaling Laws]]
+[[Mixture-of-Experts]] · [[Mixtral]] · [[Kimi K2]] · [[GLM-5]] · [[Scaling_Laws|Scaling Laws]]

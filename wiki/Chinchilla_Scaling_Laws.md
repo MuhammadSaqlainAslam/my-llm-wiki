@@ -44,8 +44,8 @@ where E is irreducible entropy, α ≈ 0.34, β ≈ 0.28.
 - **Mistral 7B (2023)** — embodies the "overtrain small models" philosophy
 
 ## Related Concepts
-[[Scaling Laws]]
-[[Compute-Optimal Training]]
-[[Kaplan Scaling Laws]]
-[[Compute-Optimal Training|Training Token Budget]]
+[[Scaling_Laws|Scaling Laws]]
+[[Compute-Optimal_Training|Compute-Optimal Training]]
+[[Kaplan_Scaling_Laws|Kaplan Scaling Laws]]
+[[Compute-Optimal_Training|Training Token Budget]]
 [[Speculative Decoding|Inference Efficiency]]

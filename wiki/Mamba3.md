@@ -186,7 +186,7 @@ Both released with optimized CUDA training + inference kernels at https://github
 - [[RoPE]] — the complex-valued state update is shown equivalent to data-dependent rotary embeddings, enabling efficient computation
 
 ### Competes with:
-- [[Gated DeltaNet (Yang et al. 2025)]] — current strongest linear model baseline; Mamba-3 SISO beats it by +0.6pp, MIMO by +1.8pp
+- [[Gated_DeltaNet_(Yang_et_al._2025)|Gated DeltaNet (Yang et al. 2025)]] — current strongest linear model baseline; Mamba-3 SISO beats it by +0.6pp, MIMO by +1.8pp
 - [[Linear attention|Linear Attention]] — simplest SSD instance; Mamba-3 significantly outperforms
 - [[HGRN2]], [[RetNet]], [[Gated Linear Attention]] — other sub-quadratic recurrent models on the quality-efficiency frontier
 

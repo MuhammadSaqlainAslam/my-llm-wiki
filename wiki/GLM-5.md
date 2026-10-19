@@ -26,7 +26,7 @@ GLM-5 advances the General Language Model line with Dynamic Sparse Architecture 
 
 ## Training
 
-- Asynchronous RL infrastructure: decouples generation and training to avoid GPU idle time during rollout collection, following the same direction as [[Multi-Environment RLVR Training]] in NVIDIA's Nemotron 3 Super pipeline
+- Asynchronous RL infrastructure: decouples generation and training to avoid GPU idle time during rollout collection, following the same direction as [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] in NVIDIA's Nemotron 3 Super pipeline
 - Post-training specialized for long-horizon agentic RL, avoiding early plateaus via two-stage pipeline design
 
 ---
@@ -48,4 +48,4 @@ GLM-5 advances the General Language Model line with Dynamic Sparse Architecture 
 
 ## Related Concepts
 
-*Lineage: [[DeepSeek-V3 Technical Report|DeepSeek-V3]] · [[Kimi K2]] · [[Qwen3 Technical Report|Qwen3]] · [[LatentMoE]] · [[Multi-Environment RLVR Training]] · [[MAI-Thinking-1]]*
+*Lineage: [[DeepSeek-V3 Technical Report|DeepSeek-V3]] · [[Kimi K2]] · [[Qwen3 Technical Report|Qwen3]] · [[LatentMoE]] · [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] · [[MAI-Thinking-1]]*

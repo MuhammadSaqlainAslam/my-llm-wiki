@@ -16,7 +16,7 @@ wikilinks: ["[[Mamba]]", "[[FlashAttention-2]]", "[[Multi-Query Attention]]", "[
 
 ## Overview
 
-nanoGPT is a minimal, readable codebase for training and fine-tuning GPT-style [[transformer]] language models. The entire implementation lives in two ~300-line files:
+nanoGPT is a minimal, readable codebase for training and fine-tuning GPT-style [[Transformer|transformer]] language models. The entire implementation lives in two ~300-line files:
 
 - `train.py` — a straightforward training loop with DDP support
 - `model.py` — a GPT model definition that can load OpenAI GPT-2 weights
@@ -59,4 +59,4 @@ python sample.py --out_dir=out-shakespeare-char
 
 ## Relevance to Wiki Themes
 
-nanoGPT is a canonical reference implementation of the [[transformer]] [[Transformer|neural network]] architecture for [[Transformer|language model]] pretraining. It demonstrates [[Scaling Laws|scaling]] considerations (batch size, context length, model size) and serves as the pedagogical baseline against which hardware-accelerated systems like [[FlashAttention-2]] and [[Sequence parallelism]] are often benchmarked.
+nanoGPT is a canonical reference implementation of the [[Transformer|transformer]] [[Transformer|neural network]] architecture for [[Transformer|language model]] pretraining. It demonstrates [[Scaling_Laws|scaling]] considerations (batch size, context length, model size) and serves as the pedagogical baseline against which hardware-accelerated systems like [[FlashAttention-2]] and [[Sequence parallelism]] are often benchmarked.

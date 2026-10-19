@@ -45,7 +45,7 @@ wikilinks:
   - "[[Hardware-Aware Scan]]"
   - "[[FlashAttention-2]]"
   - "[[Sequence parallelism]]"
-  - "[[KV cache]]"
+  - "[[KV Cache|KV cache]]"
 ---
 
 # State Space Duality (Mamba-2) Part I – The Model
@@ -59,7 +59,7 @@ wikilinks:
 
 ## TL;DR
 
-[[Transformers Are SSMs|Mamba-2]] introduces the **Structured State Space Duality ([[SSD]])** layer: a minimal restriction on [[Mamba]]'s diagonal-$A$ [[State Space Model|SSM]] — forcing $A_t$ to be scalar × identity — that simultaneously exposes a linear-[[Attention|attention]] interpretation. This duality enables training via tensor-core matrix multiplications, yielding **~2–8× faster training throughput** than [[Mamba]]'s parallel scan while supporting state sizes of $N=64$–$128$ (vs. $N=16$ in [[Mamba]]). The result is a model that is efficient as a recurrence at inference (constant-memory [[KV cache]] equivalent) and efficient as matrix operations during training.
+[[Transformers Are SSMs|Mamba-2]] introduces the **Structured State Space Duality ([[SSD]])** layer: a minimal restriction on [[Mamba]]'s diagonal-$A$ [[State Space Model|SSM]] — forcing $A_t$ to be scalar × identity — that simultaneously exposes a linear-[[Attention|attention]] interpretation. This duality enables training via tensor-core matrix multiplications, yielding **~2–8× faster training throughput** than [[Mamba]]'s parallel scan while supporting state sizes of $N=64$–$128$ (vs. $N=16$ in [[Mamba]]). The result is a model that is efficient as a recurrence at inference (constant-memory [[KV Cache|KV cache]] equivalent) and efficient as matrix operations during training.
 
 ---
 
@@ -80,7 +80,7 @@ Despite [[Mamba]]'s strong results, two key problems remained:
 - **[[Chunkwise recurrent]] algorithm:** [[SSD]] processes sequences in chunks, combining intra-chunk matmuls (quadratic/attention mode) with inter-chunk recurrence (linear mode) — analogous to [[FlashAttention]]'s tiling strategy.
 - **Multi-head structure:** Analogous to multi-head [[Attention]], enabling larger per-head state sizes ($N=64$–$128$ vs. $N=16$ in [[Mamba]]).
 - **Linear [[Attention]] connection:** The [[SSD]] quadratic form is equivalent to softmax-free [[Attention]] with a structured lower-triangular decay mask derived from $a_t$, connecting to [[RetNet]] and [[RWKV]].
-- **[[KV cache]] analogy:** At inference, the SSM hidden state $h_t \in \mathbb{R}^{N \times P}$ plays the role of the [[KV cache]], but with **fixed, $O(1)$ memory** regardless of sequence length.
+- **[[KV Cache|KV cache]] analogy:** At inference, the SSM hidden state $h_t \in \mathbb{R}^{N \times P}$ plays the role of the [[KV Cache|KV cache]], but with **fixed, $O(1)$ memory** regardless of sequence length.
 - **[[Channel-mixing]]:** Gating mechanism retained from [[Mamba]] in the overall block design.
 - **Tensor-core utilization:** [[SSD]]'s matmul-based algorithm achieves **~989 TFLOPS** BF16 throughput on H100 vs. ~67 TFLOPS for [[Mamba]]'s scan — the primary systems motivation.
 
@@ -105,7 +105,7 @@ $$h_t = A_t h_{t-1} + B_t x_t, \qquad y_t = C_t^\top h_t$$
 This means $A_t$ has shape $(T,)$ — a single scalar per timestep — giving a [[Diagonal recurrence]] of the form $h_t = a_t \cdot h_{t-1} + B_t x_t$.
 
 This tiny change has outsized consequences: the [[SSD]] layer can be expressed **both** as:
-- A **linear recurrence** ([[State Space Model|SSM]] mode) — efficient for inference; hidden state $h_t \in \mathbb{R}^{N \times P}$ serves as a fixed-size memory analogous to the [[KV cache]]
+- A **linear recurrence** ([[State Space Model|SSM]] mode) — efficient for inference; hidden state $h_t \in \mathbb{R}^{N \times P}$ serves as a fixed-size memory analogous to the [[KV Cache|KV cache]]
 - A **quadratic attention-like form** ([[Attention]] mode) — efficient for training via matrix multiplications on tensor cores
 
 This is the core of **State Space Duality ([[SSD]])**.
@@ -155,7 +155,7 @@ Key contrasts with standard [[Transformer]] [[Attention]]:
 | Property | [[Transformer]] [[Attention]] | [[SSD]] / [[Transformers Are SSMs|Mamba-2]] |
 |---|---|---|
 | Training complexity | $O(T^2)$ | $O(T^2)$ (quadratic mode) or $O(T)$ (recurrent) |
-| Inference memory | $O(T)$ [[KV cache]] | $O(N \times P)$ fixed state |
+| Inference memory | $O(T)$ [[KV Cache|KV cache]] | $O(N \times P)$ fixed state |
 | Decay mask | None (full attention) | Structured [[Exponential decay]] $a_t$ |
 | Tensor-core friendly | Yes ([[FlashAttention]]) | Yes ([[SSD]] matmuls) |
 | Selectivity | Via softmax | Via input-dependent $(A, B, C)$ |
@@ -186,7 +186,7 @@ Key contrasts with standard [[Transformer]] [[Attention]]:
 - [[FlashAttention]] — systems inspiration for [[SSD]]'s chunkwise tiling algorithm; [[FlashAttention-2]] achieves analogous tensor-core utilization for standard [[Attention]]
 - [[RetNet]] — uses fixed [[Exponential decay]] positional bias in a similar linear attention framework; [[SSD]] makes the decay input-dependent
 - [[RWKV]] — another recurrent model with an attention-mode dual interpretation; [[SSD]] formalizes this duality more explicitly
-- [[KV cache]] — [[SSD]]'s fixed-size hidden state $h_t$ is the recurrent analogue, with $O(1)$ memory vs. $O(T)$ for [[Transformer]]s
+- [[KV Cache|KV cache]] — [[SSD]]'s fixed-size hidden state $h_t$ is the recurrent analogue, with $O(1)$ memory vs. $O(T)$ for [[Transformer]]s
 - [[Chunkwise recurrent]] — the [[SSD]] training algorithm; processes length-$C$ chunks with intra-chunk matmuls and inter-chunk recurrence
 - [[Sequence parallelism]] — [[SSD]]'s matmul structure unlocks [[Transformer]]-style data and sequence parallelism for [[State Space Model|SSMs]]
 - [[Jamba]] — hybrid [[Mamba]]/[[Transformer]] architecture that could benefit from [[SSD]]'s improved throughput
@@ -197,7 +197,7 @@ Key contrasts with standard [[Transformer]] [[Attention]]:
 
 1. **Optimal head/state-size tradeoffs:** [[Transformers Are SSMs|Mamba-2]] supports $N=64$–$128$, but the relationship between head count $H$, head dim $P$, and state size $N$ on downstream task quality is not fully characterized — how do these hyperparameters interact at scale (e.g., 7B+ parameters)?
 2. **Beyond scalar-times-identity:** The SSD restriction ($A_t$ = scalar × identity) is sufficient for tensor-core efficiency, but are there intermediate structures (e.g., block-diagonal $A_t$) that recover more of [[Mamba]]'s expressivity while remaining matmul-friendly? The diagonal-to-scalar gap may leave modeling capacity on the table.
-3. **Long-context scaling of the fixed state:** [[SSD]]'s $O(N \times P)$ inference memory is context-length-independent, but compression quality degrades for very long sequences. Can the chunkwise recurrent algorithm be adapted for hierarchical or multi-scale state updates (cf. [[speculative decoding]] for inference efficiency) to maintain quality beyond 100K+ tokens?
+3. **Long-context scaling of the fixed state:** [[SSD]]'s $O(N \times P)$ inference memory is context-length-independent, but compression quality degrades for very long sequences. Can the chunkwise recurrent algorithm be adapted for hierarchical or multi-scale state updates (cf. [[Speculative Decoding|speculative decoding]] for inference efficiency) to maintain quality beyond 100K+ tokens?
 
 ---
 
@@ -215,5 +215,5 @@ Key contrasts with standard [[Transformer]] [[Attention]]:
 - [[Sequence parallelism]] — [[SSD]] unlocks [[Transformer]]-style parallelism for [[State Space Model|SSMs]]
 - [[RWKV]] — another recurrent model with [[Attention]]-like duality
 - [[RetNet]] — linear [[Attention]] with fixed [[Exponential decay]]; closely related to [[SSD]]
-- [[KV cache]] — [[SSD]]'s fixed-size state as the recurrent analogue
+- [[KV Cache|KV cache]] — [[SSD]]'s fixed-size state as the recurrent analogue
 - [[Jamba]] — hybrid architecture combining [[Mamba]] layers with [[Transformer]] blocks

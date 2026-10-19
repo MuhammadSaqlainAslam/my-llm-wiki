@@ -34,4 +34,4 @@ TokenFormer parameterizes each projection as attention between input tokens and 
 
 ## Related Concepts
 
-[[Transformer]] · [[Scaling Laws]] · [[LoRA Low-Rank Adaptation of Large Language Models|LoRA]]
+[[Transformer]] · [[Scaling_Laws|Scaling Laws]] · [[LoRA Low-Rank Adaptation of Large Language Models|LoRA]]

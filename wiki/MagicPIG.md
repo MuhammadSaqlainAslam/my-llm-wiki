@@ -11,4 +11,4 @@ tldr: "LSH-based KV cache selection: uses locality-sensitive hashing to retrieve
 Instead of evicting KV entries, MagicPIG keeps the full cache but retrieves only the top-K most relevant entries per query step using LSH (locality-sensitive hashing). This turns exact attention into approximate retrieval — O(K) cost regardless of sequence length.
 
 ## See Also
-[[KV Cache]] · [[SnapKV]] · [[Approximate Attention]] · [[Speculative Decoding]]
+[[KV Cache]] · [[SnapKV]] · Approximate Attention · [[Speculative Decoding]]

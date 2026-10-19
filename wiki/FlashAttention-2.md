@@ -69,7 +69,7 @@ The backward pass computes $dQ$, $dK$, $dV$ and is more complex than the forward
 - **[[Thread block]]** — the unit of GPU scheduling; each block has its own SRAM and synchronizes independently
 - **[[Warp]]** — 32 threads that execute in lockstep; communication between warps goes through shared memory
 - **[[Occupancy]]** — fraction of available warps that are active; low occupancy wastes GPU parallelism
-- **[[Tensor cores]]** — matrix-multiply units inside GPUs; ~10–20× faster than scalar CUDA cores
+- **[[Tensor Cores|Tensor cores]]** — matrix-multiply units inside GPUs; ~10–20× faster than scalar CUDA cores
 - **[[Multi-head attention]] parallelism** — v2 parallelizes over sequence length (query chunks) in addition to batch and heads
 - **[[Flash Attention|FlashAttention v1]]** — the foundation: tiled IO-aware attention; v2 is a better-scheduled implementation of the same algorithm
 

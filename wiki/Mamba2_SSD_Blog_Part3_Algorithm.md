@@ -223,7 +223,7 @@ def ssd_minimal_discrete(X, A, B, C, block_len):
 - [[FlashAttention]] — systems design inspiration for HBM-efficient tiling; [[SSD]] applies analogous principles to [[State Space Model|SSM]] computation
 - [[RetNet]] — [[SSD]] generalizes [[RetNet]]'s chunkwise mode by allowing data-dependent (non-constant) decay
 - [[Chunkwise recurrent]] — the key computational pattern; [[SSD]] is the canonical hardware-aware realization
-- [[KV cache]] — [[State Space Model|SSM]] recurrent state at inference time plays an analogous role to the [[KV cache]] in [[Transformer]]s; [[SSD]]'s fixed-size state ($N \times d$) makes this cache constant regardless of sequence length
+- [[KV Cache|KV cache]] — [[State Space Model|SSM]] recurrent state at inference time plays an analogous role to the [[KV Cache|KV cache]] in [[Transformer]]s; [[SSD]]'s fixed-size state ($N \times d$) makes this cache constant regardless of sequence length
 - [[Jamba]] — hybrid [[State Space Model|SSM]]/[[Transformer]] architecture whose design is informed by the [[SSD]]–[[Attention]] duality
 - [[Hardware-Aware Scan]] — [[Mamba]]-1's approach, replaced by [[SSD]] for training; still relevant for understanding the scan step (Step 3)
 - [[HBM]] / [[Memory hierarchy]] — hardware considerations central to [[SSD]]'s design

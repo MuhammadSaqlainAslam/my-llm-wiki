@@ -37,7 +37,7 @@ for i in range(num_merges):          # e.g. 50,000 iterations
 - **Kudo & Richardson 2018** — SentencePiece: alternative BPE implementation used by LLaMA/Mistral
 
 ## Related Concepts
-[[WordPiece Tokenization]]
+[[WordPiece_Tokenization|WordPiece Tokenization]]
 [[SentencePiece]]
 [[BPE_Tokenization|Vocabulary Size Tradeoffs]]
 [[BPE_Tokenization|Tokenization Artifacts]]

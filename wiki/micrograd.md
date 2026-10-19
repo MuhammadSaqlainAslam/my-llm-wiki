@@ -59,4 +59,4 @@ print(b.grad)  # dg/db
 
 ## Relation to Wiki Themes
 
-micrograd is the conceptual foundation beneath all [[Transformer|neural network]] training. Understanding it is prerequisite to understanding how [[transformer]] training, [[RLHF]], and other gradient-based methods work. See [[nanoGPT]] for a full GPT training stack, or [[llm.c]] for a C/CUDA implementation without any autograd framework.
+micrograd is the conceptual foundation beneath all [[Transformer|neural network]] training. Understanding it is prerequisite to understanding how [[Transformer|transformer]] training, [[RLHF]], and other gradient-based methods work. See [[nanoGPT]] for a full GPT training stack, or [[llm.c]] for a C/CUDA implementation without any autograd framework.

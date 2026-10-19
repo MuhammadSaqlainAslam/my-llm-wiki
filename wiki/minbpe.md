@@ -61,4 +61,4 @@ assert enc.encode(text) == tok.encode(text)  # ✓ identical
 
 ## Relation to Wiki Themes
 
-Tokenization is the first stage of any LLM pipeline and directly affects [[KV cache]] size (fewer tokens = smaller cache), [[speculative decoding]] draft quality, and vocabulary-level [[Scaling Laws|scaling]] decisions. minbpe makes the BPE mechanics transparent and hackable, complementing [[nanoGPT]] (training) and [[llm.c]] (C/CUDA inference).
+Tokenization is the first stage of any LLM pipeline and directly affects [[KV Cache|KV cache]] size (fewer tokens = smaller cache), [[Speculative Decoding|speculative decoding]] draft quality, and vocabulary-level [[Scaling_Laws|scaling]] decisions. minbpe makes the BPE mechanics transparent and hackable, complementing [[nanoGPT]] (training) and [[llm.c]] (C/CUDA inference).

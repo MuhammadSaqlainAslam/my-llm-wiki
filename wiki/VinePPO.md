@@ -51,4 +51,4 @@ The name "Vine" comes from the VINE (Value-Informed Non-parametric Estimation) e
 
 *Credit assignment: [[RLHF|InstructGPT / RLHF]] · [[GRPO]] · [[Direct Preference Optimization Your Language Model is Secretly a Reward Model|DPO]]*
 
-*Downstream: [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning|DeepSeek-R1]] · [[Ministral 3]] · [[Multi-Environment RLVR Training]]*
+*Downstream: [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning|DeepSeek-R1]] · [[Ministral 3]] · [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]]*

@@ -40,8 +40,8 @@ out = weights @ V  # (batch, heads, seq, d_k)
 - **FlashAttention** (Dao et al., 2022) — IO-aware exact attention, same math, radically faster
 
 ## Related Concepts
-[[Multi-Head Attention]]
+[[Multi-head attention|Multi-Head Attention]]
 [[Attention|Scaled Dot-Product]]
 [[KV Cache]]
-[[Positional Encoding]]
+[[Positional_Encoding|Positional Encoding]]
 [[Softmax]]

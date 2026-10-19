@@ -39,7 +39,7 @@ The project is a spiritual successor to [[nanoGPT]], sharing its `train_gpt2.py`
 
 The design is explicitly hardware-aware:
 - Targets [[HBM]] bandwidth as the primary bottleneck
-- Fused CUDA kernels reduce round-trips through the [[memory hierarchy]]
+- Fused CUDA kernels reduce round-trips through the [[Memory hierarchy|memory hierarchy]]
 - cuDNN Flash Attention leverages [[Systolic array]] units in Tensor Cores
 
 ## Quick Start (GPU, mixed precision)
@@ -64,4 +64,4 @@ Data scripts in `/dev/data/` download, tokenize (GPT-2 BPE via [[minbpe]]-compat
 
 ## Relation to Wiki Themes
 
-llm.c represents the [[Hardware Acceleration for Neural Networks|hardware acceleration]] and [[Speculative Decoding|LLM inference]]/training frontier: eliminating framework overhead, maximising [[HBM]] bandwidth, and leveraging [[FlashAttention-2]] within a minimal codebase. It is the practical counterpart to theoretical work on [[Inference optimization]], [[Sequence parallelism]], and [[Scaling Laws|scaling]]. The CPU fp32 path serves as an accessible reference analogous to [[micrograd]] for understanding raw forward/backward pass mechanics.
+llm.c represents the [[Hardware Acceleration for Neural Networks|hardware acceleration]] and [[Speculative Decoding|LLM inference]]/training frontier: eliminating framework overhead, maximising [[HBM]] bandwidth, and leveraging [[FlashAttention-2]] within a minimal codebase. It is the practical counterpart to theoretical work on [[Inference optimization]], [[Sequence parallelism]], and [[Scaling_Laws|scaling]]. The CPU fp32 path serves as an accessible reference analogous to [[micrograd]] for understanding raw forward/backward pass mechanics.

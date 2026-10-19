@@ -88,4 +88,4 @@ VeriCache resolves what looked like a fundamental tradeoff in KV-cache optimizat
 
 ## Related Concepts
 
-[[KV Cache]] · [[Speculative Decoding]] · [[Cache Compression]] · [[KV Cache Optimization]] · [[Hybrid memory|Hybrid Memory (KV-Cache Tiering)]]
+[[KV Cache]] · [[Speculative Decoding]] · [[Cache compression|Cache Compression]] · [[KV Cache Optimization]] · [[Hybrid memory|Hybrid Memory (KV-Cache Tiering)]]

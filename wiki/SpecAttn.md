@@ -87,4 +87,4 @@ Vegas is a small, sharp idea with an outsized practical payoff: a computation th
 
 ## Related Concepts
 
-[[Speculative Decoding]] · [[GQA]] · [[FlashAttention]] · [[Multi-Token Prediction]] · [[KV Cache]] · [[Sliding Window Attention]] · [[VeriCache]]
+[[Speculative Decoding]] · [[GQA]] · [[FlashAttention]] · [[Multi-Token Prediction]] · [[KV Cache]] · [[Sliding window attention|Sliding Window Attention]] · [[VeriCache]]
