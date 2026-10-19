@@ -22,6 +22,9 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[Transformers Are SSMs]] | Attention and selective SSMs are the same structured-matrix object. SSD framework gives Mamba-2: 2–8× faster, matmul-friendly. |
 | [[xLSTM]] | LSTM rehab — exponential gating + matrix memory. Competitive with Transformer at 1B+ scale, O(1) inference. |
 | [[Griffin]] | Google DeepMind hybrid: RG-LRU + local attention. Matches LLaMA-2 at 7× fewer training tokens. |
+| [[Titans]] | Test-time-written neural long-term memory + short-term attention. >2M context. |
+| [[MegaByte]] | Multiscale global+local Transformers on raw bytes. Million-byte text/image/audio without a tokenizer. |
+| [[Byte Latent Transformer]] | Entropy-patched byte LLM: matches Llama 3 FLOP parity; patches are a second scaling axis. |
 
 ## Scaling
 
@@ -36,6 +39,7 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[Flash Attention]] | IO-aware exact attention: tiles into SRAM, never writes T×T matrix to HBM. 2–4× wall-clock speedup. |
 | [[FlashAttention-2]] | Better warp scheduling pushes GPU to 50–73% peak FLOPS. 225 TFLOPS/s per A100 training GPT models. |
 | [[FlashAttention-3]] | Hopper asynchrony + FP8: 1.5–2× FA2 on H100 (up to 740 TFLOPS), ~1.2 PFLOPS FP8. |
+| [[BitNet b1.58]] | Ternary weights trained from scratch: matches FP16 from 3B; 2.7–4.1× faster, ~71× matmul energy. |
 | [[Hardware Acceleration for Neural Networks]] | Survey of GPUs, TPUs, NPUs, FPGAs, ASICs, LPUs, in/near-memory. The bottleneck is bandwidth, not FLOPS. |
 
 ## Inference Optimization
@@ -47,6 +51,7 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[KV Cache Optimization]] | Five families: eviction, compression, hybrid memory, novel attention, combination. No universal winner — pick by workload. |
 | [[Speculative Decoding]] | Fast draft proposes K tokens; large model verifies all K in one pass. ~2× throughput on long generations. |
 | [[Native Sparse Attention]] | Trainable 3-branch sparse attention (compress + select + window). 9–11× faster at 64k, quality ≥ full attention. |
+| [[YOCO]] | One global KV cache shared by all cross-decoder layers. ~L× less memory; 1M prefill 71.8× faster. |
 
 ## Modern Systems
 
