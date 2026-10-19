@@ -57,7 +57,7 @@ Note the gap between 28.4x fewer FLOPs and 7.6–14.2x faster wall-clock: sparsi
 ## Comparison to Prior Work
 
 - vs. **DeepSeek Sparse Attention (DSA)** — DSA scores tokens individually with a multi-head ReLU "lightning indexer" and shares one Top-k index across all query heads; MSA scores whole KV blocks and selects per GQA group.
-- vs. **NSA** — NSA targets MQA/MHA backbones with three parallel branches (compressed, selected, sliding-window); MSA keeps one selection path on a GQA backbone.
+- vs. **[[Native Sparse Attention|NSA]]** — NSA targets MQA/MHA backbones with three parallel branches (compressed, selected, sliding-window); MSA keeps one selection path on a GQA backbone.
 - vs. **MoBA** — also block-based and GQA-friendly, but scores blocks by averaged keys and trains the indexer only through the language-modeling gradient, with no auxiliary KL loss.
 - vs. **this wiki's [[Compressed Sparse Attention]] / [[Heavily Compressed Attention]]** ([[DeepSeek_V4]]) — a related but different design. CSA/HCA *compress* groups of tokens into single KV entries and then select among those, which shrinks the stored cache; MSA *selects among uncompressed blocks*, so it cuts the compute and memory *reads* per token. (Editorial note, not a claim from the paper: since MSA retrieves from the full cache, the cache itself is still stored in full, so its headline win is attention compute and bandwidth rather than cache footprint. The paper does not compare against CSA/HCA.)
 

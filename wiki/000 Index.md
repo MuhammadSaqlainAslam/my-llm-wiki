@@ -88,6 +88,7 @@ The silicon and memory systems the algorithms have to run on. Knowing the hardwa
 |---|---|---|---|
 | [[Flash Attention]] | FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness | 2022 | IO-aware exact attention: tiles into SRAM, never writes T×T matrix to HBM. 2–4× wall-clock speedup, zero approximation. The template every serious attention kernel copies. |
 | [[FlashAttention-2]] | FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning | 2023 | Fixes v1's warp scheduling to push GPU utilization from 25–40% to 50–73% of peak FLOPS. Reaches 225 TFLOPS/s per A100 training GPT models. |
+| [[FlashAttention-3]] | FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision | 2024 | Hopper rewrite of FA2: warp-specialized producer/consumer + pingpong GEMM↔softmax + FP8 with block quantization and incoherent processing. 1.5–2.0× FP16 (up to 740 TFLOPS, ~75% H100 util), ~1.2 PFLOPS FP8, 2.6× lower FP8 error than naive quantization. |
 | [[Hardware Acceleration for Neural Networks]] | Xu, Banerjee & Gupta — A Comprehensive Survey | 2025 | Survey of every chip family running NNs (GPU, TPU, NPU, FPGA, ASIC, LPU, in/near-memory, neuromorphic). The recurring theme: peak FLOPS doesn't matter — memory bandwidth and KV-cache I/O dominate end-to-end performance. |
 
 **Tags:** `hardware` `gpu` `tpu` `npu` `fpga` `asic` `lpu` `in-memory` `kv-cache` `io-awareness` `kernel-fusion`
@@ -117,6 +118,7 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[HYDRA]] | Hydra: Sequentially-Dependent Draft Heads for Medusa Decoding | 2024 | Makes Medusa's draft heads sequentially dependent (condition on earlier speculated tokens) instead of independent. Drop-in replacement; Hydra++ reaches 1.31× over Medusa, 2.70× over autoregressive decoding. |
 | [[VeriCache]] | VeriCache: Turning Lossy KV Cache into Lossless LLM Inference | 2026 | Drafts with a cheap compressed KV cache, verifies against the full cache kept off-GPU; the two operations bottleneck on different resources (HBM vs. PCIe) so they run in parallel. Byte-identical output to full-KV decoding at up to 4× the throughput. |
 | [[SpecAttn\|Vegas: Self-Speculative Decoding with Verification-Guided Sparse Attention]] | Vegas (orig. SpecAttn): Self-Speculative Decoding with Verification-Guided Sparse Attention | 2026 | Verification's full-attention pass already computes the exact criticality of every KV entry as a byproduct — reuse those scores to build the next draft phase's sparse-attention mask instead of running a separate KV-selection algorithm. 1.25–2.81× faster than vLLM. |
+| [[Native Sparse Attention\|Native Sparse Attention (NSA)]] | Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention | 2025 | Three gated branches (compressed blocks, top-n selected blocks, sliding window) trained from scratch with GQA-grouped Triton kernels. On 27B/3B-active MoE, beats full attention on general + LongBench avg; up to 9.0× forward, 6.0× backward, 11.6× decode at 64k on A100. |
 | [[MiniMax-Sparse-Attention\|MiniMax Sparse Attention]] | MiniMax Sparse Attention | 2026 | Blockwise sparse attention on a GQA backbone: a lightweight Index Branch picks Top-k KV blocks independently per GQA group, then exact attention runs over only those. Matches GQA quality on a 109B multimodal MoE while cutting attention compute 28.4× at 1M context; co-designed kernel gives 14.2× prefill / 7.6× decode speedups on H800. |
 
 **Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding` `lossless` `sparse-attention`
@@ -534,7 +536,7 @@ Models and techniques connecting vision encoders to large language models.
 
 **If you care about efficiency:** [[S4]] → [[Mamba]] → [[Transformers Are SSMs]] → [[xLSTM]] → [[RWKV]] → [[RetNet]] → [[Griffin]]
 
-**If you're deploying:** [[Flash Attention]] → [[FlashAttention-2]] → [[KV Cache Optimization]] → [[Medusa]] → [[EAGLE]] → [[Speculative Decoding]]
+**If you're deploying:** [[Flash Attention]] → [[FlashAttention-2]] → [[FlashAttention-3]] → [[KV Cache Optimization]] → [[Medusa]] → [[EAGLE]] → [[Speculative Decoding]]
 
 **If you want the math:** [[Transformer]] (attention) → [[S4]] (SSM, HiPPO, Cauchy kernel) → [[Mamba]] (selectivity) → [[Transformers Are SSMs]] (semiseparable matrices, SSD) → [[xLSTM]] (exponential gating + matrix memory)
 
@@ -542,6 +544,6 @@ Models and techniques connecting vision encoders to large language models.
 
 **If you care about fine-tuning:** [[LoRA Low-Rank Adaptation of Large Language Models|LoRA]] → [[RLHF]] → [[Direct Preference Optimization Your Language Model is Secretly a Reward Model|DPO]]
 
-**If you care about silicon:** [[Hardware Acceleration for Neural Networks]] → [[Flash Attention]] → [[FlashAttention-2]] → [[KV Cache Optimization]] → [[Hardware-Aware Scan]]
+**If you care about silicon:** [[Hardware Acceleration for Neural Networks]] → [[Flash Attention]] → [[FlashAttention-2]] → [[FlashAttention-3]] → [[KV Cache Optimization]] → [[Hardware-Aware Scan]]
 
 **If you want to understand the linear-RNN family:** [[S4]] → [[RWKV]] → [[RetNet]] → [[Griffin]] → [[Mamba]] → [[Transformers Are SSMs]]

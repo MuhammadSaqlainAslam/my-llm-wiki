@@ -35,6 +35,7 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 |---|---|
 | [[Flash Attention]] | IO-aware exact attention: tiles into SRAM, never writes T×T matrix to HBM. 2–4× wall-clock speedup. |
 | [[FlashAttention-2]] | Better warp scheduling pushes GPU to 50–73% peak FLOPS. 225 TFLOPS/s per A100 training GPT models. |
+| [[FlashAttention-3]] | Hopper asynchrony + FP8: 1.5–2× FA2 on H100 (up to 740 TFLOPS), ~1.2 PFLOPS FP8. |
 | [[Hardware Acceleration for Neural Networks]] | Survey of GPUs, TPUs, NPUs, FPGAs, ASICs, LPUs, in/near-memory. The bottleneck is bandwidth, not FLOPS. |
 
 ## Inference Optimization
@@ -45,6 +46,7 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[EAGLE]] | Feature-level draft model. 3–3.5× lossless speedup on LLaMA-2-Chat 70B — best in the speculative family. |
 | [[KV Cache Optimization]] | Five families: eviction, compression, hybrid memory, novel attention, combination. No universal winner — pick by workload. |
 | [[Speculative Decoding]] | Fast draft proposes K tokens; large model verifies all K in one pass. ~2× throughput on long generations. |
+| [[Native Sparse Attention]] | Trainable 3-branch sparse attention (compress + select + window). 9–11× faster at 64k, quality ≥ full attention. |
 
 ## Modern Systems
 
@@ -98,6 +100,8 @@ Transformer (2017, ~100K citations)
 │   │      Key tricks: tiling, online softmax, recomputation
 │   ├──► FlashAttention-2 (2023, ~4K)
 │   │      Fix warp scheduling → 50–73% GPU utilization (vs 25–40%)
+│   ├──► FlashAttention-3 (2024, ~750)
+│   │      Hopper async + FP8 → ~75% H100 util, 1.5–2× FA2
 │   └──► Hardware Acceleration Survey (2025)
 │          GPU / TPU / NPU / FPGA / ASIC / LPU / in-/near-memory
 │          Binding constraint: memory bandwidth, not FLOPS
@@ -174,8 +178,8 @@ If you're new: **Transformer → LLaMA 2 → Mixture-of-Experts → Mamba → Ne
 
 If you care about efficiency: **S4 → Mamba → Transformers Are SSMs → xLSTM → RWKV → RetNet → Griffin**
 
-If you're deploying: **Flash Attention → FlashAttention-2 → KV Cache Optimization → Medusa → EAGLE → Speculative Decoding**
+If you're deploying: **Flash Attention → FlashAttention-2 → FlashAttention-3 → KV Cache Optimization → Medusa → EAGLE → Speculative Decoding**
 
-If you care about silicon: **Hardware Acceleration → Flash Attention → FlashAttention-2 → Hardware-Aware Scan → KV Cache Optimization**
+If you care about silicon: **Hardware Acceleration → Flash Attention → FlashAttention-2 → FlashAttention-3 → Hardware-Aware Scan → KV Cache Optimization**
 
 If you want the linear-RNN lineage: **S4 → RWKV → RetNet → Griffin → Mamba → Transformers Are SSMs**

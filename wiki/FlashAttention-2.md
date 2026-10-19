@@ -116,4 +116,4 @@ Also supports **multi-query attention (MQA)** and **grouped-query attention (GQA
 
 ## Related Notes
 
-[[Flash Attention]] · [[Transformer]] · [[Hardware Acceleration for Neural Networks]] · [[KV Cache Optimization]] · [[GQA]] · [[Kernel fusion]] · [[SRAM]] · [[HBM]] · [[Tensor Cores]]
+[[Flash Attention]] · [[FlashAttention-3]] · [[Transformer]] · [[Hardware Acceleration for Neural Networks]] · [[KV Cache Optimization]] · [[GQA]] · [[Kernel fusion]] · [[SRAM]] · [[HBM]] · [[Tensor Cores]]
