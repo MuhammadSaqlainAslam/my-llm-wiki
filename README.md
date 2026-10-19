@@ -6,7 +6,7 @@
 🏛️ **Institute:** https://hhri.foxconn.com/en
 🌐 **Live Demo:** https://MuhammadSaqlainAslam.github.io/my-llm-wiki
 
-[![Wiki Notes](https://img.shields.io/badge/dynamic/json?url=https://MuhammadSaqlainAslam.github.io/my-llm-wiki/notes.json&query=$.length&label=wiki+notes&color=7c3aed&style=flat)](https://MuhammadSaqlainAslam.github.io/my-llm-wiki)
+[![Wiki Notes](https://img.shields.io/badge/dynamic/json?url=https://MuhammadSaqlainAslam.github.io/my-llm-wiki/notes.json&query=$.length&label=wiki+notes&color=7c3aed&style=flat&cacheSeconds=30)](https://MuhammadSaqlainAslam.github.io/my-llm-wiki)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MuhammadSaqlainAslam/my-llm-wiki?color=7c3aed&style=flat)
 ![GitHub repo size](https://img.shields.io/github/repo-size/MuhammadSaqlainAslam/my-llm-wiki?color=0d9488&style=flat)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
@@ -239,7 +239,7 @@ Three search scope modes are available via the mode selector above the result ba
 
 ## 📚 Wiki Contents
 
-[![Wiki Notes](https://img.shields.io/badge/dynamic/json?url=https://MuhammadSaqlainAslam.github.io/my-llm-wiki/notes.json&query=$.length&label=wiki+notes&color=7c3aed&style=flat)](https://MuhammadSaqlainAslam.github.io/my-llm-wiki) — 30+ full paper articles + growing concept glossary (badge updates automatically with each new paper).
+[![Wiki Notes](https://img.shields.io/badge/dynamic/json?url=https://MuhammadSaqlainAslam.github.io/my-llm-wiki/notes.json&query=$.length&label=wiki+notes&color=7c3aed&style=flat&cacheSeconds=30)](https://MuhammadSaqlainAslam.github.io/my-llm-wiki) — 128 full paper articles + 200+ concept/glossary notes (336 total). Badge reads `notes.json` from the live site and auto-updates with each deploy.
 
 ### Papers
 
@@ -261,6 +261,9 @@ Three search scope modes are available via the mode selector above the result ba
 | Griffin | 2024 | ~239 | [arXiv:2402.19427](https://arxiv.org/abs/2402.19427) |
 | Transformers are SSMs (Mamba-2) | 2024 | ~1,526 | [arXiv:2405.21060](https://arxiv.org/abs/2405.21060) |
 | xLSTM | 2024 | ~595 | [arXiv:2405.04517](https://arxiv.org/abs/2405.04517) |
+| MegaByte | 2023 | — | [arXiv:2305.07185](https://arxiv.org/abs/2305.07185) |
+| Byte Latent Transformer (BLT) | 2024 | — | [arXiv:2412.09871](https://arxiv.org/abs/2412.09871) |
+| Titans | 2025 | — | [arXiv:2501.00663](https://arxiv.org/abs/2501.00663) |
 
 #### Scaling / Parameter Efficiency
 
@@ -274,6 +277,8 @@ Three search scope modes are available via the mode selector above the result ba
 |-------|------|-----------|-------|
 | FlashAttention | 2022 | ~4,404 | [arXiv:2205.14135](https://arxiv.org/abs/2205.14135) |
 | FlashAttention-2 | 2023 | ~2,769 | [arXiv:2307.08691](https://arxiv.org/abs/2307.08691) |
+| FlashAttention-3 | 2024 | ~752 | [arXiv:2407.08608](https://arxiv.org/abs/2407.08608) |
+| BitNet b1.58 | 2024 | — | [arXiv:2402.17764](https://arxiv.org/abs/2402.17764) |
 | Hardware Acceleration for Neural Networks | 2025 | ~3 | [arXiv:2512.23914](https://arxiv.org/abs/2512.23914) |
 
 #### Inference Optimization
@@ -284,6 +289,8 @@ Three search scope modes are available via the mode selector above the result ba
 | EAGLE | 2024 | ~474 | [arXiv:2401.15077](https://arxiv.org/abs/2401.15077) |
 | Speculative Decoding | 2025 | ~6 | [arXiv:2601.11580](https://arxiv.org/abs/2601.11580) |
 | KV Cache Optimization | 2026 | ~1 | [arXiv:2603.20397](https://arxiv.org/abs/2603.20397) |
+| Native Sparse Attention (NSA) | 2025 | — | [arXiv:2502.11089](https://arxiv.org/abs/2502.11089) |
+| YOCO | 2024 | — | [arXiv:2405.05254](https://arxiv.org/abs/2405.05254) |
 
 #### Reasoning & RL
 
