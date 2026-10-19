@@ -4,7 +4,7 @@ title: "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits (BitNe
 authors: "Shuming Ma, Hongyu Wang, Lingxiao Ma, Lei Wang, Wenhui Wang, Shaohan Huang, Li Dong, Ruiping Wang, Jilong Xue, Furu Wei (Microsoft Research / UCAS)"
 year: 2024
 arxiv: "2402.17764"
-citation_count: 0
+citation_count: 35
 tags: [quantization, efficiency, 1-bit, training, inference, energy, hardware, architecture]
 tldr: "Train a Transformer whose every weight is ternary {−1, 0, 1} (1.58 bits) and 8-bit activations — matching FP16 quality from 3B up while cutting latency, memory, and energy hard (3B: 2.7× faster / 3.6× less memory; 70B: 4.1× faster / ~8.9× throughput; ~71× matmul energy on 7nm). Not post-training quant: a from-scratch recipe that wants new hardware."
 aliases: [BitNet b1.58, BitNet, 1-bit LLMs, Era of 1-bit LLMs]

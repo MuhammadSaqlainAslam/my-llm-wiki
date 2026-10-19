@@ -5,7 +5,7 @@ authors: "Dustin Wang, Rui-Jie Zhu, Steven Abreu, Yong Shan, Taylor Kergan, Yuqi
 year: 2025
 arxiv: "2507.06457"
 tags: [linear-attention, hybrid-architecture, empirical-study, gated-deltanet, hgrn2, recall]
-citation_count: 0
+citation_count: 40
 tldr: "Trains and open-sources 72 models (340M and 1.3B params, six linear-attention variants × five hybridization ratios) to answer a question nobody had actually tested: does a stronger standalone linear-attention model make a stronger hybrid? Answer: no. Selective gating, hierarchical recurrence, and controlled forgetting predict hybrid quality better than standalone-model strength does; HGRN-2 or Gated DeltaNet at a 3:1–6:1 linear-to-full ratio is the recommended default."
 aliases: ["Hybrid Linear Attention Analysis", "Systematic Analysis of Hybrid Linear Attention"]
 ---

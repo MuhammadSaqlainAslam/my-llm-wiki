@@ -760,7 +760,7 @@
       "Mixture-of-Experts",
       "vLLM"
     ],
-    "citation_count": 0,
+    "citation_count": 35,
     "created": "2026-10-19",
     "arxiv": "2402.17764",
     "technical_report": "",
@@ -836,7 +836,7 @@
       "LLaMA-2",
       "The-Llama-3-Herd-of-Models"
     ],
-    "citation_count": 0,
+    "citation_count": 17,
     "created": "2026-10-19",
     "arxiv": "2412.09871",
     "technical_report": "",
@@ -1829,7 +1829,7 @@
       "FP8-Training",
       "Pipeline-Parallelism"
     ],
-    "citation_count": 0,
+    "citation_count": 292,
     "created": "2026-06-10",
     "arxiv": "2412.19437",
     "technical_report": "",
@@ -4646,7 +4646,7 @@
       "Priming",
       "Mamba"
     ],
-    "citation_count": 0,
+    "citation_count": 40,
     "created": "2026-09-01",
     "arxiv": "2507.06457",
     "technical_report": "",
@@ -12855,7 +12855,7 @@
       "State-Space-Model",
       "Linear-attention"
     ],
-    "citation_count": 0,
+    "citation_count": 23,
     "created": "2026-10-19",
     "arxiv": "2501.00663",
     "technical_report": "",

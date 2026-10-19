@@ -4,7 +4,7 @@ title: "Titans: Learning to Memorize at Test Time"
 authors: "Ali Behrouz, Peilin Zhong, Vahab Mirrokni (Google Research)"
 year: 2025
 arxiv: "2501.00663"
-citation_count: 0
+citation_count: 23
 tags: [ssm, memory, attention, long-context, test-time-training, recurrence, architecture, efficiency]
 tldr: "A deep neural long-term memory that *learns what to store at test time* via surprise-driven gradient updates (momentum + forget gate), paired with short-term attention and persistent task vectors. Three fusion variants (MAC/MAG/MAL) beat Transformers and modern linear RNNs on LM, recall, genomics, and time series — and scale past 2M context where full attention cannot."
 aliases: [Titans, Learning to Memorize at Test Time, LMM, Titan]

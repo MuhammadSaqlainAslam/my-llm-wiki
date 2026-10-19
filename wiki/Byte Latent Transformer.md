@@ -4,7 +4,7 @@ title: "Byte Latent Transformer: Patches Scale Better Than Tokens"
 authors: "Artidoro Pagnoni, Ram Pasunuru, Pedro Rodriguez, John Nguyen, Benjamin Muller, Margaret Li, Chunting Zhou, Lili Yu, Jason Weston, Luke Zettlemoyer, Gargi Ghosh, Mike Lewis, Ari Holtzman, Srinivasan Iyer (Meta FAIR / UW / UChicago)"
 year: 2024
 arxiv: "2412.09871"
-citation_count: 0
+citation_count: 17
 tags: [byte-level, tokenization, architecture, long-context, efficiency, robustness, scaling]
 tldr: "Tokenizer-free LLM: entropy-based dynamic byte patches feed a big latent Transformer, with small local encoder/decoder and hash n-grams. First byte model to match Llama-3-class training-FLOP parity up to 8B / 4T bytes — up to 50% fewer inference FLOPs if you grow patches with model size. Better noise robustness and orthography than BPE."
 aliases: [BLT, Byte Latent Transformer, entropy patching]
