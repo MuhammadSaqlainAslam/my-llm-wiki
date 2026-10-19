@@ -60,7 +60,7 @@
       --bq-color:    #6d28d9;
     }
 
-    html, body { height: 100%; }
+    html, body { min-height: 100%; }
 
     body {
       background: var(--bg);
@@ -247,7 +247,7 @@
     /* ── LAYOUT ─────────────────────────────────────────────────────── */
     #app {
       display: flex;
-      height: calc(100vh - 64px);
+      min-height: calc(100vh - 64px);
     }
 
     /* ── GRID PANE ───────────────────────────────────────────────────── */
@@ -1937,11 +1937,13 @@
       background: var(--surface);
       border: 0.5px solid var(--border);
       border-radius: 8px;
-      padding: 16px;
-      max-width: 380px;
+      padding: 16px 20px 18px;
+      max-width: 420px;
       width: 100%;
       text-align: center;
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
     }
     [data-theme="dark"] .flag-counter-wrap { background: #161b22; border-color: #30363d; }
@@ -1951,6 +1953,22 @@
       max-width: 100%; height: auto;
       border-radius: 6px; display: block; margin: 0 auto;
     }
+    .visitor-label {
+      margin: 0 0 10px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .visitor-fallback {
+      display: none;
+      margin: 10px 0 0;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .flag-counter-wrap.fc-fallback .visitor-fallback { display: block; }
+    .flag-counter-wrap.fc-fallback .visitor-label { margin-bottom: 0; }
     @media (max-width: 600px) {
       #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
     }
@@ -4029,14 +4047,19 @@ setupTheme();
 init();
 </script>
 
-<section id="visitor-countries">
+<section id="visitor-countries" aria-label="Visitor tracking">
   <div class="visitor-inner">
     <div class="flag-counter-wrap">
+      <p class="visitor-label">Visitors by country</p>
       <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
-           alt="Visitors by Country"
+           alt="Visitor flag counter — visitors by country"
            class="flag-counter-img"
            border="0"
-           onerror="this.parentElement.style.display='none'">
+           loading="lazy"
+           decoding="async"
+           referrerpolicy="no-referrer-when-downgrade"
+           onerror="this.style.display='none'; this.parentElement.classList.add('fc-fallback')">
+      <p class="visitor-fallback">Visitor map unavailable (tracker blocked or offline).</p>
     </div>
   </div>
 </section>
