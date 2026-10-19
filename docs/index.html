@@ -2279,6 +2279,10 @@ function updateProgress() {
 // ── theme color for timeline cards ───────────────────────────────────────
 function themeColorOf(n) {
   const t = new Set(n.tags);
+  // New cluster first so byte-level / 1-bit / memory don't fall into generic buckets
+  if (t.has('byte-level') || t.has('tokenization')) return '#10b981';          // emerald — tokenization-free
+  if (t.has('1-bit') || t.has('quantization')) return '#f59e0b';               // amber — low-precision
+  if (t.has('test-time-training')) return '#a78bfa';                           // violet — test-time memory
   if (t.has('foundational') || t.has('architecture')) return '#059669';
   if (t.has('hardware') || t.has('gpu') || t.has('tpu') || t.has('asic') || t.has('fpga') || t.has('kernel-fusion')) return '#2563eb';
   if (t.has('inference') || t.has('speculative-decoding') || t.has('kv-cache') || t.has('draft-model') || t.has('throughput')) return '#d97706';
@@ -2287,7 +2291,7 @@ function themeColorOf(n) {
   if (t.has('ssm') || t.has('mamba') || t.has('lstm') || t.has('linear-time') || t.has('recurrence')) return '#7c3aed';
   if (t.has('moe') || t.has('routing') || t.has('sparse')) return '#ea580c';
   if (t.has('post-training') || t.has('rl') || t.has('rlhf') || t.has('reward')) return '#e11d48';
-  if (t.has('attention') || t.has('long-context') || t.has('compression')) return '#60a5fa';
+  if (t.has('attention') || t.has('long-context') || t.has('compression') || t.has('sparse-attention')) return '#60a5fa';
   return '#64748b';
 }
 
@@ -2485,12 +2489,16 @@ function sortedNotes(arr) {
 
 // ── categorize for By Theme ──────────────────────────────────────────────
 const THEME_ORDER = [
+  // Specialized buckets first (new cluster) so they win over generic architecture/ssm tags
+  { key: 'Tokenization-free',      match: n => n.tags.some(t => ['byte-level','tokenization'].includes(t)) },
+  { key: 'Memory & Test-Time',     match: n => n.tags.some(t => ['test-time-training'].includes(t)) },
+  { key: '1-bit & Quantization',   match: n => n.tags.some(t => ['1-bit','quantization'].includes(t)) },
   { key: 'Foundations',            match: n => n.tags.some(t => ['foundational','architecture'].includes(t)) },
   { key: 'State Space Models',     match: n => n.tags.some(t => ['ssm','linear-time','recurrence','mamba','lstm','rnn','linear-attention'].includes(t)) },
   { key: 'Mixture-of-Experts',     match: n => n.tags.some(t => ['moe','routing','sparse'].includes(t)) },
   { key: 'Inference Optimization', match: n => n.tags.some(t => ['inference','speculative-decoding','throughput','draft-model','kv-cache'].includes(t)) },
   { key: 'Hardware & Systems',     match: n => n.tags.some(t => ['hardware','io-awareness','kernel-fusion','gpu','tpu','asic','fpga'].includes(t)) },
-  { key: 'Attention & KV',         match: n => n.tags.some(t => ['attention','long-context','compression'].includes(t)) },
+  { key: 'Attention & KV',         match: n => n.tags.some(t => ['attention','long-context','compression','sparse-attention'].includes(t)) },
   { key: 'Training & RL',          match: n => n.tags.some(t => ['rlhf','rl','post-training','training','reward'].includes(t)) },
   { key: 'Benchmarks',             match: n => n.tags.some(t => ['benchmarks','evaluation'].includes(t)) },
   { key: 'Concepts & Glossary',    match: n => n.tags.includes('glossary') },

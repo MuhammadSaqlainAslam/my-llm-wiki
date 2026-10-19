@@ -812,6 +812,9 @@ const getCSSVar = v => getComputedStyle(document.documentElement).getPropertyVal
 // ── Theme-aware category color maps ──────────────────────────────────────
 const CAT_DARK = {
   index:        { color: '#f59e0b', label: 'Index / Meta'        },
+  tokenization: { color: '#10b981', label: 'Tokenization-free'   },
+  quantization: { color: '#fbbf24', label: '1-bit / Quant.'      },
+  memory:       { color: '#a78bfa', label: 'Memory / TTT'        },
   foundational: { color: '#059669', label: 'Foundations'          },
   moe:          { color: '#ea580c', label: 'Mixture-of-Experts'   },
   ssm:          { color: '#7c3aed', label: 'State Space Models'   },
@@ -826,6 +829,9 @@ const CAT_DARK = {
 
 const CAT_LIGHT = {
   index:        { color: '#b45309', label: 'Index / Meta'        },
+  tokenization: { color: '#047857', label: 'Tokenization-free'   },
+  quantization: { color: '#b45309', label: '1-bit / Quant.'      },
+  memory:       { color: '#6d28d9', label: 'Memory / TTT'        },
   foundational: { color: '#047857', label: 'Foundations'          },
   moe:          { color: '#c2410c', label: 'Mixture-of-Experts'   },
   ssm:          { color: '#6d28d9', label: 'State Space Models'   },
@@ -847,6 +853,10 @@ function categorize(note) {
   if (t.has('index') || t.has('meta') || t.has('dashboard'))             return 'index';
   if (t.has('glossary'))                                                  return 'glossary';
   if (t.has('benchmarks') || t.has('evaluation'))                        return 'benchmarks';
+  // New cluster first (byte-level / 1-bit / memory) so they don't inherit generic buckets
+  if (t.has('byte-level') || t.has('tokenization'))                      return 'tokenization';
+  if (t.has('1-bit') || t.has('quantization'))                           return 'quantization';
+  if (t.has('test-time-training'))                                        return 'memory';
   if (t.has('foundational') || t.has('architecture'))                    return 'foundational';
   if (t.has('hardware') || t.has('gpu') || t.has('tpu') ||
       t.has('asic') || t.has('fpga') || t.has('kernel-fusion'))          return 'hardware';
