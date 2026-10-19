@@ -883,5 +883,37 @@
       "xLSTM.md (+9)"
     ],
     "skipped": []
+  },
+  {
+    "timestamp": "2026-10-19T14:23:22.161768",
+    "mode": "audit-citations",
+    "topic": null,
+    "added": [],
+    "skipped": [],
+    "message": "Citation audit \u2014 41 entries checked, 41 clean, 0 flagged for review",
+    "flagged_count": 0
+  },
+  {
+    "timestamp": "2026-10-19T14:25:25.858299",
+    "mode": "update-citations",
+    "topic": null,
+    "added": [
+      "DIAMOND.md (+14)",
+      "DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.md (+41)",
+      "Direct Preference Optimization Your Language Model is Secretly a Reward Model.md (+110)",
+      "Dreamer-4.md (+7)",
+      "DreamerV3.md (+19)",
+      "EAGLE-2.md (+6)",
+      "EAGLE-3.md (+11)",
+      "EAGLE.md (+11)",
+      "FLAN.md (+22)",
+      "Flash Attention.md (+58)",
+      "FlashAttention-2.md (+36)",
+      "GAIA-1.md (+18)",
+      "GAIA-2.md (+6)",
+      "GLM-5.md (+40)",
+      "GameNGen.md (+14)"
+    ],
+    "skipped": []
   }
 ]

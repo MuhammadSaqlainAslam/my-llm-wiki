@@ -1591,7 +1591,7 @@
       "DreamerV3",
       "World-Model-Landscape"
     ],
-    "citation_count": 365,
+    "citation_count": 379,
     "created": "2026-06-29",
     "arxiv": "2405.12399",
     "technical_report": "",
@@ -1751,7 +1751,7 @@
       "Scaling_Laws",
       "Test-Time-Compute"
     ],
-    "citation_count": 5855,
+    "citation_count": 5896,
     "created": "2026-06-10",
     "arxiv": "2501.12948",
     "technical_report": "",
@@ -2012,7 +2012,7 @@
       "Constitutional-AI",
       "Transformer"
     ],
-    "citation_count": 11025,
+    "citation_count": 11135,
     "created": "2026-06-10",
     "arxiv": "2305.1829",
     "technical_report": "",
@@ -2202,7 +2202,7 @@
       "World-Models",
       "World-Model-Landscape"
     ],
-    "citation_count": 138,
+    "citation_count": 145,
     "created": "2026-06-29",
     "arxiv": "2509.24527",
     "technical_report": "",
@@ -2235,7 +2235,7 @@
       "DIAMOND",
       "VinePPO"
     ],
-    "citation_count": 1495,
+    "citation_count": 1514,
     "created": "2026-06-29",
     "arxiv": "2301.04104",
     "technical_report": "",
@@ -2277,7 +2277,7 @@
       "Medusa",
       "Lookahead-Decoding"
     ],
-    "citation_count": 425,
+    "citation_count": 431,
     "created": "2026-08-02",
     "arxiv": "2406.16858",
     "technical_report": "",
@@ -2316,7 +2316,7 @@
       "Medusa",
       "HYDRA"
     ],
-    "citation_count": 365,
+    "citation_count": 376,
     "created": "2026-08-02",
     "arxiv": "2503.01840",
     "technical_report": "",
@@ -2369,7 +2369,7 @@
       "HBM",
       "Inference-optimization"
     ],
-    "citation_count": 685,
+    "citation_count": 696,
     "created": "2026-05-20",
     "arxiv": "2401.15077",
     "technical_report": "",
@@ -2661,7 +2661,7 @@
       "Self-Instruct",
       "In-Context-Learning"
     ],
-    "citation_count": 5495,
+    "citation_count": 5517,
     "created": "2026-08-14",
     "arxiv": "2109.01652",
     "technical_report": "",
@@ -2919,7 +2919,7 @@
       "KV-Cache-Optimization",
       "Speculative-Decoding"
     ],
-    "citation_count": 5550,
+    "citation_count": 5608,
     "created": "2026-05-12",
     "arxiv": "2205.14135",
     "technical_report": "",
@@ -2991,7 +2991,7 @@
       "GQA",
       "Kernel-fusion"
     ],
-    "citation_count": 3453,
+    "citation_count": 3489,
     "created": "2026-05-20",
     "arxiv": "2307.08691",
     "technical_report": "",
@@ -3152,7 +3152,7 @@
       "GAIA-2",
       "World-Model-Landscape"
     ],
-    "citation_count": 727,
+    "citation_count": 745,
     "created": "2026-06-29",
     "arxiv": "2309.17080",
     "technical_report": "",
@@ -3184,7 +3184,7 @@
       "World-Models",
       "World-Model-Landscape"
     ],
-    "citation_count": 199,
+    "citation_count": 205,
     "created": "2026-06-29",
     "arxiv": "2503.20523",
     "technical_report": "",
@@ -3220,7 +3220,7 @@
       "DeepSeek-V3-Technical-Report",
       "Qwen3-Technical-Report"
     ],
-    "citation_count": 543,
+    "citation_count": 583,
     "created": "2026-07-06",
     "arxiv": "2602.15763",
     "technical_report": "",
@@ -3522,7 +3522,7 @@
       "World-Model-Landscape",
       "World-Models"
     ],
-    "citation_count": 331,
+    "citation_count": 345,
     "created": "2026-06-29",
     "arxiv": "2408.14837",
     "technical_report": "",
