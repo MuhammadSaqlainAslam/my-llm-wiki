@@ -6,7 +6,7 @@ year: "2025"
 arxiv: "2501.14249"
 tags: [benchmarks, reasoning, evaluation, knowledge, expert-level, multi-domain]
 tldr: "A 2,500-question multi-modal benchmark written by domain experts across dozens of subjects, designed as the final closed-ended academic benchmark now that LLMs exceed 90% on MMLU; frontier models scored below 10% at release. Published in Nature."
-citation_count: 376
+citation_count: 413
 ---
 
 ## TL;DR
