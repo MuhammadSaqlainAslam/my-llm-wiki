@@ -50,8 +50,10 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[EAGLE]] | Feature-level draft model. 3–3.5× lossless speedup on LLaMA-2-Chat 70B — best in the speculative family. |
 | [[KV Cache Optimization]] | Five families: eviction, compression, hybrid memory, novel attention, combination. No universal winner — pick by workload. |
 | [[Speculative Decoding]] | Fast draft proposes K tokens; large model verifies all K in one pass. ~2× throughput on long generations. |
+| [[LayerSkip]] | Self-speculative decoding via early layers — no second draft model. |
 | [[Native Sparse Attention]] | Trainable 3-branch sparse attention (compress + select + window). 9–11× faster at 64k, quality ≥ full attention. |
 | [[YOCO]] | One global KV cache shared by all cross-decoder layers. ~L× less memory; 1M prefill 71.8× faster. |
+| [[Mooncake]] | Production KVCache serving: prefill/decode split, DRAM/SSD cache tier, SLO-aware scheduler. |
 
 ## Modern Systems
 
@@ -188,3 +190,5 @@ If you're deploying: **Flash Attention → FlashAttention-2 → FlashAttention-3
 If you care about silicon: **Hardware Acceleration → Flash Attention → FlashAttention-2 → FlashAttention-3 → Hardware-Aware Scan → KV Cache Optimization**
 
 If you want the linear-RNN lineage: **S4 → RWKV → RetNet → Griffin → Mamba → Transformers Are SSMs**
+
+| [[SimPO]] | Reference-free preference optimization (avg logprob + margin). Beats DPO on AlpacaEval 2 / Arena-Hard. |
