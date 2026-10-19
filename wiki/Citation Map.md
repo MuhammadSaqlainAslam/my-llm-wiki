@@ -7,7 +7,7 @@ tldr: "Citation scores and downstream impact of core papers — total citations 
 
 # Citation Map
 
-> Last updated: June 10, 2026
+> Last updated: October 19, 2026
 > Source: Semantic Scholar (live API)
 
 ## How to Read This
@@ -15,12 +15,14 @@ tldr: "Citation scores and downstream impact of core papers — total citations 
 - **Total citations** = how many papers cite this work
 - **Cited by (top 10)** = highest-impact papers that reference this work, ranked by their own citation count
 - This map shows the innovation thread: foundational work → derivative works → field impact
+- **`[[wikilink]]`** = there is a full note in this wiki (click through)
+- **Plain text** = external paper tracked here for impact only — no wiki note yet (intentional; not broken links)
 
 ---
 
 ## 1. Mamba (2023)
 
-**Total citations: ~7,268**
+**Total citations: ~9,664**
 arXiv: 2312.00752 | Authors: Gu & Dao
 
 ### Top 10 Papers Citing Mamba (by citation count)
@@ -93,7 +95,7 @@ arXiv: 2512.23914
 
 | Rank | Paper | Year | Citations | Theme |
 |------|-------|------|-----------|-------|
-| 1 | FlashAttention-3 — H100 attention | 2024 | ~280 | Hardware |
+| 1 | [[FlashAttention-3]] — H100 asynchrony + FP8 attention | 2024 | ~752 | Hardware |
 | 2 | FlexAttention — Compiler attention model | 2024 | ~88 | Hardware |
 | 3 | SpecMamba — Mamba on FPGA + spec decode | 2025 | ~60 | Hardware |
 | 4 | [[FLAT]] — Fast linear attention hardware | 2025 | ~50 | Hardware |
@@ -156,16 +158,16 @@ arXiv: 2603.20397
 |-------|----------------|--------------|
 | [[Transformer]] — Attention Is All You Need | ~178,574 | Transformative — most-cited modern ML paper |
 | [[LLaMA 2]] | ~17,078 | High — practical open-model scaling reference |
-| [[Mamba]] | ~7,268 | Transformative — spawned entire SSM ecosystem |
-| [[Flash Attention]] | ~4,404 | High — universal training/inference speedup |
+| [[Mamba]] | ~9,664 | Transformative — spawned entire SSM ecosystem |
+| [[Flash Attention]] | ~5,608 | High — universal training/inference speedup |
 | [[S4]] | ~3,636 | High — foundation of structured-SSM research |
-| [[FlashAttention-2]] | ~2,769 | High — improved parallelism & work partitioning |
-| [[Transformers Are SSMs]] | ~1,526 | High — unified theory of SSM+Transformer |
-| [[RWKV]] | ~1,063 | Medium — practical linear-attention RNN |
-| [[Medusa]] | ~728 | Medium — multi-head parallel decoding |
-| [[RetNet]] | ~670 | Medium — unifies recurrence + attention |
-| [[xLSTM]] | ~595 | Medium — revived LSTM research direction |
-| [[EAGLE]] | ~474 | Medium — feature-level speculative decoding |
+| [[FlashAttention-2]] | ~3,489 | High — improved parallelism & work partitioning |
+| [[Transformers Are SSMs]] | ~2,063 | High — unified theory of SSM+Transformer |
+| [[RWKV]] | ~1,261 | Medium — practical linear-attention RNN |
+| [[Medusa]] | ~1,008 | Medium — multi-head parallel decoding |
+| [[RetNet]] | ~812 | Medium — unifies recurrence + attention |
+| [[xLSTM]] | ~718 | Medium — revived LSTM research direction |
+| [[EAGLE]] | ~696 | Medium — feature-level speculative decoding |
 | [[Jamba]] | ~432 | Medium — hybrid Mamba-Transformer-MoE |
 | [[Griffin]] | ~239 | Medium — gated-recurrence hybrid architecture |
 | [[Speculative Decoding]] | ~6 | Emerging — recent (2026) inference survey |
