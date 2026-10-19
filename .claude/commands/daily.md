@@ -19,3 +19,5 @@ Always confirm directly via the arXiv API
 (`http://export.arxiv.org/api/query?id_list=<id>`) before treating a paper as fake.
 `verify_arxiv_paper()` already gates every `download_pdf` call for this reason (added
 after a real 2026-06-16 incident where 3 of 4 quarantined papers turned out to be real).
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`.

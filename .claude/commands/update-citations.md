@@ -22,3 +22,5 @@ for n in notes:
     if n.get('citation_count', 0) > 100 and n.get('arxiv', '').startswith(('25', '26')):
         print(f"{n['title'][:45]:45} {n['citation_count']:>8,}")
 ```
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`.

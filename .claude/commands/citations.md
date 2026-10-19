@@ -17,3 +17,5 @@ RetNet. It does not cover the rest of the wiki — use `/topic` for other papers
 graphs.
 
 Auto-commits and pushes only if any new citing papers were added.
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`.

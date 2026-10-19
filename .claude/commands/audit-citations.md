@@ -13,3 +13,6 @@ python3 agent.py audit-citations
 Deterministic, no LLM call, read-only — never writes any file. Flags mismatched or
 not-found `cited_by_details` entries, skipping known false positives already in the
 `CONFIRMED_CITING_PAPERS` allowlist. Safe to run anytime.
+
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`. Use `--dry-run` to skip git entirely.

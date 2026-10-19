@@ -24,6 +24,28 @@ in `.env` (region defaults to `europe-west1` in code if unset — see `.env.exam
 per README) — not guaranteed to be installed in every shell; check with
 `python3 -c "import anthropic"` before assuming a mode will run.
 
+
+## Git safety (pipeline hardening)
+
+`agent.py` **commits locally by default and does not push**. Publishing is opt-in:
+
+| Flag | Effect |
+|------|--------|
+| *(default)* | rebuild + `git commit` only |
+| `--dry-run` / `--no-git` | no git at all (report only) |
+| `--no-push` | same as default (explicit) |
+| `--push` | commit **and** `git push origin main` |
+| `AGENT_DRY_RUN=1` | force dry-run |
+| `AGENT_PUSH=1` | force push |
+
+```bash
+python3 agent.py update-citations              # commit only — review, then push yourself
+python3 agent.py update-citations --push       # old auto-publish behavior
+python3 agent.py daily --dry-run               # see what would be added, no writes via git
+```
+
+Prefer reviewing the commit (`git show`) then `git push origin main` over `--push` after LLM-driven modes.
+
 ### Two build scripts — don't conflate them
 - `build_wiki.py` — LLM-powered PDF → wiki note converter. Reads unconverted PDFs from
   `raw/`, asks Claude to write a structured note, saves to `wiki/`. Used when a paper was

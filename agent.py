@@ -8,6 +8,12 @@ Usage:
     python3 agent.py topic <query>      # add content about a topic
     python3 agent.py citations          # track high-impact citing papers
     python3 agent.py conference         # surface conference-accepted papers for review
+
+Git safety flags (pipeline hardening):
+    --dry-run   report only; never git add/commit/push
+    --no-push   commit locally, do not push (DEFAULT)
+    --push      commit and push origin main (explicit opt-in)
+    Env: AGENT_DRY_RUN=1 | AGENT_PUSH=1
 """
 
 import anthropic
@@ -1072,23 +1078,99 @@ def run_agent(mode: str = "daily", topic: str = None, min_citations: int = 100) 
 
 # ── Entry point ────────────────────────────────────────────────────────────
 
-if __name__ == "__main__":
-    mode  = sys.argv[1] if len(sys.argv) > 1 else "daily"
-
-    # citations mode accepts an optional numeric threshold:
-    #   python3 agent.py citations 200
+def _parse_args(argv):
+    """Parse CLI: mode [topic...] [--dry-run] [--no-push] [--push] [-- N]."""
+    flags = {"dry_run": False, "no_push": False, "push": False}
+    args = list(argv)
+    for key, flag in (
+        ("--dry-run", "dry_run"),
+        ("--no-git", "dry_run"),
+        ("--no-push", "no_push"),
+        ("--push", "push"),
+    ):
+        while key in args:
+            args.remove(key)
+            flags[flag] = True
+    mode = args[0] if args else "daily"
+    rest = args[1:]
     min_citations = 100
     topic = None
-    if mode == "citations" and len(sys.argv) > 2:
+    if mode == "citations" and rest:
         try:
-            min_citations = int(sys.argv[2])
+            min_citations = int(rest[0])
         except ValueError:
             pass
     elif mode != "citations":
-        topic = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else None
+        topic = " ".join(rest) if rest else None
+    # --dry-run implies no push; --push wins over --no-push
+    if flags["dry_run"]:
+        flags["no_push"] = True
+    if flags["push"]:
+        flags["no_push"] = False
+    return mode, topic, min_citations, flags
+
+
+def _git_publish(results, mode, flags):
+    """Rebuild + commit; push only when allowed.
+
+    Safety policy (pipeline hardening):
+      --dry-run  → no git at all (report only)
+      --no-push  → commit locally, never push (DEFAULT unless --push)
+      --push     → commit and push origin main (explicit opt-in)
+
+    Env overrides: AGENT_DRY_RUN=1, AGENT_PUSH=1
+    """
+    import subprocess
+    import os
+
+    dry = flags["dry_run"] or os.environ.get("AGENT_DRY_RUN", "").lower() in {"1", "true", "yes"}
+    allow_push = (flags["push"] or os.environ.get("AGENT_PUSH", "").lower() in {"1", "true", "yes"}) and not dry
+    if flags["no_push"] and not flags["push"]:
+        allow_push = False
+
+    if not results["added"]:
+        return
+
+    if dry:
+        print("\n[dry-run] Skipping rebuild/commit/push. Changes already written where allowed.")
+        check_broken_links()
+        return
+
+    print("\nRebuilding wiki…" + (" and pushing…" if allow_push else " (commit only — not pushing)"))
+    # update-citations only edits frontmatter — skip the PDF→note build so the
+    # commit stays limited to citation changes.
+    if mode != "update-citations":
+        subprocess.run(["python3", "build_wiki.py"], cwd=VAULT)
+    subprocess.run(["python3", "build.py"], cwd=VAULT)
+    subprocess.run(["git", "add", "."], cwd=VAULT)
+    commit_msg = (
+        f"Auto-update citations — {len(results['added'])} papers"
+        if mode == "update-citations"
+        else f"Agent ({mode}): added {len(results['added'])} item(s)"
+    )
+    subprocess.run(["git", "commit", "-m", commit_msg], cwd=VAULT)
+    if allow_push:
+        push = subprocess.run(["git", "push", "origin", "main"], cwd=VAULT)
+        if push.returncode == 0:
+            print("Done — wiki updated and pushed.")
+        else:
+            print("Done — committed locally, but PUSH FAILED. Push manually or re-run with --push.")
+    else:
+        print("Done — committed locally. Push when ready: git push origin main  (or re-run with --push)")
+    check_broken_links()  # report link health after every successful agent run
+
+
+if __name__ == "__main__":
+    mode, topic, min_citations, flags = _parse_args(sys.argv[1:])
 
     print(f"\nRunning agent — mode: '{mode}'" + (f", topic: '{topic}'" if topic else "")
           + (f", min_citations: {min_citations}" if mode == "citations" else ""))
+    if flags["dry_run"]:
+        print("git policy: --dry-run (no commit/push)")
+    elif flags["push"] or os.environ.get("AGENT_PUSH", "").lower() in {"1", "true", "yes"}:
+        print("git policy: commit + PUSH (explicit --push)")
+    else:
+        print("git policy: commit only (pass --push to publish)")
     print("-" * 60)
 
     results = run_agent(mode=mode, topic=topic, min_citations=min_citations)
@@ -1105,21 +1187,4 @@ if __name__ == "__main__":
     for item in results["skipped"]:
         print(f"  - {item}")
 
-    if results["added"]:
-        print("\nRebuilding wiki and pushing…")
-        import subprocess
-        # update-citations only edits frontmatter — skip the PDF→note build so the
-        # commit stays limited to citation changes.
-        if mode != "update-citations":
-            subprocess.run(["python3", "build_wiki.py"], cwd=VAULT)
-        subprocess.run(["python3", "build.py"], cwd=VAULT)
-        subprocess.run(["git", "add", "."], cwd=VAULT)
-        commit_msg = (
-            f"Auto-update citations — {len(results['added'])} papers"
-            if mode == "update-citations"
-            else f"Agent ({mode}): added {len(results['added'])} item(s)"
-        )
-        subprocess.run(["git", "commit", "-m", commit_msg], cwd=VAULT)
-        subprocess.run(["git", "push", "origin", "main"], cwd=VAULT)
-        print("Done — wiki updated and pushed.")
-        check_broken_links()  # report link health after every successful agent run
+    _git_publish(results, mode, flags)

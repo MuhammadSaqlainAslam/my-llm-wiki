@@ -22,3 +22,5 @@ After it finishes:
   they are frequently wrong (fabricated or garbled names).
 - Check any new `[[WikiLink]]` targets actually resolve to a real file in `wiki/` —
   filenames and titles often diverge from a paper's casual short name.
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`.

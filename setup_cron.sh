@@ -11,7 +11,7 @@ CONDA_ENV="${CONDA_ENV:-base}"
 LOG="$VAULT/cron.log"
 
 # Build the cron command: source conda, activate env, then run agent
-CRON_CMD="0 8 * * * source $CONDA && conda activate $CONDA_ENV && cd $VAULT && python3 agent.py daily >> $LOG 2>&1"
+CRON_CMD="0 8 * * * source $CONDA && conda activate $CONDA_ENV && cd $VAULT && python3 agent.py daily --push >> $LOG 2>&1"
 
 # Append only if not already present
 if crontab -l 2>/dev/null | grep -q "agent.py daily"; then

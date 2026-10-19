@@ -19,3 +19,6 @@ To add a reviewed pick, use `/topic "paper title"`.
 ⚠️ Most token-intensive mode — if you hit a Vertex AI 429 (`RESOURCE_EXHAUSTED`), switching
 regions will not help; it has been confirmed to be the same project-level quota pool across
 regions.
+
+
+> **Git policy:** default is commit-only. Pass `--push` to `agent.py` (or push manually) to publish to `origin/main`. Use `--dry-run` to skip git entirely.
