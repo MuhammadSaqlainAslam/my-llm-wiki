@@ -20,9 +20,24 @@ the same per-mode warnings inline so nothing gets skipped.
 in `.env` (region defaults to `europe-west1` in code if unset — see `.env.example`)
 **Notes**: 284 as of 2026-07-22 (`python3 -c "import json; print(len(json.load(open('docs/notes.json'))))"`)
 
-`agent.py` requires the `anthropic` package (`pip install anthropic pymupdf markdown pyyaml`
-per README) — not guaranteed to be installed in every shell; check with
-`python3 -c "import anthropic"` before assuming a mode will run.
+### Dependencies — always check first
+
+Pinned in repo root **`requirements.txt`**. Not guaranteed present in every shell.
+
+| Script | Imports |
+|--------|---------|
+| `agent.py` | `anthropic` |
+| `build_wiki.py` | `anthropic`, `pymupdf` (`fitz`) |
+| `build.py` | `pyyaml`, `markdown` |
+
+**Install check — run before any `agent.py` / `build_wiki.py` / `build.py`:**
+
+```bash
+python3 -c "import anthropic, fitz, yaml, markdown" 2>/dev/null \
+  || python3 -m pip install -r requirements.txt
+```
+
+If only `build.py` is needed: `python3 -c "import yaml, markdown" || python3 -m pip install -r requirements.txt`.
 
 
 ## Git safety (pipeline hardening)

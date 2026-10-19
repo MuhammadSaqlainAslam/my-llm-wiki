@@ -357,6 +357,7 @@ my-wiki/
 │   ├── graph.html                 # D3 knowledge graph
 │   └── notes.json                 # All notes as structured JSON
 ├── raw/                           # Source PDF papers
+├── requirements.txt               # Python deps (anthropic, pymupdf, pyyaml, markdown)
 ├── build.py                       # wiki/*.md → docs/notes.json + HTML
 ├── build_wiki.py                  # PDF → wiki note (Claude API)
 ├── agent.py                       # Agentic ingestion system
@@ -388,6 +389,17 @@ https://MuhammadSaqlainAslam.github.io/my-llm-wiki
 ```
 
 `build.py` handles: YAML frontmatter parsing, math protection (swap LaTeX for placeholders before Markdown rendering → restore raw LaTeX for KaTeX), Obsidian callout → HTML div conversion, `![[embed]]` → clickable link conversion, Dataview/Mermaid block stubbing, and emission of `id`, `title`, `authors`, `tags`, `year`, `tldr`, `aliases`, `links`, `citation_count`, `arxiv`, `cited_by_details`, and rendered `html` per note.
+
+---
+
+## Setup
+
+```bash
+python3 -m pip install -r requirements.txt
+cp .env.example .env   # LLM modes only (agent.py / build_wiki.py)
+```
+
+`build.py` needs `pyyaml` + `markdown`. `agent.py` / `build_wiki.py` also need `anthropic` (and `pymupdf` for PDFs).
 
 ---
 
