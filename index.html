@@ -60,7 +60,7 @@
       --bq-color:    #6d28d9;
     }
 
-    html, body { min-height: 100%; }
+    html, body { height: 100%; }
 
     body {
       background: var(--bg);
@@ -247,7 +247,7 @@
     /* ── LAYOUT ─────────────────────────────────────────────────────── */
     #app {
       display: flex;
-      min-height: calc(100vh - 64px);
+      height: calc(100vh - 64px);
     }
 
     /* ── GRID PANE ───────────────────────────────────────────────────── */
@@ -1912,33 +1912,29 @@
       /* ── Footer + visitor ────────────────────────────────────────────── */
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
       .footer-right { text-align: center; }
-      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 16px; }
+      #visitor-countries { padding: 8px 10px 10px; }
       .flag-counter-wrap { max-width: 100%; }
       .flag-counter-img { max-width: 100%; }
     }
 
-    /* ── VISITOR COUNTER ────────────────────────────────────────────── */
+    /* ── VISITOR COUNTER (bottom of left pane — does not add a page scrollbar) ── */
     #visitor-countries {
-      padding: 24px 32px;
+      flex-shrink: 0;
+      padding: 10px 16px 12px;
       border-top: 0.5px solid var(--border);
-      margin-top: 24px;
       background: var(--surface);
-      border-radius: 8px;
-      margin-left: 16px;
-      margin-right: 16px;
-      margin-bottom: 16px;
     }
     .visitor-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; justify-content: center; align-items: flex-start;
+      margin: 0 auto;
+      display: flex; justify-content: center; align-items: center;
     }
     /* ── FLAG COUNTER ────────────────────────────────────────────────── */
     .flag-counter-wrap {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 20px 18px;
-      max-width: 420px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      max-width: 100%;
       width: 100%;
       text-align: center;
       display: flex;
@@ -1950,8 +1946,8 @@
     [data-theme="light"] .flag-counter-wrap { background: #f6f8fa; border-color: #d0d7de; }
     .flag-counter-img {
       cursor: default; pointer-events: none;
-      max-width: 100%; height: auto;
-      border-radius: 6px; display: block; margin: 0 auto;
+      max-width: min(100%, 360px); height: auto;
+      border-radius: 4px; display: block; margin: 0 auto;
     }
     .visitor-label {
       margin: 0 0 10px;
@@ -1970,7 +1966,7 @@
     .flag-counter-wrap.fc-fallback .visitor-fallback { display: block; }
     .flag-counter-wrap.fc-fallback .visitor-label { margin-bottom: 0; }
     @media (max-width: 600px) {
-      #visitor-countries { margin-left: 8px; margin-right: 8px; padding: 20px; }
+      #visitor-countries { padding: 8px 10px 10px; }
     }
 
     /* ── FOOTER ─────────────────────────────────────────────────────── */
@@ -2124,6 +2120,23 @@
 
     <!-- agent (shown when agent tab active) -->
     <div id="agent-wrap"></div>
+
+    <!-- visitor tracking — pinned to the bottom of the left pane (inner scrollbar stays) -->
+    <div id="visitor-countries" aria-label="Visitor tracking">
+      <div class="visitor-inner">
+        <div class="flag-counter-wrap">
+          <p class="visitor-label">Visitors by country</p>
+          <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
+               alt="Visitor flag counter — visitors by country"
+               class="flag-counter-img"
+               border="0"
+               decoding="async"
+               referrerpolicy="no-referrer-when-downgrade"
+               onerror="this.style.display='none'; this.parentElement.classList.add('fc-fallback')">
+          <p class="visitor-fallback">Visitor map unavailable (tracker blocked or offline).</p>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -4046,23 +4059,6 @@ document.getElementById('compare-panel-close').addEventListener('click', () => {
 setupTheme();
 init();
 </script>
-
-<section id="visitor-countries" aria-label="Visitor tracking">
-  <div class="visitor-inner">
-    <div class="flag-counter-wrap">
-      <p class="visitor-label">Visitors by country</p>
-      <img src="https://s11.flagcounter.com/count2/HHRI/bg_f6f8fa/txt_1c2128/border_d0d7de/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_Flat/percent_1/"
-           alt="Visitor flag counter — visitors by country"
-           class="flag-counter-img"
-           border="0"
-           loading="lazy"
-           decoding="async"
-           referrerpolicy="no-referrer-when-downgrade"
-           onerror="this.style.display='none'; this.parentElement.classList.add('fc-fallback')">
-      <p class="visitor-fallback">Visitor map unavailable (tracker blocked or offline).</p>
-    </div>
-  </div>
-</section>
 
 <footer id="site-footer">
   <div class="footer-inner">
