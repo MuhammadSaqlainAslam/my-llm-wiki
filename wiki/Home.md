@@ -56,7 +56,9 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[Native Sparse Attention]] | Trainable 3-branch sparse attention (compress + select + window). 9–11× faster at 64k, quality ≥ full attention. |
 | [[YOCO]] | One global KV cache shared by all cross-decoder layers. ~L× less memory; 1M prefill 71.8× faster. |
 | [[Mooncake]] | Production KVCache serving: prefill/decode split, DRAM/SSD cache tier, SLO-aware scheduler. |
+| [[LMCache]] | Open-source KV cache layer (offload + share) for vLLM/SGLang. |
 | [[GraphRAG]] | Entity graph + community map-reduce for global corpus questions. |
+| [[HippoRAG]] | PageRank over a KG for multi-hop RAG in one retrieve. |
 
 ## Modern Systems
 
@@ -195,3 +197,4 @@ If you care about silicon: **Hardware Acceleration → Flash Attention → Flash
 If you want the linear-RNN lineage: **S4 → RWKV → RetNet → Griffin → Mamba → Transformers Are SSMs**
 
 | [[SimPO]] | Reference-free preference optimization (avg logprob + margin). Beats DPO on AlpacaEval 2 / Arena-Hard. |
+| [[ORPO and KTO\|ORPO & KTO]] | ORPO: preference in SFT. KTO: binary-label prospect-theory alignment. |

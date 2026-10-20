@@ -129,6 +129,7 @@ Once a model is trained, the cost is moving bytes. These papers attack inference
 | [[MiniMax-Sparse-Attention\|MiniMax Sparse Attention]] | MiniMax Sparse Attention | 2026 | Blockwise sparse attention on a GQA backbone: a lightweight Index Branch picks Top-k KV blocks independently per GQA group, then exact attention runs over only those. Matches GQA quality on a 109B multimodal MoE while cutting attention compute 28.4× at 1M context; co-designed kernel gives 14.2× prefill / 7.6× decode speedups on H800. |
 | [[YOCO]] | You Only Cache Once: Decoder-Decoder Architectures for Language Models | 2024 | Self-decoder writes one global KV cache; cross-decoder reuses it. ~L× less KV (≈80× on 65B), prefill early-exit (512K: 180s → <6s), 1M needles near-perfect at 3B. |
 | [[Mooncake]] | Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving | 2024 | Kimi production serving: split prefill/decode clusters, tier KV across HBM/DRAM/SSD, schedule on cache reuse + SLOs with early reject. Up to 525% throughput under long-context load; +75% real Kimi requests. |
+| [[LMCache]] | LMCache: An Efficient KV Cache Layer for Enterprise-Scale LLM Inference | 2025 | Open-source KV layer for vLLM/SGLang: offload, cross-engine share, PD disaggregation. Up to 15× throughput; warn: slow remote / truncation hurt TTFT & hit rate. |
 
 **Tags:** `inference` `kv-cache` `throughput` `eviction` `compression` `paged-attention` `speculative-decoding` `medusa` `eagle` `draft-model` `jacobi-decoding` `lossless` `sparse-attention`
 
@@ -391,6 +392,7 @@ Papers on reasoning, reinforcement learning from human feedback, chain-of-though
 | [[Toolformer]] | 2023 | — | [2302.04761](https://arxiv.org/abs/2302.04761) |
 | [[Direct Preference Optimization Your Language Model is Secretly a Reward Model\|DPO]] | 2023 | ~4,500 | [2305.18290](https://arxiv.org/abs/2305.18290) |
 | [[SimPO]] | SimPO: Simple Preference Optimization with a Reference-Free Reward | 2024 | Average log-prob as reference-free reward + target margin; beats DPO up to 6.4 AlpacaEval 2 / 7.5 Arena-Hard. NeurIPS 2024. |
+| [[ORPO and KTO\|ORPO & KTO]] | Preference optimization without a reference model (or without pairs) | 2024 | ORPO: odds-ratio in monolithic SFT. KTO: prospect-theory utility from binary good/bad labels (1B–30B). Post-DPO HALO family. |
 | [[DeepSeek-R1 Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\|DeepSeek-R1]] | 2025 | ~8,000 | [2501.12948](https://arxiv.org/abs/2501.12948) |
 | [[Multi-Environment_RLVR_Training|Multi-Environment RLVR Training]] | 2025 | — | Technical report ([2512.20856](https://arxiv.org/abs/2512.20856)) |
 | [[VinePPO]] | 2024 | — | [2410.01679](https://arxiv.org/abs/2410.01679) |
@@ -462,6 +464,7 @@ Grounding LLMs in external, updatable, citable text instead of relying purely on
 | [[Self-RAG]] | Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection | 2023 | Trains one LM to decide on its own when to retrieve and to critique its own retrieved passages and generated output via learned reflection tokens — outperforms ChatGPT/retrieval-augmented Llama2-chat with only 7B/13B params. |
 | [[RAPTOR]] | RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval | 2024 | Recursively clusters and summarizes text chunks into a multi-level tree, retrieving from all abstraction levels at once; +20pp QuALITY accuracy with GPT-4 retrieval. |
 | [[GraphRAG]] | From Local to Global: A Graph RAG Approach to Query-Focused Summarization | 2024 | Entity KG + community summaries + map-reduce answers global corpus questions that chunk RAG cannot. Better comprehensiveness/diversity on ~1M-token sets. |
+| [[HippoRAG]] | HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models | 2024 | KG + Personalized PageRank for one-step multi-hop RAG. Up to +20% over SOTA; IRCoT-level quality 10–30× cheaper. NeurIPS 2024. |
 | [[Agentic-RAG-Survey\|Agentic Retrieval-Augmented Generation]] | Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG | 2025 | Classic RAG retrieves once, generates once — a static workflow. Agentic RAG embeds autonomous agents (reflection, planning, tool use, multi-agent collaboration) into the pipeline so retrieval strategy is decided dynamically; proposes a taxonomy along agent cardinality, control structure, autonomy, and knowledge representation. |
 
 **Tags:** `retrieval` `rag` `long-context` `hierarchical-summarization` `self-reflection` `non-parametric-memory` `agents` `agentic-workflows`
