@@ -23,8 +23,10 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[xLSTM]] | LSTM rehab — exponential gating + matrix memory. Competitive with Transformer at 1B+ scale, O(1) inference. |
 | [[Griffin]] | Google DeepMind hybrid: RG-LRU + local attention. Matches LLaMA-2 at 7× fewer training tokens. |
 | [[Titans]] | Test-time-written neural long-term memory + short-term attention. >2M context. |
+| [[Mixture-of-Depths]] | Top-k tokens per layer — adaptive compute with a static graph. |
 | [[MegaByte]] | Multiscale global+local Transformers on raw bytes. Million-byte text/image/audio without a tokenizer. |
 | [[Byte Latent Transformer]] | Entropy-patched byte LLM: matches Llama 3 FLOP parity; patches are a second scaling axis. |
+| [[LLaDA]] | Diffusion LM at 8B — ICL/chat without autoregression. |
 
 ## Scaling
 
@@ -54,6 +56,7 @@ AI research knowledge base — papers, concepts & intuitions. Artificial Intelli
 | [[Native Sparse Attention]] | Trainable 3-branch sparse attention (compress + select + window). 9–11× faster at 64k, quality ≥ full attention. |
 | [[YOCO]] | One global KV cache shared by all cross-decoder layers. ~L× less memory; 1M prefill 71.8× faster. |
 | [[Mooncake]] | Production KVCache serving: prefill/decode split, DRAM/SSD cache tier, SLO-aware scheduler. |
+| [[GraphRAG]] | Entity graph + community map-reduce for global corpus questions. |
 
 ## Modern Systems
 
