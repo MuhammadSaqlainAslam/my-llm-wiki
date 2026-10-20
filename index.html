@@ -2334,6 +2334,7 @@ async function init() {
     if (n.arxiv) byArxiv[n.arxiv] = n;
   });
   headerCount.textContent = `${notes.length} notes`;
+  setSearchMode(currentSearchMode || 'concepts');
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -2425,28 +2426,22 @@ function isPaper(note) {
 
 function matchesSearch(note, term) {
   const t = (term || '').toLowerCase().trim();
+  // Mode scope applies even with an empty query (e.g. Papers-only lists papers).
+  if (currentSearchMode === 'papers' && !isPaper(note)) return false;
   if (!t) return true;
+  const inTitle = note.title.toLowerCase().includes(t);
+  const inTags = (note.tags || []).some(tag => tag.toLowerCase().includes(t));
+  const inTldr = !!(note.tldr && note.tldr.toLowerCase().includes(t));
   if (currentSearchMode === 'papers') {
-    if (!isPaper(note)) return false;
-    return (
-      note.title.toLowerCase().includes(t) ||
-      (note.tags || []).some(tag => tag.toLowerCase().includes(t))
-    );
+    // Academic papers only — title + tags (as labeled)
+    return inTitle || inTags;
   }
   if (currentSearchMode === 'concepts') {
-    return (
-      note.title.toLowerCase().includes(t) ||
-      (note.tags || []).some(tag => tag.toLowerCase().includes(t)) ||
-      (note.tldr && note.tldr.toLowerCase().includes(t))
-    );
+    return inTitle || inTags || inTldr;
   }
   // fulltext
-  return (
-    note.title.toLowerCase().includes(t) ||
-    (note.tags || []).some(tag => tag.toLowerCase().includes(t)) ||
-    (note.tldr && note.tldr.toLowerCase().includes(t)) ||
-    (note.search_text && note.search_text.includes(t))
-  );
+  const body = (note.search_text || '').toLowerCase();
+  return inTitle || inTags || inTldr || body.includes(t);
 }
 
 function setSearchMode(mode) {
@@ -2461,7 +2456,8 @@ function setSearchMode(mode) {
     searchHighlightMode = false;
     clearCardHighlighting();
   }
-  if (query) searchEl.dispatchEvent(new Event('input'));
+  // Always re-render — mode filters the list even with an empty query
+  render();
 }
 
 // ── filtering + sorting ──────────────────────────────────────────────────
